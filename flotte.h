@@ -7,7 +7,7 @@ extern "C" {
 }
 #include <string>
 #include <iostream>
-
+#include <cmath>
 
 
 
@@ -30,7 +30,8 @@ public:
 
     void present();
     void first();
-    void selection(int s);
+    void selection(int s, int d);
+    int taille();
 
 
 

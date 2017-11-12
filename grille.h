@@ -2,6 +2,8 @@
 #define __GRILLE_H
 
 #include "window.h"
+#include "flotte.h"
+
 extern "C" {
 #include <curses.h>
 }
@@ -17,12 +19,15 @@ class Grille{
 public:
 
     Window fenetre; 
-
+    Flotte flotte;
     //constructeur :
     Grille(int h, int w, int sx, int sy);
 
+
     //destructeur
     ~Grille();
+
+    void placement(int t);
 
 
 

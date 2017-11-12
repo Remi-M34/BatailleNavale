@@ -1,6 +1,7 @@
 #include "window.h"
 #include "grille.h"
 #include "flotte.h"
+#include <unistd.h>
 
 
 void myprogram(){
@@ -39,18 +40,31 @@ void myprogram(){
 
       switch (ch) {
             case KEY_LEFT:
-                  flottejoueur.selection(s%5);
-                  s++;
+                  flottejoueur.selection(s%5, 0);
+                  if (s == 0)
+                        s=4;
+                  else
+                        s--;
                   break;
             case KEY_RIGHT:
-                  flottejoueur.selection(s%5);
+                  flottejoueur.selection(s%5, 1);
                   s++;
+                  break;
+            
+            case '\n':
+                  int i = 0;
+                  while (flottejoueur.n[i] != 1 && flottejoueur.s[i] != '#' && i < 5){
+                        i++;
+                  }
+                  grillejoueur.placement(flottejoueur.taille(i))
+
                   break;
             }
 
 
       }
 //PHASE 2
+
       else{
       switch (ch) {
       case '1':

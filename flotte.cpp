@@ -1,5 +1,9 @@
 #include "flotte.h"
 #include "window.h"
+#include "cmath"
+#include "iostream"
+
+using namespace std;
 
 
 Flotte::Flotte(int h, int w, int sx, int sy) : height(h), width(w), startx(sx), starty(sy), fenetre(h,w,sx,sy){}
@@ -47,12 +51,26 @@ void Flotte::present(){
 
 
 
-void Flotte::selection(int i){
+void Flotte::selection(int i, int d){
     s[i] = ' ';
-    i++;
-    while (n[(i%5)] != 1 && s[(i%5)] != ' '){
-        i+=1;
 
+    if (d == 1){
+        i++;
+        i = i%5;
+        while (n[(i)] != 1 && s[(i)] != ' '){
+            i+=1;
+        }
+    }
+    else{
+        if (i != 0){
+        i = abs(i%5);
+        i--;}
+        else
+        i = 4;
+
+        while (n[(i)] != 1 && s[(i)] != ' '){
+            i-=1;
+        }
     }
 
     s[i] = '#';
@@ -62,7 +80,38 @@ void Flotte::selection(int i){
 }
 
 
+int Flotte::taille(int i){
+    switch (i){
+        case 0:
+        return 5;
+        break;
+        
+        case 1:
+        return 4;
+        break;
+
+        case 2:
+        return 3;
+        break;
+
+        case 3:
+        return 3;
+        break;
+
+        case 4:
+        return 2;
+        break;
+    };
+
+}
+
+
+
+
+
 void Flotte::first (){
 
 }
     
+
+
