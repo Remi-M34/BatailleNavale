@@ -1,32 +1,48 @@
-#ifndef __GRILLE_H
-#define __GRILLE_H
+#ifndef __FLOTTE_H
+#define __FLOTTE_H
 
 #include "window.h"
 extern "C" {
 #include <curses.h>
 }
 #include <string>
+#include <iostream>
 
 
 
 
 
 
-class Grille{
+class Flotte{
 
 public:
 
+
     Window fenetre; 
 
+    int places = 0;
     //constructeur :
-    Grille(int h, int w, int sx, int sy);
+    Flotte(int h, int w, int sx, int sy);
 
     //destructeur
-    ~Grille();
+    ~Flotte();
+
+
+    void present();
+    void first();
+    void selection(int s);
 
 
 
 private:
+
+
+    int n[5] = {1,1,1,1,1};
+
+    char s[5] = { '#',' ',' ',' ',' ' };
+
+
+    int sel = 5;
 
     int height;
     int width;
@@ -35,6 +51,8 @@ private:
     char bord;
 
     int posX,PosX2,PosY;
+
+    
 
 
 

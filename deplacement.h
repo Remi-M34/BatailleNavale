@@ -1,5 +1,5 @@
-#ifndef __GRILLE_H
-#define __GRILLE_H
+#ifndef __FLOTTE_H
+#define __FLOTTE_H
 
 #include "window.h"
 extern "C" {
@@ -12,17 +12,17 @@ extern "C" {
 
 
 
-class Grille{
+class Flotte{
 
 public:
 
     Window fenetre; 
 
     //constructeur :
-    Grille(int h, int w, int sx, int sy);
+    Flotte(int h, int w, int sx, int sy);
 
     //destructeur
-    ~Grille();
+    ~Flotte();
 
 
 
