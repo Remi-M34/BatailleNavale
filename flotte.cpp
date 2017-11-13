@@ -51,6 +51,16 @@ void Flotte::present(){
 
 
 
+bool Flotte::selected(int i){
+    if (n[i] != 1 && s[i] != '#')
+    return true;
+    else
+    return false;
+}
+
+
+
+
 void Flotte::selection(int i, int d){
     s[i] = ' ';
 

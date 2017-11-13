@@ -31,7 +31,8 @@ public:
     void present();
     void first();
     void selection(int s, int d);
-    int taille();
+    int taille(int i);
+    bool selected(int i);
 
 
 

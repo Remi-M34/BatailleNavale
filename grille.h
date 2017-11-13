@@ -3,12 +3,14 @@
 
 #include "window.h"
 #include "flotte.h"
+#include "case.h"
+#include <unistd.h>
+
 
 extern "C" {
 #include <curses.h>
 }
 #include <string>
-
 
 
 
@@ -21,23 +23,26 @@ public:
     Window fenetre; 
     Flotte flotte;
     //constructeur :
-    Grille(int h, int w, int sx, int sy);
+    Grille(int const h, int const w, int sx, int sy);
 
 
     //destructeur
     ~Grille();
 
     void placement(int t);
-
+    void init(int const h, int const w);
 
 
 private:
 
-    int height;
-    int width;
+    int const height;
+    int const width;
     int startx;
     int starty;
     char bord;
+
+    int Case[20][10];
+
 
     int posX,PosX2,PosY;
 

@@ -1,21 +1,22 @@
 #include "window.h"
 #include "grille.h"
+#include "plateau.h"
 #include "flotte.h"
 #include <unistd.h>
+using namespace std;
 
 
 void myprogram(){
   int ch;
-  int h=10,w=20;
+  int const h=10;
+  int const w=20;
   Window menu(3,30,1,0);
- 
-  Grille plateaujoueur(h,w,1,6);  
-  Window plateau2(h,w,25,6);
-  Flotte flottejoueur(5,14,1,18);
+  Plateau plateau(h,w,6,6,2);
+
+
   menu.setCouleurBordure(BRED);  
 
-  plateaujoueur.fenetre.setCouleurBordure(BBLUE);
-  
+  plateau.joueur.fenetre.setCouleurBordure(BBLUE);
 
   menu.print(1,1,"Tapez q pour quitter !!!",WRED);
   
@@ -24,7 +25,7 @@ void myprogram(){
   Color col=WBLUE;
 //  flottejoueur.fenetre.print(x,y,p,col);
 //  flottejoueur.fenetre.print(x2,y,p,col);
-        flottejoueur.present();
+        plateau.joueur.flotte.present();
 
         int s = 0;
 
@@ -35,28 +36,28 @@ void myprogram(){
 
 
 //PHASE 1  : placement des navires
-      if (flottejoueur.places == 0){
+      if (plateau.joueur.flotte.places == 0){
 
 
       switch (ch) {
             case KEY_LEFT:
-                  flottejoueur.selection(s%5, 0);
+                  plateau.joueur.flotte.selection(s%5, 0);
                   if (s == 0)
                         s=4;
                   else
                         s--;
                   break;
             case KEY_RIGHT:
-                  flottejoueur.selection(s%5, 1);
+                  plateau.joueur.flotte.selection(s%5, 1);
                   s++;
                   break;
             
             case '\n':
                   int i = 0;
-                  while (flottejoueur.n[i] != 1 && flottejoueur.s[i] != '#' && i < 5){
+                  while (!(plateau.joueur.flotte.selected(i)) && i < 5){
                         i++;
                   }
-                  grillejoueur.placement(flottejoueur.taille(i))
+                  plateau.joueur.placement(plateau.joueur.flotte.taille(i));
 
                   break;
             }
@@ -74,51 +75,51 @@ void myprogram(){
 	col=WCYAN;
 	break;
       case 'c':
-	plateaujoueur.fenetre.clear();
+	plateau.joueur.fenetre.clear();
 	break;
       case KEY_UP:
       if (y!=0){
-	plateaujoueur.fenetre.print(x,y,' ');
-	plateaujoueur.fenetre.print(x2,y,' ');
-	plateaujoueur.fenetre.print(x,--y,p,col);
-      plateaujoueur.fenetre.print(x2,y,p,col);}
+	plateau.joueur.fenetre.print(x,y,' ');
+	plateau.joueur.fenetre.print(x2,y,' ');
+	plateau.joueur.fenetre.print(x,--y,p,col);
+      plateau.joueur.fenetre.print(x2,y,p,col);}
 	break;
       case KEY_DOWN:
       if (y!=9){
-	plateaujoueur.fenetre.print(x,y,' ');
-	plateaujoueur.fenetre.print(x2,y,' ');
-	plateaujoueur.fenetre.print(x,++y,p,col);
-	plateaujoueur.fenetre.print(x2,y,p,col);}
+	plateau.joueur.fenetre.print(x,y,' ');
+	plateau.joueur.fenetre.print(x2,y,' ');
+	plateau.joueur.fenetre.print(x,++y,p,col);
+	plateau.joueur.fenetre.print(x2,y,p,col);}
 	break;
       case KEY_LEFT:
            if (x!=0){
-      plateaujoueur.fenetre.print(x,y,' ');
-      plateaujoueur.fenetre.print(x2,y,' ');
+      plateau.joueur.fenetre.print(x,y,' ');
+      plateau.joueur.fenetre.print(x2,y,' ');
       x-=2;
       x2-=2;
-      plateaujoueur.fenetre.print(x,y,p,col);	
-      plateaujoueur.fenetre.print(x2,y,p,col);}
+      plateau.joueur.fenetre.print(x,y,p,col);	
+      plateau.joueur.fenetre.print(x2,y,p,col);}
 	break;
       case KEY_RIGHT:
            if (x2!=19){
-	plateaujoueur.fenetre.print(x,y,' ');
-	plateaujoueur.fenetre.print(x2,y,' ');
+	plateau.joueur.fenetre.print(x,y,' ');
+	plateau.joueur.fenetre.print(x2,y,' ');
       x+=2;
       x2+=2;
-	plateaujoueur.fenetre.print(x,y,p,col);
-	plateaujoueur.fenetre.print(x2,y,p,col);}
+	plateau.joueur.fenetre.print(x,y,p,col);
+	plateau.joueur.fenetre.print(x2,y,p,col);}
 	break;
       case '\n':
-      plateaujoueur.fenetre.print(x,y,' ');
-	plateaujoueur.fenetre.print(x2,y,' ');
+      plateau.joueur.fenetre.print(x,y,' ');
+	plateau.joueur.fenetre.print(x2,y,' ');
 	x=w/2, x2=x+1, y=h/2;
-	plateaujoueur.fenetre.print(x,y,p,col);
-	plateaujoueur.fenetre.print(x2,y,p,col);
+	plateau.joueur.fenetre.print(x,y,p,col);
+	plateau.joueur.fenetre.print(x2,y,p,col);
 	break;
       case '\t':
 	Color tmp= menu.getCouleurBordure();
-	menu.setCouleurBordure(plateaujoueur.fenetre.getCouleurBordure());
-	plateaujoueur.fenetre.setCouleurBordure(tmp);
+	menu.setCouleurBordure(plateau.joueur.fenetre.getCouleurBordure());
+	plateau.joueur.fenetre.setCouleurBordure(tmp);
 	break;
       }}
 
@@ -132,6 +133,7 @@ void myprogram(){
 }
 
 int main(){
+
   startProgramX();
   myprogram();
   stopProgramX();
