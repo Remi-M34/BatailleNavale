@@ -1,5 +1,3 @@
-#include "flotte.h"
-#include "case.h"
 #include "grille.h"
 #include "plateau.h"
 

@@ -2,6 +2,7 @@
 #include "window.h"
 #include "flotte.h"
 #include <unistd.h>
+using namespace std;
 
 Grille::Grille(int const h, int const w, int sx, int sy) : height(h), width(w), startx(sx), starty(sy), fenetre(h, w, sx, sy), flotte(5, 14, sx + 3, sy + 12)
 {
@@ -12,12 +13,18 @@ Grille::~Grille() {}
 
 void Grille::init(int const h, int const w)
 {
+      Case = new etat *[h];
+
       for (int i = 0; i < h; i++)
       {
-            for (int j = 0 ; j < w ; j+=2)
-            {     fenetre.print(j, i, ' ', BWHITE);
-                  fenetre.print(j+1, i, ' ', BWHITE);
-                  usleep(25000);
+            Case[i] = new etat[w / 2];
+
+            for (int j = 0; j < w; j += 2)
+            {
+                  Case[i][j / 2] = VIDE;
+                  fenetre.print(j, i, "_", BWHITE);
+                  fenetre.print(j + 1, i, '|', BWHITE);
+                  usleep(18000);
             }
       }
 }

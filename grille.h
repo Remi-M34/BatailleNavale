@@ -3,7 +3,6 @@
 
 #include "window.h"
 #include "flotte.h"
-#include "case.h"
 #include <unistd.h>
 
 
@@ -13,12 +12,20 @@ extern "C" {
 #include <string>
 
 
-
+enum etat {
+    VIDE = 0,
+    VIDETOUCHE = 1,
+    NAVIRE = 2,
+    TOUCHE = 3,
+    COULE = 4
+};
 
 
 class Grille{
 
 public:
+
+
 
     Window fenetre; 
     Flotte flotte;
@@ -41,8 +48,7 @@ private:
     int starty;
     char bord;
 
-    int Case[20][10];
-
+    etat **Case;
 
     int posX,PosX2,PosY;
 
