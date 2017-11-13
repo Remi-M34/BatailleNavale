@@ -1,10 +1,12 @@
 
 all: prog
 
-prog: window.o test-piece.o
-	g++ $^ -o $@ -lncurses -Wall
+prog: window.o test-piece.o grille.o flotte.o
+	g++ $^ -o $@ -lncurses -W -Wall -ansi -pedantic
+
 
 
 %.o: %.cpp
-	g++ -c $^ -lncurses -Wall
+	g++ -c $^ -lncurses -W -Wall -ansi -pedantic
+
 
