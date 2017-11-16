@@ -1,81 +1,39 @@
 #include "window.h"
-#include "plateau.h"
+#include "config.h"
+#include "grille.h"
 #include <unistd.h>
+#include <algorithm>
+#include <cmath>
 using namespace std;
 
 void myprogram()
 {
-      int ch;
-      int const h = 10;
-      int const w = 20;
-      Window menu(3, 30, 1, 0);
-      Plateau plateau(h, w, 6, 6, 2);
+    int ch;
+    int const h = 10;
+    int const w = 20;
+    Window menu(5, max(2*getWidthGrille(),getWidthFlotte()*2-4), 6, 1);
+  menu.setCouleurBordure(BRED);
 
-      menu.setCouleurBordure(BRED);
+    Window score(3,max(2*getWidthGrille(),(getWidthFlotte()*2)-4), 2 * max(7+getWidthFlotte(),5+ getWidthGrille()),13+getHeightGrille());
 
-      plateau.joueur.fenetre.setCouleurBordure(BBLUE);
+  score.setCouleurBordure(BGREEN);
 
-      menu.print(1, 1, "Tapez q pour quitter !!!", WRED);
 
-      int x = w / 2, x2 = x + 1, y = h / 2;
-      char p = ' ';
-      Color col = WBLUE;
-      plateau.joueur.flotte.present();
 
-      int s = 0;
+    // Création des grilles et flottes dont les positions dépendent des dimensions calculées dans le fichier config
+    Grille joueur(6, 9, 6, 12 + getHeightGrille());
+    Grille ennemi(10 + 2 * max(getWidthFlotte(), getWidthGrille()), 9, 10 + 2 * max(getWidthFlotte(), getWidthGrille()), 1);
 
-      while ((ch = getch()) != 'q')
-      {
-
-            //PHASE 1  : placement des navires
-            if (plateau.joueur.flotte.places == 0)
-            {
-
-                  switch (ch)
-                  {
-                  case KEY_LEFT:
-                        plateau.joueur.flotte.selection(s % 5, 0);
-                        if (s == 0)
-                              s = 4;
-                        else
-                              s--;
-                        break;
-                  case KEY_RIGHT:
-                        plateau.joueur.flotte.selection(s % 5, 1);
-                        s++;
-                        break;
-
-                  case '\n':
-                        int i = 0;
-                        while (!(plateau.joueur.flotte.selected(i)) && i < 5)
-                        {
-                              i++;
-                        }
-                        plateau.joueur.placement(plateau.joueur.flotte.taille(i));
-                        break;
-                  }
-            }
-            //PHASE 2
-
-            else
-            {
-                  switch (ch)
-                  {
-                  case '\t':
-                        Color tmp = menu.getCouleurBordure();
-                        menu.setCouleurBordure(plateau.joueur.fenetre.getCouleurBordure());
-                        plateau.joueur.fenetre.setCouleurBordure(tmp);
-                        break;
-                  }
-            }
-      }
+    while ((ch = getch()) != 'q')
+    {
+    }
 }
 
 int main()
 {
 
-      startProgramX();
-      myprogram();
-      stopProgramX();
-      return 0;
+    startProgramX();
+    myprogram();
+    stopProgramX();
+    return 0;
 }
