@@ -3,58 +3,42 @@
 
 #include "window.h"
 #include "flotte.h"
-#include "case.h"
-#include <unistd.h>
+#include "config.h"
 
+#include <unistd.h>
 
 extern "C" {
 #include <curses.h>
 }
 #include <string>
 
+enum etat
+{
+    VIDE = 0,
+    VIDETOUCHE = 1,
+    NAVIRE = 2,
+    TOUCHE = 3,
+    COULE = 4
+};
 
+class Grille
+{
 
-
-
-class Grille{
-
-public:
-
-    Window fenetre; 
+  public:
+    Window fenetre;
     Flotte flotte;
-    //constructeur :
-    Grille(int const h, int const w, int sx, int sy);
 
+    //constructeur :
+    Grille(int const sx, int const sy, int sxf, int syf);
 
     //destructeur
     ~Grille();
 
-    void placement(int t);
-    void init(int const h, int const w);
+    void init();
 
-
-private:
-
-    int const height;
-    int const width;
-    int startx;
-    int starty;
-    char bord;
-
-    int Case[20][10];
-
-
-    int posX,PosX2,PosY;
-
-
-
-    
-
-
+  private:
+    etat **Case;
+    int ***navire = listedesnavires();
 };
-
-
-
-
 
 #endif

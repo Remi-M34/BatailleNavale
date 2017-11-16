@@ -8,12 +8,6 @@ extern "C" {
 #include <string>
 
 
-enum e {
-    VIDE,
-    NAVIRE,
-    TOUCHE,
-    COULE
-};
 
 
 
