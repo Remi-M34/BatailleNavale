@@ -2,12 +2,10 @@
 #include <string>
 #include <fstream>
 #include "config.h"
+#include <math.h>
 using namespace std;
 
-
-
-
- int const getWidthFlotte()
+int const getDimFlotte(char c)
 {
     ifstream config("config.txt", ios::in);
     string ligne;
@@ -15,13 +13,15 @@ using namespace std;
     int lignes = 0;
     int height[5] = {0};
     int width[5] = {0};
-        int longueur = 4;
-
+    int longueur = 4;
+    int maxheight = 0;
 
     while (getline(config, ligne))
     {
-        if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
+        // On passe au navire suivant si la ligne ne contient qu'un retour à la ligne
+        if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x' && n < 5)
         {
+            maxheight = fmax(maxheight, height[n]);
             n++;
             lignes++;
             continue;
@@ -39,25 +39,29 @@ using namespace std;
             height[n]++;
         }
         lignes++;
+        if (config.eof() && height[4] == 1)
+        {
+            width[4]++;
+        }
     }
 
-        config.close();
+    config.close();
 
-
-// Obtention de la longeur cumulée des navires
-    for (n = 0 ; n < 5 ; n++)
+    // Obtention de la longeur cumulée des navires
+    for (n = 0; n < 5; n++)
     {
-        longueur+=width[n];
+        longueur += width[n];
     }
 
-    return longueur;
+    if (c == 'w')
+        return longueur;
+    else
+    {
+        return maxheight;
     }
+}
 
-
-
-
-
- int const getHeightGrille()
+int const getHeightGrille()
 {
 
     ifstream config("config.txt", ios::in);
@@ -76,12 +80,7 @@ using namespace std;
     return n;
 }
 
-
-
-
-
-
- int const getWidthGrille()
+int const getWidthGrille()
 {
     ifstream config("config.txt", ios::in);
     string ligne;
@@ -107,9 +106,6 @@ using namespace std;
     return n;
 }
 
-
-
-
 int ***listedesnavires()
 {
     ifstream config("config.txt", ios::in);
@@ -119,13 +115,15 @@ int ***listedesnavires()
     int height[5] = {0};
     int width[5] = {0};
 
-
+// Obtention des dimensions de chaque navire
     while (getline(config, ligne))
     {
+
         if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
         {
             n++;
             lignes++;
+
             continue;
         }
         if (lignes > 0)
@@ -138,15 +136,15 @@ int ***listedesnavires()
                     width[n]++;
                 }
             }
+
             height[n]++;
         }
         lignes++;
+        if (config.eof() && height[4] == 1)
+        {
+            width[4]++;
+        }
     }
-
-
-
-
-
 
     // Retour au début du fichier config
     config.clear();
@@ -204,24 +202,24 @@ int ***listedesnavires()
             y++;
         }
         lignes++;
+        ligne = "     ";
     }
 
     config.close();
 
-//            for ( n = 0; n < 5; n++)
-//    {
-//        for ( x = 0; x < height[n]; x++)
-//        {
-//            for ( y = 0; y < width[n]; y++)
-//            {
-//                cout << navire[n][y][x];
-//            }
-//            cout << endl;
-//}
- //   }
-
+    // for (n = 0; n < 5; n++)
+    // {
+    //     for (y = 0; y < height[n] + 1; y++)
+    //     {
+    //         for (x = 0; x < width[n] + 1; x++)
+    //         {
+    //             cout << navire[n][x][y];
+    //         }
+    //         cout << endl;
+    //     }
+    // }
+    // cout << width[4] << endl;
     //Affichage de toutes les cases des navires
-
 
     return navire;
 }
