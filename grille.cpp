@@ -1,6 +1,5 @@
 #include "grille.h"
 #include "config.h"
-
 #include "window.h"
 #include "flotte.h"
 #include "config.h"
@@ -9,6 +8,7 @@ using namespace std;
 
 Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(getHeightGrille(), getWidthGrille() * 2, sx, sy), flotte(sxf, syf)
 {
+
 //Initialise la grille et rend toutes les cases de la grille VIDE
       init();
 }
@@ -30,7 +30,7 @@ void Grille::init()
                   Case[i][j / 2] = VIDE;
                   fenetre.print(j, i, " ", BWHITE);
                   fenetre.print(j + 1, i, ' ', BWHITE);
-                  usleep(7000);
+                  usleep(5000);
             }
       }
 }

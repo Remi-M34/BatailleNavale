@@ -38,7 +38,6 @@ class Grille
 
   private:
     etat **Case;
-    int ***navire = listedesnavires();
 };
 
 #endif

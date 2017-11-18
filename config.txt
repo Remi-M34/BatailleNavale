@@ -1,15 +1,20 @@
-15x15 (HxL, navires 5x5 max)
-xx
+12x12 (HxL, navires 5x5 max)
+  x
+ x x
+x   x
 
-x
-xx
-x
-x
+xxxx
+   x
+   x
+   x
 
-x
-x
-x
-
-x
 x
  x
+  x
+   x
+
+xx
+x
+
+x
+x
