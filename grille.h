@@ -4,6 +4,7 @@
 #include "window.h"
 #include "flotte.h"
 #include "config.h"
+#include "navire.h"
 
 #include <unistd.h>
 
@@ -38,6 +39,10 @@ public:
   void init();
 
   void moveNavire(int n, int& sx, int& sy);
+  void pivoteDroite(int n);
+  void checkRepositionnement(int n);
+  void repositionnementVertical(int n);
+    void repositionnementHorizontal(int n);
   bool check(int n, int sx, int sy);
 
 
@@ -47,10 +52,21 @@ public:
 
   // Placement du navire sélectionné sur la grille
   void placementNavire(int n);
+  void initDecalage();
 
 private:
   etat **Case;
   int ***navire = listedesnavires();
+
+
+
+
+
+
+
+
+
+
 };
 
 #endif

@@ -30,14 +30,14 @@ void Flotte::estAuPort(int n, bool b)
 
     for (int i = 0; i < n; i++)
     {
-        x += 1 + widthnavire[i];
+        x += 1 + dimNavire[i][0];
     }
     
-    int fx = x + widthnavire[n];
+    int fx = x + dimNavire[n][0];
 
     while (x < fx)
     {
-        for (int y = 0; y < heightnavire[n]; y++)
+        for (int y = 0; y < dimNavire[n][1]; y++)
         {
             if (navire[n][xx][y] == 1)
             {
@@ -111,13 +111,13 @@ void Flotte::supprimerduport(int n)
 
     for (int i = 0; i < n; i++)
     {
-        x += 1 + widthnavire[i];
+        x += 1 + dimNavire[i][0];
     }
-    int fx = x + widthnavire[n];
+    int fx = x + dimNavire[n][0];
 
     while (x < fx)
     {
-        for (int y = 0; y < heightnavire[n]; y++)
+        for (int y = 0; y < dimNavire[n][1]; y++)
         {
             fenetre.print(2 * x, y, ' ');
             fenetre.print(2 * x + 1, y, ' ');
@@ -139,9 +139,9 @@ void Flotte::refreshPort(int delai)
         if (estauport[n])
         {
 
-            while (x < widthnavire[n])
+            while (x < dimNavire[n][0])
             {
-                for (y = 0; y < heightnavire[n]; y++)
+                for (y = 0; y < dimNavire[n][1]; y++)
                 {
                     if (navire[n][x][y] == 1)
                     {
@@ -158,7 +158,7 @@ void Flotte::refreshPort(int delai)
         }
         else
         {
-            x2 += widthnavire[n];
+            x2 += dimNavire[n][0];
         }
 
         x2++;
@@ -199,18 +199,12 @@ void Flotte::init()
 
 int Flotte::getHeightnavire(int n)
 {
-    int h = 0;
-    while (navire[n][0][h] != -1)
-        h++;
 
-    return h;
+    return dimNavire[n][1];
 }
 
 int Flotte::getWidthnavire(int n)
 {
-    int w = 0;
-    while (navire[n][w][0] != -1)
-        w++;
+    return dimNavire[n][0];
 
-    return w;
 }

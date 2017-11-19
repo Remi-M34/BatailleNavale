@@ -23,18 +23,18 @@ public:
 
     //destructeur
     ~Navire();
+    int*** navire = listedesnavires();
 
 
 
 private:
 
 
-    int*** navire = listedesnavires();
     int*** navirePivote = listedesnavires();
-    int decalageGauche[5] = {0,0,0,0};
-    int decalageDroite[5] = {0,0,0,0};
-    int decalageHaut[5] = {0,0,0,0};
-    int decalageBas[5] = {0,0,0,0};
+    int decalageGauche[5] = {0,0,0,0,0};
+    int decalageDroite[5] = {0,0,0,0,0};
+    int decalageHaut[5] = {0,0,0,0,0};
+    int decalageBas[5] = {0,0,0,0,0};
 
 
 };

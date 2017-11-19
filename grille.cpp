@@ -1,8 +1,10 @@
 #include "grille.h"
-#include "config.h"
 #include "window.h"
 #include "flotte.h"
 #include "config.h"
+#include "navire.h"
+#include "algorithm"
+
 #include <unistd.h>
 using namespace std;
 
@@ -55,6 +57,7 @@ void Grille::selectionNavire()
                         flotte.echangeSelection(n, flotte.getPremierNavire());
                   }
                   flotte.refreshPort(0);
+                  
                   break;
             }
       }
@@ -137,7 +140,7 @@ void Grille::placementNavire(int n)
             }
       }
 
-      x += 1 - flotte.getWidthnavire(n);
+      x -= flotte.getWidthnavire(n);
       y -= flotte.getHeightnavire(n);
 
       while ((ch = getch()) != '\n')
@@ -152,6 +155,9 @@ void Grille::placementNavire(int n)
                         moveNavire(n, x, y);
                   }
 
+                                    cout << x << "  " ;
+
+
                   break;
             case KEY_LEFT:
                   if (x > 0)
@@ -161,6 +167,9 @@ void Grille::placementNavire(int n)
                         moveNavire(n, x, y);
                   }
 
+                                    cout << x << "  " ;
+
+
                   break;
             case KEY_UP:
                   if (y > 0)
@@ -168,6 +177,9 @@ void Grille::placementNavire(int n)
                         y--;
                         moveNavire(n, x, y);
                   }
+
+                                    cout << x << "  " ;
+
                   break;
             case KEY_DOWN:
                   if (y < getHeightGrille() - flotte.getHeightnavire(n))
@@ -175,6 +187,16 @@ void Grille::placementNavire(int n)
                         y++;
                         moveNavire(n, x, y);
                   }
+
+                                    cout << x << "  " ;
+
+
+                  break;
+
+            case ' ':
+                  pivoteDroite(n);
+                  moveNavire(n, x, y);
+                  cout << x << "  " << endl;
                   break;
             case 'q':
                   flotte.estAuPort(n, true);
@@ -193,9 +215,9 @@ void Grille::moveNavire(int n, int &sx, int &sy)
 
       refreshGrille();
 
-      for (x = 0; x < flotte.getWidthnavire(n); x++)
+      for (x = 0; x < fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)); x++)
       {
-            for (y = 0; y < flotte.getHeightnavire(n); y++)
+            for (y = 0; y < fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)); y++)
             {
                   if (navire[n][x][y] == 1)
                   {
@@ -206,7 +228,7 @@ void Grille::moveNavire(int n, int &sx, int &sy)
       }
 }
 
-bool Grille::check(int n,int sx, int sy)
+bool Grille::check(int n, int sx, int sy)
 {
       int x = 0;
       int y = 0;
@@ -215,7 +237,105 @@ bool Grille::check(int n,int sx, int sy)
       {
             for (y = 0; x < flotte.getHeightnavire(n); y++)
             {
-                  
             }
       }
 }
+
+void Grille::pivoteDroite(int n)
+{
+      int taille = fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n));
+
+      // Consider all squares one by one
+      for (int x = 0; x < taille / 2; x++)
+      {
+            // Consider elements in group of 4 in
+            // current square
+            for (int y = x; y < taille - x - 1; y++)
+            {
+                  // store current cell in temp variable
+                  int temp = navire[n][x][y];
+
+                  // move values from right to top
+                  navire[n][x][y] = navire[n][y][taille - 1 - x];
+
+                  // move values from bottom to right
+                  navire[n][y][taille - 1 - x] = navire[n][taille - 1 - x][taille - 1 - y];
+
+                  // move values from left to bottom
+                  navire[n][taille - 1 - x][taille - 1 - y] = navire[n][taille - 1 - y][x];
+
+                  // assign temp to left
+                  navire[n][taille - 1 - y][x] = temp;
+            }
+      }
+
+      checkRepositionnement(n);
+
+      cout << fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)) << endl;
+      cout << fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)) << endl;
+      cout << fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)) << endl;
+      refreshGrille();
+}
+
+void Grille::checkRepositionnement(int n)
+{
+
+      if (flotte.getHeightnavire(n) != flotte.getWidthnavire(n))
+      {
+            int k = 0;
+            for (int x = 0; navire[n][x][0] != -1; x++)
+            {
+                  k += navire[n][x][0];
+            }
+            if (k == 0)
+            {
+                  repositionnementVertical(n);
+                  checkRepositionnement(n);
+            }
+            k = 0;
+            for (int y = 0; navire[n][0][y] != -1; y++)
+            {
+                  k += navire[n][0][y];
+            }
+            if (k == 0)
+            {
+                  repositionnementHorizontal(n);
+                  checkRepositionnement(n);
+            }
+      }
+}
+
+void Grille::repositionnementHorizontal(int n)
+{
+      int x = 0;
+      for (x = 0; navire[n][x+1][0] != -1; x++)
+      {
+            for (int y = 0; navire[n][0][y] != -1; y++)
+            {
+                  navire[n][x][y] = navire[n][x+1][y];
+            }
+      }
+
+      for (int y = 0; navire[n][0][y] != -1; y++)
+      {
+            navire[n][x][y] = 0;
+      }
+}
+
+void Grille::repositionnementVertical(int n)
+{
+      int y = 0;
+      for (int x = 0; navire[n][x][0] != -1; x++)
+      {
+            for (y = 0; navire[n][0][y + 1] != -1; y++)
+            {
+                  navire[n][x][y] = navire[n][x][y + 1];
+            }
+      }
+
+      for (int x = 0; navire[n][x][0] != -1; x++)
+      {
+            navire[n][x][y] = 0;
+      }
+}
+

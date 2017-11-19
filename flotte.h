@@ -53,6 +53,9 @@ public:
   void selectionne(int n, bool x);
   void echangeSelection(int n, int n2);
 
+
+
+
 private:
   bool estauport[5] = {1, 1, 1, 1, 1};
   bool estplace[5] = {0, 0, 0, 0, 0};
@@ -66,9 +69,14 @@ private:
                     };
 
 
-  int ***navire = listedesnavires();
   int *heightnavire;
   int *widthnavire;
+
+      int ***navire = listedesnavires();
+
+
+  int **dimNavire = dimN();
+
 };
 
 #endif
