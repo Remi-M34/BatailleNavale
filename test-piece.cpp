@@ -32,6 +32,11 @@ void myprogram()
 
   Grille ennemi(10 + 2 * max(getDimFlotte('w'), getWidthGrille()), 9, 10 + 2 * max(getDimFlotte('w'), getWidthGrille()), 1);
 
+    joueur.flotte.initSelection();
+
+    joueur.selectionNavire();
+
+
   while ((ch = getch()) != 'q')
   {
   }
