@@ -76,7 +76,6 @@ int const getHeightGrille()
     }
 
     config.close();
-
     return n;
 }
 
@@ -103,8 +102,67 @@ int const getWidthGrille()
 
     config.close();
 
+
+
     return n;
 }
+
+
+int **dimN()
+{
+    ifstream config("config.txt", ios::in);
+    string ligne;
+    int n = 0;
+    int lignes = 0;
+    // Dim [n][i] où n est le numero du navire est i est la longueur si 0, hauteur si 1
+    int **dim;
+    dim = new int *[5];
+    for (int i = 0 ; i < 5 ; i++)
+    {
+        dim[i] = new int[2];
+    }
+
+// Obtention des dimensions de chaque navire
+    while (getline(config, ligne))
+    {
+
+        if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
+        {
+            n++;
+            lignes++;
+
+            continue;
+        }
+        if (lignes > 0)
+        {
+            for (int i = 0; ligne[i] != '\0'; i++)
+            {
+
+                if (i > dim[n][0])
+                {
+                    dim[n][0]++;
+                }
+            }
+
+            dim[n][1]++;
+        }
+        lignes++;
+        if (config.eof() && dim[4][1] == 1)
+        {
+            dim[4][0]++;
+        }
+    }
+
+    config.close();
+
+    return dim;
+}
+
+
+
+
+
+
 
 int ***listedesnavires()
 {
@@ -146,6 +204,19 @@ int ***listedesnavires()
         }
     }
 
+
+    int height2[5];
+    int width2[5];
+
+    for (int i = 0 ; i < 5 ; i++)
+    {
+        height2[i] = fmax(height[i],width[i]);
+        width2[i] = fmax(height[i],width[i]);
+    }
+
+
+
+
     // Retour au début du fichier config
     config.clear();
     config.seekg(0, ios::beg);
@@ -155,17 +226,17 @@ int ***listedesnavires()
     navire = new int **[5];
     for (n = 0; n < 5; ++n)
     {
-        navire[n] = new int *[width[n] + 1];
-        for (int x = 0; x <= width[n]; x++)
+        navire[n] = new int *[width2[n] + 1];
+        for (int x = 0; x <= width2[n]; x++)
         {
-            navire[n][x] = new int[height[n] + 1];
-            for (int y = 0; y <= height[n]; y++)
+            navire[n][x] = new int[height2[n] + 1];
+            for (int y = 0; y <= height2[n]; y++)
             {
-                if (x == width[n])
+                if (x == width2[n])
                 {
                     navire[n][x][y] = -1;
                 }
-                else if (y == height[n])
+                else if (y == height2[n])
                 {
                     navire[n][x][y] = -1;
                 }

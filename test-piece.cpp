@@ -10,18 +10,25 @@ using namespace std;
 
 
 
+
+
+
+
+
+
 void myprogram()
 {
-
+  Window bordure(33, 100, 0, 0, ' ');
+  bordure.setCouleurBordure(WGREEN);
   refresh();
-
-  Window menu(5, max(2 * getWidthGrille(), getDimFlotte('w') * 2 - 4), 6, 1);
-  
+  Window menu(4, max(2 * getWidthGrille(), getDimFlotte('w') * 2 - 4), 6, 1);
+  menu.setCouleurBordure(WBLACK);
+  menu.setCouleurFenetre(WBLACK);
+  menu.setBordureDroite();
 
   int ch;
   int const h = 10;
   int const w = 20;
-  menu.setCouleurBordure(BRED);
 
   Window score(3, max(2 * getWidthGrille(), (getDimFlotte('w') * 2) - 4), 2 * max(7 + getDimFlotte('w'), 5 + getWidthGrille()), 13 + getHeightGrille());
 
@@ -32,9 +39,17 @@ void myprogram()
 
   Grille ennemi(10 + 2 * max(getDimFlotte('w'), getWidthGrille()), 9, 10 + 2 * max(getDimFlotte('w'), getWidthGrille()), 1);
 
+    joueur.flotte.initSelection();
+
+  menu.print(0,0,"Placez vos navires sur la grille \n Entrée    Sélectionner / placer \n Espace    Pivoter \n b         Renvoyer le navire au port",WBLACK);
+    joueur.selectionNavire() ;
+
+
   while ((ch = getch()) != 'q')
   {
   }
+
+
 }
 
 
@@ -59,8 +74,9 @@ void menu()
 
   startProgramX();
 
-  Window plateau(33, 100, 0, 0, ' ');
-  plateau.setCouleurBordure(BYELLOW);
+
+  Window plateau(33, 100, 0, 0, WMAGENTA);
+  plateau.setBordureDroite();
 
 
 
@@ -77,7 +93,7 @@ void menu()
 
 
 
-  Color col[4] = {WYELLOW, BYELLOW, BYELLOW, BYELLOW};
+  Color col[4] = {WMAGENTA, BMAGENTA, BMAGENTA, BMAGENTA};
 
   refresh();
   getch();
@@ -97,7 +113,6 @@ Flotte flotte(50-getDimFlotte('w'),5);
 
   while ((c = getch()) != 'q')
   {
-    cout << selection << endl;
 
     for (int i = 0; i < 4; i++)
     {

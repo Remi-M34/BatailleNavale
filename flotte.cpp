@@ -3,48 +3,134 @@
 #include "config.h"
 #include "cmath"
 #include "iostream"
+#include "algorithm"
 #include <unistd.h>
 
 using namespace std;
 
-Flotte::Flotte(int sx, int sy) : startx(sx), starty(sy), fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
+Flotte::Flotte(int sx, int sy) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
 {
-    init();
-    port();
+    fenetre.setCouleurBordure(BYELLOW);
+    initDim();
+    refreshPort(1);
 }
+
 
 Flotte::~Flotte() {}
 
-
-
-
-void Flotte::Select()
+void Flotte::estAuPort(int n, bool b)
 {
-    int ch;
-    while ((ch = getch()) != '\n')
+    if (b)
+        estauport[n] = 1;
+    else
     {
-        port();
-        switch (ch)
+        estauport[n] = 0;
+    }
+
+    int x = 0;
+    int xx = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        x += 1 + dimNavireOriginales[i][0];
+    }
+    
+    int fx = x + dimNavireOriginales[n][0];
+
+    while (x < fx)
+    {
+        for (int y = 0; y < dimNavireOriginales[n][1]; y++)
         {
-            case 'KEY_RIGHT':
+            if (navire[n][xx][y] == 1)
+            {
+                if (!(b))
+                {
+                    fenetre.print(2 * x, y, ' ');
+                    fenetre.print(2 * x + 1, y, ' ');
+                }
+                else
+                {
+                    fenetre.print(2 * x, y, ' ', color[n]);
+                    fenetre.print(2 * x + 1, y, ' ', color[n]);
+                }
+            }
+        }
+        x++;
+        xx++;
+    }
 
-            break;
+    refreshPort(0);
+}
 
-            case 'KEY_LEFT':
-
-            break;
-
-            case '\n':
-
-            break;
+int Flotte::getNavireSuivant(int n)
+{
+    for (int i = n + 1; i < 5; i++)
+    {
+        if (estauport[i])
+        {
+            return i;
         }
     }
 }
 
+Color Flotte::getColor(int n)
+{
+    return color[n];
+}
 
+int Flotte::getNavirePrecedent(int n)
+{
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (estauport[i])
+        {
+            return i;
+        }
+    }
+}
 
+bool Flotte::getEstAuPort(int n)
+{
+    return estauport[n];
+}
 
-void Flotte::port()
+void Flotte::selectionne(int n, bool x)
+{
+    if (x)
+        s[n] = '#';
+    else
+        s[n] = ' ';
+}
+
+void Flotte::echangeSelection(int n, int n2)
+{
+    swap(s[n], s[n2]);
+}
+
+void Flotte::supprimerduport(int n)
+{
+    int x = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        x += 1 + dimNavireOriginales[i][0];
+    }
+    int fx = x + dimNavireOriginales[n][0];
+
+    while (x < fx)
+    {
+        for (int y = 0; y < dimNavireOriginales[n][1]; y++)
+        {
+            fenetre.print(2 * x, y, ' ');
+            fenetre.print(2 * x + 1, y, ' ');
+        }
+        x++;
+    }
+
+    refreshPort(0);
+}
+
+void Flotte::refreshPort(int delai)
 {
     int x = 0;
     int y = 0;
@@ -52,17 +138,20 @@ void Flotte::port()
 
     for (int n = 0; n < 5; n++)
     {
-
         if (estauport[n])
         {
-            while (x < widthnavire[n])
+
+            while (x < dimNavireOriginales[n][0])
             {
-                for (y = 0; y < heightnavire[n]; y++)
+                for (y = 0; y < dimNavireOriginales[n][1]; y++)
                 {
                     if (navire[n][x][y] == 1)
                     {
-                        fenetre.print(2 * x2, y, s[n], color[n]);
-                        fenetre.print(2 * x2 + 1, y, s[n], color[n]);
+                        if (estauport[n])
+                        {
+                            fenetre.print(2 * x2, y, s[n], color[n]);
+                            fenetre.print(2 * x2 + 1, y, s[n], color[n]);
+                        }
                     }
                 }
                 x++;
@@ -71,40 +160,123 @@ void Flotte::port()
         }
         else
         {
-            x2 += widthnavire[n];
+            x2 += dimNavireOriginales[n][0];
         }
+
         x2++;
         x = 0;
-        usleep(60000);
+        if (delai == 1)
+            usleep(60000);
     }
 }
 
-//Obtention des longueurs et largeurs de chaque navire
-void Flotte::init()
+int Flotte::getPremierNavire()
 {
-    heightnavire = new int[5];
-    widthnavire = new int[5];
     for (int n = 0; n < 5; n++)
     {
-        heightnavire[n] = getHeightnavire(n);
-        widthnavire[n] = getWidthnavire(n);
+        if (estauport[n])
+        {
+            return n;
+        }
     }
+}
+
+int Flotte::getDernierNavire()
+{
+    for (int n = 4 ; n >= 0 ; n--)
+    {
+        if (estauport[n])
+        {
+            return n;
+        }
+    }
+}
+
+
+void Flotte::initSelection()
+{
+    s[getPremierNavire()] = '#';
+    refreshPort(0);
 }
 
 int Flotte::getHeightnavire(int n)
 {
-    int h = 0;
-    while (navire[n][0][h] != -1)
-        h++;
 
-    return h;
+    return dimNavire[n][1];
 }
+
 
 int Flotte::getWidthnavire(int n)
 {
-    int w = 0;
-    while (navire[n][w][0] != -1)
-        w++;
+    return dimNavire[n][0];
 
-    return w;
+}
+
+int Flotte::getHeightnavireOriginale(int n)
+{
+
+    return dimNavireOriginales[n][1];
+}
+
+
+int Flotte::getWidthnavireOriginale(int n)
+{
+    return dimNavireOriginales[n][0];
+
+}
+
+
+void Flotte::swapDimensionsNavire(int n)
+{
+    swap(dimNavire[n][0],dimNavire[n][1]);
+}
+
+
+
+void Flotte::initDim()
+{
+    int kx = 0;
+    int ky = 0;
+    int maxX = 0;
+    int maxY = 0;
+
+        dimNavire = new int*[5];
+        dimNavireOriginales = new int*[5];
+
+
+    for (int n = 0 ; n < 5 ; n++)
+    {
+        dimNavire[n] = new int[2];
+        dimNavireOriginales[n] = new int[2];
+
+        for (int x = 0 ; navire[n][x][0] != -1 ; x++)
+        {
+            for (int y = 0 ; navire[n][0][y] != -1 ; y++)
+            {
+                if (navire[n][x][y] == 1)
+                {
+                    maxY = fmax(maxY,y+1);
+                }
+                if (navire[n][y][x] == 1)
+                {
+                    maxX = fmax(maxX,y+1);
+                }
+            }
+
+        }
+
+        dimNavire[n][0] = maxX;
+        dimNavire[n][1] = maxY;        
+        dimNavireOriginales[n][0] = maxX;
+        dimNavireOriginales[n][1] = maxY;
+        maxX = 0;
+        maxY = 0;
+
+
+
+
+    }
+
+
+
 }

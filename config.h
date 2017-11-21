@@ -15,6 +15,8 @@ const int getDimFlotte(char c);
 const int getWidthGrille();
 const int getHeightGrille();
 int ***listedesnavires();
+int **dimN();
+
 
 
 
