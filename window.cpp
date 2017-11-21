@@ -100,10 +100,17 @@ Color Window::getCouleurBordure() const{ return colorframe;}
 Color Window::getCouleurFenetre() const{ return colorwin;}
 void Window::setCouleurBordure(Color c){
   colorframe=c;
-  wattron(frame,COLOR_PAIR(colorframe));
+  // wattron(frame,COLOR_PAIR(colorframe));
   wborder(frame, bord,bord,bord,bord,bord,bord,bord,bord);
   update();
 }
+
+void Window::setBordureDroite(){
+
+  wborder(frame, '|','|','_' , '_' , ' ' , ' ' , '|','|');
+  update();
+}
+
 void Window::setCouleurFenetre(Color c){
   colorwin=c;
   wattron(win,COLOR_PAIR(colorwin));

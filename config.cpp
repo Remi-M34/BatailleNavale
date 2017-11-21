@@ -76,7 +76,6 @@ int const getHeightGrille()
     }
 
     config.close();
-
     return n;
 }
 
@@ -102,6 +101,8 @@ int const getWidthGrille()
     }
 
     config.close();
+
+
 
     return n;
 }
@@ -151,6 +152,9 @@ int **dimN()
             dim[4][0]++;
         }
     }
+
+    config.close();
+
     return dim;
 }
 
@@ -243,8 +247,6 @@ int ***listedesnavires()
             }
         }
     }
-
-    cout << navire[0][0][5] << endl;
 
     n = 0;
     lignes = 0;

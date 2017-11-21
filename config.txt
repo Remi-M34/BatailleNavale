@@ -1,4 +1,4 @@
-11x11 (HxL, navires 5x5 max)
+15x15 (= taille de la grille :HxL. Navires 5x5 max)
   x
  x x
 x   x
@@ -17,5 +17,6 @@ xx
 x
 x
 
-x
-x
+x x
+xxx
+x x

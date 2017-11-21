@@ -24,7 +24,7 @@ public:
   //destructeur
   ~Flotte();
 
-  void init();
+  void initDim();
 
   // Affiche les navires les uns après les autres si delai = 1
   void refreshPort(int delai);
@@ -35,7 +35,11 @@ public:
   //Lecture
   int getHeightnavire(int n);
   int getWidthnavire(int n);
+  int getHeightnavireOriginale(int n);
+  int getWidthnavireOriginale(int n);
   int getPremierNavire();
+  int getDernierNavire();
+  int **dimensionsOriginales(int n);
 
   // Retourne le navire suivant qui est au port
   int getNavireSuivant(int n);
@@ -52,6 +56,7 @@ public:
   void estAuPort(int n, bool x);
   void selectionne(int n, bool x);
   void echangeSelection(int n, int n2);
+  void swapDimensionsNavire(int n);
 
 
 
@@ -69,13 +74,12 @@ private:
                     };
 
 
-  int *heightnavire;
-  int *widthnavire;
 
-      int ***navire = listedesnavires();
+  int ***navire = listedesnavires();
 
 
-  int **dimNavire = dimN();
+  int **dimNavire;
+  int **dimNavireOriginales;
 
 };
 
