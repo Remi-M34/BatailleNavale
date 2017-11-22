@@ -2,7 +2,6 @@
 #include "window.h"
 #include "flotte.h"
 #include "config.h"
-#include "navire.h"
 #include "algorithm"
 
 #include <unistd.h>
@@ -10,7 +9,7 @@ using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
-Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf)
+Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf,1)
 {
 
       //Initialise la grille et rend toutes les cases de la grille VIDE

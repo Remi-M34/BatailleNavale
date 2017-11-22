@@ -8,11 +8,11 @@
 
 using namespace std;
 
-Flotte::Flotte(int sx, int sy) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
+Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
 {
     fenetre.setCouleurBordure(BYELLOW);
     initDim();
-    refreshPort(1);
+    refreshPort(d);
 }
 
 

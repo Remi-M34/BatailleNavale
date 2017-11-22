@@ -19,7 +19,7 @@ public:
 
   int places = 0;
   //constructeur :
-  Flotte(int sx, int sy);
+  Flotte(int sx, int sy, int delai);
 
   //destructeur
   ~Flotte();

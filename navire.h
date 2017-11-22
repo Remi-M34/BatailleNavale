@@ -7,39 +7,17 @@ extern "C" {
 #include <curses.h>
 }
 #include <string>
+#include "window.h"
+#include "flotte.h"
 
 
-
-
-
-
-class Navire{
-
-public:
-
-
-    //constructeur :
-    Navire();
-
-    //destructeur
-    ~Navire();
-    int*** navire = listedesnavires();
-
-
-
-private:
-
-
-    int*** navirePivote = listedesnavires();
-    int decalageGauche[5] = {0,0,0,0,0};
-    int decalageDroite[5] = {0,0,0,0,0};
-    int decalageHaut[5] = {0,0,0,0,0};
-    int decalageBas[5] = {0,0,0,0,0};
-
-
-};
-
-
+void menuNavire();
+void nouveauNavire(int n);
+void moveNavire(Window creation, int x, int y , char d);
+int getDim(int** navire);
+int** checkRepositionnement(int** navire);
+int** repositionnementHorizontal(int** navire);
+int** repositionnementVertical(int** navire);
 
 
 

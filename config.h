@@ -10,11 +10,21 @@ extern "C" {
 //Accès en lecture
 
 //Retourne la longueur ou la hauteur de la fenetre de la flotte selon l'option (h ou w) 
+//BUG --- Ne pas utiliser
 const int getDimFlotte(char c);
 
 const int getWidthGrille();
 const int getHeightGrille();
 int ***listedesnavires();
+
+void modifierNavires(int n, int width, int height, int** navire);
+void ecrireNavire(int n);
+void changerDim();
+
+void editWidthGrille(int w);
+void editHeightGrille(int h);
+
+//BUG --- Ne pas utiliser
 int **dimN();
 
 

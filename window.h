@@ -70,7 +70,7 @@ class Window {
   void setBordureDroite();
 
   void clear() const; // enleve tout le contenu de la fenêtre
-
+  WINDOW* getWin();
 };
 
 
