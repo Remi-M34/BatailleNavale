@@ -4,7 +4,6 @@
 #include "window.h"
 #include "flotte.h"
 #include "config.h"
-#include "navire.h"
 
 #include <unistd.h>
 

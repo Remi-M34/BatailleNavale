@@ -2,7 +2,10 @@
 #include <string>
 #include <fstream>
 #include "config.h"
+#include "flotte.h"
 #include <math.h>
+#include <stdlib.h>
+#include <sstream>
 using namespace std;
 
 int const getDimFlotte(char c)
@@ -19,7 +22,7 @@ int const getDimFlotte(char c)
     while (getline(config, ligne))
     {
         // On passe au navire suivant si la ligne ne contient qu'un retour à la ligne
-        if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x' && n < 5)
+        if (ligne[0] == '\0' && ligne[0] != ' ' && ligne[0] != 'x' && n < 5)
         {
             maxheight = fmax(maxheight, height[n]);
             n++;
@@ -31,7 +34,7 @@ int const getDimFlotte(char c)
             for (int i = 0; ligne[i] != '\0'; i++)
             {
 
-                if (i > width[n])
+                if (i >= width[n])
                 {
                     width[n]++;
                 }
@@ -61,7 +64,57 @@ int const getDimFlotte(char c)
     }
 }
 
-int const getHeightGrille()
+void editWidthGrille(int w)
+{
+    fstream tmp("tmp.txt", ios::in | ios::out | ios::trunc);
+    tmp << w << "x" << getHeightGrille() << '\n';
+
+    string ligne;
+    int lignes = 0;
+    fstream config("config.txt", ios::in | ios::out);
+
+    while (getline(config, ligne))
+    {
+        lignes++;
+        if (lignes == 1)
+        {
+            continue;
+        }
+        tmp << ligne << '\n';
+    }
+
+    rename("tmp.txt", "config.txt");
+
+    tmp.close();
+    config.close();
+}
+
+void editHeightGrille(int h)
+{
+    fstream tmp("tmp.txt", ios::in | ios::out | ios::trunc);
+    tmp << getWidthGrille() << "x" << h << '\n';
+
+    string ligne;
+    int lignes = 0;
+    fstream config("config.txt", ios::in | ios::out);
+
+    while (getline(config, ligne))
+    {
+        lignes++;
+        if (lignes == 1)
+        {
+            continue;
+        }
+        tmp << ligne << '\n';
+    }
+
+    rename("tmp.txt", "config.txt");
+
+    tmp.close();
+    config.close();
+}
+
+int const getWidthGrille()
 {
 
     ifstream config("config.txt", ios::in);
@@ -79,7 +132,7 @@ int const getHeightGrille()
     return n;
 }
 
-int const getWidthGrille()
+int const getHeightGrille()
 {
     ifstream config("config.txt", ios::in);
     string ligne;
@@ -102,11 +155,8 @@ int const getWidthGrille()
 
     config.close();
 
-
-
     return n;
 }
-
 
 int **dimN()
 {
@@ -117,12 +167,12 @@ int **dimN()
     // Dim [n][i] où n est le numero du navire est i est la longueur si 0, hauteur si 1
     int **dim;
     dim = new int *[5];
-    for (int i = 0 ; i < 5 ; i++)
+    for (int i = 0; i < 5; i++)
     {
         dim[i] = new int[2];
     }
 
-// Obtention des dimensions de chaque navire
+    // Obtention des dimensions de chaque navire
     while (getline(config, ligne))
     {
 
@@ -158,12 +208,6 @@ int **dimN()
     return dim;
 }
 
-
-
-
-
-
-
 int ***listedesnavires()
 {
     ifstream config("config.txt", ios::in);
@@ -173,11 +217,11 @@ int ***listedesnavires()
     int height[5] = {0};
     int width[5] = {0};
 
-// Obtention des dimensions de chaque navire
+    // Obtention des dimensions de chaque navire
     while (getline(config, ligne))
     {
 
-        if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
+        if (ligne[0] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
         {
             n++;
             lignes++;
@@ -189,7 +233,7 @@ int ***listedesnavires()
             for (int i = 0; ligne[i] != '\0'; i++)
             {
 
-                if (i > width[n])
+                if (i >= width[n])
                 {
                     width[n]++;
                 }
@@ -204,18 +248,14 @@ int ***listedesnavires()
         }
     }
 
-
     int height2[5];
     int width2[5];
 
-    for (int i = 0 ; i < 5 ; i++)
+    for (int i = 0; i < 5; i++)
     {
-        height2[i] = fmax(height[i],width[i]);
-        width2[i] = fmax(height[i],width[i]);
+        height2[i] = fmax(height[i], width[i]);
+        width2[i] = fmax(height[i], width[i]);
     }
-
-
-
 
     // Retour au début du fichier config
     config.clear();
@@ -257,7 +297,7 @@ int ***listedesnavires()
     {
         if (lignes > 0)
         {
-            if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
+            if (ligne[0] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
             {
                 n++;
                 y = 0;
@@ -293,4 +333,256 @@ int ***listedesnavires()
     //Affichage de toutes les cases des navires
 
     return navire;
+}
+
+void modifierNavires(int n, int width, int height, int **nouveaunavire)
+{
+
+    int lignes = -1;
+    string ligne;
+    int navire = 1;
+    bool trouve = false;
+    bool saut = false;
+
+    fstream tmp0("tmp.txt", ios::in | ios::out | ios::trunc);
+    tmp0 << "15x15\n";
+    tmp0.close();
+
+    for (int i = 0; i != n; i++)
+    {
+        ecrireNavire(i);
+    }
+
+    fstream tmp("tmp.txt", ios::in | ios::out | ios::app);
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            if (nouveaunavire[x][y] == 0)
+            {
+                tmp << ' ';
+            }
+            else if (nouveaunavire[x][y] == 1)
+            {
+                tmp << 'x';
+            }
+        }
+        tmp << '\n';
+    }
+    if (n != 4)
+        tmp << '\n';
+    tmp.close();
+
+    if (n != 4)
+    {
+        for (int i = n + 1; i < 5; i++)
+        {
+            ecrireNavire(i);
+        }
+    }
+
+    rename("tmp.txt", "config.txt");
+}
+
+void ecrireNavire(int n)
+{
+    fstream config("config.txt", ios::in | ios::out);
+
+    fstream tmp("tmp.txt", ios::in | ios::out | ios::app);
+
+    int lignes = 0;
+    string ligne;
+    int navire = 0;
+
+    while (getline(config, ligne))
+    {
+        lignes++;
+        if (lignes == 1)
+        {
+            // if (n == 0)
+            // {
+            //     continue;
+            // }
+            continue;
+        }
+
+        if (navire == n)
+        {
+            if (ligne[0] != ' ' && ligne[0] != 'x')
+            {
+                if (!config.eof())
+                {
+                    tmp << '\n';
+                }
+                config.close();
+                tmp.close();
+                return;
+            }
+            tmp << ligne;
+            if (!config.eof())
+            {
+                tmp << '\n';
+            }
+            continue;
+        }
+
+        if (navire != n)
+        {
+            if (ligne[0] != ' ' && ligne[0] != 'x')
+            {
+                navire++;
+            }
+            continue;
+        }
+    }
+
+    config.close();
+    tmp.close();
+}
+
+void changerDim()
+{
+    stopProgramX();
+    startProgramX();
+
+    int ch;
+    int n = 0;
+
+    Window plateau(33, 100, 0, 0, WMAGENTA);
+
+    Window dim(3, 18, 41, 13, WMAGENTA);
+    plateau.setBordureDroite();
+    dim.setCouleurBordure(BGREEN);
+    dim.setCouleurFenetre(WBLACK);
+    Flotte flotte(50 - getDimFlotte('w'), 5, 0);
+
+    noecho();
+
+    int h = getHeightGrille(); 
+    int w = getWidthGrille();
+    string height; 
+    string width; 
+    ostringstream convert;
+    convert << h;         
+    height = convert.str();
+    ostringstream convert2; 
+    convert2 << w;          
+    width = convert2.str();
+
+    int x = 0;
+    int num = 0;
+
+    Color col[3] = {BWHITE, BMAGENTA, BMAGENTA};
+    dim.print(5 + width.length() + 2, 1, "x", WBLACK);
+
+    while ((ch = getch()) != 'q')
+    {
+        string retour = "Retour";
+
+        dim.print(5, 1, width, col[0]);
+        dim.print(5 + width.length() + 5, 1, height, col[1]);
+        plateau.print(50 - retour.length() / 2, 18, retour, col[2]);
+
+        switch (ch)
+        {
+        case KEY_RIGHT:
+            if (n == 0)
+            {
+                n++;
+                swap(col[0], col[1]);
+            }
+            break;
+
+        case KEY_LEFT:
+            if (n == 1)
+            {
+                n--;
+                swap(col[0], col[1]);
+            }
+            break;
+
+        case KEY_DOWN:
+            if (n != 2)
+            {
+                swap(col[n], col[2]);
+                n = 2;
+            }
+            break;
+
+        case KEY_UP:
+            if (n == 2)
+            {
+                swap(col[0], col[2]);
+                n = 0;
+            }
+            break;
+
+        case '\n':
+            if (n == 0)
+            {
+                echo();
+                for (int i = 0; i < width.length(); i++)
+                {
+                    dim.print(5 + i, 1, ' ', WBLACK);
+                }
+
+                move(15, 47);
+
+                do
+                {
+
+                    ch = getch();
+                    if (isdigit(ch))
+                    {
+
+                        // cout << ch  ;
+                        num = (num * 10) + ch - '0';
+                    }
+                    if (ch == '\n' && num > 0) 
+                    {
+                        editWidthGrille(num);
+                        changerDim();
+                        return;
+                        // cout << " x ";
+
+                        break;
+                    }
+                } while (1);
+            }
+            else if (n == 1)
+            {
+
+                echo();
+                for (int i = 0; i < height.length(); i++)
+                {
+                    dim.print(10 + i + width.length(), 1, ' ', WBLACK);
+                }
+
+                move(15, 52 + width.length());
+
+                do
+                {
+
+                    ch = getch();
+                    if (isdigit(ch))
+                    {
+                        num = (num * 10) + ch - '0';
+                    }
+                    if (ch == '\n' && num > 0) 
+                    {
+                        editHeightGrille(num);
+                        changerDim();
+
+                        return;
+                        break;
+                    }
+                } while (1);
+            }
+            else if (n == 2)
+            {
+                return;
+            }
+            break;
+        }
+    }
 }
