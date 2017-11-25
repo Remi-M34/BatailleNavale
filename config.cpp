@@ -8,6 +8,9 @@
 #include <sstream>
 using namespace std;
 
+#define xm (COLS-100)/2
+#define ym (LINES-33)/2
+
 int const getDimFlotte(char c)
 {
     ifstream config("config.txt", ios::in);
@@ -48,6 +51,9 @@ int const getDimFlotte(char c)
         }
     }
 
+                maxheight = fmax(maxheight, height[n]);
+
+
     config.close();
 
     // Obtention de la longeur cumulée des navires
@@ -55,6 +61,8 @@ int const getDimFlotte(char c)
     {
         longueur += width[n];
     }
+
+
 
     if (c == 'w')
         return longueur;
@@ -448,36 +456,48 @@ void changerDim()
     int ch;
     int n = 0;
 
-    Window plateau(33, 100, 0, 0, WMAGENTA);
+    Window plateau(33, 100, xm, ym, WMAGENTA);
 
-    Window dim(3, 18, 41, 13, WMAGENTA);
+    Window dim(3, 18, 41+xm, 13+ym, WMAGENTA);
     plateau.setBordureDroite();
     dim.setCouleurBordure(BGREEN);
     dim.setCouleurFenetre(WBLACK);
-    Flotte flotte(50 - getDimFlotte('w'), 5, 0);
+    Flotte flotte(50 - getDimFlotte('w')+xm, 4+ym, 0);
 
-    noecho();
 
-    int h = getHeightGrille(); 
+
+    Window aide(8,30,2+xm,11+ym);
+    aide.setBordureDroite();
+      aide.print(1,1,"<-, ->     Parcourir",WBLACK);
+      aide.print(1,2,"ENTREE     Sélectionner",WBLACK);
+
+      aide.print(1,7,"q          Menu",WBLACK);
+
+
+
+
+    echo();
+
+    int h = getHeightGrille();
     int w = getWidthGrille();
-    string height; 
-    string width; 
+    string height;
+    string width;
     ostringstream convert;
-    convert << h;         
+    convert << h;
     height = convert.str();
-    ostringstream convert2; 
-    convert2 << w;          
+    ostringstream convert2;
+    convert2 << w;
     width = convert2.str();
 
     int x = 0;
     int num = 0;
-
     Color col[3] = {BWHITE, BMAGENTA, BMAGENTA};
     dim.print(5 + width.length() + 2, 1, "x", WBLACK);
 
     while ((ch = getch()) != 'q')
     {
         string retour = "Retour";
+    echo();
 
         dim.print(5, 1, width, col[0]);
         dim.print(5 + width.length() + 5, 1, height, col[1]);
@@ -518,6 +538,10 @@ void changerDim()
             break;
 
         case '\n':
+              aide.print(1,4,"1-9        Modifier la taille",WBLACK);
+      aide.print(1,5,"ENTREE     Valider",WBLACK);
+      curs_set(1);
+
             if (n == 0)
             {
                 echo();
@@ -526,7 +550,7 @@ void changerDim()
                     dim.print(5 + i, 1, ' ', WBLACK);
                 }
 
-                move(15, 47);
+                move(15+ym, 47+xm);
 
                 do
                 {
@@ -538,14 +562,22 @@ void changerDim()
                         // cout << ch  ;
                         num = (num * 10) + ch - '0';
                     }
-                    if (ch == '\n' && num > 0) 
+                    if (ch == '\n' && num > 0)
                     {
                         editWidthGrille(num);
                         changerDim();
                         return;
-                        // cout << " x ";
 
                         break;
+                    }
+                    else if (ch == '\n' && num == 0)
+                    {
+                        move(15+ym, 47+xm);
+                    }
+                    if (isalpha(ch))
+                    {
+                        changerDim();
+                        return;
                     }
                 } while (1);
             }
@@ -558,7 +590,7 @@ void changerDim()
                     dim.print(10 + i + width.length(), 1, ' ', WBLACK);
                 }
 
-                move(15, 52 + width.length());
+                move(15+ym,xm+ 52 + width.length());
 
                 do
                 {
@@ -568,7 +600,7 @@ void changerDim()
                     {
                         num = (num * 10) + ch - '0';
                     }
-                    if (ch == '\n' && num > 0) 
+                    if (ch == '\n' && num > 0)
                     {
                         editHeightGrille(num);
                         changerDim();
@@ -576,10 +608,16 @@ void changerDim()
                         return;
                         break;
                     }
+                    else if (ch == '\n' && num == 0)
+                    {
+                move(15+ym,xm+ 52 + width.length());
+                    }
                 } while (1);
             }
             else if (n == 2)
             {
+                curs_set(0);
+
                 return;
             }
             break;

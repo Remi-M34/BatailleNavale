@@ -13,10 +13,20 @@ Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(H, W * 2,
 {
 
       //Initialise la grille et rend toutes les cases de la grille VIDE
+      fenetre.setCouleurBordure(WMAGENTA);
       init();
 
       initDecalage();
+
 }
+
+
+
+
+
+
+
+
 
 Grille::~Grille() {}
 

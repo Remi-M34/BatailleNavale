@@ -8,8 +8,8 @@
 #include "string"
 using namespace std;
 
-
-
+#define xm (COLS-100)/2
+#define ym (LINES-33)/2
 
 
 
@@ -134,18 +134,38 @@ void menuNavire()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, 0, 0, WMAGENTA);
+  Window plateau(33, 100, xm, ym, WMAGENTA);
   plateau.setBordureDroite();
+    Window aide(12,30,2+xm,11+ym);
+    aide.setBordureDroite();
+      aide.print(1,1,"<-, ->     Parcourir",WBLACK);
+      aide.print(1,2,"ENTREE     Sélectionner",WBLACK);
+      aide.print(1,11,"q          Menu",WBLACK);
 
-  Flotte flotte(50 - getDimFlotte('w'), 5, 0);
+
+
+
+Color col = BMAGENTA;
+  Flotte flotte(50 - getDimFlotte('w')+xm, 4+ym, 0);
 
   flotte.initSelection();
 
   while ((c = getch()) != 'q')
   {
+            plateau.print(15,5,"Retour",col);
+            
+
     switch (c)
     {
     case KEY_RIGHT:
+    if (n == -1)
+    {
+      flotte.selectionne(0,true);
+      flotte.refreshPort(0);
+      col = BMAGENTA;
+      n++;
+      break;
+    }
       if (n != 4)
       {
         n++;
@@ -156,20 +176,35 @@ void menuNavire()
       break;
 
     case KEY_LEFT:
-      if (n != 0)
+      if (n > 0)
       {
         n--;
         flotte.echangeSelection(n, n + 1);
+        flotte.refreshPort(0);
+      }
+      else if (n == 0)
+      {
+        n--;
+        col = WMAGENTA;
+        flotte.selectionne(0,false);
         flotte.refreshPort(0);
       }
 
       break;
 
     case '\n':
+    if (n == -1)
+    {
+      return;
+    }
+          aide.print(1,4,"ESPACE     Ajouter une case",WBLACK);
+          aide.print(1,5,"ENTREE     Valider",WBLACK);
+          aide.print(1,6,"r          Annuler l'édition",WBLACK);
+          aide.print(1,7,"d          Repositionner",WBLACK);
       flotte.estAuPort(n, false);
       nouveauNavire(n);
       flotte.estAuPort(n,true);
-      break;
+      return;
 
 
           case 'q':
@@ -182,8 +217,8 @@ void menuNavire()
 
 void nouveauNavire(int n)
 {
-  Window creation(5, 10, 45, 13);
-  creation.setCouleurFenetre(WBLACK);
+  Window creation(5, 10, 45+xm, 13+ym,' ');
+  creation.setCouleurBordure(BWHITE);
   int c;
   int k = 0;
   int **Case = new int *[5];
@@ -270,6 +305,14 @@ refresh:
         goto refresh;
       }
       break;
+
+
+    case 'r':
+      menuNavire();
+      return;
+      break;
+
+
     case '\n':
       if (k > 0)
       {

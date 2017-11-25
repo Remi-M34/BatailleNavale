@@ -1,7 +1,7 @@
 
 all: prog
 
-prog: window.o test-piece.o grille.o flotte.o plateau.o config.o message.o navire.o menu.o
+prog: window.o test-piece.o grille.o flotte.o config.o message.o navire.o menu.o jeu.o
 	g++ $^ -o $@ -lncurses -W -Wall -ansi -pedantic
 
 
