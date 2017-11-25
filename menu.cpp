@@ -9,17 +9,23 @@
 #include "string"
 using namespace std;
 
+#define xm (COLS-100)/2
+#define ym (LINES-33)/2
+
 
 void menu()
 {
 
   startProgramX();
 
-  Window plateau(33, 100, 0, 0, WMAGENTA);
-
+  Window plateau(33, 100, xm, ym, WMAGENTA);
   plateau.setBordureDroite();
 
   // bordure.setBordureDroite();
+
+            Window ap(2, 40, 50 - 40 / 2+xm, 25+ym, ' ');
+            ap.setCouleurBordure(WBLACK);
+
 
   Color col[5] = {WMAGENTA, BMAGENTA, BMAGENTA, BMAGENTA, BMAGENTA};
 
@@ -30,15 +36,13 @@ void menu()
   string choix[5] = {"Commencer une partie", "Options", "Aide","Version du jeu", "A Propos"};
   int selection = 0;
 
-  Window ap(3, 30, 50 - 30 / 2, 25, ' ');
 
-  Flotte flotte(50 - getDimFlotte('w'), 5,1);
+  Flotte flotte(50 - getDimFlotte('w')+xm, 4+ym,1);
 
   bool wait = false;
 
   while ((c = getch()) != 'q')
   {
-      ap.clear();
 
 
     for (int i = 0; i < 5 && !wait; i++)
@@ -84,9 +88,16 @@ void menu()
         menu();
         return;
       }
+      else if (selection == 3)
+      {
+                ap.clear();
+          ap.print(0,1,version());
+      }
       else if (selection == 4)
       {
-          ap.print(1,1,aPropos());
+        ap.clear();
+          ap.print(0,1,aPropos());
+          ap.setBordureDroite();
           
       }
       else{
@@ -120,7 +131,7 @@ void options()
   stopProgramX();
   startProgramX();
 
-  Window plateau(33, 100, 0, 0, WMAGENTA);
+  Window plateau(33, 100, xm, ym, WMAGENTA);
   plateau.setBordureDroite();
 
   Color col[3] = {WMAGENTA, BMAGENTA, BMAGENTA};
@@ -133,7 +144,7 @@ void options()
   int selection = 0;
 
 
-  Flotte flotte(50 - getDimFlotte('w'), 5,0);
+  Flotte flotte(50 - getDimFlotte('w')+xm, 4+ym,0);
 
     for (int i = 0; i < 3 ; i++)
     {
@@ -206,7 +217,7 @@ void options()
 void aideMenu()
 {
   int ch;
-  Window aidef(19,85,7,12);
+  Window aidef(19,85,7+xm,12+ym);
   aidef.setBordureDroite();
   aidef.setCouleurFenetre(WBLACK);
             aidef.print(39, 0, "Règles :", WBLUE);

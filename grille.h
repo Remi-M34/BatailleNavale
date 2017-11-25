@@ -31,7 +31,6 @@ public:
 
   //constructeur :
   Grille(int const sx, int const sy, int sxf, int syf);
-
   //destructeur
   ~Grille();
 

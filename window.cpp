@@ -1,6 +1,8 @@
 #include "window.h"
 
 
+
+
 void init_colors(void)
 {
   start_color();
@@ -49,7 +51,7 @@ void Window::update() const{
 Window::Window(int h,int w, int x, int y, char c)
   : height(h), width(w), startx(x), starty(y), bord(c)
 {
-  colorwin=WCYAN;
+  colorwin=WBLACK;
   colorframe=WBLACK;
   frame=newwin(h+2,w+2,y,x);
   win=subwin(frame,h,w,y+1,x+1);
@@ -105,9 +107,12 @@ void Window::setCouleurBordure(Color c){
   update();
 }
 
+
 void Window::setBordureDroite(){
-  wattron(frame,COLOR_PAIR(WBLACK));
   wborder(frame, '|','|','_' , '_' , ' ' , ' ' , '|','|');
+  colorwin=WBLACK;
+  wbkgd(frame,COLOR_PAIR(colorwin));
+  wattron(win,COLOR_PAIR(colorwin));
   update();
 }
 

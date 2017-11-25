@@ -13,6 +13,7 @@ extern "C" {
 std::string insPlacement();
 std::string aide();
 std::string aPropos();
+std::string version();
 
 
 

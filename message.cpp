@@ -30,3 +30,11 @@ string aPropos()
 
     return message;
 }
+
+
+string version()
+{
+    string message = "v. 0.25";
+
+    return message;
+}

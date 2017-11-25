@@ -1,20 +1,18 @@
-15x15
- x 
-xxx
- x 
+16x16
+x
+x
+x
+x
+x
 
+x  
+ x 
   x
-  x
-xxx
 
- x  
-  x 
- x x
-x   
+xxx
+xxx
 
 xx
 xx
 
-x
-x
 x
