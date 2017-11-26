@@ -20,6 +20,7 @@ int ***listedesnavires();
 void modifierNavires(int n, int width, int height, int** navire);
 void ecrireNavire(int n);
 void changerDim();
+Color convertColor(std::string ligne);
 
 void editWidthGrille(int w);
 void editHeightGrille(int h);

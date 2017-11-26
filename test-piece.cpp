@@ -75,18 +75,17 @@ syScore += ym;
 
   refresh();
 
-  Window score(scoreHeight, scoreWidth, sxScore, syScore);
-  score.setCouleurBordure(WBLUE);
+  // Window score(scoreHeight, scoreWidth, sxScore, syScore);
+  // score.setCouleurBordure(WBLUE);
 
   int ch;
   int const h = 10;
   int const w = 20;
 
 noecho();
-Jeu Jeu2(sx, sy, sxf, syf, sx2, sy2, sxf2, syf2);
+Jeu Jeu2(sx, sy, sxf, syf, sx2, sy2, sxf2, syf2, scoreHeight, scoreWidth, sxScore, syScore);
 
-  // jeu.joueur1.flotte.initSelection();
-
+Jeu2.placement();
 
   while (1)
   {
