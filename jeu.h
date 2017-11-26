@@ -15,17 +15,18 @@ class Jeu{
 
 public:
 
-  Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2);
+  Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2, int scoreHeight, int scoreWidth, int sxScore, int syScore);
 
   //destructeur
   ~Jeu();
 
-      Grille joueur1;
-      Grille joueur2;
+void  placement();
 
 
 private:
-
+      Window score;
+      Grille joueur1;
+      Grille joueur2;
 
 };
 

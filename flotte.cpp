@@ -3,6 +3,8 @@
 #include "config.h"
 #include "cmath"
 #include "iostream"
+#include <fstream>
+
 #include "algorithm"
 #include <unistd.h>
 
@@ -10,11 +12,10 @@ using namespace std;
 
 Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
 {
-    fenetre.setCouleurBordure(BYELLOW);
+    couleursNavires();
     initDim();
     refreshPort(d);
 }
-
 
 Flotte::~Flotte() {}
 
@@ -34,7 +35,7 @@ void Flotte::estAuPort(int n, bool b)
     {
         x += 1 + dimNavireOriginales[i][0];
     }
-    
+
     int fx = x + dimNavireOriginales[n][0];
 
     while (x < fx)
@@ -179,11 +180,12 @@ int Flotte::getPremierNavire()
             return n;
         }
     }
+    return -1;
 }
 
 int Flotte::getDernierNavire()
 {
-    for (int n = 4 ; n >= 0 ; n--)
+    for (int n = 4; n >= 0; n--)
     {
         if (estauport[n])
         {
@@ -191,7 +193,6 @@ int Flotte::getDernierNavire()
         }
     }
 }
-
 
 void Flotte::initSelection()
 {
@@ -205,11 +206,9 @@ int Flotte::getHeightnavire(int n)
     return dimNavire[n][1];
 }
 
-
 int Flotte::getWidthnavire(int n)
 {
     return dimNavire[n][0];
-
 }
 
 int Flotte::getHeightnavireOriginale(int n)
@@ -218,20 +217,15 @@ int Flotte::getHeightnavireOriginale(int n)
     return dimNavireOriginales[n][1];
 }
 
-
 int Flotte::getWidthnavireOriginale(int n)
 {
     return dimNavireOriginales[n][0];
-
 }
-
 
 void Flotte::swapDimensionsNavire(int n)
 {
-    swap(dimNavire[n][0],dimNavire[n][1]);
+    swap(dimNavire[n][0], dimNavire[n][1]);
 }
-
-
 
 void Flotte::initDim()
 {
@@ -240,43 +234,58 @@ void Flotte::initDim()
     int maxX = 0;
     int maxY = 0;
 
-        dimNavire = new int*[5];
-        dimNavireOriginales = new int*[5];
+    dimNavire = new int *[5];
+    dimNavireOriginales = new int *[5];
 
-
-    for (int n = 0 ; n < 5 ; n++)
+    for (int n = 0; n < 5; n++)
     {
         dimNavire[n] = new int[2];
         dimNavireOriginales[n] = new int[2];
 
-        for (int x = 0 ; navire[n][x][0] != -1 ; x++)
+        for (int x = 0; navire[n][x][0] != -1; x++)
         {
-            for (int y = 0 ; navire[n][0][y] != -1 ; y++)
+            for (int y = 0; navire[n][0][y] != -1; y++)
             {
                 if (navire[n][x][y] == 1)
                 {
-                    maxY = fmax(maxY,y+1);
+                    maxY = fmax(maxY, y + 1);
                 }
                 if (navire[n][y][x] == 1)
                 {
-                    maxX = fmax(maxX,y+1);
+                    maxX = fmax(maxX, y + 1);
                 }
             }
-
         }
 
         dimNavire[n][0] = maxX;
-        dimNavire[n][1] = maxY;        
+        dimNavire[n][1] = maxY;
         dimNavireOriginales[n][0] = maxX;
         dimNavireOriginales[n][1] = maxY;
         maxX = 0;
         maxY = 0;
+    }
+}
 
+void Flotte::couleursNavires()
+{
+    ifstream couleurs("couleurs.txt", ios::in);
+    int lignes = 1;
+    string ligne;
+    int n = 0;
 
+    while (getline(couleurs, ligne))
+    {
+        if (lignes == 6)
+        {
+            fenetre.setCouleurBordure(convertColor(ligne));
+            return;
+        }
 
-
+            color[n] = convertColor(ligne);
+            n++;
+            lignes++;
     }
 
-
+    couleurs.close();
 
 }

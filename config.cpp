@@ -8,8 +8,8 @@
 #include <sstream>
 using namespace std;
 
-#define xm (COLS-100)/2
-#define ym (LINES-33)/2
+#define xm (COLS - 100) / 2
+#define ym (LINES - 33) / 2
 
 int const getDimFlotte(char c)
 {
@@ -51,8 +51,7 @@ int const getDimFlotte(char c)
         }
     }
 
-                maxheight = fmax(maxheight, height[n]);
-
+    maxheight = fmax(maxheight, height[n]);
 
     config.close();
 
@@ -61,8 +60,6 @@ int const getDimFlotte(char c)
     {
         longueur += width[n];
     }
-
-
 
     if (c == 'w')
         return longueur;
@@ -458,23 +455,18 @@ void changerDim()
 
     Window plateau(33, 100, xm, ym, WMAGENTA);
 
-    Window dim(3, 18, 41+xm, 13+ym, WMAGENTA);
+    Window dim(3, 18, 41 + xm, 13 + ym, ' ');
     plateau.setBordureDroite();
     dim.setCouleurBordure(BGREEN);
     dim.setCouleurFenetre(WBLACK);
-    Flotte flotte(50 - getDimFlotte('w')+xm, 4+ym, 0);
+    Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
 
-
-
-    Window aide(8,30,2+xm,11+ym);
+    Window aide(8, 30, 2 + xm, 11 + ym);
     aide.setBordureDroite();
-      aide.print(1,1,"<-, ->     Parcourir",WBLACK);
-      aide.print(1,2,"ENTREE     Sélectionner",WBLACK);
+    aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
+    aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
 
-      aide.print(1,7,"q          Menu",WBLACK);
-
-
-
+    aide.print(1, 7, "q          Menu", WBLACK);
 
     echo();
 
@@ -497,7 +489,7 @@ void changerDim()
     while ((ch = getch()) != 'q')
     {
         string retour = "Retour";
-    echo();
+        echo();
 
         dim.print(5, 1, width, col[0]);
         dim.print(5 + width.length() + 5, 1, height, col[1]);
@@ -538,9 +530,9 @@ void changerDim()
             break;
 
         case '\n':
-              aide.print(1,4,"1-9        Modifier la taille",WBLACK);
-      aide.print(1,5,"ENTREE     Valider",WBLACK);
-      curs_set(1);
+            aide.print(1, 4, "1-9        Modifier la taille", WBLACK);
+            aide.print(1, 5, "ENTREE     Valider", WBLACK);
+            curs_set(1);
 
             if (n == 0)
             {
@@ -550,7 +542,7 @@ void changerDim()
                     dim.print(5 + i, 1, ' ', WBLACK);
                 }
 
-                move(15+ym, 47+xm);
+                move(15 + ym, 47 + xm);
 
                 do
                 {
@@ -572,7 +564,7 @@ void changerDim()
                     }
                     else if (ch == '\n' && num == 0)
                     {
-                        move(15+ym, 47+xm);
+                        move(15 + ym, 47 + xm);
                     }
                     if (isalpha(ch))
                     {
@@ -590,7 +582,7 @@ void changerDim()
                     dim.print(10 + i + width.length(), 1, ' ', WBLACK);
                 }
 
-                move(15+ym,xm+ 52 + width.length());
+                move(15 + ym, xm + 52 + width.length());
 
                 do
                 {
@@ -610,7 +602,7 @@ void changerDim()
                     }
                     else if (ch == '\n' && num == 0)
                     {
-                move(15+ym,xm+ 52 + width.length());
+                        move(15 + ym, xm + 52 + width.length());
                     }
                 } while (1);
             }
@@ -624,3 +616,39 @@ void changerDim()
         }
     }
 }
+
+Color convertColor(string ligne)
+{
+
+    if (!ligne.find("WBLACK"))
+        return WBLACK;
+    else if (!ligne.find("WCYAN"))
+        return WCYAN;
+    else if (!ligne.find("WBLUE"))
+        return WBLUE;
+    else if (!ligne.find("WYELLOW"))
+        return WYELLOW;
+    else if (!ligne.find("WGREEN"))
+        return WGREEN;
+    else if (!ligne.find("WMAGENTA"))
+        return WMAGENTA;
+    else if (!ligne.find("WRED"))
+        return WRED;
+    else if (!ligne.find("BWHITE"))
+        return BWHITE;
+    else if (!ligne.find("BCYAN"))
+        return BCYAN;
+    else if (!ligne.find("BBLUE"))
+        return BBLUE;
+    else if (!ligne.find("BYELLOW"))
+        return BYELLOW;
+    else if (!ligne.find("BGREEN"))
+        return BGREEN;
+    else if (!ligne.find("BMAGENTA"))
+        return BMAGENTA;
+    else if (!ligne.find("BRED"))
+        return BRED;
+    
+    return WBLACK;
+}
+

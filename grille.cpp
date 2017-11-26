@@ -3,35 +3,26 @@
 #include "flotte.h"
 #include "config.h"
 #include "algorithm"
-
+#include <fstream>
 #include <unistd.h>
 using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
-Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf,1)
+Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf, 1)
 {
 
       //Initialise la grille et rend toutes les cases de la grille VIDE
-      fenetre.setCouleurBordure(WMAGENTA);
+      initCouleurs();
       init();
-
-      initDecalage();
-
 }
-
-
-
-
-
-
-
-
 
 Grille::~Grille() {}
 
 void Grille::selectionNavire()
 {
+      initCouleurs();
+
       int n = flotte.getPremierNavire();
       int ch;
 
@@ -69,12 +60,15 @@ void Grille::selectionNavire()
                   }
 
                   flotte.initSelection();
-
                   n = flotte.getPremierNavire();
-                  // flotte.echangeSelection(n, flotte.getPremierNavire());
 
+                  if (n == -1)
+                  {
+                        return;
+                  }
+                  // flotte.echangeSelection(n, flotte.getPremierNavire());
                   flotte.refreshPort(0);
-                  refreshGrille(0, 0);
+                  refreshGrille(0, 0, 0, 0);
 
                   break;
             }
@@ -85,27 +79,33 @@ void Grille::init()
 {
       int const h = H;
       int const w = W;
-      Case = new etat *[h];
+      Case = new etat *[w];
+      Case2 = new int *[w];
 
-      for (int i = 0; i < h; i++)
+      for (int i = 0; i < w; i++)
       {
-            Case[i] = new etat[w];
+            Case[i] = new etat[h];
+            Case2[i] = new int[h];
 
-            for (int j = 0; j < w * 2; j += 2)
+            for (int j = 0; j < h; j++)
             {
-                  Case[i][j / 2] = VIDE;
-                  fenetre.print(j, i, "_", BWHITE);
-                  fenetre.print(j + 1, i, '_|', BWHITE);
-                  usleep(500);
+                  Case[i][j] = VIDE;
+                  Case2[i][j] = -1;
+                  fenetre.print(2 * i, j, ' ');
+                  fenetre.print(2 * i + 1, j, ' ');
+                  usleep(300);
             }
       }
 }
 
-void Grille::refreshGrille(int fx, int fy)
+void Grille::refreshGrille(int fx, int fy, int maxX, int maxY)
 {
-      int maxX, maxY;
-      maxX = min(W, fx + 7);
-      maxY = min(H, fy + 7);
+
+      if (maxX == 0 && maxY == 0)
+      {
+            maxX = min(W, fx + 7);
+            maxY = min(H, fy + 7);
+      }
       if (fx < 0)
       {
             fx = 0;
@@ -115,49 +115,104 @@ void Grille::refreshGrille(int fx, int fy)
             fy = 0;
       }
 
-      // if (fx == 0)
-      // {
-      //       maxX = W;
-      // }
-      // if (fy == 0)
-      // {
-      //       maxY = H;
-      // }
 
       for (int x = fx; x < maxX; x++)
       {
             for (int y = fy; y < maxY; y++)
             {
-                  switch (Case[y][x])
+                  switch (Case[x][y])
                   {
                   case VIDE:
-                        fenetre.print(2 * x, y, '_', BWHITE);
-                        fenetre.print(2 * x + 1, y, '_|', BWHITE);
+                        fenetre.print(2 * x, y, ' ', colVide);
+                        fenetre.print(2 * x + 1, y, ' ', colVide);
                         break;
-                  case VIDETOUCHE:
+                  case TOMBEALEAU:
+                        fenetre.print(2 * x, y, ' ', colManque);
+                        fenetre.print(2 * x + 1, y, ' ', colManque);
 
                         break;
                   case NAVIRE:
-                        fenetre.print(2 * x, y, ' ', BBLUE);
-                        fenetre.print(2 * x + 1, y, ' ', BBLUE);
+                        fenetre.print(2 * x, y, ' ', colNavires);
+                        fenetre.print(2 * x + 1, y, ' ', colNavires);
                         break;
                   case TOUCHE:
-                        fenetre.print(2 * x, y, '#', BBLUE);
-                        fenetre.print(2 * x + 1, y, '#', BBLUE);
+                        fenetre.print(2 * x, y, '#', colTouche);
+                        fenetre.print(2 * x + 1, y, '#', colTouche);
                         break;
-                  case TOUCHECOULE:
-                        fenetre.print(2 * x, y, '#', BRED);
-                        fenetre.print(2 * x + 1, y, '#', BRED);
+                  case COULE:
+                        fenetre.print(2 * x, y, '#', colCoule);
+                        fenetre.print(2 * x + 1, y, '#', colCoule);
                         break;
                   }
             }
       }
 }
 
+
+
+
+void Grille::refreshNavireGrille(int n, int fx, int fy)
+{
+
+      // if (maxX == 0 && maxY == 0)
+      // {
+      //       maxX = min(W, fx + 7);
+      //       maxY = min(H, fy + 7);
+      // }
+      if (fx < 0)
+      {
+            fx = 0;
+      }
+      if (fy < 0)
+      {
+            fy = 0;
+      }
+
+     int maxX = min(W,fx +2+ flotte.getWidthnavire(n));
+     int maxY = min(H,fy + 2+flotte.getHeightnavire(n));
+
+
+      for (int x = fx; x < maxX; x++)
+      {
+            for (int y = fy; y < maxY; y++)
+            {
+                  switch (Case[x][y])
+                  {
+                  case VIDE:
+                        fenetre.print(2 * x, y, ' ', colVide);
+                        fenetre.print(2 * x + 1, y, ' ', colVide);
+                        break;
+                  case TOMBEALEAU:
+                        fenetre.print(2 * x, y, ' ', colManque);
+                        fenetre.print(2 * x + 1, y, ' ', colManque);
+
+                        break;
+                  case NAVIRE:
+                        fenetre.print(2 * x, y, ' ', colNavires);
+                        fenetre.print(2 * x + 1, y, ' ', colNavires);
+                        break;
+                  case TOUCHE:
+                        fenetre.print(2 * x, y, '#', colTouche);
+                        fenetre.print(2 * x + 1, y, '#', colTouche);
+                        break;
+                  case COULE:
+                        fenetre.print(2 * x, y, '#', colCoule);
+                        fenetre.print(2 * x + 1, y, '#', colCoule);
+                        break;
+                  }
+            }
+      }
+}
+
+
+
+
+
+
+
 void Grille::placementNavire(int n)
 {
-      refreshGrille(0, 0);
-
+      refreshGrille(0, 0, 0, 0);
       int fx = (W - flotte.getWidthnavire(n)) / 2;
       int fy = (H - flotte.getHeightnavire(n)) / 2;
       int ch;
@@ -165,7 +220,7 @@ void Grille::placementNavire(int n)
       int y = 0;
 
       char c = ' ';
-      if (!(checkPlacement(n,fx,fy)))
+      if (!(checkPlacement(n, fx, fy)))
       {
             c = '#';
       }
@@ -176,8 +231,8 @@ void Grille::placementNavire(int n)
             {
                   if (navire[n][x][y] == 1)
                   {
-                        fenetre.print(2 * (x + fx), y + fy, c, BBLUE);
-                        fenetre.print(2 * (x + fx) + 1, y + fy, c, BBLUE);
+                        fenetre.print(2 * (x + fx), y + fy, c, colNavires);
+                        fenetre.print(2 * (x + fx) + 1, y + fy, c, colNavires);
                   }
             }
       }
@@ -227,27 +282,31 @@ void Grille::placementNavire(int n)
                   break;
 
             case ' ':
+                  refreshNavireGrille(n,x,y);
                   pivoteDroite(n, x, y);
                   moveNavire(n, x, y);
+
                   break;
 
             case '\n':
 
                   if (checkPlacement(n, x, y))
                   {
-                        refreshGrille(0, 0);
                         validerNavire(n, x, y);
+
+                        refreshGrille(0, 0, 0, 0);
                         return;
                   }
-                  else{
-                        changeCouleur();
+                  else
+                  {
+                        fenetre.setCouleurBordure(colMauvaiseCouleur);
                   }
 
                   break;
 
             case 'b':
                   flotte.estAuPort(n, true);
-                  refreshGrille(x, y);
+                  refreshGrille(x, y, 0, 0);
 
                   return;
 
@@ -257,17 +316,19 @@ void Grille::placementNavire(int n)
 }
 void Grille::moveNavire(int n, int sx, int sy)
 {
+      fenetre.setCouleurBordure(bordure);
 
       int x = 0;
       int y = 0;
       char c = ' ';
-      char c2 = ' |';
-      if (!checkPlacement(n,sx,sy))
+      char c2 = ' ';
+      if (!checkPlacement(n, sx, sy))
       {
             c = '#';
       }
 
-      refreshGrille(sx - 1, sy - 1);
+      // refreshGrille(sx - 1, sy - 1, 0, 0);
+      refreshNavireGrille(n,sx-1,sy-1);
 
       for (x = 0; x < fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)); x++)
       {
@@ -275,15 +336,11 @@ void Grille::moveNavire(int n, int sx, int sy)
             {
                   if (navire[n][x][y] == 1)
                   {
-                        fenetre.print(2 * (sx) + 2 * x, sy + y, c, BBLUE);
-                        fenetre.print(2 * (sx) + 1 + 2 * x, sy + y, c2, BBLUE);
+                        fenetre.print(2 * (sx) + 2 * x, sy + y, c, colNavires);
+                        fenetre.print(2 * (sx) + 1 + 2 * x, sy + y, c2, colNavires);
                   }
             }
       }
-
-
-
-
 }
 
 bool Grille::check(int n, int sx, int sy)
@@ -322,9 +379,6 @@ void Grille::pivoteDroite(int n, int &x, int &y)
 
       checkRepositionnement(n);
 
-      cout << fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)) << endl;
-      cout << fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)) << endl;
-      cout << fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)) << endl;
       // refreshGrille();
 
       flotte.swapDimensionsNavire(n);
@@ -332,7 +386,6 @@ void Grille::pivoteDroite(int n, int &x, int &y)
       if (x + flotte.getWidthnavire(n) > W)
       {
             x -= abs(flotte.getHeightnavire(n) - flotte.getWidthnavire(n));
-            ;
       }
       if (y + flotte.getHeightnavire(n) > H)
       {
@@ -409,7 +462,7 @@ bool Grille::checkPlacement(int n, int sx, int sy)
             for (int y = 0; y < flotte.getHeightnavire(n); y++)
             {
 
-                  if (Case[sy + y][sx + x] == NAVIRE && navire[n][x][y] == 1)
+                  if (Case[sx + x][sy + y] == NAVIRE && navire[n][x][y] == 1)
                   {
                         return false;
                   }
@@ -419,23 +472,20 @@ bool Grille::checkPlacement(int n, int sx, int sy)
       return true;
 }
 
-void Grille::initDecalage()
-{
-      for (int n = 0; n < 5; n++)
-      {
-      }
-}
-
 void Grille::validerNavire(int n, int sx, int sy)
 {
+      posNavire[n][0] = sx;
+      posNavire[n][1] = sy;
 
-      for (int y = 0; y < flotte.getHeightnavire(n); y++)
+      for (int x = 0; x < flotte.getWidthnavire(n); x++)
       {
-            for (int x = 0; x < flotte.getWidthnavire(n); x++)
+            for (int y = 0; y < flotte.getHeightnavire(n); y++)
             {
                   if (navire[n][x][y] == 1)
                   {
-                        Case[sy + y][sx + x] = NAVIRE;
+                        Case[sx + x][sy + y] = NAVIRE;
+                        Case2[sx + x][sy + y] = n;
+                        caseRestantes[n]++;
                   }
             }
       }
@@ -443,18 +493,236 @@ void Grille::validerNavire(int n, int sx, int sy)
 
 void Grille::changerEtat(int x, int y, etat e)
 {
-      Case[y][x] = e;
+      Case[x][y] = e;
 }
 
-
-
-
-void Grille::changeCouleur()
+void Grille::coulerNavire(int n)
 {
- Color tmp = fenetre.getCouleurBordure();
- fenetre.setCouleurBordure(BRED);
- usleep(100000);
- fenetre.setCouleurBordure(WBLACK);
+      for (int x = 0; x < flotte.getWidthnavire(n); x++)
+      {
+            for (int y = 0; y < flotte.getHeightnavire(n); y++)
+            {
+                  if (navire[n][x][y] == 1)
+                  {
+                        Case[posNavire[n][0] + x][posNavire[n][1] + y] = COULE;
+                  }
+            }
+      }
+      refreshGrille(0, 0, 0, 0);
+}
 
+int Grille::destinationMissile()
+{
 
+      int ch;
+      int x = W / 2;
+      int y = H / 2;
+
+      findMilieu(x, y);
+      fenetre.print(2 * x, y, ' ', colCaseSelectionnee);
+      fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
+
+      while ((ch = getch()) != 'q')
+      {
+            switch (ch)
+            {
+            case KEY_RIGHT:
+                  moveRight(x, y);
+                  break;
+
+            case KEY_LEFT:
+                  moveLeft(x, y);
+
+                  break;
+
+            case KEY_DOWN:
+                  moveDown(x, y);
+
+                  break;
+
+            case KEY_UP:
+                  moveUp(x, y);
+
+                  break;
+            case '\n':
+                  if (Case[x][y] == VIDE)
+                  {
+                        Case[x][y] = TOMBEALEAU;
+                        refreshGrille(x, y, x + 1, y + 1);
+                        return 0;
+                  }
+                  else if (Case[x][y] == NAVIRE)
+                  {
+                        Case[x][y] = TOUCHE;
+                        caseRestantes[Case2[x][y]]--;
+                        if (estCoule(Case2[x][y]) == true)
+                        {
+                              refreshGrille(posNavire[Case2[x][y]][0],posNavire[Case2[x][y]][1],W,H);
+
+                              return 2;
+                        }
+                        else
+                        {
+                              refreshGrille(x, y, x+1, y+1);
+
+                              return 1;
+                        }
+                  }
+                  break;
+            }
+      }
+}
+
+void Grille::moveRight(int &x, int &y)
+{
+
+      for (int i = x + 1; i < W; i++)
+      {
+            if (Case[i][y] == VIDE || Case[i][y] == NAVIRE)
+            {
+                  refreshGrille(x, y, W, y + 1);
+                  fenetre.print(2 * i, y, ' ', colCaseSelectionnee);
+                  fenetre.print(2 * i + 1, y, ' ', colCaseSelectionnee);
+                  x = i;
+                  return;
+            }
+      }
+}
+
+void Grille::moveLeft(int &x, int &y)
+{
+
+      for (int i = x - 1; i >= 0; i--)
+      {
+            if (Case[i][y] == VIDE || Case[i][y] == NAVIRE)
+            {
+                  refreshGrille(0, y, x + 1, y + 1);
+                  fenetre.print(2 * (i), y, ' ', colCaseSelectionnee);
+                  fenetre.print(2 * i + 1, y, ' ', colCaseSelectionnee);
+                  x = i;
+                  return;
+            }
+      }
+}
+
+void Grille::moveUp(int &x, int &y)
+{
+
+      for (int i = y - 1; i >= 0; i--)
+      {
+            if (Case[x][i] == VIDE || Case[x][i] == NAVIRE)
+            {
+                  refreshGrille(x, 0, x + 1, y + 1);
+                  fenetre.print(2 * (x), i, ' ', colCaseSelectionnee);
+                  fenetre.print(2 * x + 1, i, ' ', colCaseSelectionnee);
+                  y = i;
+                  return;
+            }
+      }
+}
+
+void Grille::moveDown(int &x, int &y)
+{
+
+      for (int i = y + 1; i < H; i++)
+      {
+            if (Case[x][i] == VIDE || Case[x][i] == NAVIRE)
+            {
+                  refreshGrille(x, y, x + 1, H);
+                  fenetre.print(2 * (x), i, ' ', colCaseSelectionnee);
+                  fenetre.print(2 * x + 1, i, ' ', colCaseSelectionnee);
+                  y = i;
+                  return;
+            }
+      }
+}
+
+void Grille::findMilieu(int &x, int &y)
+{
+      int k = 1;
+      while (Case[x][y] != VIDE || Case[x][y] != NAVIRE)
+      {
+            x--;
+            y--;
+
+            for (int i = x; i <= x + 2 * k; i++)
+            {
+                  for (int j = y; j <= y + 2 * k; j++)
+                  {
+                        if (Case[i][j] == VIDE || Case[i][j] == NAVIRE)
+                        {
+                              x = i;
+                              y = j;
+                              return;
+                        }
+                  }
+            }
+            k++;
+      }
+}
+
+bool Grille::estCoule(int n)
+{
+      if (caseRestantes[n] == 0)
+      {
+            coulerNavire(n);
+            return true;
+      }
+      else
+      {
+            return false;
+      }
+}
+
+void Grille::test()
+{
+      fstream test("test.txt", ios::in | ios::out | ios::trunc);
+
+      for (int x = 0; x < W; x++)
+      {
+            for (int y = 0; y < H; y++)
+            {
+                  test << x << ":" << Case[x][y] << "   ";
+            }
+            test << '\n';
+      }
+
+      test.close();
+}
+
+void Grille::initCouleurs()
+{
+      ifstream couleurs("couleurs.txt", ios::in);
+      int lignes = 1;
+      string ligne;
+
+      while (getline(couleurs, ligne))
+      {
+
+            switch (lignes)
+            {
+            case 8:
+                  fenetre.setCouleurBordure(convertColor(ligne));
+                  bordure = convertColor(ligne);
+            case 9:
+                  colCaseSelectionnee = convertColor(ligne);
+            case 10:
+                  colTouche = convertColor(ligne);
+            case 11:
+                  colCoule = convertColor(ligne);
+            case 12:
+                  colManque = convertColor(ligne);
+            case 13:
+                  colVide = convertColor(ligne);
+            case 14:
+                  colMauvaiseCouleur = convertColor(ligne);
+            case 15:
+                  colNavires = convertColor(ligne);
+            }
+
+            lignes++;
+
+      }
+
+      couleurs.close();
 }

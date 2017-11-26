@@ -92,6 +92,8 @@ void menu()
       {
                 ap.clear();
           ap.print(0,1,version());
+                    ap.setBordureDroite();
+
       }
       else if (selection == 4)
       {
