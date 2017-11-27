@@ -30,6 +30,8 @@ public:
 
   //constructeur :
   Grille(int const sx, int const sy, int sxf, int syf);
+  Grille(int const sx, int const sy, int sxf, int syf, bool estIA);
+
   //destructeur
   ~Grille();
 
@@ -51,10 +53,14 @@ public:
 
   // Placement du navire sélectionné sur la grille
   void placementNavire(int n);
+  // Place tous les navires aléatoirement
+  void placementAleatoire();
+
   void validerNavire(int n, int sx, int sy);
 
   // Sélectionne la case sur laquelle tirer un missile
   int destinationMissile();
+  int destinationMissileAleatoire();
   void moveRight(int &x, int &y);
   void moveLeft(int &x, int &y);
   void moveUp(int &x, int &y);
@@ -62,6 +68,7 @@ public:
 
   // Trouve et sélectionne la case la plus proche du milieu de la grille qui n'a pas déjà été victime d'un tir de missile
   void findMilieu(int &x, int &y);
+  void zoneFocus(int &x, int &y);
 
   bool estCoule(int n);
 
@@ -72,11 +79,13 @@ public:
 private:
   etat **Case;
   int **Case2;
+  bool IA = false;
   int ***navire = listedesnavires();
 
   // Position du navire sur la grille. [n][0] = x, [n][1] = y; afin de changer l'état
   // de toutes ses cases quand il est coulé
   int posNavire[5][2];
+  int focus = -1;
 
   // +1 pour chaque case dont dispose le navire. -1 à chaque missile tiré sur ce navire. A 0, le navire est coulé.
   // Est initialisé lors de la création de la grille
@@ -90,6 +99,8 @@ private:
    Color bordure;
    Color colMauvaiseCouleur;
    Color colNavires;
+
+   char carBordureGrille;
 };
 
 #endif

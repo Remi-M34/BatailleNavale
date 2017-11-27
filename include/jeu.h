@@ -21,12 +21,16 @@ public:
   ~Jeu();
 
 void  placement();
+void  tir(Grille joueur);
+void initCouleurs();
 
 
 private:
       Window score;
       Grille joueur1;
       Grille joueur2;
+
+      Color colScore;
 
 };
 

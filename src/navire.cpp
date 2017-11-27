@@ -1,11 +1,5 @@
-#include "navire.h"
-#include "window.h"
-#include "config.h"
-#include <algorithm>
-#include <fstream>
+#include "../include/headers.h"
 
-#include <unistd.h>
-#include "string"
 using namespace std;
 
 #define xm (COLS-100)/2
@@ -126,99 +120,12 @@ int** repositionnementVertical(int** navire)
 
 
 
-void menuNavire()
-{
-  stopProgramX();
-  startProgramX();
 
-  int c;
-  int n = 0;
-
-  Window plateau(33, 100, xm, ym, WMAGENTA);
-  plateau.setBordureDroite();
-    Window aide(12,30,2+xm,11+ym);
-    aide.setBordureDroite();
-      aide.print(1,1,"<-, ->     Parcourir",WBLACK);
-      aide.print(1,2,"ENTREE     Sélectionner",WBLACK);
-      aide.print(1,11,"q          Menu",WBLACK);
-
-
-
-
-Color col = BMAGENTA;
-  Flotte flotte(50 - getDimFlotte('w')+xm, 4+ym, 0);
-
-  flotte.initSelection();
-
-  while ((c = getch()) != 'q')
-  {
-            plateau.print(15,5,"Retour",col);
-            
-
-    switch (c)
-    {
-    case KEY_RIGHT:
-    if (n == -1)
-    {
-      flotte.selectionne(0,true);
-      flotte.refreshPort(0);
-      col = BMAGENTA;
-      n++;
-      break;
-    }
-      if (n != 4)
-      {
-        n++;
-        flotte.echangeSelection(n, n - 1);
-        flotte.refreshPort(0);
-      }
-
-      break;
-
-    case KEY_LEFT:
-      if (n > 0)
-      {
-        n--;
-        flotte.echangeSelection(n, n + 1);
-        flotte.refreshPort(0);
-      }
-      else if (n == 0)
-      {
-        n--;
-        col = WMAGENTA;
-        flotte.selectionne(0,false);
-        flotte.refreshPort(0);
-      }
-
-      break;
-
-    case '\n':
-    if (n == -1)
-    {
-      return;
-    }
-          aide.print(1,4,"ESPACE     Ajouter une case",WBLACK);
-          aide.print(1,5,"ENTREE     Valider",WBLACK);
-          aide.print(1,6,"r          Annuler l'édition",WBLACK);
-          aide.print(1,7,"d          Repositionner",WBLACK);
-      flotte.estAuPort(n, false);
-      nouveauNavire(n);
-      flotte.estAuPort(n,true);
-      return;
-
-
-          case 'q':
-        return;
-
-      break;
-    }
-  }
-}
 
 void nouveauNavire(int n)
 {
   Window creation(5, 10, 45+xm, 13+ym,' ');
-  creation.setCouleurBordure(BWHITE);
+  creation.setCouleurBordure(BCYAN);
   int c;
   int k = 0;
   int **Case = new int *[5];
@@ -308,24 +215,14 @@ refresh:
 
 
     case 'r':
-      menuNavire();
       return;
-      break;
-
-
     case '\n':
       if (k > 0)
       {
 
         Case = checkRepositionnement(Case);
-            fstream test("test.txt", ios::in | ios::out | ios::trunc);
-        test << Case[2][0] << endl;
-        test << Case[2][4] << endl;
-        test.close();
-
         modifierNavires(n, getDim(Case,0), getDim(Case,1), Case);
 
-        menuNavire();
 
         return;
       }
@@ -339,10 +236,7 @@ refresh:
     if (k > 0)
     {
               Case = checkRepositionnement(Case);
-              Case = checkRepositionnement(Case);
-              Case = checkRepositionnement(Case);
-              Case = checkRepositionnement(Case);
-              Case = checkRepositionnement(Case);
+              goto refresh;
 
     }
 

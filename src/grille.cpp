@@ -1,10 +1,6 @@
-#include "grille.h"
-#include "window.h"
-#include "flotte.h"
-#include "config.h"
-#include "algorithm"
-#include <fstream>
-#include <unistd.h>
+#include "../include/headers.h"
+
+
 using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
@@ -17,15 +13,30 @@ Grille::Grille(int const sx, int const sy, int sxf, int syf) : fenetre(H, W * 2,
       init();
 }
 
+Grille::Grille(int const sx, int const sy, int sxf, int syf, bool estIA) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf, 1), IA(estIA)
+{
+
+      //Initialise la grille et rend toutes les cases de la grille VIDE
+      initCouleurs();
+      init();
+}
+
 Grille::~Grille() {}
 
 void Grille::selectionNavire()
 {
+      // Ré-initialisation des couleurs car bug sinon...
       initCouleurs();
 
-      int n = flotte.getPremierNavire();
-      int ch;
+      //Si le joueur est une IA
+      if (IA)
+      {
+            placementAleatoire();
+            return;
+      }
 
+      int ch;
+      int n = flotte.getPremierNavire();
       while ((ch = getch()) != 'q')
 
       {
@@ -64,6 +75,8 @@ void Grille::selectionNavire()
 
                   if (n == -1)
                   {
+                        colNavires = colVide;
+                        refreshGrille(0, 0, W, H);
                         return;
                   }
                   // flotte.echangeSelection(n, flotte.getPremierNavire());
@@ -115,7 +128,6 @@ void Grille::refreshGrille(int fx, int fy, int maxX, int maxY)
             fy = 0;
       }
 
-
       for (int x = fx; x < maxX; x++)
       {
             for (int y = fy; y < maxY; y++)
@@ -147,9 +159,6 @@ void Grille::refreshGrille(int fx, int fy, int maxX, int maxY)
             }
       }
 }
-
-
-
 
 void Grille::refreshNavireGrille(int n, int fx, int fy)
 {
@@ -168,9 +177,8 @@ void Grille::refreshNavireGrille(int n, int fx, int fy)
             fy = 0;
       }
 
-     int maxX = min(W,fx +2+ flotte.getWidthnavire(n));
-     int maxY = min(H,fy + 2+flotte.getHeightnavire(n));
-
+      int maxX = min(W, fx + 2 + flotte.getWidthnavire(n));
+      int maxY = min(H, fy + 2 + flotte.getHeightnavire(n));
 
       for (int x = fx; x < maxX; x++)
       {
@@ -203,12 +211,6 @@ void Grille::refreshNavireGrille(int n, int fx, int fy)
             }
       }
 }
-
-
-
-
-
-
 
 void Grille::placementNavire(int n)
 {
@@ -282,7 +284,7 @@ void Grille::placementNavire(int n)
                   break;
 
             case ' ':
-                  refreshNavireGrille(n,x,y);
+                  refreshNavireGrille(n, x, y);
                   pivoteDroite(n, x, y);
                   moveNavire(n, x, y);
 
@@ -317,6 +319,7 @@ void Grille::placementNavire(int n)
 void Grille::moveNavire(int n, int sx, int sy)
 {
       fenetre.setCouleurBordure(bordure);
+      fenetre.setCarBordure(carBordureGrille);
 
       int x = 0;
       int y = 0;
@@ -328,7 +331,7 @@ void Grille::moveNavire(int n, int sx, int sy)
       }
 
       // refreshGrille(sx - 1, sy - 1, 0, 0);
-      refreshNavireGrille(n,sx-1,sy-1);
+      refreshNavireGrille(n, sx - 1, sy - 1);
 
       for (x = 0; x < fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)); x++)
       {
@@ -514,6 +517,11 @@ void Grille::coulerNavire(int n)
 int Grille::destinationMissile()
 {
 
+      if (IA)
+      {
+            return destinationMissileAleatoire();
+      }
+
       int ch;
       int x = W / 2;
       int y = H / 2;
@@ -557,13 +565,13 @@ int Grille::destinationMissile()
                         caseRestantes[Case2[x][y]]--;
                         if (estCoule(Case2[x][y]) == true)
                         {
-                              refreshGrille(posNavire[Case2[x][y]][0],posNavire[Case2[x][y]][1],W,H);
+                              refreshGrille(posNavire[Case2[x][y]][0], posNavire[Case2[x][y]][1], W, H);
 
                               return 2;
                         }
                         else
                         {
-                              refreshGrille(x, y, x+1, y+1);
+                              refreshGrille(x, y, x + 1, y + 1);
 
                               return 1;
                         }
@@ -674,25 +682,25 @@ bool Grille::estCoule(int n)
       }
 }
 
-void Grille::test()
-{
-      fstream test("test.txt", ios::in | ios::out | ios::trunc);
+// void Grille::test()
+// {
+//       fstream test("test.txt", ios::in | ios::out | ios::trunc);
 
-      for (int x = 0; x < W; x++)
-      {
-            for (int y = 0; y < H; y++)
-            {
-                  test << x << ":" << Case[x][y] << "   ";
-            }
-            test << '\n';
-      }
+//       for (int x = 0; x < W; x++)
+//       {
+//             for (int y = 0; y < H; y++)
+//             {
+//                   test << x << ":" << Case[x][y] << "   ";
+//             }
+//             test << '\n';
+//       }
 
-      test.close();
-}
+//       test.close();
+// }
 
 void Grille::initCouleurs()
 {
-      ifstream couleurs("couleurs.txt", ios::in);
+      ifstream couleurs("config/couleurs.txt", ios::in);
       int lignes = 1;
       string ligne;
 
@@ -701,28 +709,139 @@ void Grille::initCouleurs()
 
             switch (lignes)
             {
-            case 8:
+            case 14:
                   fenetre.setCouleurBordure(convertColor(ligne));
                   bordure = convertColor(ligne);
-            case 9:
-                  colCaseSelectionnee = convertColor(ligne);
-            case 10:
-                  colTouche = convertColor(ligne);
-            case 11:
-                  colCoule = convertColor(ligne);
-            case 12:
-                  colManque = convertColor(ligne);
-            case 13:
-                  colVide = convertColor(ligne);
-            case 14:
-                  colMauvaiseCouleur = convertColor(ligne);
+                  break;
             case 15:
+                  carBordureGrille = ligne[0];
+                  fenetre.setCarBordure(carBordureGrille);
+                  break;
+            case 16:
+                  colMauvaiseCouleur = convertColor(ligne);
+                  break;
+            case 20:
                   colNavires = convertColor(ligne);
+                  break;
+            case 25:
+                  colCaseSelectionnee = convertColor(ligne);
+                  break;
+            case 26:
+                  colTouche = convertColor(ligne);
+                  break;
+            case 27:
+                  colCoule = convertColor(ligne);
+                  break;
+            case 28:
+                  colManque = convertColor(ligne);
+                  break;
+            case 29:
+                  colVide = convertColor(ligne);
+                        couleurs.close();
+
+                  return;
+                  
             }
 
             lignes++;
-
       }
 
       couleurs.close();
+}
+
+void Grille::placementAleatoire()
+{
+      int n = flotte.getPremierNavire();
+      int x, y, p;
+      cout << endl
+           << endl;
+      srand((int)time(0));
+
+      while (n != -1)
+      {
+            p = rand() % 3;
+
+            for (int i = 0; i < p; i++)
+            {
+                  pivoteDroite(n, x, y);
+            }
+            x = rand() % (W - flotte.getWidthnavire(n));
+            y = rand() % (H - flotte.getHeightnavire(n));
+            cout << x << ':';
+            cout << y;
+            if (checkPlacement(n, x, y))
+            {
+                  flotte.estAuPort(n, false);
+                  validerNavire(n, x, y);
+                  flotte.initSelection();
+                  n = flotte.getPremierNavire();
+            }
+
+            if (n == -1)
+            {
+                  colNavires = colVide;
+                  usleep(1000000);
+
+                  return;
+            }
+      }
+}
+
+int Grille::destinationMissileAleatoire()
+{
+      srand((int)time(0));
+      int x, y;
+      if (focus == -1)
+      {
+            x = rand() % W;
+            y = rand() % H;
+            int k = 50;
+
+            while (Case[x][y] == TOUCHE || Case[x][y] == COULE || Case[x][y] == TOMBEALEAU)
+            {
+                  srand((int)time(0) + k);
+
+                  x = rand() % W;
+                  y = rand() % H;
+                  k += 50;
+            }
+      }
+      else
+      {
+            zoneFocus(x, y);
+      }
+
+      fenetre.print(2 * x, y, ' ', colCaseSelectionnee);
+      fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
+      usleep(500000);
+
+      if (Case[x][y] == VIDE)
+      {
+            Case[x][y] = TOMBEALEAU;
+            refreshGrille(x, y, x + 1, y + 1);
+            return 0;
+      }
+      else if (Case[x][y] == NAVIRE)
+      {
+            Case[x][y] = TOUCHE;
+            caseRestantes[Case2[x][y]]--;
+            if (estCoule(Case2[x][y]) == true)
+            {
+                  refreshGrille(posNavire[Case2[x][y]][0], posNavire[Case2[x][y]][1], W, H);
+                  focus = -1;
+                  return 2;
+            }
+            else
+            {
+                  refreshGrille(x, y, x + 1, y + 1);
+                  focus = Case2[x][y];
+                  return 1;
+            }
+      }
+}
+
+void Grille::zoneFocus(int &x, int &y)
+{
+      x = rand() % 9 + (max(x - 4, 0));
+      y = rand() % 9 + (max(y - 4, 0));
 }

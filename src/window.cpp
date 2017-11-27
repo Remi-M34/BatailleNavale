@@ -1,4 +1,4 @@
-#include "window.h"
+#include "../include/headers.h"
 
 
 
@@ -21,6 +21,7 @@ void init_colors(void)
   init_pair(BMAGENTA, COLOR_BLACK, COLOR_MAGENTA);
   init_pair(BRED,     COLOR_BLACK, COLOR_RED);  
 }
+
 
 
 void startProgramX() {
@@ -121,6 +122,13 @@ void Window::setCouleurFenetre(Color c){
   wattron(win,COLOR_PAIR(colorwin));
   wbkgd(win,COLOR_PAIR(colorwin));
   update();  
+}
+
+void Window::setCarBordure(char c)
+{
+  wborder(frame, c,c,c,c,c,c,c,c);
+  update();  
+
 }
 
 void Window::clear() const{  werase(win); update(); }
