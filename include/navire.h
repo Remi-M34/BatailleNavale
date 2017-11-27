@@ -11,7 +11,6 @@ extern "C" {
 #include "flotte.h"
 
 
-void menuNavire();
 void nouveauNavire(int n);
 void moveNavire(Window creation, int x, int y , char d);
 int getDim(int** navire);

@@ -1,13 +1,4 @@
-#include "flotte.h"
-#include "window.h"
-#include "config.h"
-#include "cmath"
-#include "iostream"
-#include <fstream>
-
-#include "algorithm"
-#include <unistd.h>
-
+#include "../include/headers.h"
 using namespace std;
 
 Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
@@ -28,6 +19,7 @@ void Flotte::estAuPort(int n, bool b)
         estauport[n] = 0;
     }
 
+    
     int x = 0;
     int xx = 0;
 
@@ -268,24 +260,45 @@ void Flotte::initDim()
 
 void Flotte::couleursNavires()
 {
-    ifstream couleurs("couleurs.txt", ios::in);
+    ifstream couleurs("config/couleurs.txt", ios::in);
     int lignes = 1;
     string ligne;
-    int n = 0;
 
     while (getline(couleurs, ligne))
     {
-        if (lignes == 6)
+
+        switch (lignes)
         {
+        case 3:
+            color[lignes-3] = convertColor(ligne);
+            break;
+        case 4:
+            color[lignes-3] = convertColor(ligne);
+            break;
+        case 5:
+            color[lignes-3] = convertColor(ligne);
+            break;
+        case 6:
+            color[lignes-3] = convertColor(ligne);
+            break;
+        case 7:
+            color[lignes-3] = convertColor(ligne);
+            break;
+        case 8:
             fenetre.setCouleurBordure(convertColor(ligne));
-            return;
+            break;
+        case 9:
+            fenetre.setCarBordure(ligne[0]);
+                couleurs.close();
+
+                        return;
+
         }
 
-            color[n] = convertColor(ligne);
-            n++;
-            lignes++;
+
+
+        lignes++;
     }
 
     couleurs.close();
-
 }

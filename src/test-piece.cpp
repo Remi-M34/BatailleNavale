@@ -1,16 +1,4 @@
-#include "window.h"
-#include "config.h"
-#include "grille.h"
-#include "message.h"
-#include "jeu.h"
-#include "menu.h"
-#include "navire.h"
-#include <unistd.h>
-#include <algorithm>
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include <string>
+#include "../include/headers.h"
 using namespace std;
 void options();
 
@@ -143,7 +131,8 @@ int main()
 
   // modifierNavires(2, 3, 4, n);
 
-  menu();
+  Menu menu;
+  menu.mainMenu();
 
   startProgramX();
   myprogram();

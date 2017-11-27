@@ -1,11 +1,5 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include "config.h"
-#include "flotte.h"
-#include <math.h>
-#include <stdlib.h>
-#include <sstream>
+#include "../include/headers.h"
+
 using namespace std;
 
 #define xm (COLS - 100) / 2
@@ -13,7 +7,7 @@ using namespace std;
 
 int const getDimFlotte(char c)
 {
-    ifstream config("config.txt", ios::in);
+    ifstream config("config/config.txt", ios::in);
     string ligne;
     int n = 0;
     int lignes = 0;
@@ -71,12 +65,12 @@ int const getDimFlotte(char c)
 
 void editWidthGrille(int w)
 {
-    fstream tmp("tmp.txt", ios::in | ios::out | ios::trunc);
+    fstream tmp("config/tmp.txt", ios::in | ios::out | ios::trunc);
     tmp << w << "x" << getHeightGrille() << '\n';
 
     string ligne;
     int lignes = 0;
-    fstream config("config.txt", ios::in | ios::out);
+    fstream config("config/config.txt", ios::in | ios::out);
 
     while (getline(config, ligne))
     {
@@ -88,7 +82,7 @@ void editWidthGrille(int w)
         tmp << ligne << '\n';
     }
 
-    rename("tmp.txt", "config.txt");
+    rename("config/tmp.txt", "config/config.txt");
 
     tmp.close();
     config.close();
@@ -96,12 +90,12 @@ void editWidthGrille(int w)
 
 void editHeightGrille(int h)
 {
-    fstream tmp("tmp.txt", ios::in | ios::out | ios::trunc);
+    fstream tmp("config/tmp.txt", ios::in | ios::out | ios::trunc);
     tmp << getWidthGrille() << "x" << h << '\n';
 
     string ligne;
     int lignes = 0;
-    fstream config("config.txt", ios::in | ios::out);
+    fstream config("config/config.txt", ios::in | ios::out);
 
     while (getline(config, ligne))
     {
@@ -113,7 +107,7 @@ void editHeightGrille(int h)
         tmp << ligne << '\n';
     }
 
-    rename("tmp.txt", "config.txt");
+    rename("config/tmp.txt", "config/config.txt");
 
     tmp.close();
     config.close();
@@ -122,7 +116,7 @@ void editHeightGrille(int h)
 int const getWidthGrille()
 {
 
-    ifstream config("config.txt", ios::in);
+    ifstream config("config/config.txt", ios::in);
     string ligne;
     int n = 0;
 
@@ -139,7 +133,7 @@ int const getWidthGrille()
 
 int const getHeightGrille()
 {
-    ifstream config("config.txt", ios::in);
+    ifstream config("config/config.txt", ios::in);
     string ligne;
     int n = 0;
     int i = 0;
@@ -165,7 +159,7 @@ int const getHeightGrille()
 
 int **dimN()
 {
-    ifstream config("config.txt", ios::in);
+    ifstream config("config/config.txt", ios::in);
     string ligne;
     int n = 0;
     int lignes = 0;
@@ -215,7 +209,7 @@ int **dimN()
 
 int ***listedesnavires()
 {
-    ifstream config("config.txt", ios::in);
+    ifstream config("config/config.txt", ios::in);
     string ligne;
     int n = 0;
     int lignes = 0;
@@ -349,7 +343,7 @@ void modifierNavires(int n, int width, int height, int **nouveaunavire)
     bool trouve = false;
     bool saut = false;
 
-    fstream tmp0("tmp.txt", ios::in | ios::out | ios::trunc);
+    fstream tmp0("config/tmp.txt", ios::in | ios::out | ios::trunc);
     tmp0 << "15x15\n";
     tmp0.close();
 
@@ -358,7 +352,7 @@ void modifierNavires(int n, int width, int height, int **nouveaunavire)
         ecrireNavire(i);
     }
 
-    fstream tmp("tmp.txt", ios::in | ios::out | ios::app);
+    fstream tmp("config/tmp.txt", ios::in | ios::out | ios::app);
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
@@ -386,14 +380,14 @@ void modifierNavires(int n, int width, int height, int **nouveaunavire)
         }
     }
 
-    rename("tmp.txt", "config.txt");
+    rename("config/tmp.txt", "config/config.txt");
 }
 
 void ecrireNavire(int n)
 {
-    fstream config("config.txt", ios::in | ios::out);
+    fstream config("config/config.txt", ios::in | ios::out);
 
-    fstream tmp("tmp.txt", ios::in | ios::out | ios::app);
+    fstream tmp("config/tmp.txt", ios::in | ios::out | ios::app);
 
     int lignes = 0;
     string ligne;
@@ -445,177 +439,7 @@ void ecrireNavire(int n)
     tmp.close();
 }
 
-void changerDim()
-{
-    stopProgramX();
-    startProgramX();
 
-    int ch;
-    int n = 0;
-
-    Window plateau(33, 100, xm, ym, WMAGENTA);
-
-    Window dim(3, 18, 41 + xm, 13 + ym, ' ');
-    plateau.setBordureDroite();
-    dim.setCouleurBordure(BGREEN);
-    dim.setCouleurFenetre(WBLACK);
-    Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
-
-    Window aide(8, 30, 2 + xm, 11 + ym);
-    aide.setBordureDroite();
-    aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
-    aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
-
-    aide.print(1, 7, "q          Menu", WBLACK);
-
-    echo();
-
-    int h = getHeightGrille();
-    int w = getWidthGrille();
-    string height;
-    string width;
-    ostringstream convert;
-    convert << h;
-    height = convert.str();
-    ostringstream convert2;
-    convert2 << w;
-    width = convert2.str();
-
-    int x = 0;
-    int num = 0;
-    Color col[3] = {BWHITE, BMAGENTA, BMAGENTA};
-    dim.print(5 + width.length() + 2, 1, "x", WBLACK);
-
-    while ((ch = getch()) != 'q')
-    {
-        string retour = "Retour";
-        echo();
-
-        dim.print(5, 1, width, col[0]);
-        dim.print(5 + width.length() + 5, 1, height, col[1]);
-        plateau.print(50 - retour.length() / 2, 18, retour, col[2]);
-
-        switch (ch)
-        {
-        case KEY_RIGHT:
-            if (n == 0)
-            {
-                n++;
-                swap(col[0], col[1]);
-            }
-            break;
-
-        case KEY_LEFT:
-            if (n == 1)
-            {
-                n--;
-                swap(col[0], col[1]);
-            }
-            break;
-
-        case KEY_DOWN:
-            if (n != 2)
-            {
-                swap(col[n], col[2]);
-                n = 2;
-            }
-            break;
-
-        case KEY_UP:
-            if (n == 2)
-            {
-                swap(col[0], col[2]);
-                n = 0;
-            }
-            break;
-
-        case '\n':
-            aide.print(1, 4, "1-9        Modifier la taille", WBLACK);
-            aide.print(1, 5, "ENTREE     Valider", WBLACK);
-            curs_set(1);
-
-            if (n == 0)
-            {
-                echo();
-                for (int i = 0; i < width.length(); i++)
-                {
-                    dim.print(5 + i, 1, ' ', WBLACK);
-                }
-
-                move(15 + ym, 47 + xm);
-
-                do
-                {
-
-                    ch = getch();
-                    if (isdigit(ch))
-                    {
-
-                        // cout << ch  ;
-                        num = (num * 10) + ch - '0';
-                    }
-                    if (ch == '\n' && num > 0)
-                    {
-                        editWidthGrille(num);
-                        changerDim();
-                        return;
-
-                        break;
-                    }
-                    else if (ch == '\n' && num == 0)
-                    {
-                        move(15 + ym, 47 + xm);
-                    }
-                    if (isalpha(ch))
-                    {
-                        changerDim();
-                        return;
-                    }
-                } while (1);
-            }
-            else if (n == 1)
-            {
-
-                echo();
-                for (int i = 0; i < height.length(); i++)
-                {
-                    dim.print(10 + i + width.length(), 1, ' ', WBLACK);
-                }
-
-                move(15 + ym, xm + 52 + width.length());
-
-                do
-                {
-
-                    ch = getch();
-                    if (isdigit(ch))
-                    {
-                        num = (num * 10) + ch - '0';
-                    }
-                    if (ch == '\n' && num > 0)
-                    {
-                        editHeightGrille(num);
-                        changerDim();
-
-                        return;
-                        break;
-                    }
-                    else if (ch == '\n' && num == 0)
-                    {
-                        move(15 + ym, xm + 52 + width.length());
-                    }
-                } while (1);
-            }
-            else if (n == 2)
-            {
-                curs_set(0);
-
-                return;
-            }
-            break;
-        }
-    }
-}
 
 Color convertColor(string ligne)
 {

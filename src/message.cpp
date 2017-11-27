@@ -1,7 +1,5 @@
-#include "message.h"
-#include "window.h"
-#include <unistd.h>
-#include "string"
+#include "../include/headers.h"
+
 using namespace std;
 
 
@@ -34,7 +32,7 @@ string aPropos()
 
 string version()
 {
-    string message = "v. 0.25";
+    string message = "v. 0.28";
 
     return message;
 }
