@@ -24,6 +24,7 @@ void ecrireNavire(int n);
 Color convertColor(std::string ligne);
 
 void changeTheme(std::string th);
+void changePreset(int n);
 
 void editWidthGrille(int w);
 void editHeightGrille(int h);

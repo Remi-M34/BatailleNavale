@@ -40,6 +40,13 @@ void Menu::initCouleurs()
       break;
     case 40:
       carBordureMenu = ligne[0];
+      break;
+    case 45:
+      theme.clear();
+      for (int i = 0; isalnum(ligne[i]); i++)
+      {
+        theme += ligne[i];
+      }
       couleurs.close();
       return;
     }
@@ -163,7 +170,7 @@ void Menu::options()
     plateau.setBordureDroite();
   }
 
-  Color col[5] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee,colNonSelectionnee};
+  Color col[5] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
 
   refresh();
   getch();
@@ -226,14 +233,12 @@ void Menu::options()
         themes();
         options();
         return;
-
       }
-        else if (selection == 3)
+      else if (selection == 3)
       {
-        themes();
+        preset(1);
         options();
         return;
-
       }
       else if (selection == 4)
       {
@@ -618,4 +623,69 @@ void Menu::themes()
       }
     }
   }
+}
+
+void Menu::preset(int s)
+{
+
+  int c;
+
+  Window plateau(33, 100, xm, ym, carBordureMenu);
+  plateau.setCouleurBordure(colBordureMenu);
+  if (bordureMenuDroite)
+  {
+    plateau.setBordureDroite();
+  }
+
+  plateau.print(47, 22, "Valider", colSelectionnee);
+
+  Window aide(5, 24, xm + 50 - 12, ym + 25);
+  aide.setBordureDroite();
+  aide.print(1, 1, "<-, ->       Parcourir", WBLACK);
+  aide.print(1, 2, "ENTREE         Valider", WBLACK);
+  aide.print(1, 4, "q                 Menu", WBLACK);
+
+  Window info(6, 30, xm + 50 - 15, ym + 3);
+  info.setBordureDroite();
+
+  int selection = s;
+
+  changePreset(selection);
+  Flotte flotte(50 - getDimFlotte('w') + xm, 14 + ym, 0);
+
+  info.print(15 - (infoFlotte(s).length()) / 2, 1, infoFlotte(s));
+  info.print(15 - (infoFlotteD(s).length()) / 2, 2, infoFlotteD(s));
+  info.print(15 - (infoFlotteT().length()) / 2, 5, infoFlotteT());
+
+  while ((c = getch()) != 'q')
+  {
+
+    switch (c)
+    {
+    case KEY_RIGHT:
+      if (selection < 9)
+      {
+        preset(selection + 1);
+        return;
+      }
+      else
+      {
+        continue;
+      }
+    case KEY_LEFT:
+      if (selection > 1)
+      {
+        preset(selection - 1);
+        return;
+      }
+      else
+      {
+        continue;
+      }
+
+    case '\n':
+      return;
+    }
+  }
+  return;
 }

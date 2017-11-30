@@ -586,6 +586,7 @@ int Grille::destinationMissile()
                               refreshGrille(x, y, x + 1, y + 1);
 
                               return 1;
+
                         }
                   }
                   break;
@@ -923,10 +924,14 @@ void Grille::zoneFocus(int &x, int &y)
 
                   srand((int)time(0) + k);
 
-                  x = rand() % 3 + (max(focusx - 1, 0));
-                  y = rand() % 3 + (max(focusy - 1, 0));
+                  x = rand() % min(3,W-focusx+1) + (max(focusx - 1, 0));
+                  y = rand() % min(3,H-focusy+1) + (max(focusy - 1, 0));
                   k += 50;
             }
+                              test("\fin de la recherche avec focusx:");
+                  test(myitoa(focusx));
+                  test(" et focusy: ");
+                  test(myitoa(focusy));
       }
       else
       {
@@ -946,7 +951,10 @@ void Grille::zoneFocus(int &x, int &y)
 
 bool Grille::aDesVoisins(int x, int y)
 {
-      test("aDesVoisins");
+                              test("\fdebut recherche voisin avec x:");
+                  test(myitoa(x));
+                  test(" et y: ");
+                  test(myitoa(y));
 
       int debutX = max(0, x - 1);
       int debutY = max(0, y - 1);
