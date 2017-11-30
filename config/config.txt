@@ -1,18 +1,22 @@
-12x12
+10x10
+x
 x
 x
 x
 x
 
 x
-xxx
-
-xx
-xx
+x
+x
+x
 
 x
- x
-  x
+x
+x
+
+x
+x
+x
 
 x
 x

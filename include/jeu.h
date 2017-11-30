@@ -23,10 +23,22 @@ public:
 void  placement();
 void  tir(Grille joueur);
 void initCouleurs();
+void scoreplus(int s, int j);
 
 
 private:
       Window score;
+
+      Grille *Joueur[2];
+
+      int scoreWidth;
+      int syf2;
+      int sxf2;
+      int sy2, sx2;
+
+      int scoreJoueur1 = 0;
+      int scoreJoueur2 = 0;
+
       Grille joueur1;
       Grille joueur2;
 
@@ -38,5 +50,6 @@ private:
 };
 
 
+void aideJeu();
 
 #endif

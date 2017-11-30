@@ -28,6 +28,7 @@ void changePreset(int n);
 
 void editWidthGrille(int w);
 void editHeightGrille(int h);
+std::string to_string(int i);
 
 //BUG --- Ne pas utiliser
 int **dimN();

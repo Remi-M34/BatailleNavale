@@ -1,0 +1,1648 @@
+caseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:2 et y: 6
+a renvoye un voisin : x:1 et y:5
+ tandis que focusx: 2 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:2 et focusy: 6in de la recherche avec focusx:2 et focusy: 6zoneFocusdebut recherche voisin avec x:2 et y: 6
+a renvoye un voisin : x:1 et y:5
+ tandis que focusx: 2 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6in de la recherche avec focusx:2 et focusy: 6zoneFocusdebut recherche voisin avec x:2 et y: 6
+a renvoye un voisin : x:1 et y:5
+ tandis que focusx: 2 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6in de la recherche avec focusx:2 et focusy: 6zoneFocusdebut recherche voisin avec x:2 et y: 6
+a renvoye un voisin : x:1 et y:6
+ tandis que focusx: 2 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6in de la recherche avec focusx:2 et focusy: 6zoneFocusdebut recherche voisin avec x:2 et y: 6
+a renvoye un voisin : x:1 et y:6
+ tandis que focusx: 2 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:2 et focusy: 6
+continue la recherche avec focusx:2 et focusy: 6in de la recherche avec focusx:2 et focusy: 6zoneFocusdebut recherche voisin avec x:1 et y: 6
+a renvoye un voisin : x:0 et y:5
+ tandis que focusx: 1 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:1 et focusy: 6in de la recherche avec focusx:1 et focusy: 6zoneFocusdebut recherche voisin avec x:0 et y: 5
+a renvoye un voisin : x:0 et y:4
+ tandis que focusx: 0 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:0 et focusy: 5in de la recherche avec focusx:0 et focusy: 5zoneFocusdebut recherche voisin avec x:0 et y: 5
+a renvoye un voisin : x:0 et y:6
+ tandis que focusx: 0 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5in de la recherche avec focusx:0 et focusy: 5zoneFocusdebut recherche voisin avec x:0 et y: 5
+a renvoye un voisin : x:0 et y:6
+ tandis que focusx: 0 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5
+continue la recherche avec focusx:0 et focusy: 5in de la recherche avec focusx:0 et focusy: 5findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:8 et y: 5
+a renvoye un voisin : x:7 et y:4
+ tandis que focusx: 8 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 5
+continue la recherche avec focusx:8 et focusy: 5in de la recherche avec focusx:8 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1zoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:9 et y:5
+ tandis que focusx: 10 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6in de la recherche avec focusx:10 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:5
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:5
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6zoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6zoneFocusdebut recherche voisin avec x:7 et y: 5
+a renvoye un voisin : x:6 et y:4
+ tandis que focusx: 7 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:7 et focusy: 5
+continue la recherche avec focusx:7 et focusy: 5in de la recherche avec focusx:7 et focusy: 5zoneFocusdebut recherche voisin avec x:7 et y: 5
+a renvoye un voisin : x:6 et y:4
+ tandis que focusx: 7 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:7 et focusy: 5
+continue la recherche avec focusx:7 et focusy: 5
+continue la recherche avec focusx:7 et focusy: 5in de la recherche avec focusx:7 et focusy: 5findFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:4
+ tandis que focusx: 7 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:9 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:10 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:9 et y: 5
+n'a pas renvoye de voisindebut recherche voisin avec x:9 et y: 6
+n'a pas renvoye de voisindebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:11 et y:5
+ tandis que focusx: 9 et focusy: 5zoneFocusdebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:11 et y:5
+ tandis que focusx: 10 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6in de la recherche avec focusx:10 et focusy: 6zoneFocusdebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:11 et y:6
+ tandis que focusx: 10 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6in de la recherche avec focusx:10 et focusy: 6findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 10
+a renvoye un voisin : x:4 et y:9
+ tandis que focusx: 5 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 10in de la recherche avec focusx:5 et focusy: 10zoneFocusdebut recherche voisin avec x:5 et y: 10
+a renvoye un voisin : x:4 et y:9
+ tandis que focusx: 5 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 10
+continue la recherche avec focusx:5 et focusy: 10in de la recherche avec focusx:5 et focusy: 10zoneFocusdebut recherche voisin avec x:5 et y: 11
+a renvoye un voisin : x:4 et y:10
+ tandis que focusx: 5 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11in de la recherche avec focusx:5 et focusy: 11zoneFocusdebut recherche voisin avec x:6 et y: 10
+a renvoye un voisin : x:5 et y:9
+ tandis que focusx: 6 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 10
+continue la recherche avec focusx:6 et focusy: 10in de la recherche avec focusx:6 et focusy: 10findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1zoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1zoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:9 et y:5
+ tandis que focusx: 10 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6in de la recherche avec focusx:10 et focusy: 6zoneFocusdebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:9 et y:5
+ tandis que focusx: 10 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 6in de la recherche avec focusx:10 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:8 et y:5
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:5
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 6
+a renvoye un voisin : x:8 et y:6
+ tandis que focusx: 9 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6
+continue la recherche avec focusx:9 et focusy: 6in de la recherche avec focusx:9 et focusy: 6zoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6zoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6zoneFocusdebut recherche voisin avec x:7 et y: 5
+a renvoye un voisin : x:6 et y:4
+ tandis que focusx: 7 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:7 et focusy: 5
+continue la recherche avec focusx:7 et focusy: 5in de la recherche avec focusx:7 et focusy: 5findFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:9 et y:4
+ tandis que focusx: 7 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:9 et y:4
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+a renvoye un voisin : x:10 et y:5
+ tandis que focusx: 9 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5
+continue la recherche avec focusx:9 et focusy: 5in de la recherche avec focusx:9 et focusy: 5zoneFocusdebut recherche voisin avec x:9 et y: 5
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:9 et y: 5
+n'a pas renvoye de voisindebut recherche voisin avec x:9 et y: 6
+n'a pas renvoye de voisindebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:11 et y:6
+ tandis que focusx: 9 et focusy: 5zoneFocusdebut recherche voisin avec x:10 et y: 6
+a renvoye un voisin : x:11 et y:6
+ tandis que focusx: 10 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6
+continue la recherche avec focusx:10 et focusy: 6in de la recherche avec focusx:10 et focusy: 6findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:5 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:4 et y:4
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:5 et y:4
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:11 et y: 5
+a renvoye un voisin : x:10 et y:4
+ tandis que focusx: 11 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 5in de la recherche avec focusx:11 et focusy: 5zoneFocusdebut recherche voisin avec x:10 et y: 5
+a renvoye un voisin : x:9 et y:4
+ tandis que focusx: 10 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 5
+continue la recherche avec focusx:10 et focusy: 5
+continue la recherche avec focusx:10 et focusy: 5
+continue la recherche avec focusx:10 et focusy: 5in de la recherche avec focusx:10 et focusy: 5zoneFocusdebut recherche voisin avec x:10 et y: 5
+a renvoye un voisin : x:9 et y:4
+ tandis que focusx: 10 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 5in de la recherche avec focusx:10 et focusy: 5zoneFocusdebut recherche voisin avec x:10 et y: 5
+a renvoye un voisin : x:9 et y:5
+ tandis que focusx: 10 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 5in de la recherche avec focusx:10 et focusy: 5zoneFocusdebut recherche voisin avec x:11 et y: 6
+a renvoye un voisin : x:10 et y:6
+ tandis que focusx: 11 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 6in de la recherche avec focusx:11 et focusy: 6zoneFocusdebut recherche voisin avec x:11 et y: 6
+a renvoye un voisin : x:10 et y:6
+ tandis que focusx: 11 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6in de la recherche avec focusx:11 et focusy: 6zoneFocusdebut recherche voisin avec x:11 et y: 6
+a renvoye un voisin : x:10 et y:6
+ tandis que focusx: 11 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6
+continue la recherche avec focusx:11 et focusy: 6in de la recherche avec focusx:11 et focusy: 6findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:3 et y:0
+ tandis que focusx: 4 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:4 et focusy: 1in de la recherche avec focusx:4 et focusy: 1zoneFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:3 et y:0
+ tandis que focusx: 4 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1in de la recherche avec focusx:4 et focusy: 1zoneFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:3 et y:1
+ tandis que focusx: 4 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:4 et focusy: 1in de la recherche avec focusx:4 et focusy: 1zoneFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:3 et y:1
+ tandis que focusx: 4 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1in de la recherche avec focusx:4 et focusy: 1zoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1zoneFocusdebut recherche voisin avec x:5 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 5 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 1
+continue la recherche avec focusx:5 et focusy: 1
+continue la recherche avec focusx:5 et focusy: 1in de la recherche avec focusx:5 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+a renvoye un voisin : x:5 et y:2
+ tandis que focusx: 6 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 1in de la recherche avec focusx:6 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+a renvoye un voisin : x:6 et y:0
+ tandis que focusx: 6 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1in de la recherche avec focusx:6 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+a renvoye un voisin : x:6 et y:0
+ tandis que focusx: 6 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1in de la recherche avec focusx:6 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+a renvoye un voisin : x:6 et y:0
+ tandis que focusx: 6 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1in de la recherche avec focusx:6 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+a renvoye un voisin : x:6 et y:0
+ tandis que focusx: 6 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1in de la recherche avec focusx:6 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+a renvoye un voisin : x:6 et y:2
+ tandis que focusx: 6 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1
+continue la recherche avec focusx:6 et focusy: 1in de la recherche avec focusx:6 et focusy: 1zoneFocusdebut recherche voisin avec x:6 et y: 1
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:3 et y:1
+ tandis que focusx: 6 et focusy: 1zoneFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:3 et y:1
+ tandis que focusx: 4 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:4 et focusy: 1in de la recherche avec focusx:4 et focusy: 1zoneFocusdebut recherche voisin avec x:4 et y: 1
+a renvoye un voisin : x:4 et y:0
+ tandis que focusx: 4 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1
+continue la recherche avec focusx:4 et focusy: 1in de la recherche avec focusx:4 et focusy: 1findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 11
+a renvoye un voisin : x:4 et y:10
+ tandis que focusx: 5 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 11in de la recherche avec focusx:5 et focusy: 11zoneFocusdebut recherche voisin avec x:5 et y: 11
+a renvoye un voisin : x:4 et y:11
+ tandis que focusx: 5 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11in de la recherche avec focusx:5 et focusy: 11zoneFocusdebut recherche voisin avec x:5 et y: 11
+a renvoye un voisin : x:5 et y:10
+ tandis que focusx: 5 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11in de la recherche avec focusx:5 et focusy: 11zoneFocusdebut recherche voisin avec x:5 et y: 11
+a renvoye un voisin : x:5 et y:10
+ tandis que focusx: 5 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11
+continue la recherche avec focusx:5 et focusy: 11in de la recherche avec focusx:5 et focusy: 11findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:8
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 7
+a renvoye un voisin : x:4 et y:8
+ tandis que focusx: 5 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7
+continue la recherche avec focusx:5 et focusy: 7in de la recherche avec focusx:5 et focusy: 7zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:5 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:4 et y:4
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:5 et y:4
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:0 et y: 4
+a renvoye un voisin : x:0 et y:3
+ tandis que focusx: 0 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:0 et focusy: 4in de la recherche avec focusx:0 et focusy: 4zoneFocusdebut recherche voisin avec x:1 et y: 5
+a renvoye un voisin : x:0 et y:5
+ tandis que focusx: 1 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:1 et focusy: 5in de la recherche avec focusx:1 et focusy: 5zoneFocusdebut recherche voisin avec x:1 et y: 5
+a renvoye un voisin : x:0 et y:5
+ tandis que focusx: 1 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:1 et focusy: 5
+continue la recherche avec focusx:1 et focusy: 5in de la recherche avec focusx:1 et focusy: 5zoneFocusdebut recherche voisin avec x:1 et y: 5
+a renvoye un voisin : x:0 et y:6
+ tandis que focusx: 1 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:1 et focusy: 5in de la recherche avec focusx:1 et focusy: 5findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6caseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:5
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:4 et y:4
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5zoneFocusdebut recherche voisin avec x:5 et y: 4
+a renvoye un voisin : x:4 et y:4
+ tandis que focusx: 5 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4in de la recherche avec focusx:5 et focusy: 4zoneFocusdebut recherche voisin avec x:5 et y: 4
+a renvoye un voisin : x:4 et y:4
+ tandis que focusx: 5 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4in de la recherche avec focusx:5 et focusy: 4zoneFocusdebut recherche voisin avec x:5 et y: 4
+a renvoye un voisin : x:4 et y:4
+ tandis que focusx: 5 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4in de la recherche avec focusx:5 et focusy: 4zoneFocusdebut recherche voisin avec x:5 et y: 4
+a renvoye un voisin : x:6 et y:3
+ tandis que focusx: 5 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4in de la recherche avec focusx:5 et focusy: 4zoneFocusdebut recherche voisin avec x:5 et y: 4
+a renvoye un voisin : x:6 et y:3
+ tandis que focusx: 5 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4
+continue la recherche avec focusx:5 et focusy: 4in de la recherche avec focusx:5 et focusy: 4zoneFocusdebut recherche voisin avec x:5 et y: 4
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:5 et y: 4
+n'a pas renvoye de voisindebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 4zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:4 et y:6
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5zoneFocusdebut recherche voisin avec x:5 et y: 5
+a renvoye un voisin : x:6 et y:6
+ tandis que focusx: 5 et focusy: 5
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5
+continue la recherche avec focusx:5 et focusy: 5in de la recherche avec focusx:5 et focusy: 5zoneFocusdebut recherche voisin avec x:5 et y: 5
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:5 et y: 4
+n'a pas renvoye de voisindebut recherche voisin avec x:5 et y: 5
+n'a pas renvoye de voisindebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 5zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:5 et y:7
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6zoneFocusdebut recherche voisin avec x:5 et y: 6
+a renvoye un voisin : x:5 et y:7
+ tandis que focusx: 5 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6
+continue la recherche avec focusx:5 et focusy: 6in de la recherche avec focusx:5 et focusy: 6findFocuscaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:9 et y: 3
+a renvoye un voisin : x:8 et y:3
+ tandis que focusx: 9 et focusy: 3
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 3in de la recherche avec focusx:9 et focusy: 3zoneFocusdebut recherche voisin avec x:9 et y: 3
+a renvoye un voisin : x:8 et y:3
+ tandis que focusx: 9 et focusy: 3
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3in de la recherche avec focusx:9 et focusy: 3zoneFocusdebut recherche voisin avec x:9 et y: 3
+a renvoye un voisin : x:8 et y:3
+ tandis que focusx: 9 et focusy: 3
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3in de la recherche avec focusx:9 et focusy: 3zoneFocusdebut recherche voisin avec x:9 et y: 3
+a renvoye un voisin : x:10 et y:2
+ tandis que focusx: 9 et focusy: 3
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3
+continue la recherche avec focusx:9 et focusy: 3in de la recherche avec focusx:9 et focusy: 3zoneFocusdebut recherche voisin avec x:10 et y: 4
+a renvoye un voisin : x:9 et y:5
+ tandis que focusx: 10 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4in de la recherche avec focusx:10 et focusy: 4zoneFocusdebut recherche voisin avec x:10 et y: 4
+a renvoye un voisin : x:10 et y:5
+ tandis que focusx: 10 et focusy: 4
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4
+continue la recherche avec focusx:10 et focusy: 4in de la recherche avec focusx:10 et focusy: 4findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:6 et y: 10
+a renvoye un voisin : x:5 et y:9
+ tandis que focusx: 6 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 10in de la recherche avec focusx:6 et focusy: 10zoneFocusdebut recherche voisin avec x:5 et y: 10
+a renvoye un voisin : x:4 et y:10
+ tandis que focusx: 5 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 10in de la recherche avec focusx:5 et focusy: 10zoneFocusdebut recherche voisin avec x:5 et y: 10
+a renvoye un voisin : x:5 et y:9
+ tandis que focusx: 5 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 10
+continue la recherche avec focusx:5 et focusy: 10
+continue la recherche avec focusx:5 et focusy: 10in de la recherche avec focusx:5 et focusy: 10zoneFocusdebut recherche voisin avec x:6 et y: 9
+a renvoye un voisin : x:5 et y:9
+ tandis que focusx: 6 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 9in de la recherche avec focusx:6 et focusy: 9findFocuscaseAleatoirezoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6zoneFocusdebut recherche voisin avec x:7 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 7 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6in de la recherche avec focusx:7 et focusy: 6zoneFocusdebut recherche voisin avec x:7 et y: 6
+a renvoye un voisin : x:7 et y:5
+ tandis que focusx: 7 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6
+continue la recherche avec focusx:7 et focusy: 6in de la recherche avec focusx:7 et focusy: 6zoneFocusdebut recherche voisin avec x:7 et y: 5
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:7 et y: 5
+n'a pas renvoye de voisindebut recherche voisin avec x:7 et y: 6
+n'a pas renvoye de voisindebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:9 et y:6
+ tandis que focusx: 7 et focusy: 5zoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:9 et y:6
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6zoneFocusdebut recherche voisin avec x:9 et y: 7
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 9 et focusy: 7
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 7
+continue la recherche avec focusx:9 et focusy: 7in de la recherche avec focusx:9 et focusy: 7findFocusdebut recherche voisin avec x:7 et y: 5
+n'a pas renvoye de voisindebut recherche voisin avec x:7 et y: 6
+n'a pas renvoye de voisindebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:9 et y:6
+ tandis que focusx: 9 et focusy: 7zoneFocusdebut recherche voisin avec x:8 et y: 6
+a renvoye un voisin : x:9 et y:6
+ tandis que focusx: 8 et focusy: 6
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6
+continue la recherche avec focusx:8 et focusy: 6in de la recherche avec focusx:8 et focusy: 6findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:17 et y:18
+ tandis que focusx: 18 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18in de la recherche avec focusx:18 et focusy: 18zoneFocusdebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:17 et y:18
+ tandis que focusx: 18 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18in de la recherche avec focusx:18 et focusy: 18zoneFocusdebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:17 et y:19
+ tandis que focusx: 18 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18in de la recherche avec focusx:18 et focusy: 18zoneFocusdebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:17 et y:19
+ tandis que focusx: 18 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18in de la recherche avec focusx:18 et focusy: 18zoneFocusdebut recherche voisin avec x:17 et y: 19
+a renvoye un voisin : x:16 et y:18
+ tandis que focusx: 17 et focusy: 19
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:17 et focusy: 19
+continue la recherche avec focusx:17 et focusy: 19
+continue la recherche avec focusx:17 et focusy: 19
+continue la recherche avec focusx:17 et focusy: 19in de la recherche avec focusx:17 et focusy: 19zoneFocusdebut recherche voisin avec x:16 et y: 18
+a renvoye un voisin : x:15 et y:17
+ tandis que focusx: 16 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18in de la recherche avec focusx:16 et focusy: 18zoneFocusdebut recherche voisin avec x:16 et y: 18
+a renvoye un voisin : x:15 et y:17
+ tandis que focusx: 16 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18in de la recherche avec focusx:16 et focusy: 18zoneFocusdebut recherche voisin avec x:15 et y: 17
+a renvoye un voisin : x:14 et y:16
+ tandis que focusx: 15 et focusy: 17
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17in de la recherche avec focusx:15 et focusy: 17zoneFocusdebut recherche voisin avec x:15 et y: 17
+a renvoye un voisin : x:14 et y:16
+ tandis que focusx: 15 et focusy: 17
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17in de la recherche avec focusx:15 et focusy: 17zoneFocusdebut recherche voisin avec x:15 et y: 17
+a renvoye un voisin : x:14 et y:18
+ tandis que focusx: 15 et focusy: 17
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17in de la recherche avec focusx:15 et focusy: 17zoneFocusdebut recherche voisin avec x:15 et y: 17
+a renvoye un voisin : x:14 et y:18
+ tandis que focusx: 15 et focusy: 17
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 17in de la recherche avec focusx:15 et focusy: 17zoneFocusdebut recherche voisin avec x:15 et y: 17
+a renvoye un voisin : x:14 et y:18
+ tandis que focusx: 15 et focusy: 17
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17in de la recherche avec focusx:15 et focusy: 17zoneFocusdebut recherche voisin avec x:15 et y: 17
+a renvoye un voisin : x:14 et y:18
+ tandis que focusx: 15 et focusy: 17
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17
+continue la recherche avec focusx:15 et focusy: 17in de la recherche avec focusx:15 et focusy: 17zoneFocusdebut recherche voisin avec x:15 et y: 17
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:15 et y: 17
+n'a pas renvoye de voisindebut recherche voisin avec x:16 et y: 18
+a renvoye un voisin : x:15 et y:19
+ tandis que focusx: 15 et focusy: 17zoneFocusdebut recherche voisin avec x:16 et y: 18
+a renvoye un voisin : x:15 et y:19
+ tandis que focusx: 16 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18in de la recherche avec focusx:16 et focusy: 18zoneFocusdebut recherche voisin avec x:16 et y: 18
+a renvoye un voisin : x:16 et y:19
+ tandis que focusx: 16 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18
+continue la recherche avec focusx:16 et focusy: 18in de la recherche avec focusx:16 et focusy: 18zoneFocusdebut recherche voisin avec x:16 et y: 18
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:15 et y: 17
+n'a pas renvoye de voisindebut recherche voisin avec x:16 et y: 18
+n'a pas renvoye de voisindebut recherche voisin avec x:17 et y: 19
+a renvoye un voisin : x:18 et y:19
+ tandis que focusx: 16 et focusy: 18zoneFocusdebut recherche voisin avec x:17 et y: 19
+a renvoye un voisin : x:18 et y:19
+ tandis que focusx: 17 et focusy: 19
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:17 et focusy: 19in de la recherche avec focusx:17 et focusy: 19zoneFocusdebut recherche voisin avec x:17 et y: 19
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:15 et y: 17
+n'a pas renvoye de voisindebut recherche voisin avec x:16 et y: 18
+n'a pas renvoye de voisindebut recherche voisin avec x:17 et y: 19
+n'a pas renvoye de voisindebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:19 et y:17
+ tandis que focusx: 17 et focusy: 19zoneFocusdebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:19 et y:17
+ tandis que focusx: 18 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 18in de la recherche avec focusx:18 et focusy: 18zoneFocusdebut recherche voisin avec x:18 et y: 18
+a renvoye un voisin : x:19 et y:17
+ tandis que focusx: 18 et focusy: 18
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18
+continue la recherche avec focusx:18 et focusy: 18in de la recherche avec focusx:18 et focusy: 18findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:10 et y: 8
+a renvoye un voisin : x:9 et y:7
+ tandis que focusx: 10 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 8in de la recherche avec focusx:10 et focusy: 8zoneFocusdebut recherche voisin avec x:10 et y: 8
+a renvoye un voisin : x:9 et y:7
+ tandis que focusx: 10 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8in de la recherche avec focusx:10 et focusy: 8zoneFocusdebut recherche voisin avec x:10 et y: 8
+a renvoye un voisin : x:9 et y:8
+ tandis que focusx: 10 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8in de la recherche avec focusx:10 et focusy: 8zoneFocusdebut recherche voisin avec x:10 et y: 8
+a renvoye un voisin : x:9 et y:8
+ tandis que focusx: 10 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8in de la recherche avec focusx:10 et focusy: 8zoneFocusdebut recherche voisin avec x:11 et y: 9
+a renvoye un voisin : x:10 et y:9
+ tandis que focusx: 11 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9in de la recherche avec focusx:11 et focusy: 9zoneFocusdebut recherche voisin avec x:11 et y: 9
+a renvoye un voisin : x:10 et y:9
+ tandis que focusx: 11 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9in de la recherche avec focusx:11 et focusy: 9zoneFocusdebut recherche voisin avec x:11 et y: 9
+a renvoye un voisin : x:10 et y:9
+ tandis que focusx: 11 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9
+continue la recherche avec focusx:11 et focusy: 9in de la recherche avec focusx:11 et focusy: 9zoneFocusdebut recherche voisin avec x:10 et y: 10
+a renvoye un voisin : x:9 et y:9
+ tandis que focusx: 10 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 10in de la recherche avec focusx:10 et focusy: 10zoneFocusdebut recherche voisin avec x:10 et y: 10
+a renvoye un voisin : x:9 et y:9
+ tandis que focusx: 10 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 10
+continue la recherche avec focusx:10 et focusy: 10in de la recherche avec focusx:10 et focusy: 10zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9zoneFocusdebut recherche voisin avec x:10 et y: 9
+a renvoye un voisin : x:9 et y:8
+ tandis que focusx: 10 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9in de la recherche avec focusx:10 et focusy: 9zoneFocusdebut recherche voisin avec x:10 et y: 9
+a renvoye un voisin : x:9 et y:10
+ tandis que focusx: 10 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9in de la recherche avec focusx:10 et focusy: 9zoneFocusdebut recherche voisin avec x:10 et y: 9
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 10 et focusy: 9zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:9
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:9
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:5 et y: 9
+a renvoye un voisin : x:4 et y:8
+ tandis que focusx: 5 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 9
+continue la recherche avec focusx:5 et focusy: 9
+continue la recherche avec focusx:5 et focusy: 9in de la recherche avec focusx:5 et focusy: 9zoneFocusdebut recherche voisin avec x:5 et y: 8
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8in de la recherche avec focusx:5 et focusy: 8zoneFocusdebut recherche voisin avec x:5 et y: 8
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8in de la recherche avec focusx:5 et focusy: 8zoneFocusdebut recherche voisin avec x:5 et y: 8
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8in de la recherche avec focusx:5 et focusy: 8zoneFocusdebut recherche voisin avec x:5 et y: 8
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8in de la recherche avec focusx:5 et focusy: 8zoneFocusdebut recherche voisin avec x:5 et y: 8
+a renvoye un voisin : x:4 et y:7
+ tandis que focusx: 5 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8in de la recherche avec focusx:5 et focusy: 8zoneFocusdebut recherche voisin avec x:5 et y: 8
+a renvoye un voisin : x:6 et y:9
+ tandis que focusx: 5 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8
+continue la recherche avec focusx:5 et focusy: 8in de la recherche avec focusx:5 et focusy: 8zoneFocusdebut recherche voisin avec x:6 et y: 9
+a renvoye un voisin : x:5 et y:10
+ tandis que focusx: 6 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:6 et focusy: 9
+continue la recherche avec focusx:6 et focusy: 9
+continue la recherche avec focusx:6 et focusy: 9
+continue la recherche avec focusx:6 et focusy: 9in de la recherche avec focusx:6 et focusy: 9findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:16 et y: 0
+a renvoye un voisin : x:15 et y:0
+ tandis que focusx: 16 et focusy: 0
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0in de la recherche avec focusx:16 et focusy: 0zoneFocusdebut recherche voisin avec x:16 et y: 0
+a renvoye un voisin : x:15 et y:1
+ tandis que focusx: 16 et focusy: 0
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0in de la recherche avec focusx:16 et focusy: 0zoneFocusdebut recherche voisin avec x:16 et y: 0
+a renvoye un voisin : x:16 et y:1
+ tandis que focusx: 16 et focusy: 0
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0in de la recherche avec focusx:16 et focusy: 0zoneFocusdebut recherche voisin avec x:16 et y: 0
+a renvoye un voisin : x:17 et y:1
+ tandis que focusx: 16 et focusy: 0
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0in de la recherche avec focusx:16 et focusy: 0zoneFocusdebut recherche voisin avec x:16 et y: 0
+a renvoye un voisin : x:17 et y:1
+ tandis que focusx: 16 et focusy: 0
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0
+continue la recherche avec focusx:16 et focusy: 0in de la recherche avec focusx:16 et focusy: 0zoneFocusdebut recherche voisin avec x:16 et y: 2
+a renvoye un voisin : x:15 et y:3
+ tandis que focusx: 16 et focusy: 2
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2in de la recherche avec focusx:16 et focusy: 2zoneFocusdebut recherche voisin avec x:17 et y: 1
+a renvoye un voisin : x:17 et y:2
+ tandis que focusx: 17 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1in de la recherche avec focusx:17 et focusy: 1zoneFocusdebut recherche voisin avec x:17 et y: 1
+a renvoye un voisin : x:18 et y:1
+ tandis que focusx: 17 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1
+continue la recherche avec focusx:17 et focusy: 1in de la recherche avec focusx:17 et focusy: 1zoneFocusdebut recherche voisin avec x:18 et y: 1
+a renvoye un voisin : x:19 et y:0
+ tandis que focusx: 18 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1in de la recherche avec focusx:18 et focusy: 1zoneFocusdebut recherche voisin avec x:19 et y: 2
+a renvoye un voisin : x:18 et y:3
+ tandis que focusx: 19 et focusy: 2
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:19 et focusy: 2
+continue la recherche avec focusx:19 et focusy: 2in de la recherche avec focusx:19 et focusy: 2zoneFocusdebut recherche voisin avec x:19 et y: 2
+a renvoye un voisin : x:19 et y:3
+ tandis que focusx: 19 et focusy: 2
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:19 et focusy: 2
+continue la recherche avec focusx:19 et focusy: 2
+continue la recherche avec focusx:19 et focusy: 2
+continue la recherche avec focusx:19 et focusy: 2
+continue la recherche avec focusx:19 et focusy: 2
+continue la recherche avec focusx:19 et focusy: 2in de la recherche avec focusx:19 et focusy: 2zoneFocusdebut recherche voisin avec x:19 et y: 2
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:16 et y: 0
+n'a pas renvoye de voisindebut recherche voisin avec x:16 et y: 2
+a renvoye un voisin : x:15 et y:3
+ tandis que focusx: 19 et focusy: 2zoneFocusdebut recherche voisin avec x:16 et y: 2
+a renvoye un voisin : x:15 et y:3
+ tandis que focusx: 16 et focusy: 2
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2in de la recherche avec focusx:16 et focusy: 2zoneFocusdebut recherche voisin avec x:16 et y: 2
+a renvoye un voisin : x:17 et y:3
+ tandis que focusx: 16 et focusy: 2
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2
+continue la recherche avec focusx:16 et focusy: 2in de la recherche avec focusx:16 et focusy: 2zoneFocusdebut recherche voisin avec x:16 et y: 2
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:16 et y: 0
+n'a pas renvoye de voisindebut recherche voisin avec x:16 et y: 2
+n'a pas renvoye de voisindebut recherche voisin avec x:17 et y: 1
+n'a pas renvoye de voisindebut recherche voisin avec x:18 et y: 1
+a renvoye un voisin : x:19 et y:0
+ tandis que focusx: 16 et focusy: 2zoneFocusdebut recherche voisin avec x:18 et y: 1
+a renvoye un voisin : x:19 et y:0
+ tandis que focusx: 18 et focusy: 1
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1
+continue la recherche avec focusx:18 et focusy: 1in de la recherche avec focusx:18 et focusy: 1findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:14 et y: 9
+a renvoye un voisin : x:13 et y:8
+ tandis que focusx: 14 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:14 et focusy: 9in de la recherche avec focusx:14 et focusy: 9zoneFocusdebut recherche voisin avec x:14 et y: 9
+a renvoye un voisin : x:13 et y:9
+ tandis que focusx: 14 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:14 et focusy: 9in de la recherche avec focusx:14 et focusy: 9zoneFocusdebut recherche voisin avec x:14 et y: 9
+a renvoye un voisin : x:13 et y:9
+ tandis que focusx: 14 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:14 et focusy: 9
+continue la recherche avec focusx:14 et focusy: 9in de la recherche avec focusx:14 et focusy: 9zoneFocusdebut recherche voisin avec x:14 et y: 9
+a renvoye un voisin : x:13 et y:9
+ tandis que focusx: 14 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:14 et focusy: 9in de la recherche avec focusx:14 et focusy: 9zoneFocusdebut recherche voisin avec x:14 et y: 9
+a renvoye un voisin : x:13 et y:9
+ tandis que focusx: 14 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:14 et focusy: 9
+continue la recherche avec focusx:14 et focusy: 9in de la recherche avec focusx:14 et focusy: 9zoneFocusdebut recherche voisin avec x:14 et y: 9
+a renvoye un voisin : x:13 et y:10
+ tandis que focusx: 14 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:14 et focusy: 9
+continue la recherche avec focusx:14 et focusy: 9
+continue la recherche avec focusx:14 et focusy: 9
+continue la recherche avec focusx:14 et focusy: 9in de la recherche avec focusx:14 et focusy: 9zoneFocusdebut recherche voisin avec x:15 et y: 10
+a renvoye un voisin : x:14 et y:10
+ tandis que focusx: 15 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 10in de la recherche avec focusx:15 et focusy: 10zoneFocusdebut recherche voisin avec x:15 et y: 10
+a renvoye un voisin : x:14 et y:10
+ tandis que focusx: 15 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:15 et focusy: 10
+continue la recherche avec focusx:15 et focusy: 10
+continue la recherche avec focusx:15 et focusy: 10in de la recherche avec focusx:15 et focusy: 10findFocuscaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirecaseAleatoirezoneFocusdebut recherche voisin avec x:7 et y: 10
+a renvoye un voisin : x:6 et y:9
+ tandis que focusx: 7 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:7 et focusy: 10in de la recherche avec focusx:7 et focusy: 10zoneFocusdebut recherche voisin avec x:8 et y: 9
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 8 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 9
+continue la recherche avec focusx:8 et focusy: 9
+continue la recherche avec focusx:8 et focusy: 9in de la recherche avec focusx:8 et focusy: 9zoneFocusdebut recherche voisin avec x:9 et y: 10
+a renvoye un voisin : x:8 et y:10
+ tandis que focusx: 9 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 10in de la recherche avec focusx:9 et focusy: 10zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9zoneFocusdebut recherche voisin avec x:9 et y: 9
+a renvoye un voisin : x:8 et y:8
+ tandis que focusx: 9 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 9
+continue la recherche avec focusx:9 et focusy: 9in de la recherche avec focusx:9 et focusy: 9zoneFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:7
+ tandis que focusx: 8 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 8in de la recherche avec focusx:8 et focusy: 8zoneFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 8 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8in de la recherche avec focusx:8 et focusy: 8zoneFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 8 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8in de la recherche avec focusx:8 et focusy: 8zoneFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 8 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8in de la recherche avec focusx:8 et focusy: 8zoneFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 8 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8in de la recherche avec focusx:8 et focusy: 8zoneFocusdebut recherche voisin avec x:9 et y: 8
+a renvoye un voisin : x:10 et y:7
+ tandis que focusx: 9 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 8in de la recherche avec focusx:9 et focusy: 8zoneFocusdebut recherche voisin avec x:9 et y: 8
+a renvoye un voisin : x:10 et y:8
+ tandis que focusx: 9 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8
+continue la recherche avec focusx:9 et focusy: 8in de la recherche avec focusx:9 et focusy: 8zoneFocusdebut recherche voisin avec x:10 et y: 8
+a renvoye un voisin : x:10 et y:9
+ tandis que focusx: 10 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8in de la recherche avec focusx:10 et focusy: 8zoneFocusdebut recherche voisin avec x:10 et y: 8
+a renvoye un voisin : x:10 et y:9
+ tandis que focusx: 10 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8
+continue la recherche avec focusx:10 et focusy: 8in de la recherche avec focusx:10 et focusy: 8zoneFocusdebut recherche voisin avec x:10 et y: 9
+a renvoye un voisin : x:11 et y:9
+ tandis que focusx: 10 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9in de la recherche avec focusx:10 et focusy: 9zoneFocusdebut recherche voisin avec x:10 et y: 9
+a renvoye un voisin : x:11 et y:10
+ tandis que focusx: 10 et focusy: 9
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9
+continue la recherche avec focusx:10 et focusy: 9in de la recherche avec focusx:10 et focusy: 9findFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 10 et focusy: 9zoneFocusdebut recherche voisin avec x:8 et y: 8
+a renvoye un voisin : x:7 et y:8
+ tandis que focusx: 8 et focusy: 8
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8
+continue la recherche avec focusx:8 et focusy: 8in de la recherche avec focusx:8 et focusy: 8zoneFocusdebut recherche voisin avec x:8 et y: 8
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:8 et y: 8
+n'a pas renvoye de voisindebut recherche voisin avec x:9 et y: 9
+n'a pas renvoye de voisindebut recherche voisin avec x:9 et y: 10
+a renvoye un voisin : x:8 et y:11
+ tandis que focusx: 8 et focusy: 8zoneFocusdebut recherche voisin avec x:9 et y: 10
+a renvoye un voisin : x:8 et y:11
+ tandis que focusx: 9 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 10in de la recherche avec focusx:9 et focusy: 10zoneFocusdebut recherche voisin avec x:8 et y: 11
+a renvoye un voisin : x:7 et y:11
+ tandis que focusx: 8 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 11
+continue la recherche avec focusx:8 et focusy: 11in de la recherche avec focusx:8 et focusy: 11zoneFocusdebut recherche voisin avec x:8 et y: 11
+a renvoye un voisin : x:7 et y:11
+ tandis que focusx: 8 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 11in de la recherche avec focusx:8 et focusy: 11zoneFocusdebut recherche voisin avec x:8 et y: 11
+a renvoye un voisin : x:7 et y:11
+ tandis que focusx: 8 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 11
+continue la recherche avec focusx:8 et focusy: 11in de la recherche avec focusx:8 et focusy: 11zoneFocusdebut recherche voisin avec x:8 et y: 11
+a renvoye un voisin : x:8 et y:12
+ tandis que focusx: 8 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 11
+continue la recherche avec focusx:8 et focusy: 11
+continue la recherche avec focusx:8 et focusy: 11
+continue la recherche avec focusx:8 et focusy: 11in de la recherche avec focusx:8 et focusy: 11zoneFocusdebut recherche voisin avec x:8 et y: 11
+a renvoye un voisin : x:9 et y:12
+ tandis que focusx: 8 et focusy: 11
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:8 et focusy: 11in de la recherche avec focusx:8 et focusy: 11zoneFocusdebut recherche voisin avec x:8 et y: 11
+n'a pas renvoye de voisinfindFocusdebut recherche voisin avec x:8 et y: 8
+n'a pas renvoye de voisindebut recherche voisin avec x:8 et y: 11
+n'a pas renvoye de voisindebut recherche voisin avec x:9 et y: 9
+n'a pas renvoye de voisindebut recherche voisin avec x:9 et y: 10
+a renvoye un voisin : x:10 et y:11
+ tandis que focusx: 8 et focusy: 11zoneFocusdebut recherche voisin avec x:9 et y: 10
+a renvoye un voisin : x:10 et y:11
+ tandis que focusx: 9 et focusy: 10
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 10
+continue la recherche avec focusx:9 et focusy: 10
+continue la recherche avec focusx:9 et focusy: 10
+continue la recherche avec focusx:9 et focusy: 10in de la recherche avec focusx:9 et focusy: 10findFocuscaseAleatoirezoneFocusdebut recherche voisin avec x:11 et y: 13
+a renvoye un voisin : x:10 et y:12
+ tandis que focusx: 11 et focusy: 13
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 13in de la recherche avec focusx:11 et focusy: 13zoneFocusdebut recherche voisin avec x:11 et y: 14
+a renvoye un voisin : x:10 et y:13
+ tandis que focusx: 11 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:11 et focusy: 14in de la recherche avec focusx:11 et focusy: 14zoneFocusdebut recherche voisin avec x:10 et y: 14
+a renvoye un voisin : x:9 et y:13
+ tandis que focusx: 10 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 14
+continue la recherche avec focusx:10 et focusy: 14in de la recherche avec focusx:10 et focusy: 14zoneFocusdebut recherche voisin avec x:10 et y: 14
+a renvoye un voisin : x:9 et y:13
+ tandis que focusx: 10 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:10 et focusy: 14in de la recherche avec focusx:10 et focusy: 14zoneFocusdebut recherche voisin avec x:9 et y: 14
+a renvoye un voisin : x:8 et y:13
+ tandis que focusx: 9 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 14in de la recherche avec focusx:9 et focusy: 14zoneFocusdebut recherche voisin avec x:9 et y: 14
+a renvoye un voisin : x:8 et y:13
+ tandis que focusx: 9 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 14
+continue la recherche avec focusx:9 et focusy: 14
+continue la recherche avec focusx:9 et focusy: 14
+continue la recherche avec focusx:9 et focusy: 14in de la recherche avec focusx:9 et focusy: 14zoneFocusdebut recherche voisin avec x:9 et y: 14
+a renvoye un voisin : x:8 et y:13
+ tandis que focusx: 9 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 14
+continue la recherche avec focusx:9 et focusy: 14in de la recherche avec focusx:9 et focusy: 14zoneFocusdebut recherche voisin avec x:9 et y: 14
+a renvoye un voisin : x:8 et y:13
+ tandis que focusx: 9 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 14in de la recherche avec focusx:9 et focusy: 14zoneFocusdebut recherche voisin avec x:9 et y: 14
+a renvoye un voisin : x:8 et y:13
+ tandis que focusx: 9 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 14in de la recherche avec focusx:9 et focusy: 14zoneFocusdebut recherche voisin avec x:9 et y: 14
+a renvoye un voisin : x:9 et y:13
+ tandis que focusx: 9 et focusy: 14
+debute la recherche de case pour une zone focus
+continue la recherche avec focusx:9 et focusy: 14
+continue la recherche avec focusx:9 et focusy: 14
+continue la recherche avec focusx:9 et focusy: 14in de la recherche avec focusx:9 et focusy: 14

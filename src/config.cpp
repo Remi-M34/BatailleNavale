@@ -507,11 +507,9 @@ void changeTheme(string th)
     stream2.close();
 }
 
-
-
 void changePreset(int n)
 {
-        ofstream stream2("config/config.txt");
+    ofstream stream2("config/config.txt");
 
     if (n == 1)
     {
@@ -531,38 +529,38 @@ void changePreset(int n)
         stream2 << stream1.rdbuf();
         stream1.close();
     }
-        else if (n == 4)
+    else if (n == 4)
     {
         ifstream stream1("config/preset/4");
         stream2 << stream1.rdbuf();
         stream1.close();
     }
-        else if (n == 5)
+    else if (n == 5)
     {
         ifstream stream1("config/preset/5");
         stream2 << stream1.rdbuf();
         stream1.close();
     }
-        else if (n == 6)
+    else if (n == 6)
     {
         ifstream stream1("config/preset/6");
         stream2 << stream1.rdbuf();
         stream1.close();
     }
-        else if (n == 7)
+    else if (n == 7)
     {
         ifstream stream1("config/preset/7");
         stream2 << stream1.rdbuf();
         stream1.close();
     }
 
-            else if (n == 8)
+    else if (n == 8)
     {
         ifstream stream1("config/preset/8");
         stream2 << stream1.rdbuf();
         stream1.close();
     }
-        else if (n == 9)
+    else if (n == 9)
     {
         ifstream stream1("config/preset/9");
         stream2 << stream1.rdbuf();
@@ -570,4 +568,17 @@ void changePreset(int n)
     }
 
     stream2.close();
+}
+
+// Convertie un string en int (cppreference)
+
+std::string to_string(int x)
+{
+    int length = snprintf(NULL, 0, "%d", x);
+    assert(length >= 0);
+    char *buf = new char[length + 1];
+    snprintf(buf, length + 1, "%d", x);
+    std::string str(buf);
+    delete[] buf;
+    return str;
 }

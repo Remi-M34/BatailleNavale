@@ -1,10 +1,10 @@
 ---------- Navires ----------
 
-BBLUE		Navire 1
-BRED		Navire 2
-BCYAN		Navire 3
-BYELLOW		Navire 4
-BMAGENTA	Navire 5
+BGREEN		Navire 1
+BMAGENTA	Navire 2
+BYELLOW		Navire 3
+BBLUE		Navire 4
+BRED		Navire 5
 BBLUE		Couleur des navires lors de la pose sur la grille
 BYELLOW		Contour de la flotte
 +			Caractère du contour de la flotte
@@ -19,7 +19,7 @@ BCYAN		Couleur de la fenêtre score
  			Caractère de la bordure de la fenêtre score
 OUI			Bordure de la fenêtre score droite (si oui, ignore la couleur et le caractère)
 1			Temps entre chaque envoi de missile de l'IA (en millisecondes)
-1000		Délai après la pose de chacun des navires de l'IA (en millisecondes)
+100		Délai après la pose de chacun des navires de l'IA (en millisecondes)
 
 
 ---------- Cases ----------
@@ -34,7 +34,7 @@ WBLACK		Case vide
 ---------- Menu ----------
 
 BWHITE		Couleur du menu (sélectionné)
-BYELLOW		Couleur du menu
+BCYAN		Couleur du menu
 OUI			Bordure du menu droite
 WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est droite)
  			Caractère de la bordure du menu (espace par défaut)
@@ -42,7 +42,7 @@ WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est droi
 
 			
 			
-Theme2
+Defaut
 			
 			
 Couleurs :

@@ -563,6 +563,9 @@ int Grille::destinationMissile()
             case 's':
                   caseSuivante(x,y);
                   break;
+                  case 'h':
+                  aideJeu();
+                  break;
 
             case '\n':
                   if (Case[x][y] == VIDE)
