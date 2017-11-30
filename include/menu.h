@@ -21,6 +21,7 @@ class Menu
     void themes();
 
     void aideMenu();
+    void preset( int s);
 
     Menu();
     ~Menu();
@@ -34,7 +35,7 @@ class Menu
     bool bordureMenuDroite = false;
     char carBordureMenu = ' ';
 
-    std::string theme = "Defaut";
+    std::string theme;
 };
 
 

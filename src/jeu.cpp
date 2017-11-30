@@ -5,9 +5,14 @@ using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
-Jeu::Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2, int scoreHeight, int scoreWidth, int sxScore, int syScore) : joueur1(sx, sy, sxf, syf,0), joueur2(sx2, sy2, sxf2, syf2, 1), score(scoreHeight, scoreWidth, sxScore, syScore)
+Jeu::Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2, int scoreHeight, int scoreWidth, int sxScore, int syScore, int xm, int ym) : joueur1(sx, sy, sxf, syf,0), joueur2(sx2, sy2, sxf2, syf2, 1), score(scoreHeight, scoreWidth, sxScore, syScore)
 {
+    
     initCouleurs();
+
+
+
+
 }
 
 
@@ -15,6 +20,9 @@ Jeu::~Jeu() {}
 
 void Jeu::initCouleurs()
 {
+
+
+
     ifstream couleurs("config/couleurs.txt", ios::in);
     int lignes = 1;
     string ligne;
@@ -47,6 +55,9 @@ void Jeu::initCouleurs()
 
 void Jeu::placement()
 {
+
+
+
 
     // score.setBordureDroite();
 

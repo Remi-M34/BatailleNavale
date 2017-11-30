@@ -14,6 +14,9 @@ std::string insPlacement();
 std::string aide();
 std::string aPropos();
 std::string version();
+std::string infoFlotte(int s);
+std::string infoFlotteD(int s);
+std::string infoFlotteT();
 
 
 

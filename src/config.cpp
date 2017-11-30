@@ -506,3 +506,68 @@ void changeTheme(string th)
     }
     stream2.close();
 }
+
+
+
+void changePreset(int n)
+{
+        ofstream stream2("config/config.txt");
+
+    if (n == 1)
+    {
+        ifstream stream1("config/preset/1");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+    else if (n == 2)
+    {
+        ifstream stream1("config/preset/2");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+    else if (n == 3)
+    {
+        ifstream stream1("config/preset/3");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+        else if (n == 4)
+    {
+        ifstream stream1("config/preset/4");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+        else if (n == 5)
+    {
+        ifstream stream1("config/preset/5");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+        else if (n == 6)
+    {
+        ifstream stream1("config/preset/6");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+        else if (n == 7)
+    {
+        ifstream stream1("config/preset/7");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+
+            else if (n == 8)
+    {
+        ifstream stream1("config/preset/8");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+        else if (n == 9)
+    {
+        ifstream stream1("config/preset/9");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+
+    stream2.close();
+}

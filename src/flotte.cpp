@@ -86,6 +86,7 @@ bool Flotte::getEstAuPort(int n)
     return estauport[n];
 }
 
+
 void Flotte::selectionne(int n, bool x)
 {
     if (x)
