@@ -19,7 +19,6 @@ void Flotte::estAuPort(int n, bool b)
         estauport[n] = 0;
     }
 
-    
     int x = 0;
     int xx = 0;
 
@@ -163,6 +162,18 @@ void Flotte::refreshPort(int delai)
     }
 }
 
+bool Flotte::portVide()
+{
+    for (int n = 0; n < 5; n++)
+    {
+        if (estauport[n])
+        {
+            return false;
+        }
+    }
+    return true;
+    }
+
 int Flotte::getPremierNavire()
 {
     for (int n = 0; n < 5; n++)
@@ -184,6 +195,24 @@ int Flotte::getDernierNavire()
             return n;
         }
     }
+}
+
+int Flotte::getRandomNavire()
+{
+    if (portVide())
+    {
+        return -1;
+    }
+    srand((int)time(0));
+    int n = rand() % 5;
+
+    while (!getEstAuPort(n))
+{        
+     n = rand() % 5;
+}
+s[n] = '#';
+refreshPort(0);
+return n;
 }
 
 void Flotte::initSelection()
@@ -270,32 +299,30 @@ void Flotte::couleursNavires()
         switch (lignes)
         {
         case 3:
-            color[lignes-3] = convertColor(ligne);
+            color[lignes - 3] = convertColor(ligne);
             break;
         case 4:
-            color[lignes-3] = convertColor(ligne);
+            color[lignes - 3] = convertColor(ligne);
             break;
         case 5:
-            color[lignes-3] = convertColor(ligne);
+            color[lignes - 3] = convertColor(ligne);
             break;
         case 6:
-            color[lignes-3] = convertColor(ligne);
+            color[lignes - 3] = convertColor(ligne);
             break;
         case 7:
-            color[lignes-3] = convertColor(ligne);
+            color[lignes - 3] = convertColor(ligne);
             break;
-        case 8:
+
+        case 9:
             fenetre.setCouleurBordure(convertColor(ligne));
             break;
-        case 9:
+        case 10:
             fenetre.setCarBordure(ligne[0]);
-                couleurs.close();
+            couleurs.close();
 
-                        return;
-
+            return;
         }
-
-
 
         lignes++;
     }

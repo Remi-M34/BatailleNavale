@@ -18,8 +18,8 @@ BCYAN		Couleur de la fenêtre score
 .			Caractère de la bordure des grilles
  			Caractère de la bordure de la fenêtre score
 OUI			Bordure de la fenêtre score droite (si oui, ignore la couleur et le caractère)
-1000		Temps entre chaque envoi de missile de l'IA (en millisecondes)
-1		Délai après la pose de chacun des navires de l'IA (en millisecondes)
+1			Temps entre chaque envoi de missile de l'IA (en millisecondes)
+1000		Délai après la pose de chacun des navires de l'IA (en millisecondes)
 
 
 ---------- Cases ----------

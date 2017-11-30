@@ -5,10 +5,11 @@ using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
-Jeu::Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2, int scoreHeight, int scoreWidth, int sxScore, int syScore) : joueur1(sx, sy, sxf, syf), joueur2(sx2, sy2, sxf2, syf2, 1), score(scoreHeight, scoreWidth, sxScore, syScore)
+Jeu::Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2, int scoreHeight, int scoreWidth, int sxScore, int syScore) : joueur1(sx, sy, sxf, syf,0), joueur2(sx2, sy2, sxf2, syf2, 1), score(scoreHeight, scoreWidth, sxScore, syScore)
 {
     initCouleurs();
 }
+
 
 Jeu::~Jeu() {}
 
@@ -27,10 +28,10 @@ void Jeu::initCouleurs()
             colScore = convertColor(ligne);
             score.setCouleurBordure(colScore);
             break;
-        case 18:
+        case 19:
             score.setCarBordure(ligne[0]);
             break;
-        case 19:
+        case 20:
             if (ligne[0] == 'O' || ligne[0] == 'o')
             {
                 score.setBordureDroite();
@@ -49,11 +50,10 @@ void Jeu::placement()
 
     // score.setBordureDroite();
 
-    joueur1.flotte.initSelection();
     joueur1.selectionNavire();
 
     // Le joueur 2 place ses navires aléatoirement
-    joueur2.selectionNavire();
+ joueur2.selectionNavire();
 
     // joueur2.flotte.initSelection();
     // joueur2.selectionNavire();
@@ -87,9 +87,7 @@ void Jeu::placement()
             }
         }
 
-        cout << "unun" << endl;
-        cout << "unun" << endl;
-        cout << "unun" << endl;
+
         d = joueur2.destinationMissile();
 
         while (d > 0)

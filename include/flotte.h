@@ -39,6 +39,7 @@ public:
   int getWidthnavireOriginale(int n);
   int getPremierNavire();
   int getDernierNavire();
+  int getRandomNavire();
   int **dimensionsOriginales(int n);
 
   // Retourne le navire suivant qui est au port
@@ -57,6 +58,7 @@ public:
   void initSelection();
   //Choisir si le navire n est au port. Le port est ensuite actualisé.
   void estAuPort(int n, bool x);
+  bool portVide();
   void selectionne(int n, bool x);
 
   // Selectionne et dé-selectionne chacun des deux navires.

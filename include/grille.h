@@ -65,16 +65,21 @@ public:
   void moveLeft(int &x, int &y);
   void moveUp(int &x, int &y);
   void moveDown(int &x, int &y);
+  void caseSuivante(int &x, int &y);
 
   // Trouve et sélectionne la case la plus proche du milieu de la grille qui n'a pas déjà été victime d'un tir de missile
   void findMilieu(int &x, int &y);
   void zoneFocus(int &x, int &y);
+  bool aDesVoisins(int x, int y);
+  bool caseNonDecouverte(int x, int y);
+  int findFocus();
+  void caseAleatoire(int &x, int &y);
 
   bool estCoule(int n);
 
   void coulerNavire(int n);
   void initCouleurs();
-  void test();
+  void test(std::string s);
 
 private:
   etat **Case;
@@ -85,7 +90,9 @@ private:
   // Position du navire sur la grille. [n][0] = x, [n][1] = y; afin de changer l'état
   // de toutes ses cases quand il est coulé
   int posNavire[5][2];
-  int focus = -1;
+  int focusnavire = -1;
+  int focusx = -1;
+  int focusy = -1;
 
   // +1 pour chaque case dont dispose le navire. -1 à chaque missile tiré sur ce navire. A 0, le navire est coulé.
   // Est initialisé lors de la création de la grille
@@ -100,7 +107,12 @@ private:
    Color colMauvaiseCouleur;
    Color colNavires;
 
+   int delaiTirIA = 0;
+   int delaiPoseIA = 0;
+
    char carBordureGrille;
 };
+
+std::string myitoa(int i);
 
 #endif

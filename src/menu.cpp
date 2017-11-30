@@ -12,7 +12,6 @@ Menu::Menu()
 
 Menu::~Menu() {}
 
-
 void Menu::initCouleurs()
 {
   ifstream couleurs("config/couleurs.txt", ios::in);
@@ -24,24 +23,24 @@ void Menu::initCouleurs()
 
     switch (lignes)
     {
-    case 34:
+    case 36:
       colSelectionnee = convertColor(ligne);
       break;
-    case 35:
+    case 37:
       colNonSelectionnee = convertColor(ligne);
       break;
-    case 36:
+    case 38:
       if (ligne[0] == 'o' || ligne[0] == 'O')
       {
         bordureMenuDroite = true;
       }
       break;
-    case 37:
+    case 39:
       colBordureMenu = convertColor(ligne);
       break;
-    case 38:
+    case 40:
       carBordureMenu = ligne[0];
-        couleurs.close();
+      couleurs.close();
       return;
     }
     lignes++;
@@ -164,18 +163,18 @@ void Menu::options()
     plateau.setBordureDroite();
   }
 
-  Color col[3] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee};
+  Color col[5] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee,colNonSelectionnee};
 
   refresh();
   getch();
 
   int c;
-  string choix[3] = {"Editeur de navires", "Modifier la taille de la grille", "Retour"};
+  string choix[5] = {"Editeur de navires", "Modifier la taille de la grille", "Thèmes", "Charger flotte", "Retour"};
   int selection = 0;
 
   Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
 
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < 5; i++)
   {
     plateau.print(50 - choix[i].length() / 2, 12 + 2 * i, choix[i], col[i]);
     usleep(12000);
@@ -184,7 +183,7 @@ void Menu::options()
   while ((c = getch()) != 'q')
   {
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 5; i++)
     {
       plateau.print(50 - choix[i].length() / 2, 12 + 2 * i, choix[i], col[i]);
     }
@@ -199,7 +198,7 @@ void Menu::options()
       break;
 
     case KEY_DOWN:
-      if (selection != 2)
+      if (selection != 4)
       {
         swap(col[selection], col[selection + 1]);
         selection++;
@@ -224,11 +223,24 @@ void Menu::options()
       }
       else if (selection == 2)
       {
+        themes();
+        options();
+        return;
+
+      }
+        else if (selection == 3)
+      {
+        themes();
+        options();
+        return;
+
+      }
+      else if (selection == 4)
+      {
         return;
         // version.print(2, 2, "aaaaaaaaaaaaaaa", WGREEN);
         // refresh();
       }
-
       break;
     }
   }
@@ -440,7 +452,6 @@ void Menu::menuNavire()
   int c;
   int n = 0;
 
-
   Window plateau(33, 100, xm, ym, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
@@ -520,6 +531,91 @@ void Menu::menuNavire()
       return;
 
       break;
+    }
+  }
+}
+
+void Menu::themes()
+{
+
+  int c;
+  int n = 0;
+
+  Window plateau(33, 100, xm, ym, carBordureMenu);
+  plateau.setCouleurBordure(colBordureMenu);
+  if (bordureMenuDroite)
+  {
+    plateau.setBordureDroite();
+  }
+
+  // Window aide(12, 30, 2 + xm, 11 + ym);
+  // // aide.setBordureDroite();
+
+  Color col[6] = {plateau.getCouleurFenetre(), colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
+
+  string th = "[ Thème actuel: " + theme + " ]";
+  string choix[6] = {th, "Defaut", "Theme2", "Theme3", "Theme4", "Retour"};
+
+  int selection = 1;
+
+  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
+
+  while ((c = getch()) != 'q')
+  {
+
+    for (int i = 0; i < 6; i++)
+    {
+      plateau.print(50 - choix[i].length() / 2, 12 + 2 * i, choix[i], col[i]);
+    }
+    switch (c)
+    {
+    case KEY_UP:
+      if (selection != 1)
+      {
+        swap(col[selection], col[selection - 1]);
+        selection--;
+      }
+      break;
+
+    case KEY_DOWN:
+      if (selection != 5)
+      {
+        swap(col[selection], col[selection + 1]);
+        selection++;
+      }
+      break;
+
+    case '\n':
+      switch (selection)
+      {
+      case 1:
+        theme = "Defaut";
+        changeTheme(theme);
+        initCouleurs();
+        refresh();
+        flotte.refreshPort(0);
+        return;
+      case 2:
+        theme = "Theme2";
+        changeTheme(theme);
+        initCouleurs();
+        refresh();
+        flotte.refreshPort(0);
+        return;
+      case 3:
+        theme = "Theme3";
+        break;
+      case 4:
+        theme = "Theme4";
+        break;
+      }
+      if (selection != 5)
+      {
+      }
+      else
+      {
+        return;
+      }
     }
   }
 }

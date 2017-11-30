@@ -32,7 +32,7 @@ string aPropos()
 
 string version()
 {
-    string message = "v. 0.28";
+    string message = "v. 0.3";
 
     return message;
 }
