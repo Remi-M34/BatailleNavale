@@ -1,6 +1,5 @@
 #include "../include/headers.h"
 
-
 using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
@@ -33,6 +32,10 @@ void Grille::selectionNavire()
       {
             placementAleatoire();
             return;
+      }
+      else
+      {
+            flotte.initSelection();
       }
 
       int ch;
@@ -517,7 +520,7 @@ void Grille::coulerNavire(int n)
 int Grille::destinationMissile()
 {
 
-      if (IA)
+      if (!IA)
       {
             return destinationMissileAleatoire();
       }
@@ -532,26 +535,35 @@ int Grille::destinationMissile()
 
       while ((ch = getch()) != 'q')
       {
+            refresh();
+            wrefresh(fenetre.getWin());
+
             switch (ch)
             {
+
+                  case 'a':
+                  refreshGrille(x,y,x+1,y+1);
+                 return destinationMissileAleatoire();
+
             case KEY_RIGHT:
                   moveRight(x, y);
                   break;
-
             case KEY_LEFT:
                   moveLeft(x, y);
-
                   break;
 
             case KEY_DOWN:
                   moveDown(x, y);
-
                   break;
 
             case KEY_UP:
                   moveUp(x, y);
-
                   break;
+
+            case 's':
+                  caseSuivante(x,y);
+                  break;
+
             case '\n':
                   if (Case[x][y] == VIDE)
                   {
@@ -577,9 +589,41 @@ int Grille::destinationMissile()
                         }
                   }
                   break;
+
+            case 'n':
+                  // Flotte fl(15, 15, 0);
+                  // wclear(fl.fenetre.getWin());
+                  break;
             }
       }
 }
+
+
+void Grille::caseSuivante(int &x, int &y)
+{
+      for (int j = y ; j < H ; j++)
+      {
+            for (int i = 0 ; i < W ; i++)
+            {
+                  if (caseNonDecouverte(i,j) && (i>x || j>y))
+                  {
+                                          refreshGrille(x,y,x+1,y+1);
+
+                        x = i;
+                        y = j;
+                  fenetre.print(2 * (x), y, ' ', colCaseSelectionnee);
+                  fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
+                        return;
+                  }
+            }
+      }
+                                          refreshGrille(x,y,x+1,y+1);
+
+      x = 0;
+      y = 0;
+      caseSuivante(x,y);
+}
+
 
 void Grille::moveRight(int &x, int &y)
 {
@@ -650,12 +694,13 @@ void Grille::findMilieu(int &x, int &y)
       int k = 1;
       while (Case[x][y] != VIDE || Case[x][y] != NAVIRE)
       {
-            x--;
-            y--;
 
-            for (int i = x; i <= x + 2 * k; i++)
+            x = max(0, x - 1);
+            y = max(0, y - 1);
+
+            for (int i = x; (i <= x + 2 * k) && i < W; i++)
             {
-                  for (int j = y; j <= y + 2 * k; j++)
+                  for (int j = y; (j <= y + 2 * k) && (j < H); j++)
                   {
                         if (Case[i][j] == VIDE || Case[i][j] == NAVIRE)
                         {
@@ -682,21 +727,14 @@ bool Grille::estCoule(int n)
       }
 }
 
-// void Grille::test()
-// {
-//       fstream test("test.txt", ios::in | ios::out | ios::trunc);
+void Grille::test(string s)
+{
+      fstream test("test.txt", ios::in | ios::out | ios::app);
 
-//       for (int x = 0; x < W; x++)
-//       {
-//             for (int y = 0; y < H; y++)
-//             {
-//                   test << x << ":" << Case[x][y] << "   ";
-//             }
-//             test << '\n';
-//       }
+      test << s;
 
-//       test.close();
-// }
+      test.close();
+}
 
 void Grille::initCouleurs()
 {
@@ -709,38 +747,58 @@ void Grille::initCouleurs()
 
             switch (lignes)
             {
-            case 14:
+            case 15:
                   fenetre.setCouleurBordure(convertColor(ligne));
                   bordure = convertColor(ligne);
                   break;
-            case 15:
+            case 18:
                   carBordureGrille = ligne[0];
                   fenetre.setCarBordure(carBordureGrille);
                   break;
             case 16:
                   colMauvaiseCouleur = convertColor(ligne);
                   break;
-            case 20:
+            case 8:
                   colNavires = convertColor(ligne);
                   break;
-            case 25:
-                  colCaseSelectionnee = convertColor(ligne);
+            case 21:
+                  int i;
+                  for (i = 0; isdigit(ligne[i]); i++)
+                  {
+                  }
+                  ligne.erase(i, 150);
+                  cout << ligne << endl;
+                  cout << ligne << endl;
+                  std::stringstream(ligne) >> delaiTirIA;
+                  delaiTirIA *= 1000;
                   break;
-            case 26:
-                  colTouche = convertColor(ligne);
+            case 22:
+                  for (i = 0; isdigit(ligne[i]); i++)
+                  {
+                  }
+                  ligne.erase(i, 150);
+                  cout << ligne << endl;
+                  cout << ligne << endl;
+                  std::stringstream(ligne) >> delaiPoseIA;
+                  delaiPoseIA *= 1000;
                   break;
             case 27:
-                  colCoule = convertColor(ligne);
+                  colCaseSelectionnee = convertColor(ligne);
                   break;
             case 28:
-                  colManque = convertColor(ligne);
+                  colTouche = convertColor(ligne);
                   break;
             case 29:
+                  colCoule = convertColor(ligne);
+                  break;
+            case 30:
+                  colManque = convertColor(ligne);
+                  break;
+            case 31:
                   colVide = convertColor(ligne);
-                        couleurs.close();
+                  couleurs.close();
 
                   return;
-                  
             }
 
             lignes++;
@@ -751,10 +809,12 @@ void Grille::initCouleurs()
 
 void Grille::placementAleatoire()
 {
-      int n = flotte.getPremierNavire();
+      int n = flotte.getRandomNavire();
+      usleep(delaiPoseIA / 2);
+
       int x, y, p;
-      cout << endl
-           << endl;
+      // cout << endl
+      //      << endl;
       srand((int)time(0));
 
       while (n != -1)
@@ -767,20 +827,21 @@ void Grille::placementAleatoire()
             }
             x = rand() % (W - flotte.getWidthnavire(n));
             y = rand() % (H - flotte.getHeightnavire(n));
-            cout << x << ':';
-            cout << y;
+
             if (checkPlacement(n, x, y))
             {
                   flotte.estAuPort(n, false);
                   validerNavire(n, x, y);
-                  flotte.initSelection();
-                  n = flotte.getPremierNavire();
+                  flotte.selectionne(n, false);
+
+                  n = flotte.getRandomNavire();
+                  usleep(delaiPoseIA);
             }
 
             if (n == -1)
             {
                   colNavires = colVide;
-                  usleep(1000000);
+                  usleep(30000);
 
                   return;
             }
@@ -789,31 +850,27 @@ void Grille::placementAleatoire()
 
 int Grille::destinationMissileAleatoire()
 {
+      // test("destinationMissileAleatoire");
+
       srand((int)time(0));
-      int x, y;
-      if (focus == -1)
+      int x = focusx;
+      int y = focusy;
+      if (focusnavire == -1)
       {
-            x = rand() % W;
-            y = rand() % H;
-            int k = 50;
-
-            while (Case[x][y] == TOUCHE || Case[x][y] == COULE || Case[x][y] == TOMBEALEAU)
-            {
-                  srand((int)time(0) + k);
-
-                  x = rand() % W;
-                  y = rand() % H;
-                  k += 50;
-            }
+            caseAleatoire(x, y);
       }
       else
       {
             zoneFocus(x, y);
+            if (focusnavire == -1)
+            {
+                  return destinationMissileAleatoire();
+            }
       }
 
       fenetre.print(2 * x, y, ' ', colCaseSelectionnee);
       fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
-      usleep(500000);
+      usleep(delaiTirIA);
 
       if (Case[x][y] == VIDE)
       {
@@ -828,13 +885,21 @@ int Grille::destinationMissileAleatoire()
             if (estCoule(Case2[x][y]) == true)
             {
                   refreshGrille(posNavire[Case2[x][y]][0], posNavire[Case2[x][y]][1], W, H);
-                  focus = -1;
+                  if (!IA)
+                  {
+                        focusnavire = findFocus();
+                  }
                   return 2;
             }
             else
             {
                   refreshGrille(x, y, x + 1, y + 1);
-                  focus = Case2[x][y];
+                  if (!IA)
+                  {
+                        focusnavire = Case2[x][y];
+                        focusx = x;
+                        focusy = y;
+                  }
                   return 1;
             }
       }
@@ -842,6 +907,132 @@ int Grille::destinationMissileAleatoire()
 
 void Grille::zoneFocus(int &x, int &y)
 {
-      x = rand() % 9 + (max(x - 4, 0));
-      y = rand() % 9 + (max(y - 4, 0));
+      test("zoneFocus");
+
+      if (aDesVoisins(x, y))
+      {
+            test("\ndebute la recherche de case pour une zone focus");
+
+            int k = 50;
+            while (!caseNonDecouverte(x, y))
+            {
+                  test("\ncontinue la recherche avec focusx:");
+                  test(myitoa(focusx));
+                  test(" et focusy: ");
+                  test(myitoa(focusy));
+
+                  srand((int)time(0) + k);
+
+                  x = rand() % 3 + (max(focusx - 1, 0));
+                  y = rand() % 3 + (max(focusy - 1, 0));
+                  k += 50;
+            }
+      }
+      else
+      {
+            focusnavire = findFocus();
+            if (focusnavire != -1)
+            {
+                  x = focusx;
+                  y = focusy;
+                  zoneFocus(x, y);
+            }
+            else
+            {
+                  return;
+            }
+      }
+}
+
+bool Grille::aDesVoisins(int x, int y)
+{
+      test("aDesVoisins");
+
+      int debutX = max(0, x - 1);
+      int debutY = max(0, y - 1);
+
+      int finX = min(x + 1, W - 1);
+      int finY = min(y + 1, H - 1);
+
+      while (debutX <= finX)
+      {
+            int debutY = max(0, y - 1);
+
+            while (debutY <= finY)
+            {
+                  if (caseNonDecouverte(debutX, debutY))
+                  {
+                        test("\na renvoye un voisin : x:");
+
+                        test(myitoa(debutX));
+                        test(" et y:");
+                        test(myitoa(debutY));
+                        test("\n tandis que focusx: ");
+                        test(myitoa(focusx));
+                        test(" et focusy: ");
+                        test(myitoa(focusy));
+
+                        return true;
+                  }
+                  debutY++;
+            }
+            debutX++;
+      }
+      test("\nn'a pas renvoye de voisin");
+
+      return false;
+}
+
+bool Grille::caseNonDecouverte(int x, int y)
+{
+      return (Case[x][y] == VIDE || Case[x][y] == NAVIRE);
+}
+
+int Grille::findFocus()
+{
+      test("findFocus");
+
+      for (int x = 0; x < W; x++)
+      {
+            for (int y = 0; y < H; y++)
+            {
+                  if (Case[x][y] == TOUCHE && aDesVoisins(x, y))
+                  {
+
+                        focusx = x;
+                        focusy = y;
+                        return Case2[x][y];
+                  }
+            }
+      }
+
+      return -1;
+}
+
+void Grille::caseAleatoire(int &x, int &y)
+{
+      test("caseAleatoire");
+
+      srand((int)time(0));
+
+      x = rand() % W;
+      y = rand() % H;
+      int k = 50;
+
+      while (Case[x][y] == TOUCHE || Case[x][y] == COULE || Case[x][y] == TOMBEALEAU)
+      {
+            srand((int)time(0) + k);
+
+            x = rand() % W;
+            y = rand() % H;
+            k += 50;
+      }
+}
+
+string myitoa(int i)
+{
+      std::ostringstream s;
+      s << i;
+      const std::string i_as_string(s.str());
+      return i_as_string;
 }

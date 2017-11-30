@@ -344,7 +344,7 @@ void modifierNavires(int n, int width, int height, int **nouveaunavire)
     bool saut = false;
 
     fstream tmp0("config/tmp.txt", ios::in | ios::out | ios::trunc);
-    tmp0 << "15x15\n";
+    tmp0 << getWidthGrille() << "x" << getHeightGrille() << '\n';
     tmp0.close();
 
     for (int i = 0; i != n; i++)
@@ -439,8 +439,6 @@ void ecrireNavire(int n)
     tmp.close();
 }
 
-
-
 Color convertColor(string ligne)
 {
 
@@ -472,7 +470,39 @@ Color convertColor(string ligne)
         return BMAGENTA;
     else if (!ligne.find("BRED"))
         return BRED;
-    
+
     return WBLACK;
 }
 
+void changeTheme(string th)
+{
+
+    ofstream stream2("config/couleurs.txt");
+
+    if (th == "Defaut")
+    {
+        ifstream stream1("config/themes/Defaut");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+    else if (th == "Theme2")
+    {
+        ifstream stream1("config/themes/theme2");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+    else if (th == "Theme3")
+    {
+        ifstream stream1("config/themes/theme3");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+
+    else if (th == "Theme4")
+    {
+        ifstream stream1("config/themes/theme4");
+        stream2 << stream1.rdbuf();
+        stream1.close();
+    }
+    stream2.close();
+}

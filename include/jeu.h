@@ -32,6 +32,9 @@ private:
 
       Color colScore;
 
+     bool Joueur1Humain = 0;
+     bool Joueur2Humain = 0;
+
 };
 
 

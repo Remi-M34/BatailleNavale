@@ -75,6 +75,7 @@ Jeu Jeu2(sx, sy, sxf, syf, sx2, sy2, sxf2, syf2, scoreHeight, scoreWidth, sxScor
 
 Jeu2.placement();
 
+
   while (1)
   {
 refresh();

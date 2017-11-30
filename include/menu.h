@@ -18,6 +18,7 @@ class Menu
     void initCouleurs();
     void changerDim();
     void menuNavire();
+    void themes();
 
     void aideMenu();
 
@@ -32,6 +33,8 @@ class Menu
     Color colBordureMenu;
     bool bordureMenuDroite = false;
     char carBordureMenu = ' ';
+
+    std::string theme = "Defaut";
 };
 
 

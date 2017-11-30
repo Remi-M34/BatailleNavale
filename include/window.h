@@ -35,12 +35,14 @@ void stopProgramX();
 class Window {
  private:
   int height,width,startx,starty;
-  WINDOW* win, *frame;
   Color colorwin, colorframe;
   char bord;
   void update() const;
 
  public:
+
+   WINDOW* win, *frame;
+
 
   // constructeur d'un fenetre de hauteur=h, largeur=w dont le coin superieur gauche
   // a pour coordonnée (x,y), le caractère c est utilisé pour définir la bordure
