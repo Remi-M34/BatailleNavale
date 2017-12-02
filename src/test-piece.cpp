@@ -11,67 +11,16 @@ void myprogram()
 {
   clear();
 
-  // Window menu(4, max(2 * getWidthGrille(), WF * 2 - 4), 6, 1);
-  // menu.setCouleurBordure(WBLACK);
-  // menu.setCouleurFenetre(WBLACK);
-  // menu.setBordureDroite();
-  int sxScore = 6 + 2 * W;
-  int syScore = 3;
-  int scoreWidth = 18;
-  int scoreHeight = 4 + H;
-  int sy = 5;
-  int sy2 = 5;
-  int syf = 10 + H;
-  int syf2 = syf;
-  int sx2, sx, sxf, sxf2;
-
-  if (W < WF)
-  {
-    sxf = 2;
-    sx = (WF - W) + 2;
-    sxScore += WF - W;
-    sxf2 = scoreWidth +8 + sx + W * 2 - (WF-W);
-  }
-  else
-  {
-    sx = 2;
-    sxf = 2 + (W - WF);
-    sxf2 = scoreWidth +8 + sx + W * 2 + (W-WF);
-  }
-    int bordureWidth = (sxScore + (scoreWidth/2))*2;
-    int bordureHeight = H+WH+12;
-
-  sx2 = scoreWidth + 8 + sx + W * 2;
-
-// Pour centrer tout le jeu
-  int xm = (COLS - bordureWidth) /2;
-  int ym = (LINES - bordureHeight)/2;
-
-sx += xm;
-sy +=ym;
-sxf +=xm;
-syf +=ym;
-sx2 += xm;
-sy2 +=ym;
-sxf2 +=xm;
-syf2 +=ym;
-sxScore += xm;
-syScore += ym;
-
-  Window bordure(bordureHeight, bordureWidth, xm, ym);
-  bordure.setBordureDroite();
-
   refresh();
 
-  // Window score(scoreHeight, scoreWidth, sxScore, syScore);
-  // score.setCouleurBordure(WBLUE);
 
   int ch;
   int const h = 10;
   int const w = 20;
 
 noecho();
-Jeu Jeu2(sx, sy, sxf, syf, sx2, sy2, sxf2, syf2, scoreHeight, scoreWidth, sxScore, syScore, xm,ym);
+Jeu Jeu2(3,1);
+
 
 Jeu2.placement();
 

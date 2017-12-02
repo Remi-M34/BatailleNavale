@@ -27,7 +27,7 @@ string aPropos()
 
 string version()
 {
-    string message = "v. 0.31";
+    string message = "v. 0.4";
 
     return message;
 }

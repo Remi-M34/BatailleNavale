@@ -1,22 +1,17 @@
-10x10
-x
-x
-x
-x
-x
+16x16
+xxxxx
 
 x
 x
 x
 x
 
-x
-x
-x
+xxx
+ xx
 
 x
-x
-x
+xx
 
+x
 x
 x

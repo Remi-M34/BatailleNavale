@@ -15,21 +15,42 @@ class Jeu{
 
 public:
 
-  Jeu(int sx, int sy, int sxf, int syf, int sx2, int sy2, int sxf2, int syf2, int scoreHeight, int scoreWidth, int sxScore, int syScore, int xm, int ym);
+  Jeu(int nbjoueurs, int humains);
 
   //destructeur
   ~Jeu();
 
 void  placement();
-void  tir(Grille joueur);
-void initCouleurs();
-void scoreplus(int s, int j);
+void  placementDesNavires();
 
+void initCouleurs();
+
+void initDim2(int j);
+bool estIA();
+void selectionCible(int c);
+void selectUp();
+void selectDown();
+void selectRight();
+void selectLeft();
+void joueurSuivant();
+int attaque();
+void selectionCibleAleatoire();
+void deplacementIA();
 
 private:
       Window score;
+      Window aide;
+      Window bordure;
+      int humains;
+      int nbjoueurs;
+      int vitesse = 3;
+      int joueur = 0;
+      int cible;
+      int cibleSelectionnee = 0;
+      int *payback[];
 
-      Grille *Joueur[2];
+      
+      Grille *Joueur[];
 
       int scoreWidth;
       int syf2;
@@ -39,17 +60,21 @@ private:
       int scoreJoueur1 = 0;
       int scoreJoueur2 = 0;
 
-      Grille joueur1;
-      Grille joueur2;
 
       Color colScore;
+      Color colAide;
 
-     bool Joueur1Humain = 0;
-     bool Joueur2Humain = 0;
+
+     int sx,sy,sxf,syf;
 
 };
 
+int getScoreStartX(int t);
+int getBordureWidth(int nbjoueurs);
+int getBordureHeight(int nbjoueurs);
+int getBordureStartY(int nbjoueurs);
+int getAideStartY(int nbjoueurs);
 
-void aideJeu();
+
 
 #endif

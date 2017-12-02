@@ -23,25 +23,25 @@ void Menu::initCouleurs()
 
     switch (lignes)
     {
-    case 36:
+    case 38:
       colSelectionnee = convertColor(ligne);
       break;
-    case 37:
+    case 39:
       colNonSelectionnee = convertColor(ligne);
       break;
-    case 38:
+    case 40:
       if (ligne[0] == 'o' || ligne[0] == 'O')
       {
         bordureMenuDroite = true;
       }
       break;
-    case 39:
+    case 41:
       colBordureMenu = convertColor(ligne);
       break;
-    case 40:
+    case 42:
       carBordureMenu = ligne[0];
       break;
-    case 45:
+    case 50:
       theme.clear();
       for (int i = 0; isalnum(ligne[i]); i++)
       {
