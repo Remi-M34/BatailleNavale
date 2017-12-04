@@ -1,10 +1,10 @@
 ---------- Navires ----------
 
-BGREEN		Navire 1
-BMAGENTA	Navire 2
-BYELLOW		Navire 3
-BBLUE		Navire 4
-BRED		Navire 5
+BBLUE		Navire 1
+BRED		Navire 2
+BCYAN		Navire 3
+BYELLOW		Navire 4
+BMAGENTA	Navire 5
 BBLUE		Couleur des navires lors de la pose sur la grille
 BYELLOW		Contour de la flotte
 +			Caractère du contour de la flotte
@@ -12,14 +12,20 @@ BYELLOW		Contour de la flotte
 
 ---------- Jeu ----------
 
-BMAGENTA	Couleur de la bordure des grilles
+BCYAN		Couleur de la bordure du plateau
+WBLUE		Couleur de la bordure des grilles
 BRED		Couleur temporaire de la grille quand la pose du navire est impossible (dû à un chevauchement)
 BCYAN		Couleur de la fenêtre score
+BGREEN		Couleur de la bordure de la fenêtre d'aide
 .			Caractère de la bordure des grilles
++			Caractère de la bordure du plateau
  			Caractère de la bordure de la fenêtre score
+ 			Caractère de la bordure de la fenêtre d'aide
+OUI			Bordure du plateau droite (si oui, ignore la couleur et le caractère)
 OUI			Bordure de la fenêtre score droite (si oui, ignore la couleur et le caractère)
-1			Temps entre chaque envoi de missile de l'IA (en millisecondes)
-100		Délai après la pose de chacun des navires de l'IA (en millisecondes)
+1			Temps entre chaque envoi de missile de l'IA (en millisecondes) (désormais réglable pendant le jeu)
+190			Délai après la pose de chacun des navires de l'IA (en millisecondes)
+Normal		Difficulté (précision de l'IA et pertinence des cibles choisies) (désormais réglable pendant le jeu)
 
 
 ---------- Cases ----------
@@ -34,15 +40,14 @@ WBLACK		Case vide
 ---------- Menu ----------
 
 BWHITE		Couleur du menu (sélectionné)
-BCYAN		Couleur du menu
+BYELLOW		Couleur du menu
 OUI			Bordure du menu droite
 WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est droite)
  			Caractère de la bordure du menu (espace par défaut)
 
 
-			
-			
-Defaut
+
+Theme2
 			
 			
 Couleurs :

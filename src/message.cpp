@@ -27,7 +27,7 @@ string aPropos()
 
 string version()
 {
-    string message = "v. 0.4";
+    string message = "v. 0.55";
 
     return message;
 }
@@ -96,4 +96,58 @@ string infoFlotteT()
     config.close();
 
         return ("Grille : " + ligne);
+}
+
+
+string mauvaiseTaille()
+{
+    string message;
+    message = "La taille doit être comprise entre 10 et 20.";
+
+    return message;
+}
+
+string mauvaiseTaille2()
+{
+    string message;
+    message = "La grille fait désormais";
+
+    return message;
+}
+
+
+
+string dimGrille()
+{
+    string largeur, hauteur;
+    largeur = myitoa(getWidthGrille());
+    hauteur = myitoa(getHeightGrille());
+    string message = largeur + "x" + hauteur;
+
+    return message;
+}
+
+
+string erreurTailleFenetre()
+{
+
+    string largeur, hauteur;
+    largeur = myitoa(COLS);
+    hauteur = myitoa(LINES);
+    string message = "Votre fenêtre est trop petite : " + largeur + " x " + hauteur 
+    + "\nLe jeu nécessite une fenêtre de taille supérieur à 150 x 40"
+    + "\n\nNous recommendons d'utiliser le mode plein écran."
+    + "\n\nAppuyez sur une touche pour quitter...";
+
+
+    return message;
+}
+
+
+string erreurTailleFenetre2()
+{
+    string message = "Erreur!\nVeuillez agrandir la taille de votre terminal et relancer le jeu.\n\nAppuyez sur une touche pour quitter...";
+
+
+    return message;
 }

@@ -15,12 +15,12 @@ class Jeu{
 
 public:
 
-  Jeu(int nbjoueurs, int humains);
+  Jeu(int nbjoueurs, int humains, int difficulte, int v);
 
   //destructeur
   ~Jeu();
 
-void  placement();
+void  start();
 void  placementDesNavires();
 
 void initCouleurs();
@@ -36,18 +36,23 @@ void joueurSuivant();
 int attaque();
 void selectionCibleAleatoire();
 void deplacementIA();
+void navires();
+int joueurVulnerable();
+void cibleAleatoire();
 
 private:
       Window score;
       Window aide;
-      Window bordure;
+      Window plateau;
       int humains;
       int nbjoueurs;
       int vitesse = 3;
       int joueur = 0;
       int cible;
       int cibleSelectionnee = 0;
-      int *payback[];
+      int *payback;
+      int *estVulnerable;
+       int const difficulte;
 
       
       Grille *Joueur[];
@@ -63,6 +68,8 @@ private:
 
       Color colScore;
       Color colAide;
+      Color colBordureGrilles;
+      Color colBordurePlateau;
 
 
      int sx,sy,sxf,syf;

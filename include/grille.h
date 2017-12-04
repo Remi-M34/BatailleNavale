@@ -29,8 +29,8 @@ public:
   Flotte flotte;
 
   //constructeur :
-  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, Window &aide);
-  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, Window &aide, bool estIA);
+  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse,  int const difficulte, Window &aide);
+  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA);
 
   //destructeur
   ~Grille();
@@ -67,6 +67,7 @@ public:
   void moveDown(int &x, int &y);
   void caseSuivante(int &x, int &y);
   void casePrecedente(int &x, int &y);
+  void cacherCases();
   void speed();
 
   // Trouve et sélectionne la case la plus proche du milieu de la grille qui n'a pas déjà été victime d'un tir de missile
@@ -86,14 +87,18 @@ public:
   void initCouleurs();
   void test(std::string s);
 
-  void estCible();
+  void setEstCible(bool c);
   void nonCible();
   bool estDejaCible();
-  void joue();
+  // void joue();
+  bool getJoue();
+  void setJoue(bool c);
   bool estIA();
 
-  void ciblageValide();
-  void ciblageAnnule();
+  // void ciblageValide();
+  // void ciblageAnnule();
+void setCiblageValide(bool c);
+void mauvaiseSelection();
 
 private:
   etat **Case;
@@ -101,6 +106,8 @@ private:
   bool IA = false;
   int ***navire = listedesnavires();
   int &vitesse;
+   int const difficulte;
+  bool joue = false;
   Window *aide;
 
   // Position du navire sur la grille. [n][0] = x, [n][1] = y; afin de changer l'état
@@ -128,6 +135,7 @@ private:
    int delaiPoseIA = 0;
 
    char carBordureGrille;
+   char carGrilleMauvaiseSelection = '!';
 };
 
 std::string myitoa(int i);

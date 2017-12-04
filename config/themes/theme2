@@ -12,14 +12,20 @@ BYELLOW		Contour de la flotte
 
 ---------- Jeu ----------
 
-BMAGENTA	Couleur de la bordure des grilles
+BCYAN		Couleur de la bordure du plateau
+WBLUE		Couleur de la bordure des grilles
 BRED		Couleur temporaire de la grille quand la pose du navire est impossible (dû à un chevauchement)
 BCYAN		Couleur de la fenêtre score
+BGREEN		Couleur de la bordure de la fenêtre d'aide
 .			Caractère de la bordure des grilles
++			Caractère de la bordure du plateau
  			Caractère de la bordure de la fenêtre score
+ 			Caractère de la bordure de la fenêtre d'aide
+OUI			Bordure du plateau droite (si oui, ignore la couleur et le caractère)
 OUI			Bordure de la fenêtre score droite (si oui, ignore la couleur et le caractère)
-1			Temps entre chaque envoi de missile de l'IA (en millisecondes)
-1000		Délai après la pose de chacun des navires de l'IA (en millisecondes)
+1			Temps entre chaque envoi de missile de l'IA (en millisecondes) (désormais réglable pendant le jeu)
+190			Délai après la pose de chacun des navires de l'IA (en millisecondes)
+Normal		Difficulté (précision de l'IA et pertinence des cibles choisies) (désormais réglable pendant le jeu)
 
 
 ---------- Cases ----------
@@ -40,8 +46,7 @@ WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est droi
  			Caractère de la bordure du menu (espace par défaut)
 
 
-			
-			
+
 Theme2
 			
 			

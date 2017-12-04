@@ -65,6 +65,14 @@ int const getDimFlotte(char c)
 
 void editWidthGrille(int w)
 {
+    if (w > 20)
+    {
+        w = 20;
+    }
+    else if (w < 10)
+    {
+        w = 10;
+    }
     fstream tmp("config/tmp.txt", ios::in | ios::out | ios::trunc);
     tmp << w << "x" << getHeightGrille() << '\n';
 
@@ -90,6 +98,14 @@ void editWidthGrille(int w)
 
 void editHeightGrille(int h)
 {
+        if (h > 20)
+    {
+        h = 20;
+    }
+    else if (h < 10)
+    {
+        h = 10;
+    }
     fstream tmp("config/tmp.txt", ios::in | ios::out | ios::trunc);
     tmp << getWidthGrille() << "x" << h << '\n';
 

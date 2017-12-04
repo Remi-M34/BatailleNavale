@@ -7,16 +7,23 @@ using namespace std;
 #define WF getDimFlotte('w')
 #define HF getDimFlotte('h')
 
-Jeu::Jeu(int nbjoueurs, int humains) : nbjoueurs(nbjoueurs),
-                                       humains(humains),
-                                       score(20, 18, getScoreStartX(nbjoueurs), LINES / 2 - (H + HF) / 1.9),
-                                       bordure(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
-                                       aide(6,2*W,getScoreStartX(nbjoueurs)+24,getAideStartY(nbjoueurs))
+Jeu::Jeu(int nbjoueurs, int humains, int diff, int v) : nbjoueurs(nbjoueurs),
+                                                 humains(humains),
+                                                 score(20, 18, getScoreStartX(nbjoueurs), LINES / 2 - (H + HF) / 1.9),
+                                                 plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
+                                                 aide(7, 2 * W + 4, getScoreStartX(nbjoueurs) + 22, getAideStartY(nbjoueurs)),
+                                                 difficulte(diff),
+                                                 vitesse(v)
+
 {
+
     vitesse = 3;
-    bordure.setCouleurBordure(BCYAN);
+    // plateau.setCouleurBordure(BCYAN);
     initCouleurs();
+    srand((int)time(0));
+
     initDim2(nbjoueurs);
+    curs_set(0);
 }
 
 Jeu::~Jeu() {}
@@ -33,27 +40,39 @@ void Jeu::initCouleurs()
 
         switch (lignes)
         {
-        case 17:
+        case 15:
+            plateau.setCouleurBordure(convertColor(ligne));
+            break;
+        case 18:
             colScore = convertColor(ligne);
             score.setCouleurBordure(colScore);
             break;
-        case 18:
+        case 19:
             colAide = convertColor(ligne);
             score.setCouleurBordure(colAide);
             break;
         case 20:
-            score.setCarBordure(ligne[0]);
+            colBordureGrilles = convertColor(ligne);
+                        colBordurePlateau = convertColor(ligne);
             break;
-                    case 21:
-            aide.setCarBordure(ligne[0]);
+        case 21:
+            plateau.setCarBordure(ligne[0]);
             break;
         case 22:
+            score.setCarBordure(ligne[0]);
+            break;
+        case 23:
+            aide.setCarBordure(ligne[0]);
+            break;
+        case 24:
+            plateau.setBordureDroite();
+            break;
+        case 25:
             if (ligne[0] == 'O' || ligne[0] == 'o')
             {
                 score.setBordureDroite();
             }
-            couleurs.close();
-            return;
+            break;
         }
         lignes++;
     }
@@ -61,29 +80,33 @@ void Jeu::initCouleurs()
     couleurs.close();
 }
 
-void Jeu::placement()
+void Jeu::start()
 {
 
     placementDesNavires();
-        (*Joueur[0]).flotte.fenetre.setBordureDroite();
-        (*Joueur[0]).flotte.fenetre.setCarBordure(' ');
+    (*Joueur[0]).flotte.fenetre.setBordureDroite();
+    (*Joueur[0]).flotte.fenetre.setCarBordure(' ');
     score.setBordureDroite();
     // aide.setBordureDroite();
     aide.setCouleurBordure(BGREEN);
     aide.setCarBordure(' ');
-    aide.print(1,0,"Vitesse ( +, - )"); aide.print(aide.getWindowWidth()-2,0,myitoa(vitesse), BCYAN);
-        aide.print(1,1,"Selection");    aide.print(aide.getWindowWidth()-6,1,"<-,->");
+    aide.print(1, 0, "Vitesse ( +, - )");
+    aide.print(aide.getWindowWidth() - 2, 0, myitoa(vitesse), colBordureGrilles);
+    aide.print(1, 1, "Selection");
+    aide.print(aide.getWindowWidth() - 6, 1, "<-,->");
 
-    aide.print(1,2,"Annuler cible");    aide.print(aide.getWindowWidth()-2,2,"c");
+    aide.print(1, 2, "Annuler cible");
+    aide.print(aide.getWindowWidth() - 2, 2, "c");
 
+    aide.print(1, 3, "Case suivante");
+    aide.print(aide.getWindowWidth() - 2, 3, "e");
 
-    aide.print(1,3,"Case suivante");    aide.print(aide.getWindowWidth()-2,3,"d");
+    aide.print(1, 4, "Case précédente");
+    aide.print(aide.getWindowWidth() - 2, 4, "z");
+    aide.print(1, 5, "Tir aléatoire");
+    aide.print(aide.getWindowWidth() - 2, 5, "a");
 
-    aide.print(1,4,"Case précédente");aide.print(aide.getWindowWidth()-2,4,"q");
-    aide.print(1,5,"Tir aléatoire"); aide.print(aide.getWindowWidth()-2,5,"a");
-    
-    
-    (*Joueur[joueur]).joue();
+    (*Joueur[joueur]).setJoue(true);
     usleep(155555);
 
     selectionCible(joueur);
@@ -94,25 +117,30 @@ void Jeu::placement()
 
         switch (attaque())
         {
-        case 1 ... 2:
-            (*payback[cibleSelectionnee]) = joueur;
-            continue;
-        case 0:
-            (*payback[cibleSelectionnee]) = joueur;
+        case 1:
+            (payback[cibleSelectionnee]) = joueur;
 
-            (*Joueur[cibleSelectionnee]).nonCible();
-            (*Joueur[cibleSelectionnee]).ciblageAnnule();
+            estVulnerable[cibleSelectionnee] = 1;
+            continue;
+
+        case 2:
+            (payback[cibleSelectionnee]) = joueur;
+            if ((*Joueur[cibleSelectionnee]).findFocus() == -1)
+            {
+                estVulnerable[cibleSelectionnee] = 0;
+            }
+            continue;
+
+        case 0:
+            (payback[cibleSelectionnee]) = joueur;
 
             joueurSuivant();
-            usleep(50000);
-            // cibleSelectionnee = (*payback[joueur]);
-            cibleSelectionnee = joueur;
-
+            usleep(125000);
             selectionCible(joueur);
 
             break;
         case -1:
-            (*Joueur[cibleSelectionnee]).ciblageAnnule();
+            (*Joueur[cibleSelectionnee]).setCiblageValide(false);
 
             selectionCible(joueur);
 
@@ -159,48 +187,59 @@ void Jeu::initDim2(int nbjoueurs)
     {
     case 2:
     {
-        Joueur[0] = new Grille(xm - 2 - sx - 2 * W, ym - (H + HF) / 2, xm - 2 - sxf - 2 * WF, 4 + H + ym - (H + HF) / 2, vitesse,aide, estIA());
-        Joueur[1] = new Grille(xm + 2 + sx, ym - (H + HF) / 2, xm + 2 + sxf, 4 + H + ym - (H + HF) / 2, vitesse,aide,estIA());
+        Joueur[0] = new Grille(xm - 2 - sx - 2 * W, ym - (H + HF) / 2, xm - 2 - sxf - 2 * WF, 4 + H + ym - (H + HF) / 2, vitesse, difficulte, aide, estIA());
+        Joueur[1] = new Grille(xm + 2 + sx, ym - (H + HF) / 2, xm + 2 + sxf, 4 + H + ym - (H + HF) / 2, vitesse, difficulte, aide, estIA());
         break;
     }
     case 3 ... 4:
     {
-        Joueur[0] = new Grille(xm - 2 - sx - 2 * W, ym + 1, xm - 2 - sxf - 2 * WF, 4 + H + ym + 1, vitesse,aide,estIA());
-        Joueur[1] = new Grille(xm + 2 + sx, ym + 1, xm + 2 + sxf, 4 + H + ym + 1, vitesse,aide,estIA());
+        Joueur[0] = new Grille(xm - 2 - sx - 2 * W, ym + 1, xm - 2 - sxf - 2 * WF, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
+        Joueur[1] = new Grille(xm + 2 + sx, ym + 1, xm + 2 + sxf, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
 
         switch (nbjoueurs)
         {
         case 3:
-            Joueur[2] = new Grille(xm - 2 - sx - 2 * W, ym - H - 2, xm - 2 - sxf - 2 * WF, ym - 6 - H - HF, vitesse,aide,estIA());
+            Joueur[2] = new Grille(xm - 2 - sx - 2 * W, ym - H - 2, xm - 2 - sxf - 2 * WF, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
             break;
         case 4:
-            Joueur[2] = new Grille(xm - 2 - sx - 2 * W, ym - H - 2, xm - 2 - sxf - 2 * WF, ym - 6 - H - HF, vitesse,aide,estIA());
-            Joueur[3] = new Grille(xm + 2 + sx, ym - H - 2, xm + 2 + sxf, ym - 6 - H - HF, vitesse,aide,estIA());
+            Joueur[2] = new Grille(xm - 2 - sx - 2 * W, ym - H - 2, xm - 2 - sxf - 2 * WF, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
+            Joueur[3] = new Grille(xm + 2 + sx, ym - H - 2, xm + 2 + sxf, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
             break;
         }
         break;
     }
     case 5 ... 6:
     {
-        Joueur[0] = new Grille(xm - 2 - sx - 2 * W - 12, ym + 1, xm - 2 - sxf - 2 * WF - 12, 4 + H + ym + 1, vitesse,aide,estIA());
-        Joueur[1] = new Grille(xm + 2 + sx - 12, ym + 1, xm + 2 + sxf - 12, 4 + H + ym + 1, vitesse,aide,estIA());
-        Joueur[2] = new Grille(xm + 6 + sx + 2 * max(W, WF) - 12, ym + 1, xm + 6 + sxf + 2 * max(W, WF) - 12, 4 + H + ym + 1, vitesse,aide,estIA());
+        Joueur[0] = new Grille(xm - 2 - sx - 2 * W - 12, ym + 1, xm - 2 - sxf - 2 * WF - 12, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
+        Joueur[1] = new Grille(xm + 2 + sx - 12, ym + 1, xm + 2 + sxf - 12, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
+        Joueur[2] = new Grille(xm + 6 + sx + 2 * max(W, WF) - 12, ym + 1, xm + 6 + sxf + 2 * max(W, WF) - 12, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
 
-        Joueur[3] = new Grille(xm - 2 - sx - 2 * W - 12, ym - H - 2, xm - 2 - sxf - 2 * WF - 12, ym - 6 - H - HF, vitesse,aide,estIA());
-        Joueur[4] = new Grille(xm + 2 + sx - 12, ym - H - 2, xm + 2 + sxf - 12, ym - 6 - H - HF, vitesse,aide,estIA());
+        Joueur[3] = new Grille(xm - 2 - sx - 2 * W - 12, ym - H - 2, xm - 2 - sxf - 2 * WF - 12, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
+        Joueur[4] = new Grille(xm + 2 + sx - 12, ym - H - 2, xm + 2 + sxf - 12, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
 
         if (nbjoueurs == 6)
         {
-            Joueur[5] = new Grille(xm + 6 + sx + 2 * max(W, WF) - 12, ym - H - 2, xm + 6 + sxf + 2 * max(W, WF) - 12, ym - 6 - H - HF, vitesse,aide,estIA());
-            break;
+            Joueur[5] = new Grille(xm + 6 + sx + 2 * max(W, WF) - 12, ym - H - 2, xm + 6 + sxf + 2 * max(W, WF) - 12, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
         }
+        break;
     }
     }
 
+    // *payback = new int[nbjoueurs];
+    // *estVulnerable = new bool[nbjoueurs];
+
+    // srand((int)time(0));
+    payback = new int[nbjoueurs];
+    estVulnerable = new int[nbjoueurs];
+
     for (int i = 0; i < nbjoueurs; i++)
     {
-        (*payback[i]) = rand() % nbjoueurs;
+        payback[i] = rand() % nbjoueurs;
+                estVulnerable[i] = 0;
+
+        // estVulnerable[i] = 0;
     }
+
 }
 
 bool Jeu::estIA()
@@ -226,10 +265,27 @@ void Jeu::selectionCible(int j)
     }
 
     int c;
-    while ((c = getch()) != '$')
+    while (c = getch())
     {
         switch (c)
         {
+        case 'n':
+            navires();
+            for (int i = 0; i < nbjoueurs; i++)
+            {
+                (*Joueur[i]).fenetre.setCouleurBordure(BCYAN);
+
+                if (i == cibleSelectionnee)
+                {
+                    (*Joueur[cibleSelectionnee]).setEstCible(true);
+                }
+            }
+            for (int i = 0; i < nbjoueurs; i++)
+            {
+                (*Joueur[i]).refreshGrille(0, 0, W, H);
+            }
+
+            break;
         case KEY_RIGHT:
         {
             selectRight();
@@ -243,45 +299,124 @@ void Jeu::selectionCible(int j)
         case KEY_UP:
 
         {
-            if (nbjoueurs > 3)
-{            selectUp();
-}
+            if (nbjoueurs > 2)
+            {
+                selectUp();
+            }
             break;
         }
 
         case KEY_DOWN:
         {
-            if (nbjoueurs > 3)
-{            selectDown();
-}
+            if (nbjoueurs > 2)
+            {
+                selectDown();
+            }
+            break;
+        }
+        case 'a':
+        {
+            selectionCibleAleatoire();
             break;
         }
         case '\n':
-            (*Joueur[cibleSelectionnee]).ciblageValide();
-            return;
+            if (joueur != cibleSelectionnee)
+{
+                (*Joueur[cibleSelectionnee]).setCiblageValide(true);
+                return;
+}
+else
+{
+(*Joueur[joueur]).mauvaiseSelection();    
+}
 
             break;
         }
     }
 }
 
+int Jeu::joueurVulnerable()
+{
+    int k = 0;
+    int vul[nbjoueurs] = {-1};
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        if ((estVulnerable[i] == 1) && joueur != i)
+        {
+            vul[k] = i;
+            k++;
+        }
+    }
+    if (k == 0)
+        return rand() % nbjoueurs;
+
+    return vul[rand() % k];
+}
+
+void Jeu::cibleAleatoire()
+{
+
+    do
+    {
+        cible = rand() % nbjoueurs;
+    } while (cible == joueur);
+}
+
 void Jeu::selectionCibleAleatoire()
 {
+
     do
     {
         (*Joueur[0]).test("rand...");
 
-        cible = rand() % nbjoueurs;
+        switch (difficulte)
+        {
+        case 3:
+
+            cible = joueurVulnerable();
+            break;
+        case 2:
+            if ((rand() % 2) == 0)
+            {
+                cible = joueurVulnerable();
+            }
+            else
+            {
+                cible = payback[joueur];
+            }
+            break;
+        case 1:
+            switch (int k = (rand() % 3))
+            {
+            case 0:
+                cible = joueurVulnerable();
+                break;
+            case 1:
+                cible = payback[joueur];
+                break;
+            case 2:
+                cibleAleatoire();
+                break;
+            }
+
+            break;
+        }
+
+        // cible = rand() % nbjoueurs;
     } while (cible == joueur);
+    (*Joueur[0]).test("\n");
+
     (*Joueur[0]).test(myitoa(cible));
     (*Joueur[0]).test("est la cible. Depuis le joueur ");
     (*Joueur[0]).test(myitoa(joueur));
-    // (*Joueur[cibleSelectionnee]).estCible();
-    deplacementIA();
+    // (*Joueur[cibleSelectionnee]).setEstCible();
+{    deplacementIA();
+}
 }
 
 void Jeu::deplacementIA()
 {
+
 
     switch (cibleSelectionnee)
     {
@@ -332,7 +467,6 @@ void Jeu::deplacementIA()
     if (cible != cibleSelectionnee)
     {
         deplacementIA();
-        cout << "ok" << endl;
     }
     else
     {
@@ -347,15 +481,15 @@ void Jeu::selectUp()
         switch (cibleSelectionnee)
         {
         case 0:
-            (*Joueur[cibleSelectionnee]).estCible();
-            (*Joueur[3]).estCible();
+            (*Joueur[cibleSelectionnee]).setEstCible(false);
+            (*Joueur[3]).setEstCible(true);
             cibleSelectionnee = 3;
             return;
         case 1:
             if (nbjoueurs > 4)
             {
-                (*Joueur[cibleSelectionnee]).estCible();
-                (*Joueur[4]).estCible();
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[4]).setEstCible(true);
                 cibleSelectionnee = 4;
             }
             else
@@ -366,8 +500,8 @@ void Jeu::selectUp()
         case 2:
             if (nbjoueurs == 6)
             {
-                (*Joueur[cibleSelectionnee]).estCible();
-                (*Joueur[5]).estCible();
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[5]).setEstCible(true);
                 cibleSelectionnee = 5;
             }
             else
@@ -382,15 +516,15 @@ void Jeu::selectUp()
         switch (cibleSelectionnee)
         {
         case 0:
-            (*Joueur[cibleSelectionnee]).estCible();
-            (*Joueur[2]).estCible();
+            (*Joueur[cibleSelectionnee]).setEstCible(false);
+            (*Joueur[2]).setEstCible(true);
             cibleSelectionnee = 2;
             return;
         case 1:
-            // if (nbjoueurs >  4)
+            if (nbjoueurs == 4)
             {
-                (*Joueur[cibleSelectionnee]).estCible();
-                (*Joueur[3]).estCible();
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[3]).setEstCible(true);
                 cibleSelectionnee = 3;
             }
             return;
@@ -409,23 +543,23 @@ void Jeu::selectDown()
         switch (cibleSelectionnee)
         {
         case 3:
-            (*Joueur[cibleSelectionnee]).estCible();
-            (*Joueur[0]).estCible();
+            (*Joueur[cibleSelectionnee]).setEstCible(false);
+            (*Joueur[0]).setEstCible(true);
             cibleSelectionnee = 0;
             break;
         case 4:
             if (nbjoueurs > 4)
             {
-                (*Joueur[cibleSelectionnee]).estCible();
-                (*Joueur[1]).estCible();
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[1]).setEstCible(true);
                 cibleSelectionnee = 1;
             }
             break;
         case 5:
             if (nbjoueurs == 6)
             {
-                (*Joueur[cibleSelectionnee]).estCible();
-                (*Joueur[2]).estCible();
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[2]).setEstCible(true);
                 cibleSelectionnee = 2;
             }
             break;
@@ -436,14 +570,14 @@ void Jeu::selectDown()
         switch (cibleSelectionnee)
         {
         case 3:
-            (*Joueur[cibleSelectionnee]).estCible();
-            (*Joueur[1]).estCible();
+            (*Joueur[cibleSelectionnee]).setEstCible(false);
+            (*Joueur[1]).setEstCible(true);
             cibleSelectionnee = 1;
             break;
         case 2:
         {
-            (*Joueur[cibleSelectionnee]).estCible();
-            (*Joueur[0]).estCible();
+            (*Joueur[cibleSelectionnee]).setEstCible(false);
+            (*Joueur[0]).setEstCible(true);
             cibleSelectionnee = 0;
         }
         break;
@@ -455,8 +589,8 @@ void Jeu::selectRight()
 {
     if (cibleSelectionnee < nbjoueurs - 1)
     {
-        (*Joueur[cibleSelectionnee]).estCible();
-        (*Joueur[++cibleSelectionnee]).estCible();
+        (*Joueur[cibleSelectionnee]).setEstCible(false);
+        (*Joueur[++cibleSelectionnee]).setEstCible(true);
     }
 }
 
@@ -464,8 +598,8 @@ void Jeu::selectLeft()
 {
     if (cibleSelectionnee > 0)
     {
-        (*Joueur[cibleSelectionnee]).estCible();
-        (*Joueur[--cibleSelectionnee]).estCible();
+        (*Joueur[cibleSelectionnee]).setEstCible(false);
+        (*Joueur[--cibleSelectionnee]).setEstCible(true);
     }
 }
 
@@ -481,21 +615,29 @@ void Jeu::placementDesNavires()
 
 void Jeu::joueurSuivant()
 {
+             (*Joueur[cibleSelectionnee]).setEstCible(false);
+
+         (*Joueur[joueur]).setJoue(false);
+
     if (joueur < nbjoueurs - 1)
     {
         joueur++;
-        (*Joueur[joueur]).joue();
-
-        return;
     }
-    joueur = 0;
-    (*Joueur[joueur]).joue();
+    else
+    {
+        joueur = 0;
+    }
+     (*Joueur[joueur]).setJoue(true);
+     cibleSelectionnee = joueur;
+
+
 }
 
 int Jeu::attaque()
 {
     if ((*Joueur[joueur]).estIA())
     {
+        (*Joueur[cibleSelectionnee]).setCiblageValide(true);
         return (*Joueur[cibleSelectionnee]).destinationMissileAleatoire();
     }
     else
@@ -536,11 +678,11 @@ int getBordureHeight(int nbjoueurs)
 {
     if (nbjoueurs > 2)
     {
-        return 16 + 2 * (H + HF)+6-HF;
+        return 16 + 2 * (H + HF) + 6 - HF;
     }
     else
     {
-        return 12 + (H + HF);
+        return 12 + (H + HF) + 6 - HF;
     }
 }
 
@@ -556,11 +698,22 @@ int getBordureStartY(int nbjoueurs)
     }
 }
 
-
 int getAideStartY(int nbjoueurs)
 {
     if (nbjoueurs == 2)
-    return (LINES / 2 - (H + HF) / 1.8)+2+H+HF/2;
+        return (LINES / 2 - (H + HF) / 1.9) + 3 + H + HF / 2 + max(0, 3 - HF);
     else
-    return 4 + H + LINES/2 ;
+        return 4 + H + LINES / 2;
+}
+
+void Jeu::navires()
+{
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        (*Joueur[i]).cacherCases();
+    }
+    Flotte nav(COLS / 2, LINES / 2, 0);
+    cin.ignore(1);
+    nav.fenetre.setBordureDroite();
+    nav.fenetre.setCarBordure(' ');
 }
