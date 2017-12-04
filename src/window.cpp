@@ -128,8 +128,15 @@ void Window::setCarBordure(char c)
 {
   wborder(frame, c,c,c,c,c,c,c,c);
   update();  
+  bord = c;
 
 }
+
+  int Window::getWindowWidth()
+  {
+    return width;
+  }
+
 
 void Window::clear() const{  werase(win); update(); }
 

@@ -29,8 +29,8 @@ public:
   Flotte flotte;
 
   //constructeur :
-  Grille(int const sx, int const sy, int sxf, int syf);
-  Grille(int const sx, int const sy, int sxf, int syf, bool estIA);
+  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse,  int const difficulte, Window &aide);
+  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA);
 
   //destructeur
   ~Grille();
@@ -66,6 +66,9 @@ public:
   void moveUp(int &x, int &y);
   void moveDown(int &x, int &y);
   void caseSuivante(int &x, int &y);
+  void casePrecedente(int &x, int &y);
+  void cacherCases();
+  void speed();
 
   // Trouve et sélectionne la case la plus proche du milieu de la grille qui n'a pas déjà été victime d'un tir de missile
   void findMilieu(int &x, int &y);
@@ -74,6 +77,9 @@ public:
   bool caseNonDecouverte(int x, int y);
   int findFocus();
   void caseAleatoire(int &x, int &y);
+  void deplacementIA(int dx, int dy, int x, int y);
+  bool checkCheminVertical(int dx, int dy, int y);
+  bool checkCheminHorizontal(int dx, int dy, int x);
 
   bool estCoule(int n);
 
@@ -81,11 +87,28 @@ public:
   void initCouleurs();
   void test(std::string s);
 
+  void setEstCible(bool c);
+  void nonCible();
+  bool estDejaCible();
+  // void joue();
+  bool getJoue();
+  void setJoue(bool c);
+  bool estIA();
+
+  // void ciblageValide();
+  // void ciblageAnnule();
+void setCiblageValide(bool c);
+void mauvaiseSelection();
+
 private:
   etat **Case;
   int **Case2;
   bool IA = false;
   int ***navire = listedesnavires();
+  int &vitesse;
+   int const difficulte;
+  bool joue = false;
+  Window *aide;
 
   // Position du navire sur la grille. [n][0] = x, [n][1] = y; afin de changer l'état
   // de toutes ses cases quand il est coulé
@@ -93,6 +116,7 @@ private:
   int focusnavire = -1;
   int focusx = -1;
   int focusy = -1;
+  int dernierePositionGagnante[2] = {-1};
 
   // +1 pour chaque case dont dispose le navire. -1 à chaque missile tiré sur ce navire. A 0, le navire est coulé.
   // Est initialisé lors de la création de la grille
@@ -111,8 +135,10 @@ private:
    int delaiPoseIA = 0;
 
    char carBordureGrille;
+   char carGrilleMauvaiseSelection = '!';
 };
 
 std::string myitoa(int i);
+  void test(std::string s);
 
 #endif

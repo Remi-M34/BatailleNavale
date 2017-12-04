@@ -16,6 +16,8 @@
 #include <string>
 #include <stdlib.h>
 #include <sstream>
+#include <cstdio>
+#include <cassert>
 
 extern "C" {
 #include <curses.h>
