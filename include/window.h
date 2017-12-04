@@ -35,12 +35,14 @@ void stopProgramX();
 class Window {
  private:
   int height,width,startx,starty;
-  WINDOW* win, *frame;
   Color colorwin, colorframe;
   char bord;
   void update() const;
 
  public:
+
+   WINDOW* win, *frame;
+
 
   // constructeur d'un fenetre de hauteur=h, largeur=w dont le coin superieur gauche
   // a pour coordonnée (x,y), le caractère c est utilisé pour définir la bordure
@@ -67,9 +69,13 @@ class Window {
   Color getCouleurFenetre() const; // récupère la couleur de la fenêtre
   void setCouleurBordure(Color);   // modifie la couleur de la bordure
   void setCouleurFenetre(Color);   // modifie la couleur de la fenêtre (ATTENTION, tout le contenu de la fenêtre prend la couleur)
+  void setBordureDroite();
+  void setCarBordure(char car);
+  int getWindowWidth();
+
 
   void clear() const; // enleve tout le contenu de la fenêtre
-
+  WINDOW* getWin();
 };
 
 

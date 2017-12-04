@@ -1,4 +1,6 @@
-#include "window.h"
+#include "../include/headers.h"
+
+
 
 
 void init_colors(void)
@@ -19,6 +21,7 @@ void init_colors(void)
   init_pair(BMAGENTA, COLOR_BLACK, COLOR_MAGENTA);
   init_pair(BRED,     COLOR_BLACK, COLOR_RED);  
 }
+
 
 
 void startProgramX() {
@@ -49,7 +52,7 @@ void Window::update() const{
 Window::Window(int h,int w, int x, int y, char c)
   : height(h), width(w), startx(x), starty(y), bord(c)
 {
-  colorwin=WCYAN;
+  colorwin=WBLACK;
   colorframe=WBLACK;
   frame=newwin(h+2,w+2,y,x);
   win=subwin(frame,h,w,y+1,x+1);
@@ -104,6 +107,16 @@ void Window::setCouleurBordure(Color c){
   wborder(frame, bord,bord,bord,bord,bord,bord,bord,bord);
   update();
 }
+
+
+void Window::setBordureDroite(){
+  wborder(frame, '|','|','_' , '_' , ' ' , ' ' , '|','|');
+  colorwin=WBLACK;
+  wbkgd(frame,COLOR_PAIR(colorwin));
+  wattron(win,COLOR_PAIR(colorwin));
+  update();
+}
+
 void Window::setCouleurFenetre(Color c){
   colorwin=c;
   wattron(win,COLOR_PAIR(colorwin));
@@ -111,4 +124,24 @@ void Window::setCouleurFenetre(Color c){
   update();  
 }
 
+void Window::setCarBordure(char c)
+{
+  wborder(frame, c,c,c,c,c,c,c,c);
+  update();  
+  bord = c;
+
+}
+
+  int Window::getWindowWidth()
+  {
+    return width;
+  }
+
+
 void Window::clear() const{  werase(win); update(); }
+
+
+WINDOW* Window::getWin()
+{
+  return win;
+}

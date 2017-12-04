@@ -1,0 +1,68 @@
+---------- Navires ----------
+
+BBLUE		Navire 1
+BRED		Navire 2
+BCYAN		Navire 3
+BYELLOW		Navire 4
+BMAGENTA	Navire 5
+BBLUE		Couleur des navires lors de la pose sur la grille
+BYELLOW		Contour de la flotte
++			Caractère du contour de la flotte
+
+
+---------- Jeu ----------
+
+BCYAN		Couleur de la bordure du plateau
+WBLUE		Couleur de la bordure des grilles
+BRED		Couleur temporaire de la grille quand la pose du navire est impossible (dû à un chevauchement)
+BCYAN		Couleur de la fenêtre score
+BGREEN		Couleur de la bordure de la fenêtre d'aide
+.			Caractère de la bordure des grilles
++			Caractère de la bordure du plateau
+ 			Caractère de la bordure de la fenêtre score
+ 			Caractère de la bordure de la fenêtre d'aide
+OUI			Bordure du plateau droite (si oui, ignore la couleur et le caractère)
+OUI			Bordure de la fenêtre score droite (si oui, ignore la couleur et le caractère)
+1			Temps entre chaque envoi de missile de l'IA (en millisecondes) (désormais réglable pendant le jeu)
+190			Délai après la pose de chacun des navires de l'IA (en millisecondes)
+Normal		Difficulté (précision de l'IA et pertinence des cibles choisies) (désormais réglable pendant le jeu)
+
+
+---------- Cases ----------
+
+BMAGENTA	Selection de cases
+BBLUE		Navire touché
+BRED		Navire coulé
+BWHITE		Tir manqué
+WBLACK		Case vide
+
+
+---------- Menu ----------
+
+BWHITE		Couleur du menu (sélectionné)
+BYELLOW		Couleur du menu
+OUI			Bordure du menu droite
+WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est droite)
+ 			Caractère de la bordure du menu (espace par défaut)
+
+
+
+Theme2
+			
+			
+Couleurs :
+
+  WBLACK,  // couleur fond = noir ,   couleur texte = blanc
+  WCYAN,   // couleur fond = cyan,    couleur texte = blanc
+  WBLUE,   // couleur fond = bleu,    couleur texte = blanc
+  WYELLOW, // couleur fond = jaune,   couleur texte = blanc
+  WGREEN,  // couleur fond = vert,    couleur texte = blanc
+  WMAGENTA,// couleur fond = magenta, couleur texte = blanc
+  WRED,	   // couleur fond = rouge,   couleur texte = blanc
+  BWHITE,  // couleur fond = blanc,   couleur texte = blanc
+  BCYAN,   // couleur fond = cyan,    couleur texte = noir
+  BBLUE,   // couleur fond = bleu,    couleur texte = noir
+  BYELLOW, // couleur fond = jaune,   couleur texte = noir
+  BGREEN,  // couleur fond = vert,    couleur texte = noir 
+  BMAGENTA,// couleur fond = magenta, couleur texte = noir
+  BRED    // couleur fond = rouge,   couleur texte = noir
