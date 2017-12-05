@@ -99,6 +99,7 @@ void Grille::selectionNavire()
       }
 }
 
+
 void Grille::init()
 {
       int const h = H;
@@ -225,6 +226,7 @@ void Grille::refreshNavireGrille(int n, int fx, int fy)
 
 void Grille::placementNavire(int n)
 {
+
       refreshGrille(0, 0, 0, 0);
       int fx = (W - flotte.getWidthnavire(n)) / 2;
       int fy = (H - flotte.getHeightnavire(n)) / 2;
@@ -298,8 +300,17 @@ void Grille::placementNavire(int n)
                   refreshNavireGrille(n, x, y);
                   pivoteDroite(n, x, y);
                   moveNavire(n, x, y);
-
                   break;
+
+case 'w':
+                        {
+                              refreshNavireGrille(n, x, y);
+                              pivoteDroite(n, x, y);
+                              pivoteDroite(n, x, y);
+                              pivoteDroite(n, x, y);
+                              moveNavire(n, x, y);
+                              break;
+                        }
 
             case '\n':
 
@@ -972,7 +983,7 @@ int Grille::destinationMissileAleatoire()
                   fenetre.print(2 * dx, dy, '#', colCaseSelectionnee);
                   fenetre.print(2 * dx + 1, dy, '#', colCaseSelectionnee);
             }
-            speed();
+            wait();
             deplacementIA(dx, dy, x, y);
       }
       else
@@ -980,9 +991,9 @@ int Grille::destinationMissileAleatoire()
             fenetre.print(2 * x, y, ' ', colCaseSelectionnee);
             fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
       }
-      speed();
-      speed();
-      speed();
+      wait();
+      wait();
+      wait();
       if (Case[x][y] == VIDE)
       {
             Case[x][y] = TOMBEALEAU;
@@ -1049,8 +1060,8 @@ void Grille::zoneFocus(int &x, int &y)
                   switch (difficulte)
                   {
                   case 2 ... 3:
-                        x = rand() % min(3, W - focusx + 1) + (max(focusx - 1, 0));
-                        y = rand() % min(3, H - focusy + 1) + (max(focusy - 1, 0));
+                        x = rand() % min(3, max(W - focusx + 1,focusx+1)) + (max(focusx - 1, 0));
+                        y = rand() % min(3, max(H - focusy + 1,focusy+1)) + (max(focusy - 1, 0));
                         break;
                   case 1:
                         x = rand() % min(5, W - focusx + 2) + (max(focusx - 2, 0));
@@ -1271,15 +1282,23 @@ void Grille::setCiblageValide(bool c)
       }
 }
 
-// void Grille::ciblageValide()
-// {
-//       fenetre.setCarBordure('-');
-// }
+void Grille::checkSpeedG(int ch)
+{
 
-// void Grille::ciblageAnnule()
-// {
-//       fenetre.setCarBordure(carBordureGrille);
-// }
+        switch (ch)
+        {
+        case '+':
+            vitesse = min(vitesse+1,9);
+            break;
+        case '-':
+            vitesse = max(vitesse-1,0);
+            break;
+        }
+    
+    (*aide).print((*aide).getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
+}
+
+
 
 void Grille::deplacementIA(int dx, int dy, int x, int y)
 {
@@ -1293,9 +1312,11 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
       test("\n");
       double distance;
       double distance2;
-
       while ((distance = (double)sqrt(pow(x - dx, 2)) + pow(y - dy, 2)) > 0)
       {
+                  int ch = getch();
+
+            checkSpeedG(ch);
             if (checkCheminHorizontal(dx, dy, x))
             {
                   do
@@ -1303,12 +1324,12 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
                         if (dx < x)
                         {
                               caseSuivante(dx, dy);
-                              speed();
+                              wait();
                         }
                         else
                         {
                               moveLeft(dx, dy);
-                              speed();
+                              wait();
                         }
                   } while (dx != x);
                   continue;
@@ -1320,12 +1341,12 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
                         if (dy > y)
                         {
                               moveUp(dx, dy);
-                              speed();
+                              wait();
                         }
                         else
                         {
                               moveDown(dx, dy);
-                              speed();
+                              wait();
                         }
                   } while (dy != y);
                   continue;
@@ -1334,7 +1355,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
             if (dx < x)
             {
                   caseSuivante(dx, dy);
-                  speed();
+                  wait();
                   test(myitoa(dx));
                   test(",");
                   test(myitoa(dy));
@@ -1347,7 +1368,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
             else if (dx > x)
             {
                   casePrecedente(dx, dy);
-                  speed();
+                  wait();
                   test(myitoa(dx));
                   test(",");
                   test(myitoa(dy));
@@ -1361,7 +1382,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
             if (dy < y)
             {
                   moveDown(dx, dy);
-                  speed();
+                  wait();
                   test(myitoa(dx));
                   test(",");
                   test(myitoa(dy));
@@ -1374,7 +1395,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
             else if (dy > y)
             {
                   moveUp(dx, dy);
-                  speed();
+                  wait();
                   test(myitoa(dx));
                   test(",");
                   test(myitoa(dy));
@@ -1391,7 +1412,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
                         while (dx != x && dy != y)
                         {
                               caseSuivante(dx, dy);
-                              speed();
+                              wait();
                         }
                   }
                   else
@@ -1399,7 +1420,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
                         while (dx != x && dy != y)
                         {
                               casePrecedente(dx, dy);
-                              speed();
+                              wait();
                         }
                   }
 
@@ -1436,9 +1457,9 @@ bool Grille::checkCheminHorizontal(int dx, int dy, int x)
       return (caseNonDecouverte(x, dy) && dx != x);
 }
 
-void Grille::speed()
+void Grille::wait()
 {
-      usleep(vitesse * vitesse * 10000);
+      usleep((9-vitesse) * (9-vitesse) * 10000);
 }
 
 void Grille::cacherCases()

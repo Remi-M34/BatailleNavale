@@ -2,8 +2,7 @@
 
 using namespace std;
 
-#define xm (COLS - 100) / 2
-#define ym (LINES - 33) / 2
+
 
 Menu::Menu()
 {
@@ -59,16 +58,18 @@ void Menu::initCouleurs()
 void Menu::mainMenu(int d)
 {
 
+
+
   // startProgramX();
 
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  Window apropos(2, 40, 50 - 40 / 2 + xm, 25 + ym, ' ');
+  Window apropos(2, 40, 50 - 40 / 2 + -50, 25 + -16, ' ');
   apropos.setCouleurBordure(WBLACK);
 
   Color col[5] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
@@ -80,7 +81,7 @@ void Menu::mainMenu(int d)
   string choix[5] = {"Commencer une partie", "Options", "Aide", "Version du jeu", "A Propos"};
   int selection = 0;
 
-  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, d);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, d);
   while ((c = getch()))
   {
 
@@ -217,7 +218,7 @@ void Menu::options()
   // stopProgramX();
   // startProgramX();
 
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -233,7 +234,7 @@ void Menu::options()
   string choix[5] = {"Editeur de navires", "Modifier la taille de la grille", "Thèmes", "Charger flotte", "Retour"};
   int selection = 0;
 
-  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
 
   for (int i = 0; i < 5; i++)
   {
@@ -318,7 +319,7 @@ void Menu::options()
 void Menu::aideMenu()
 {
   int ch;
-  Window aidef(19, 85, 7 + xm, 12 + ym);
+  Window aidef(19, 85, 7 + -50, 12 + -16);
   aidef.setBordureDroite();
   aidef.setCouleurFenetre(WBLACK);
   aidef.print(39, 0, "Règles :", BBLUE);
@@ -331,31 +332,26 @@ void Menu::aideMenu()
   }
 }
 
-void Menu::erreurEcran()
-{
-  Window erreur(5, 100, LINES / 2 - 50, COLS / 2 - 10, '+');
-  erreur.print(1, 2, "Erreur");
-  usleep(999999);
-}
+
 
 void Menu::changerDim()
 {
   int ch;
   int n = 0;
 
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  Window dim(3, 18, 41 + xm, 13 + ym, ' ');
+  Window dim(3, 18, 41 + -50, 13 + -16, ' ');
   dim.setCouleurBordure(BGREEN);
   dim.setCouleurFenetre(WBLACK);
-  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
 
-  Window aide(8, 30, 2 + xm, 11 + ym);
+  Window aide(8, 30, 2 + -50, 11 + -16);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
@@ -433,7 +429,7 @@ void Menu::changerDim()
           dim.print(5 + i, 1, ' ', WBLACK);
         }
 
-        move(15 + ym, 47 + xm);
+        move(15 + -16, 47 + -50);
 
         do
         {
@@ -462,7 +458,7 @@ void Menu::changerDim()
           }
           else if (ch == '\n' && num == 0)
           {
-            move(15 + ym, 47 + xm);
+            move(15 + -16, 47 + -50);
           }
           else if (ch == 'q')
           {
@@ -490,7 +486,7 @@ void Menu::changerDim()
           dim.print(10 + i + width.length(), 1, ' ', WBLACK);
         }
 
-        move(15 + ym, xm + 52 + width.length());
+        move(15 + -16, -50 + 52 + width.length());
 
         do
         {
@@ -529,7 +525,7 @@ void Menu::changerDim()
           }
           else if (ch == '\n' && num == 0)
           {
-            move(15 + ym, xm + 52 + width.length());
+            move(15 + -16, -50 + 52 + width.length());
           }
         } while (1);
       }
@@ -554,20 +550,20 @@ void Menu::menuNavire()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
-  Window aide(12, 30, 2 + xm, 11 + ym);
+  Window aide(12, 30, 2 + -50, 11 + -16);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
   aide.print(1, 11, "q          Menu", WBLACK);
 
   Color col = colNonSelectionnee;
-  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
 
   flotte.initSelection();
 
@@ -643,14 +639,14 @@ void Menu::themes()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  // Window aide(12, 30, 2 + xm, 11 + ym);
+  // Window aide(12, 30, 2 + -50, 11 + -16);
   // // aide.setBordureDroite();
 
   Color col[6] = {plateau.getCouleurFenetre(), colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
@@ -660,7 +656,7 @@ void Menu::themes()
 
   int selection = 1;
 
-  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
 
   while ((c = getch()) != 'q')
   {
@@ -727,7 +723,7 @@ void Menu::preset(int s)
 
   int c;
 
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -736,19 +732,19 @@ void Menu::preset(int s)
 
   plateau.print(47, 22, "Valider", colSelectionnee);
 
-  Window aide(5, 24, xm + 50 - 12, ym + 25);
+  Window aide(5, 24, -50 + 50 - 12, -16 + 25);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->       Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE         Valider", WBLACK);
   aide.print(1, 4, "q                 Menu", WBLACK);
 
-  Window info(6, 30, xm + 50 - 15, ym + 3);
+  Window info(6, 30, -50 + 50 - 15, -16 + 3);
   info.setBordureDroite();
 
   int selection = s;
 
   changePreset(selection);
-  Flotte flotte(50 - getDimFlotte('w') + xm, 14 + ym, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 14 + -16, 0);
 
   info.print(15 - (infoFlotte(s).length()) / 2, 1, infoFlotte(s));
   info.print(15 - (infoFlotteD(s).length()) / 2, 2, infoFlotteD(s));
@@ -791,7 +787,7 @@ void Menu::checkTailleEcran()
 {
   if (COLS < 5 * getWidthGrille() || LINES < 2.5 * getHeightGrille())
   {
-    Window erreur(5, 100, xm, ym, '+');
+    Window erreur(5, 100, -50, -16, '+');
     erreur.print(0, 0, erreurTailleFenetre2());
     cin.ignore(1);
     assert(COLS > 5 * getWidthGrille() && LINES > 2.5 * getHeightGrille());
@@ -803,13 +799,13 @@ void Menu::optionsJeu()
 
   int c;
   nbjoueurshumain = 0;
-  Window plateau(33, 100, xm, ym, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
-  Window aide(6, 40, xm + 30, 26 + ym, ' ');
+  Window aide(6, 40, -50 + 30, 26 + -16, ' ');
   aide.setBordureDroite();
 
   Color col[10] = {
@@ -831,14 +827,14 @@ void Menu::optionsJeu()
   string difficulte[3] = {"Facile", "Normal", "Difficile"};
   int selection = 2;
 
-  Flotte flotte(50 - getDimFlotte('w') + xm, 4 + ym, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
   aideOptionsJeu(aide, selection);
 
   while ((c = getch()) != 'q')
   {
 
     plateau.print(70, 12, choix[0] + myitoa(vitesse), col[0]);
-    plateau.print(41, 12, choix[1] + difficulte[this->difficulte], col[1]);
+    plateau.print(41, 12, choix[1] + difficulte[this->difficulte-1], col[1]);
     plateau.print(23, 12, choix[2] + " (" + myitoa(nbjoueurshumain) + ")", col[2]);
     plateau.print(9, 12, "IA (" + myitoa(nbjoueurs - nbjoueurshumain) + ")", colNonSelectionnee);
     plateau.print(48, 24, choix[9], col[9]);
@@ -913,13 +909,13 @@ void Menu::optionsJeu()
 
         break;
       case 1:
-        if (this->difficulte < 2)
+        if (this->difficulte < 3)
         {
           this->difficulte++;
         }
         else
         {
-          this->difficulte = 0;
+          this->difficulte = 1;
         }
         plateau.print(41, 12, "                      ", WBLACK);
 
@@ -956,7 +952,7 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
   }
   string chaine;
 
-  move(ym + y + 1, xm + x + 1);
+  move(-16 + y + 1, -50 + x + 1);
 
   do
   {

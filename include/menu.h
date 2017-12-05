@@ -20,12 +20,13 @@ class Menu
     void menuNavire();
     void themes();
     void optionsJeu();
-    void erreurEcran();
     void selectJoueurs(Window plateau);
 
     void aideMenu();
     void preset(int s);
+    // Vérifie si la taille de l'écran est assez grande pour lancer le jeu.
     void checkTailleEcran();
+    // Active et place le curseur à la position séléctionnée de la fenêtre. Renvoie un string.
     std::string saisie(int x, int y, int longueur, Window &p);
     Menu();
     ~Menu();
@@ -36,12 +37,18 @@ class Menu
     int nbjoueurs = 0;
     int nbjoueurshumain = 0;
     int vitesse = 6;
-    int difficulte = 1;
+   // Gère le niveau de difficulté, entre 1 et 3. Moyen par défaut.
+    int difficulte = 2;
+
+
+    // Options du thème
     Color colSelectionnee;
     Color colNonSelectionnee;
     Color colBordureMenu;
     bool bordureMenuDroite = false;
     char carBordureMenu = ' ';
+
+
 
     std::string theme;
 };

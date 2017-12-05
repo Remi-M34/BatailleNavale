@@ -18,10 +18,8 @@ public:
   Window fenetre;
 
   int places = 0;
-  //constructeur :
-  Flotte(int sx, int sy, int delai);
 
-  //destructeur
+  Flotte(int sx, int sy, int delai);
   ~Flotte();
 
   void initDim();
@@ -33,12 +31,16 @@ public:
   void supprimerduport(int n);
 
   //Lecture
+  // Les dimensions du navire. Sont échangées à chaque rotation.
   int getHeightnavire(int n);
   int getWidthnavire(int n);
+  // Dimensions originales du navire.
   int getHeightnavireOriginale(int n);
   int getWidthnavireOriginale(int n);
+  // Renvoie le premier navire se situant au port.
   int getPremierNavire();
   int getDernierNavire();
+  // Renvoie un navire aléatoire du port
   int getRandomNavire();
   int **dimensionsOriginales(int n);
 
@@ -58,7 +60,9 @@ public:
   void initSelection();
   //Choisir si le navire n est au port. Le port est ensuite actualisé.
   void estAuPort(int n, bool x);
+  // Renvoie vrai si le port est vide
   bool portVide();
+  // Sélectionne le navire
   void selectionne(int n, bool x);
 
   // Selectionne et dé-selectionne chacun des deux navires.

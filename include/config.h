@@ -20,7 +20,7 @@ int ***listedesnavires();
 void modifierNavires(int n, int width, int height, int** navire);
 void ecrireNavire(int n);
 
-// Lis une ligne et renvoie la couleur
+// Cherche une couleur dans une chaine de caractère string et la renvoie en tant que Color
 Color convertColor(std::string ligne);
 
 void changeTheme(std::string th);
@@ -29,6 +29,8 @@ void changePreset(int n);
 void editWidthGrille(int w);
 void editHeightGrille(int h);
 std::string to_string(int i);
+
+void erreurEcran(int w, int h);
 
 //BUG --- Ne pas utiliser
 int **dimN();

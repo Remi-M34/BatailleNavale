@@ -598,3 +598,37 @@ std::string to_string(int x)
     delete[] buf;
     return str;
 }
+
+
+
+
+void erreurEcran(int w, int h)
+{
+  halfdelay(1);
+    
+  Window erreur(LINES, COLS, 0-COLS/2, 0-LINES/2, ' ');
+  while (COLS < w || LINES < h)
+  {
+    erreur.print(0, 1, erreurTailleFenetre());
+    usleep(3000000);
+
+
+      }
+
+  Window m(LINES, COLS, 0-25, 0, ' ');
+
+  erase();
+  int ch;
+  while ((ch = getch()) != '\n')
+  {
+
+    // cin.ignore(99999,'\n');
+    m.print(1, 1, "Taille OK! Appuyez sur ENTREE pour démarrer le jeu.");
+    // usleep(50000);
+  }
+  erase();
+
+    stopProgramX();
+
+  startProgramX();
+}

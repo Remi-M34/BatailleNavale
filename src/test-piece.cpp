@@ -13,36 +13,32 @@ void myprogram()
 
   refresh();
 
-
   int ch;
   int const h = 10;
   int const w = 20;
 
-noecho();
-Jeu Jeu(6,1,2,6);
+  noecho();
+  Jeu Jeu(6, 1, 2, 6);
 
-
-
-Jeu.start();
-
+  Jeu.start();
 
   while (1)
   {
-refresh();
+    refresh();
   }
 }
 
-
 int main()
 {
-    startProgramX();
-if (COLS < 140 || LINES < 40)
-{
-  Window erreur(10,COLS,1,1);
-  erreur.print(0,1,erreurTailleFenetre());
-cin.ignore(1);
-assert(COLS > 140 && LINES > 40);
-}
+  startProgramX();
+  if (COLS < 140 || LINES < 40)
+  {
+    erreurEcran(140,40);
+  }
+
+
+
+
   Menu menu;
 
   menu.mainMenu(1);
@@ -52,3 +48,4 @@ assert(COLS > 140 && LINES > 40);
 
   return 0;
 }
+

@@ -29,10 +29,14 @@ void startProgramX() {
   cbreak();              // pass key presses to program, but not signals
   noecho();              // don't echo key presses to screen
   keypad(stdscr, TRUE);  // allow arrow keys
+    mousemask(ALL_MOUSE_EVENTS, NULL); /* Report all mouse events */
+
   timeout(0);            // no blocking on getch()
   curs_set(0);           // set the cursor to invisible
+  
   init_colors();
 }
+
 
 void stopProgramX() {
   refresh();
@@ -50,12 +54,12 @@ void Window::update() const{
 
 
 Window::Window(int h,int w, int x, int y, char c)
-  : height(h), width(w), startx(x), starty(y), bord(c)
+  : height(h), width(w), startx(x+COLS/2), starty(y+LINES/2), bord(c)
 {
   colorwin=WBLACK;
   colorframe=WBLACK;
-  frame=newwin(h+2,w+2,y,x);
-  win=subwin(frame,h,w,y+1,x+1);
+  frame=newwin(h+2,w+2,starty,startx);
+  win=subwin(frame,h,w,starty+1,startx+1);
   wbkgd(frame,COLOR_PAIR(colorwin));
   wbkgd(win,COLOR_PAIR(colorframe));
   wborder(frame, c,c,c,c,c,c,c,c);

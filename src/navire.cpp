@@ -2,8 +2,8 @@
 
 using namespace std;
 
-#define xm (COLS-100)/2
-#define ym (LINES-33)/2
+// #define xm (COLS-100)/2
+// #define ym (LINES-33)/2
 
 
 
@@ -124,7 +124,7 @@ int** repositionnementVertical(int** navire)
 
 void nouveauNavire(int n)
 {
-  Window creation(5, 10, 45+xm, 13+ym,' ');
+  Window creation(5, 10, 0, 0,' ');
   creation.setCouleurBordure(BCYAN);
   int c;
   int k = 0;

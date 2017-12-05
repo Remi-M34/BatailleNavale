@@ -8,21 +8,19 @@ using namespace std;
 #define HF getDimFlotte('h')
 
 Jeu::Jeu(int nbjoueurs, int humains, int diff, int v) : nbjoueurs(nbjoueurs),
-                                                 humains(humains),
-                                                 score(20, 18, getScoreStartX(nbjoueurs), LINES / 2 - (H + HF) / 1.9),
-                                                 plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
-                                                 aide(7, 2 * W + 4, getScoreStartX(nbjoueurs) + 22, getAideStartY(nbjoueurs)),
-                                                 difficulte(diff),
-                                                 vitesse(v)
+                                                        humains(humains),
+                                                        score(20, 18, getScoreStartX(nbjoueurs), -(H + HF) / 1.9),
+                                                        plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
+                                                        aide(7, 2 * W + 4, getScoreStartX(nbjoueurs) + 22, getAideStartY(nbjoueurs)),
+                                                        difficulte(diff),
+                                                        vitesse(v)
 
 {
-
-    vitesse = 3;
     // plateau.setCouleurBordure(BCYAN);
     initCouleurs();
     srand((int)time(0));
 
-    initDim2(nbjoueurs);
+    initDim(nbjoueurs);
     curs_set(0);
 }
 
@@ -53,7 +51,7 @@ void Jeu::initCouleurs()
             break;
         case 20:
             colBordureGrilles = convertColor(ligne);
-                        colBordurePlateau = convertColor(ligne);
+            colBordurePlateau = convertColor(ligne);
             break;
         case 21:
             plateau.setCarBordure(ligne[0]);
@@ -111,9 +109,10 @@ void Jeu::start()
 
     selectionCible(joueur);
     // cibleSelectionnee = joueur;
-
+    int ch;
     while (1)
     {
+        // checkSpeed(ch,aide,vitesse);
 
         switch (attaque())
         {
@@ -165,11 +164,11 @@ void Jeu::start()
     // }
 }
 
-void Jeu::initDim2(int nbjoueurs)
+void Jeu::initDim(int nbjoueurs)
 {
 
-    int xm = COLS / 2;
-    int ym = LINES / 2;
+    // int 0 = COLS / 2;
+    // int 0 = LINES / 2;
 
     int sx, sxf;
     if (W < WF)
@@ -187,39 +186,39 @@ void Jeu::initDim2(int nbjoueurs)
     {
     case 2:
     {
-        Joueur[0] = new Grille(xm - 2 - sx - 2 * W, ym - (H + HF) / 2, xm - 2 - sxf - 2 * WF, 4 + H + ym - (H + HF) / 2, vitesse, difficulte, aide, estIA());
-        Joueur[1] = new Grille(xm + 2 + sx, ym - (H + HF) / 2, xm + 2 + sxf, 4 + H + ym - (H + HF) / 2, vitesse, difficulte, aide, estIA());
+        Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 - (H + HF) / 2, 0 - 2 - sxf - 2 * WF, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA());
+        Joueur[1] = new Grille(0 + 2 + sx, 0 - (H + HF) / 2, 0 + 2 + sxf, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA());
         break;
     }
     case 3 ... 4:
     {
-        Joueur[0] = new Grille(xm - 2 - sx - 2 * W, ym + 1, xm - 2 - sxf - 2 * WF, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
-        Joueur[1] = new Grille(xm + 2 + sx, ym + 1, xm + 2 + sxf, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
+        Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 + 1, 0 - 2 - sxf - 2 * WF, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA());
+        Joueur[1] = new Grille(0 + 2 + sx, 0 + 1, 0 + 2 + sxf, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA());
 
         switch (nbjoueurs)
         {
         case 3:
-            Joueur[2] = new Grille(xm - 2 - sx - 2 * W, ym - H - 2, xm - 2 - sxf - 2 * WF, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
+            Joueur[2] = new Grille(0 - 2 - sx - 2 * W, 0 - H - 2, 0 - 2 - sxf - 2 * WF, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA());
             break;
         case 4:
-            Joueur[2] = new Grille(xm - 2 - sx - 2 * W, ym - H - 2, xm - 2 - sxf - 2 * WF, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
-            Joueur[3] = new Grille(xm + 2 + sx, ym - H - 2, xm + 2 + sxf, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
+            Joueur[2] = new Grille(0 - 2 - sx - 2 * W, 0 - H - 2, 0 - 2 - sxf - 2 * WF, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA());
+            Joueur[3] = new Grille(0 + 2 + sx, 0 - H - 2, 0 + 2 + sxf, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA());
             break;
         }
         break;
     }
     case 5 ... 6:
     {
-        Joueur[0] = new Grille(xm - 2 - sx - 2 * W - 12, ym + 1, xm - 2 - sxf - 2 * WF - 12, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
-        Joueur[1] = new Grille(xm + 2 + sx - 12, ym + 1, xm + 2 + sxf - 12, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
-        Joueur[2] = new Grille(xm + 6 + sx + 2 * max(W, WF) - 12, ym + 1, xm + 6 + sxf + 2 * max(W, WF) - 12, 4 + H + ym + 1, vitesse, difficulte, aide, estIA());
+        Joueur[0] = new Grille(0 - 2 - sx - 2 * W - 12, 0 + 1, 0 - 2 - sxf - 2 * WF - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA());
+        Joueur[1] = new Grille(0 + 2 + sx - 12, 0 + 1, 0 + 2 + sxf - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA());
+        Joueur[2] = new Grille(0 + 6 + sx + 2 * max(W, WF) - 12, 0 + 1, 0 + 6 + sxf + 2 * max(W, WF) - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA());
 
-        Joueur[3] = new Grille(xm - 2 - sx - 2 * W - 12, ym - H - 2, xm - 2 - sxf - 2 * WF - 12, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
-        Joueur[4] = new Grille(xm + 2 + sx - 12, ym - H - 2, xm + 2 + sxf - 12, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
+        Joueur[3] = new Grille(0 - 2 - sx - 2 * W - 12, 0 - H - 2, 0 - 2 - sxf - 2 * WF - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA());
+        Joueur[4] = new Grille(0 + 2 + sx - 12, 0 - H - 2, 0 + 2 + sxf - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA());
 
         if (nbjoueurs == 6)
         {
-            Joueur[5] = new Grille(xm + 6 + sx + 2 * max(W, WF) - 12, ym - H - 2, xm + 6 + sxf + 2 * max(W, WF) - 12, ym - 6 - H - HF, vitesse, difficulte, aide, estIA());
+            Joueur[5] = new Grille(0 + 6 + sx + 2 * max(W, WF) - 12, 0 - H - 2, 0 + 6 + sxf + 2 * max(W, WF) - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA());
         }
         break;
     }
@@ -235,11 +234,10 @@ void Jeu::initDim2(int nbjoueurs)
     for (int i = 0; i < nbjoueurs; i++)
     {
         payback[i] = rand() % nbjoueurs;
-                estVulnerable[i] = 0;
+        estVulnerable[i] = 0;
 
         // estVulnerable[i] = 0;
     }
-
 }
 
 bool Jeu::estIA()
@@ -321,14 +319,14 @@ void Jeu::selectionCible(int j)
         }
         case '\n':
             if (joueur != cibleSelectionnee)
-{
+            {
                 (*Joueur[cibleSelectionnee]).setCiblageValide(true);
                 return;
-}
-else
-{
-(*Joueur[joueur]).mauvaiseSelection();    
-}
+            }
+            else
+            {
+                (*Joueur[joueur]).mauvaiseSelection();
+            }
 
             break;
         }
@@ -410,13 +408,13 @@ void Jeu::selectionCibleAleatoire()
     (*Joueur[0]).test("est la cible. Depuis le joueur ");
     (*Joueur[0]).test(myitoa(joueur));
     // (*Joueur[cibleSelectionnee]).setEstCible();
-{    deplacementIA();
-}
+    {
+        deplacementIA();
+    }
 }
 
 void Jeu::deplacementIA()
 {
-
 
     switch (cibleSelectionnee)
     {
@@ -463,7 +461,7 @@ void Jeu::deplacementIA()
         }
         break;
     }
-    usleep(333333);
+    usleep(min((9-vitesse)*100000,400000));
     if (cible != cibleSelectionnee)
     {
         deplacementIA();
@@ -615,9 +613,9 @@ void Jeu::placementDesNavires()
 
 void Jeu::joueurSuivant()
 {
-             (*Joueur[cibleSelectionnee]).setEstCible(false);
+    (*Joueur[cibleSelectionnee]).setEstCible(false);
 
-         (*Joueur[joueur]).setJoue(false);
+    (*Joueur[joueur]).setJoue(false);
 
     if (joueur < nbjoueurs - 1)
     {
@@ -627,10 +625,9 @@ void Jeu::joueurSuivant()
     {
         joueur = 0;
     }
-     (*Joueur[joueur]).setJoue(true);
-     cibleSelectionnee = joueur;
-
-
+    (*Joueur[joueur]).setJoue(true);
+    cibleSelectionnee = joueur;
+    usleep(min((9-vitesse)*20000,50000));
 }
 
 int Jeu::attaque()
@@ -651,11 +648,11 @@ int getScoreStartX(int nbjoueurs)
 
     if (nbjoueurs < 5)
     {
-        return (COLS / 2 - 2 * max(W, WF) - 26 + max(0, WF - W));
+        return (-2 * max(W, WF) - 26 + max(0, WF - W));
     }
     else
     {
-        return (COLS / 2 - 2 * max(W, WF) - 38 + max(0, WF - W));
+        return (-2 * max(W, WF) - 38 + max(0, WF - W));
     }
 }
 
@@ -690,30 +687,48 @@ int getBordureStartY(int nbjoueurs)
 {
     if (nbjoueurs > 2)
     {
-        return LINES / 2 - 9 - H - HF;
+        return -9 - H - HF;
     }
     else
     {
-        return LINES / 2 - 6 - (H) / 2;
+        return -6 - (H) / 2;
     }
 }
 
 int getAideStartY(int nbjoueurs)
 {
     if (nbjoueurs == 2)
-        return (LINES / 2 - (H + HF) / 1.9) + 3 + H + HF / 2 + max(0, 3 - HF);
+        return (-(H + HF) / 1.9) + 3 + H + HF / 2 + max(0, 3 - HF);
     else
-        return 4 + H + LINES / 2;
+        return 4 + H;
 }
 
 void Jeu::navires()
 {
     for (int i = 0; i < nbjoueurs; i++)
     {
+
         (*Joueur[i]).cacherCases();
     }
     Flotte nav(COLS / 2, LINES / 2, 0);
     cin.ignore(1);
     nav.fenetre.setBordureDroite();
     nav.fenetre.setCarBordure(' ');
+}
+
+void checkSpeed(int ch, Window &aide, int &vitesse)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        switch (ch)
+        {
+        case '+':
+            vitesse++;
+            break;
+        case '-':
+            vitesse--;
+            break;
+        }
+    }
+    aide.print(aide.getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
 }

@@ -1,13 +1,13 @@
 #ifndef __JEU_H
 #define __JEU_H
 
-#include "window.h"
-#include "config.h"
-#include "grille.h"
-extern "C" {
-#include <curses.h>
-}
-#include <string>
+// #include "window.h"
+// #include "config.h"
+// #include "grille.h"
+// extern "C" {
+// #include <curses.h>
+// }
+// #include <string>
 
 
 
@@ -19,25 +19,31 @@ public:
 
   //destructeur
   ~Jeu();
-
+// Démarre le jeu
 void  start();
+// Phase où chacun des joueurs placent leur navires.
 void  placementDesNavires();
 
 void initCouleurs();
-
-void initDim2(int j);
+// Initialise toutes les grilles dont les positions dépendent du nombre de joueurs (afin de toujours centrer le jeu)
+void initDim(int j);
 bool estIA();
+// Fonctions permettant la sélection de cible
 void selectionCible(int c);
 void selectUp();
 void selectDown();
 void selectRight();
 void selectLeft();
+// Détermine à qui le tour
 void joueurSuivant();
 int attaque();
 void selectionCibleAleatoire();
 void deplacementIA();
 void navires();
+// Renvoie un joueur "vulnérable" cad ayant au moins un navire touché (mais non coulé).
+// Est plus ou moins pris en compte par l'IA selon le mode de difficulté choisie
 int joueurVulnerable();
+// Renvoie aléatoirement un joueur qui sera la cible du joueur en train de jouer (sauf lui-même)
 void cibleAleatoire();
 
 private:
@@ -50,6 +56,8 @@ private:
       int joueur = 0;
       int cible;
       int cibleSelectionnee = 0;
+      // Gère les affinités, utilisé par l'IA.
+      // Selon le mode de difficulté, renvoie et cible le dernier joueur ayant attaqué avec succès le joueur en train de jouer.
       int *payback;
       int *estVulnerable;
        int const difficulte;
@@ -65,7 +73,7 @@ private:
       int scoreJoueur1 = 0;
       int scoreJoueur2 = 0;
 
-
+  // Options du thème
       Color colScore;
       Color colAide;
       Color colBordureGrilles;
@@ -83,5 +91,7 @@ int getBordureStartY(int nbjoueurs);
 int getAideStartY(int nbjoueurs);
 
 
+void checkSpeed(int ch, Window &aide, int &vitesse);
 
 #endif
+
