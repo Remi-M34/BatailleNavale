@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "message.h"
 #include "window.h"
+#include "scores.h"
 
 #include <unistd.h>
 #include <algorithm>

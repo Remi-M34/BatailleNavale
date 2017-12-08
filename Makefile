@@ -1,7 +1,7 @@
 
 all: prog
 
-prog: obj/window.o obj/test-piece.o obj/grille.o obj/flotte.o obj/config.o obj/message.o obj/navire.o obj/menu.o obj/jeu.o
+prog: obj/window.o obj/test-piece.o obj/grille.o obj/flotte.o obj/config.o obj/message.o obj/navire.o obj/menu.o obj/jeu.o obj/scores.o
 	g++ -g $^ -o $@ -lncurses -W -Wall -ansi -pedantic
 
 

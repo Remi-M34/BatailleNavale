@@ -99,7 +99,6 @@ void Grille::selectionNavire()
       }
 }
 
-
 void Grille::init()
 {
       int const h = H;
@@ -302,15 +301,15 @@ void Grille::placementNavire(int n)
                   moveNavire(n, x, y);
                   break;
 
-case 'w':
-                        {
-                              refreshNavireGrille(n, x, y);
-                              pivoteDroite(n, x, y);
-                              pivoteDroite(n, x, y);
-                              pivoteDroite(n, x, y);
-                              moveNavire(n, x, y);
-                              break;
-                        }
+            case 'w':
+            {
+                  refreshNavireGrille(n, x, y);
+                  pivoteDroite(n, x, y);
+                  pivoteDroite(n, x, y);
+                  pivoteDroite(n, x, y);
+                  moveNavire(n, x, y);
+                  break;
+            }
 
             case '\n':
 
@@ -650,6 +649,7 @@ int Grille::destinationMissile()
 
 void Grille::caseSuivante(int &x, int &y)
 {
+      checkSpeedG();
 
       refreshGrille(x, y, x + 1, y + 1);
 
@@ -680,6 +680,8 @@ void Grille::caseSuivante(int &x, int &y)
 
 void Grille::casePrecedente(int &x, int &y)
 {
+
+      checkSpeedG();
       refreshGrille(x, y, x + 1, y + 1);
 
       do
@@ -710,6 +712,8 @@ void Grille::casePrecedente(int &x, int &y)
 void Grille::moveRight(int &x, int &y)
 {
 
+      checkSpeedG();
+
       for (int i = x + 1; i < W; i++)
       {
             if (Case[i][y] == VIDE || Case[i][y] == NAVIRE)
@@ -725,6 +729,8 @@ void Grille::moveRight(int &x, int &y)
 
 void Grille::moveLeft(int &x, int &y)
 {
+
+      checkSpeedG();
 
       for (int i = x - 1; i >= 0; i--)
       {
@@ -742,6 +748,8 @@ void Grille::moveLeft(int &x, int &y)
 void Grille::moveUp(int &x, int &y)
 {
 
+      checkSpeedG();
+
       for (int i = y - 1; i >= 0; i--)
       {
             if (Case[x][i] == VIDE || Case[x][i] == NAVIRE)
@@ -757,6 +765,8 @@ void Grille::moveUp(int &x, int &y)
 
 void Grille::moveDown(int &x, int &y)
 {
+
+      checkSpeedG();
 
       for (int i = y + 1; i < H; i++)
       {
@@ -1060,8 +1070,8 @@ void Grille::zoneFocus(int &x, int &y)
                   switch (difficulte)
                   {
                   case 2 ... 3:
-                        x = rand() % min(3, max(W - focusx + 1,focusx+1)) + (max(focusx - 1, 0));
-                        y = rand() % min(3, max(H - focusy + 1,focusy+1)) + (max(focusy - 1, 0));
+                        x = rand() % min(3, max(W - focusx + 1, focusx + 1)) + (max(focusx - 1, 0));
+                        y = rand() % min(3, max(H - focusy + 1, focusy + 1)) + (max(focusy - 1, 0));
                         break;
                   case 1:
                         x = rand() % min(5, W - focusx + 2) + (max(focusx - 2, 0));
@@ -1282,23 +1292,22 @@ void Grille::setCiblageValide(bool c)
       }
 }
 
-void Grille::checkSpeedG(int ch)
+void Grille::checkSpeedG()
 {
+      int ch = getch();
 
-        switch (ch)
-        {
-        case '+':
-            vitesse = min(vitesse+1,9);
+      switch (ch)
+      {
+      case '+':
+            vitesse = min(vitesse + 1, 9);
             break;
-        case '-':
-            vitesse = max(vitesse-1,0);
+      case '-':
+            vitesse = max(vitesse - 1, 0);
             break;
-        }
-    
-    (*aide).print((*aide).getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
+      }
+
+      (*aide).print((*aide).getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
 }
-
-
 
 void Grille::deplacementIA(int dx, int dy, int x, int y)
 {
@@ -1314,13 +1323,12 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
       double distance2;
       while ((distance = (double)sqrt(pow(x - dx, 2)) + pow(y - dy, 2)) > 0)
       {
-                  int ch = getch();
 
-            checkSpeedG(ch);
             if (checkCheminHorizontal(dx, dy, x))
             {
                   do
                   {
+
                         if (dx < x)
                         {
                               caseSuivante(dx, dy);
@@ -1338,6 +1346,7 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
             {
                   do
                   {
+
                         if (dy > y)
                         {
                               moveUp(dx, dy);
@@ -1459,7 +1468,12 @@ bool Grille::checkCheminHorizontal(int dx, int dy, int x)
 
 void Grille::wait()
 {
-      usleep((9-vitesse) * (9-vitesse) * 10000);
+
+      for (int i = 1; i <= 5; i++)
+      {
+            checkSpeedG();
+            usleep((9 - vitesse) * (9 - vitesse) * 2000);
+      }
 }
 
 void Grille::cacherCases()

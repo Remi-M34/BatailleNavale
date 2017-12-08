@@ -49,7 +49,7 @@ public:
   void changerEtat(int x, int y, etat e);
 
   // Modifie la vitesse de l'IA pendant qu'elle joue
-  void checkSpeedG(int ch);
+  void checkSpeedG();
 
   //Selectionne le navire depuis le port
   void selectionNavire();

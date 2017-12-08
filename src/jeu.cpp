@@ -134,7 +134,7 @@ void Jeu::start()
             (payback[cibleSelectionnee]) = joueur;
 
             joueurSuivant();
-            usleep(125000);
+            usleep(max((9-vitesse)*27000,40000));
             selectionCible(joueur);
 
             break;
@@ -461,7 +461,7 @@ void Jeu::deplacementIA()
         }
         break;
     }
-    usleep(min((9-vitesse)*100000,400000));
+    usleep(min((9-vitesse)*30000,333333));
     if (cible != cibleSelectionnee)
     {
         deplacementIA();
