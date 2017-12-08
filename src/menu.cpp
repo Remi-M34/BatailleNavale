@@ -429,7 +429,7 @@ void Menu::changerDim()
           dim.print(5 + i, 1, ' ', WBLACK);
         }
 
-        move(15 + -16, 47 + -50);
+        move(15 + LINES/2 -16, 47 +COLS/2 -50);
 
         do
         {
@@ -458,7 +458,7 @@ void Menu::changerDim()
           }
           else if (ch == '\n' && num == 0)
           {
-            move(15 + -16, 47 + -50);
+            move(15 + LINES/2 -16, 47 +COLS/2 -50);
           }
           else if (ch == 'q')
           {
@@ -486,7 +486,7 @@ void Menu::changerDim()
           dim.print(10 + i + width.length(), 1, ' ', WBLACK);
         }
 
-        move(15 + -16, -50 + 52 + width.length());
+        move(15 +LINES/2 -16, COLS/2-50 + 52 + width.length());
 
         do
         {
@@ -525,7 +525,7 @@ void Menu::changerDim()
           }
           else if (ch == '\n' && num == 0)
           {
-            move(15 + -16, -50 + 52 + width.length());
+            move(15 + LINES/2 -16, COLS/2-50 + 52 + width.length());
           }
         } while (1);
       }
@@ -952,7 +952,7 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
   }
   string chaine;
 
-  move(-16 + y + 1, -50 + x + 1);
+  move(LINES/2-16 + y + 1, COLS/2-50 + x + 1);
 
   do
   {

@@ -31,6 +31,7 @@ void startProgramX() {
   keypad(stdscr, TRUE);  // allow arrow keys
     mousemask(ALL_MOUSE_EVENTS, NULL); /* Report all mouse events */
 
+
   timeout(0);            // no blocking on getch()
   curs_set(0);           // set the cursor to invisible
   
