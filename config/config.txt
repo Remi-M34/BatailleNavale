@@ -1,20 +1,18 @@
-20x20
-  x
- x x
-x   x
-
-x x
- x
- x
-x x
-
-  x
-xxxx
-  x
+12x12
+x
+x
+x
+x
 
 x
+xxx
+
+xx
 xx
 
 x
-xx
  x
+  x
+
+x
+x

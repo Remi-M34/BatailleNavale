@@ -15,8 +15,6 @@
 
 using namespace std;
 
-
-
 Menu::Menu()
 {
   initCouleurs();
@@ -70,8 +68,6 @@ void Menu::initCouleurs()
 
 void Menu::mainMenu(int d)
 {
-
-
 
   // startProgramX();
 
@@ -345,8 +341,6 @@ void Menu::aideMenu()
   }
 }
 
-
-
 void Menu::changerDim()
 {
   int ch;
@@ -442,7 +436,7 @@ void Menu::changerDim()
           dim.print(5 + i, 1, ' ', WBLACK);
         }
 
-        move(15 + LINES/2 -16, 47 +COLS/2 -50);
+        move(15 + LINES / 2 - 16, 47 + COLS / 2 - 50);
 
         do
         {
@@ -471,7 +465,7 @@ void Menu::changerDim()
           }
           else if (ch == '\n' && num == 0)
           {
-            move(15 + LINES/2 -16, 47 +COLS/2 -50);
+            move(15 + LINES / 2 - 16, 47 + COLS / 2 - 50);
           }
           else if (ch == 'q')
           {
@@ -499,7 +493,7 @@ void Menu::changerDim()
           dim.print(10 + i + width.length(), 1, ' ', WBLACK);
         }
 
-        move(15 +LINES/2 -16, COLS/2-50 + 52 + width.length());
+        move(15 + LINES / 2 - 16, COLS / 2 - 50 + 52 + width.length());
 
         do
         {
@@ -538,7 +532,7 @@ void Menu::changerDim()
           }
           else if (ch == '\n' && num == 0)
           {
-            move(15 + LINES/2 -16, COLS/2-50 + 52 + width.length());
+            move(15 + LINES / 2 - 16, COLS / 2 - 50 + 52 + width.length());
           }
         } while (1);
       }
@@ -847,7 +841,7 @@ void Menu::optionsJeu()
   {
 
     plateau.print(70, 12, choix[0] + myitoa(vitesse), col[0]);
-    plateau.print(41, 12, choix[1] + difficulte[this->difficulte-1], col[1]);
+    plateau.print(41, 12, choix[1] + difficulte[this->difficulte - 1], col[1]);
     plateau.print(23, 12, choix[2] + " (" + myitoa(nbjoueurshumain) + ")", col[2]);
     plateau.print(9, 12, "IA (" + myitoa(nbjoueurs - nbjoueurshumain) + ")", colNonSelectionnee);
     plateau.print(48, 24, choix[9], col[9]);
@@ -965,7 +959,7 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
   }
   string chaine;
 
-  move(LINES/2-16 + y + 1, COLS/2-50 + x + 1);
+  move(LINES / 2 - 16 + y + 1, COLS / 2 - 50 + x + 1);
 
   do
   {
@@ -974,7 +968,23 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
     {
       chaine += ch;
     }
-  } while (ch != '\n');
+    if (ch == KEY_BACKSPACE)
+    {
+      plateau.print(x, y, "                     ", WBLACK);
+      move(LINES / 2 - 16 + y + 1, COLS / 2 - 50 + x + 1);
+      chaine.clear();
+    }
+    if (ch == '\n' && chaine.length() == 0)
+    {
+      move(LINES / 2 - 16 + y + 1, COLS / 2 - 50 + x + 1);
+      plateau.print(x, y + 2, "Au moins 1 caractère!");
+    }
+    else if (ch == '\n')
+    {
+      plateau.print(x, y + 2, "                     ", WBLACK);
+      break;
+    }
+  } while (chaine.length() < 10);
 
   curs_set(0);
   noecho();

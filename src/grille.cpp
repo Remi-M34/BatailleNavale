@@ -1082,12 +1082,12 @@ void Grille::zoneFocus(int &x, int &y)
                   switch (difficulte)
                   {
                   case 2 ... 3:
-                        x = rand() % min(3, max(W - focusx + 1, focusx + 1)) + (max(focusx - 1, 0));
-                        y = rand() % min(3, max(H - focusy + 1, focusy + 1)) + (max(focusy - 1, 0));
+                        x = rand() % (toucheBord(focusx,W) ? 2 : 3) + (max(focusx - 1, 0));
+                        y = rand() % (toucheBord(focusy,H) ? 2 : 3) + (max(focusy - 1, 0));
                         break;
                   case 1:
-                        x = rand() % min(5, W - focusx + 2) + (max(focusx - 2, 0));
-                        y = rand() % min(5, H - focusy + 2) + (max(focusy - 2, 0));
+                        x = rand() % (toucheBord(focusx,W) ? 3 : toucheBord(focusx+1,W) ? 4 : 5) + (max(focusx - 2, 0));
+                        y = rand() % (toucheBord(focusy,H) ? 3 : toucheBord(focusy+1,H) ? 4 : 5) + (max(focusy - 2, 0));
                         break;
                   }
 
@@ -1158,6 +1158,14 @@ bool Grille::aDesVoisins(int x, int y)
 
 bool Grille::caseNonDecouverte(int x, int y)
 {
+                        test("\n casenon decouverte? avec x=");
+                        test(myitoa(x));
+                        test(" et y=");
+                        test(myitoa(y));
+                        test("\n tandis que focusx=");
+                        test(myitoa(focusx));
+                        test(" et focusy=");
+                        test(myitoa(focusy));
       return (Case[x][y] == VIDE || Case[x][y] == NAVIRE);
 }
 
@@ -1514,4 +1522,10 @@ void Grille::mauvaiseSelection()
 int Grille::getScore()
 {
       return Score.getScore();
+}
+
+
+bool Grille::toucheBord(int x, int d)
+{
+      return (d - x == 1 || x == 0);
 }

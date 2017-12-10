@@ -123,6 +123,7 @@ public:
   void setCiblageValide(bool c);
   // Le joueur a tenté de se cibler lui-même.
   void mauvaiseSelection();
+  bool toucheBord(int x, int d);
 
   int getScore();
 
