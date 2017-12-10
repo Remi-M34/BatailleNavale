@@ -38,6 +38,9 @@ public:
   int joueurVulnerable();
   // Renvoie aléatoirement un joueur qui sera la cible du joueur en train de jouer (sauf lui-même)
   void cibleAleatoire();
+  void refreshScores();
+  void classementDown();
+  void classementUp();
 
 private:
   Window info;
@@ -56,9 +59,13 @@ private:
   // Selon le mode de difficulté, renvoie et cible le dernier joueur ayant attaqué avec succès le joueur en train de jouer.
   int payback[6];
   int estVulnerable[6];
+    int positionDuJoueur[6];
+  int joueurEnPosition[6];
   
   int const difficulte;
   Grille *Joueur[];
+
+
 
   int scoreWidth;
   int syf2;

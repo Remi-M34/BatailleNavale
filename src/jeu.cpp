@@ -1,6 +1,6 @@
 #include "../include/jeu.h"
 #include "../include/window.h"
-
+#include "../include/grille.h"
 
 #include <iostream>
 #include <unistd.h>
@@ -118,18 +118,23 @@ void Jeu::start()
     int ch;
     while (1)
     {
+        refreshScores();
         // checkSpeed(ch,aide,vitesse);
 
         switch (attaque())
         {
         case 1:
             payback[cibleSelectionnee] = joueur;
+            (*Joueur[joueur]).Score.navireTouche();
+            classementUp();
 
             estVulnerable[cibleSelectionnee] = 1;
             continue;
 
         case 2:
             (payback[cibleSelectionnee]) = joueur;
+            (*Joueur[joueur]).Score.navireTouche();
+            classementUp();
             if ((*Joueur[cibleSelectionnee]).findFocus() == -1)
             {
                 estVulnerable[cibleSelectionnee] = 0;
@@ -138,9 +143,10 @@ void Jeu::start()
 
         case 0:
             (payback[cibleSelectionnee]) = joueur;
-
+            (*Joueur[joueur]).Score.missileEnvoye();
+            classementDown();
             joueurSuivant();
-            usleep(max((9-vitesse)*27000,40000));
+            usleep(max((9 - vitesse) * 27000, 40000));
             selectionCible(joueur);
 
             break;
@@ -241,10 +247,11 @@ void Jeu::initDim(int nbjoueurs)
     {
         payback[i] = rand() % nbjoueurs;
         estVulnerable[i] = 0;
+        positionDuJoueur[i] = i;
+        joueurEnPosition[i] = i;
 
         // estVulnerable[i] = 0;
     }
-
 }
 
 bool Jeu::estIA()
@@ -372,7 +379,7 @@ void Jeu::selectionCibleAleatoire()
 
     do
     {
-        (*Joueur[0]).test("rand...");
+    test("rand...");
 
         switch (difficulte)
         {
@@ -409,11 +416,11 @@ void Jeu::selectionCibleAleatoire()
 
         // cible = rand() % nbjoueurs;
     } while (cible == joueur);
-    (*Joueur[0]).test("\n");
+    test("\n");
 
-    (*Joueur[0]).test(myitoa(cible));
-    (*Joueur[0]).test("est la cible. Depuis le joueur ");
-    (*Joueur[0]).test(myitoa(joueur));
+    test(myitoa(cible));
+    test("est la cible. Depuis le joueur ");
+    test(myitoa(joueur));
     // (*Joueur[cibleSelectionnee]).setEstCible();
     {
         deplacementIA();
@@ -468,7 +475,7 @@ void Jeu::deplacementIA()
         }
         break;
     }
-    usleep(min((9-vitesse)*30000,333333));
+    usleep(min((9 - vitesse) * 30000, 333333));
     if (cible != cibleSelectionnee)
     {
         deplacementIA();
@@ -634,7 +641,7 @@ void Jeu::joueurSuivant()
     }
     (*Joueur[joueur]).setJoue(true);
     cibleSelectionnee = joueur;
-    usleep(min((9-vitesse)*20000,50000));
+    usleep(min((9 - vitesse) * 20000, 50000));
 }
 
 int Jeu::attaque()
@@ -738,4 +745,88 @@ void checkSpeed(int ch, Window &aide, int &vitesse)
         }
     }
     aide.print(aide.getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
+}
+
+void Jeu::refreshScores()
+{
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        string t = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore());
+        switch (t.length())
+        {
+            case 4:
+            t.insert(1," ");
+            break;
+                        case 5:
+            t.insert(2," ");
+            break;
+                        case 6:
+            t.insert(3," ");
+            break;
+        }
+
+        string str = "Joueur " + myitoa(joueurEnPosition[i]) + ":";
+        string str2 = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore()/1000)+" "+myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore()%1000);
+                info.print(0, 15 + i, "                    ");
+        info.print(0, 15 + i, str);
+        info.print(18-t.length(), 15 + i, t);
+        cout <<i << endl;
+        // info.print(1,13+i,myitoa(i));
+    }
+}
+
+void Jeu::classementDown()
+{
+
+        if (positionDuJoueur[joueur] < nbjoueurs-1 && (*Joueur[joueur]).getScore() < (*Joueur[joueurEnPosition[positionDuJoueur[joueur] + 1 ]]).getScore())
+        {
+                        int pos = joueurEnPosition[positionDuJoueur[joueur] + 1];
+
+            swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] + 1 ]);
+
+            swap(positionDuJoueur[joueur],positionDuJoueur[pos]);
+
+            // positionDuJoueur[joueur]++;
+            // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
+            test("\nLe joueur ");
+            test(myitoa(joueur));
+                        test("\n devient  ");
+            test(myitoa(positionDuJoueur[joueur]));
+            test("      et le joueur ");
+            test(myitoa(joueurEnPosition[positionDuJoueur[joueur]]));
+            test(" devient ");
+            test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
+            classementDown();
+
+        }
+
+    
+}
+
+
+void Jeu::classementUp()
+{
+
+        if (positionDuJoueur[joueur] > 0 && (*Joueur[joueur]).getScore() > (*Joueur[joueurEnPosition[positionDuJoueur[joueur] - 1 ]]).getScore())
+        {
+            int pos = joueurEnPosition[positionDuJoueur[joueur] - 1];
+            swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] - 1 ]);
+
+            swap(positionDuJoueur[joueur],positionDuJoueur[pos]);
+
+            // positionDuJoueur[joueur]++;
+            // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
+            test("\nLe joueur ");
+            test(myitoa(joueur));
+                        test("\n devient  ");
+            test(myitoa(positionDuJoueur[joueur]));
+            test("      et le joueur ");
+            test(myitoa(joueurEnPosition[positionDuJoueur[joueur]]));
+            test(" devient ");
+            test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
+            classementUp();
+
+        }
+
 }

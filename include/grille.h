@@ -110,7 +110,6 @@ public:
   void initCouleurs();
 
   // Ecrit un string dans le fichier test.txt. Sert au débuggage.
-  void test(std::string s);
 
   // Le joueur a qui appartient la grille devient la cible de l'attaquant. Modifie l'apparence de la bordure.
   void setEstCible(bool c);
@@ -124,6 +123,8 @@ public:
   void setCiblageValide(bool c);
   // Le joueur a tenté de se cibler lui-même.
   void mauvaiseSelection();
+
+  int getScore();
 
 private:
 // L'etat de chaque case.

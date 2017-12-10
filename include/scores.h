@@ -14,11 +14,15 @@ public:
 
 
   int getScore();
+  void missileEnvoye();
+  void navireTouche();
+  void augmenterTailleFlotte();
 
 private:
 
 int missilesTires = 0;
 int missilesGagnants = 0;
+int tailleFlotte = 0;
 
 int nbjoueurs;
 int height = getHeightGrille();

@@ -1,8 +1,6 @@
 #include "../include/grille.h"
 #include "../include/window.h"
 #include "../include/scores.h"
-#include "../include/scores.h"
-#include "../include/scores.h"
 
 
 #include <unistd.h>
@@ -524,6 +522,7 @@ void Grille::validerNavire(int n, int sx, int sy)
                         Case[sx + x][sy + y] = NAVIRE;
                         Case2[sx + x][sy + y] = n;
                         caseRestantes[n]++;
+                        Score.augmenterTailleFlotte();
                   }
             }
       }
@@ -634,7 +633,6 @@ int Grille::destinationMissile()
                   }
                   else if (Case[x][y] == NAVIRE)
                   {
-
                         Case[x][y] = TOUCHE;
                         caseRestantes[Case2[x][y]]--;
                         if (estCoule(Case2[x][y]) == true)
@@ -840,7 +838,7 @@ bool Grille::estCoule(int n)
       }
 }
 
-void Grille::test(string s)
+void test(string s)
 {
       fstream test("test.txt", ios::in | ios::out | ios::app);
 
@@ -1511,4 +1509,9 @@ void Grille::mauvaiseSelection()
       refreshGrille(0, H / 2 - 2, W, H / 2 + 1);
       fenetre.setCarBordure(carBordureGrille);
       fenetre.setCouleurBordure(BWHITE);
+}
+
+int Grille::getScore()
+{
+      return Score.getScore();
 }
