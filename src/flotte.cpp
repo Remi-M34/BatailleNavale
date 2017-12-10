@@ -1,4 +1,15 @@
-#include "../include/headers.h"
+#include "../include/flotte.h"
+#include "../include/window.h"
+
+
+
+#include <iostream>
+#include <cmath>
+#include <unistd.h>
+#include <fstream>
+#include <stdlib.h>
+
+
 using namespace std;
 
 Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)

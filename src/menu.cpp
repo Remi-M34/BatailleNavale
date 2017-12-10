@@ -1,4 +1,17 @@
-#include "../include/headers.h"
+#include "../include/menu.h"
+#include "../include/window.h"
+#include "../include/flotte.h"
+#include "../include/config.h"
+#include "../include/jeu.h"
+#include "../include/message.h"
+#include "../include/grille.h"
+#include "../include/navire.h"
+
+#include <fstream>
+#include <sstream>
+#include <unistd.h>
+#include <cassert>
+#include <iostream>
 
 using namespace std;
 

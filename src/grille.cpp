@@ -1,11 +1,25 @@
-#include "../include/headers.h"
+#include "../include/grille.h"
+#include "../include/window.h"
+#include "../include/scores.h"
+#include "../include/scores.h"
+#include "../include/scores.h"
+
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <cmath>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+
+
 
 using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
 Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf, 1),
-                                                                                                                 vitesse(vitesse), aide(&aide), difficulte(difficulte)
+                                                                                                                 vitesse(vitesse), aide(&aide), difficulte(difficulte), Score(difficulte)
 {
 
       //Initialise la grille et rend toutes les cases de la grille VIDE
@@ -15,7 +29,7 @@ Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int c
 
 Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf, 1), IA(estIA),
 
-                                                                                                                             vitesse(vitesse), aide(&aide), difficulte(difficulte)
+                                                                                                                             vitesse(vitesse), aide(&aide), difficulte(difficulte), Score(difficulte)
 
 {
 

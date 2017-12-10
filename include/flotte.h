@@ -1,15 +1,11 @@
 #ifndef __FLOTTE_H
 #define __FLOTTE_H
 
-#include "window.h"
-extern "C" {
-#include <curses.h>
-}
-#include <string>
-#include <iostream>
-#include "config.h"
+#include "../include/window.h"
+#include "../include/config.h"
 
-#include <cmath>
+#include <string>
+
 
 class Flotte
 {

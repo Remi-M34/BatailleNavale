@@ -1,4 +1,9 @@
-#include "../include/headers.h"
+#include "../include/message.h"
+#include "../include/window.h"
+#include "../include/config.h"
+#include "../include/grille.h"
+
+#include <fstream>
 
 using namespace std;
 

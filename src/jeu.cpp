@@ -1,4 +1,11 @@
-#include "../include/headers.h"
+#include "../include/jeu.h"
+#include "../include/window.h"
+
+
+#include <iostream>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fstream>
 
 using namespace std;
 
@@ -9,7 +16,7 @@ using namespace std;
 
 Jeu::Jeu(int nbjoueurs, int humains, int diff, int v) : nbjoueurs(nbjoueurs),
                                                         humains(humains),
-                                                        score(20, 18, getScoreStartX(nbjoueurs), -(H + HF) / 1.9),
+                                                        info(20, 18, getScoreStartX(nbjoueurs), -(H + HF) / 1.9),
                                                         plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
                                                         aide(7, 2 * W + 4, getScoreStartX(nbjoueurs) + 22, getAideStartY(nbjoueurs)),
                                                         difficulte(diff),
@@ -28,7 +35,6 @@ Jeu::~Jeu() {}
 
 void Jeu::initCouleurs()
 {
-
     ifstream couleurs("config/couleurs.txt", ios::in);
     int lignes = 1;
     string ligne;
@@ -43,11 +49,11 @@ void Jeu::initCouleurs()
             break;
         case 18:
             colScore = convertColor(ligne);
-            score.setCouleurBordure(colScore);
+            info.setCouleurBordure(colScore);
             break;
         case 19:
             colAide = convertColor(ligne);
-            score.setCouleurBordure(colAide);
+            info.setCouleurBordure(colAide);
             break;
         case 20:
             colBordureGrilles = convertColor(ligne);
@@ -57,7 +63,7 @@ void Jeu::initCouleurs()
             plateau.setCarBordure(ligne[0]);
             break;
         case 22:
-            score.setCarBordure(ligne[0]);
+            info.setCarBordure(ligne[0]);
             break;
         case 23:
             aide.setCarBordure(ligne[0]);
@@ -68,7 +74,7 @@ void Jeu::initCouleurs()
         case 25:
             if (ligne[0] == 'O' || ligne[0] == 'o')
             {
-                score.setBordureDroite();
+                info.setBordureDroite();
             }
             break;
         }
@@ -84,7 +90,7 @@ void Jeu::start()
     placementDesNavires();
     (*Joueur[0]).flotte.fenetre.setBordureDroite();
     (*Joueur[0]).flotte.fenetre.setCarBordure(' ');
-    score.setBordureDroite();
+    info.setBordureDroite();
     // aide.setBordureDroite();
     aide.setCouleurBordure(BGREEN);
     aide.setCarBordure(' ');
@@ -117,7 +123,7 @@ void Jeu::start()
         switch (attaque())
         {
         case 1:
-            (payback[cibleSelectionnee]) = joueur;
+            payback[cibleSelectionnee] = joueur;
 
             estVulnerable[cibleSelectionnee] = 1;
             continue;
@@ -152,13 +158,13 @@ void Jeu::start()
     //     int d = joueur2.destinationMissile();
     //     if (d == 1)
     //     {
-    //         score.print(2, 1, "Touché!");
-    //         score.print(2, 3, "joueur 1 rejoue");
+    //         info.print(2, 1, "Touché!");
+    //         info.print(2, 3, "joueur 1 rejoue");
     //     }
     //     else if (d == 2)
     //     {
-    //         score.print(2, 1, "Coulé ");
-    //         score.print(2, 3, "joueur 1 rejoue");
+    //         info.print(2, 1, "Coulé ");
+    //         info.print(2, 3, "joueur 1 rejoue");
     //     }
     //     k++;
     // }
@@ -228,8 +234,8 @@ void Jeu::initDim(int nbjoueurs)
     // *estVulnerable = new bool[nbjoueurs];
 
     // srand((int)time(0));
-    payback = new int[nbjoueurs];
-    estVulnerable = new int[nbjoueurs];
+    // payback = new int[nbjoueurs];
+    // estVulnerable = new int[nbjoueurs];
 
     for (int i = 0; i < nbjoueurs; i++)
     {
@@ -238,6 +244,7 @@ void Jeu::initDim(int nbjoueurs)
 
         // estVulnerable[i] = 0;
     }
+
 }
 
 bool Jeu::estIA()
@@ -605,8 +612,8 @@ void Jeu::placementDesNavires()
 {
     for (int i = 0; i < nbjoueurs; i++)
     {
-        score.print(1, 0, 'Joueur ');
-        score.print(8, 0, to_string(i));
+        info.print(1, 0, 'Joueur ');
+        info.print(8, 0, to_string(i));
         Joueur[i]->selectionNavire();
     }
 }

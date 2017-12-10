@@ -1,4 +1,8 @@
-#include "../include/headers.h"
+#include "../include/navire.h"
+#include "../include/window.h"
+
+
+#include <cmath>
 
 using namespace std;
 

@@ -1,4 +1,6 @@
-#include "../include/headers.h"
+#include "../include/window.h"
+#include "../include/config.h"
+#include "../include/menu.h"
 using namespace std;
 void options();
 
@@ -18,9 +20,9 @@ void myprogram()
   int const w = 20;
 
   noecho();
-  Jeu Jeu(6, 1, 2, 6);
+  // Jeu Jeu(6, 1, 2, 6);
 
-  Jeu.start();
+  // Jeu.start();
 
   while (1)
   {

@@ -1,11 +1,9 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#include "window.h"
-extern "C" {
-#include <curses.h>
-}
+#include "../include/window.h"
 #include <string>
+
 
 //Accès en lecture
 

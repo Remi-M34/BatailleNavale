@@ -1,15 +1,11 @@
 #ifndef __GRILLE_H
 #define __GRILLE_H
 
-// #include "window.h"
-// #include "flotte.h"
-// #include "config.h"
-// #include <unistd.h>
+#include "../include/config.h"
+#include "../include/window.h"
+#include "../include/flotte.h"
+#include "../include/scores.h"
 
-// extern "C" {
-// #include <curses.h>
-// }
-// #include <string>
 
 enum etat
 {
@@ -27,6 +23,8 @@ class Grille
 public:
   Window fenetre;
   Flotte flotte;
+    Scores Score;
+
 
   //Constructeur :
   Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide);
@@ -142,6 +140,7 @@ private:
   bool joue = false;
   // Permet d'afficher la nouvelle vitesse dans la fenêtre appropriée.
   Window *aide;
+
 
   // Position du navire sur la grille. [n][0] = x, [n][1] = y; afin de changer l'état
   // de toutes ses cases quand celui-ci est coulé

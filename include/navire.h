@@ -9,6 +9,8 @@
 // #include <string>
 // #include "window.h"
 // #include "flotte.h"
+#include "../include/config.h"
+
 
 // Sert à l'édition des navires depuis le menu
 

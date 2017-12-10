@@ -1,14 +1,10 @@
 #ifndef __MENU_H
 #define __MENU_H
 
-#include "window.h"
-#include "config.h"
-extern "C" {
-#include <curses.h>
-}
+#include "../include/window.h"
+#include "../include/flotte.h"
+
 #include <string>
-#include "window.h"
-#include "flotte.h"
 
 class Menu
 {

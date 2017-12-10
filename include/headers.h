@@ -1,12 +1,12 @@
+#include "window.h"
 #include "config.h"
+#include "menu.h"
 #include "flotte.h"
 #include "navire.h"
+#include "jeu.h" 
 #include "grille.h"
-#include "jeu.h"
-#include "menu.h"
-#include "message.h"
-#include "window.h"
 #include "scores.h"
+#include "message.h"
 
 #include <unistd.h>
 #include <algorithm>
@@ -20,6 +20,3 @@
 #include <cstdio>
 #include <cassert>
 
-extern "C" {
-#include <curses.h>
-}

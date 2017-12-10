@@ -1,4 +1,15 @@
-#include "../include/headers.h"
+#include "../include/window.h"
+#include "../include/navire.h"
+#include "../include/config.h"
+#include "../include/message.h"
+
+
+#include <fstream>
+#include <unistd.h>
+#include <cmath>
+#include <cassert>
+#include <stdlib.h>
+
 
 using namespace std;
 

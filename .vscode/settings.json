@@ -49,6 +49,7 @@
         "memory": "cpp",
         "ratio": "cpp",
         "xlocmon": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "cassert": "cpp"
     }
 }
