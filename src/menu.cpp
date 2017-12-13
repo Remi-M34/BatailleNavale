@@ -131,7 +131,7 @@ void Menu::mainMenu(int d)
         // if (nbjoueurs >= 2)
 
         // erase();
-        Jeu Jeu(nbjoueurs, nbjoueurshumain, difficulte, vitesse);
+        Jeu Jeu(nbjoueurs, nbjoueurshumain, difficulte, vitesse, nom);
         Jeu.start();
         return;
       }
@@ -282,6 +282,7 @@ void Menu::options()
       }
 
       break;
+    
     case '\n':
       if (selection == 0)
       {
@@ -803,6 +804,10 @@ void Menu::checkTailleEcran()
 
 void Menu::optionsJeu()
 {
+  for (int i = 0 ; i < 6 ; i ++)
+  {
+    nom[i] = "Bot "+myitoa(i);
+  }
 
   int c;
   nbjoueurshumain = 0;
@@ -938,7 +943,7 @@ void Menu::optionsJeu()
           nbjoueurshumain = min(6, nbjoueurshumain + 1);
         }
         choix[selection] = saisie(23, 14 + 2 * (selection - 3), 25, plateau);
-
+        nom[selection-3] = choix[selection];
         continue;
       }
       break;

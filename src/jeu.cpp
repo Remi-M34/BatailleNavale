@@ -14,7 +14,7 @@ using namespace std;
 #define WF getDimFlotte('w')
 #define HF getDimFlotte('h')
 
-Jeu::Jeu(int nbjoueurs, int humains, int diff, int v) : nbjoueurs(nbjoueurs),
+Jeu::Jeu(int nbjoueurs, int humains, int diff, int v, string n[]) : nbjoueurs(nbjoueurs),
                                                         humains(humains),
                                                         info(20, 18, getScoreStartX(nbjoueurs), -(H + HF) / 1.9),
                                                         plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
@@ -24,6 +24,10 @@ Jeu::Jeu(int nbjoueurs, int humains, int diff, int v) : nbjoueurs(nbjoueurs),
 
 {
     // plateau.setCouleurBordure(BCYAN);
+    for (int i = 0 ; i < 6 ; i++)
+{    nom[i] = n[i];
+
+    }
     initCouleurs();
     srand((int)time(0));
 
@@ -749,6 +753,10 @@ void checkSpeed(int ch, Window &aide, int &vitesse)
 
 void Jeu::refreshScores()
 {
+    cout << nom[0] << endl;
+    cout << nom[0] << endl;
+    cout << nom[0] << endl;
+    cout << nom[0] << endl;
 
     for (int i = 0; i < nbjoueurs; i++)
     {
@@ -766,10 +774,10 @@ void Jeu::refreshScores()
             break;
         }
 
-        string str = "Joueur " + myitoa(joueurEnPosition[i]) + ":";
+        string str = nom[i];
         string str2 = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore()/1000)+" "+myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore()%1000);
                 info.print(0, 15 + i, "                    ");
-        info.print(0, 15 + i, str);
+        info.print(0, 15 + i, nom[joueurEnPosition[i]]);
         info.print(18-t.length(), 15 + i, t);
         cout <<i << endl;
         // info.print(1,13+i,myitoa(i));

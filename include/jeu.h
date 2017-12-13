@@ -8,7 +8,7 @@ class Jeu
 {
 
 public:
-  Jeu(int nbjoueurs, int humains, int difficulte, int v);
+  Jeu(int nbjoueurs, int humains, int difficulte, int v, std::string n[]);
 
   //destructeur
   ~Jeu();
@@ -46,6 +46,7 @@ private:
   Window info;
   Window aide;
   Window plateau;
+std::string nom[6];
 
   int humains;
   int nbjoueurs;
@@ -71,7 +72,6 @@ private:
   int syf2;
   int sxf2;
   int sy2, sx2;
-
 
 
 
