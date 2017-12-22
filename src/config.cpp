@@ -617,7 +617,7 @@ void erreurEcran(int w, int h)
 {
   halfdelay(1);
     
-  Window erreur(LINES, COLS, 0-COLS/2, 0-LINES/2, ' ');
+  Window erreur(LINES, COLS, 0-COLS/2, 0-LINES/2, ' ',false);
   while (COLS < w || LINES < h)
   {
     erreur.print(0, 1, erreurTailleFenetre());
@@ -626,7 +626,7 @@ void erreurEcran(int w, int h)
 
       }
 
-  Window m(LINES, COLS, 0-25, 0, ' ');
+  Window m(LINES, COLS, 0-25, 0, ' ',false);
 
   erase();
   int ch;

@@ -71,14 +71,14 @@ void Menu::mainMenu(int d)
 
   // startProgramX();
 
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  Window apropos(2, 40, 50 - 40 / 2 + -50, 25 + -16, ' ');
+  Window apropos(2, 40, 50 - 40 / 2 + -50, 25 + -16, ' ',false);
   apropos.setCouleurBordure(WBLACK);
 
   Color col[5] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
@@ -227,7 +227,7 @@ void Menu::options()
   // stopProgramX();
   // startProgramX();
 
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -329,7 +329,7 @@ void Menu::options()
 void Menu::aideMenu()
 {
   int ch;
-  Window aidef(19, 85, 7 + -50, 12 + -16);
+  Window aidef(19, 85, 7 + -50, 12 + -16,false);
   aidef.setBordureDroite();
   aidef.setCouleurFenetre(WBLACK);
   aidef.print(39, 0, "Règles :", BBLUE);
@@ -347,19 +347,19 @@ void Menu::changerDim()
   int ch;
   int n = 0;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  Window dim(3, 18, 41 + -50, 13 + -16, ' ');
+  Window dim(3, 18, 41 + -50, 13 + -16, ' ',false);
   dim.setCouleurBordure(BGREEN);
   dim.setCouleurFenetre(WBLACK);
   Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
 
-  Window aide(8, 30, 2 + -50, 11 + -16);
+  Window aide(8, 30, 2 + -50, 11 + -16,false);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
@@ -558,13 +558,13 @@ void Menu::menuNavire()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
-  Window aide(12, 30, 2 + -50, 11 + -16);
+  Window aide(12, 30, 2 + -50, 11 + -16,false);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
@@ -647,14 +647,14 @@ void Menu::themes()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  // Window aide(12, 30, 2 + -50, 11 + -16);
+  // Window aide(12, 30, 2 + -50, 11 + -16,false);
   // // aide.setBordureDroite();
 
   Color col[6] = {plateau.getCouleurFenetre(), colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
@@ -731,7 +731,7 @@ void Menu::preset(int s)
 
   int c;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -740,13 +740,13 @@ void Menu::preset(int s)
 
   plateau.print(47, 22, "Valider", colSelectionnee);
 
-  Window aide(5, 24, -50 + 50 - 12, -16 + 25);
+  Window aide(5, 24, -50 + 50 - 12, -16 + 25,false);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->       Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE         Valider", WBLACK);
   aide.print(1, 4, "q                 Menu", WBLACK);
 
-  Window info(6, 30, -50 + 50 - 15, -16 + 3);
+  Window info(6, 30, -50 + 50 - 15, -16 + 3,false);
   info.setBordureDroite();
 
   int selection = s;
@@ -795,7 +795,7 @@ void Menu::checkTailleEcran()
 {
   if (COLS < 5 * getWidthGrille() || LINES < 2.5 * getHeightGrille())
   {
-    Window erreur(5, 100, -50, -16, '+');
+    Window erreur(5, 100, -50, -16, '+',false);
     erreur.print(0, 0, erreurTailleFenetre2());
     cin.ignore(1);
     assert(COLS > 5 * getWidthGrille() && LINES > 2.5 * getHeightGrille());
@@ -808,16 +808,17 @@ void Menu::optionsJeu()
   {
     nom[i] = "Bot "+myitoa(i);
   }
+  
 
   int c;
   nbjoueurshumain = 0;
-  Window plateau(33, 100, -50, -16, carBordureMenu);
+  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
-  Window aide(6, 40, -50 + 30, 26 + -16, ' ');
+  Window aide(6, 40, -50 + 30, 26 + -16, ' ',false);
   aide.setBordureDroite();
 
   Color col[10] = {

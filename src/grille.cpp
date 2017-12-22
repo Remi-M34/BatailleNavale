@@ -16,16 +16,9 @@ using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
-Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf, 1),
-                                                                                                                 vitesse(vitesse), aide(&aide), difficulte(difficulte), Score(difficulte)
-{
 
-      //Initialise la grille et rend toutes les cases de la grille VIDE
-      initCouleurs();
-      init();
-}
 
-Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA) : fenetre(H, W * 2, sx, sy), flotte(sxf, syf, 1), IA(estIA),
+Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA) : fenetre(H, W * 2, sx, sy, true), flotte(sxf, syf, 1), IA(estIA),
 
                                                                                                                              vitesse(vitesse), aide(&aide), difficulte(difficulte), Score(difficulte)
 
@@ -687,6 +680,8 @@ void Grille::caseSuivante(int &x, int &y)
 
       fenetre.print(2 * (x), y, ' ', colCaseSelectionnee);
       fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
+
+      fenetre.BordureNumerotee(x, y);
       return;
 }
 
@@ -718,6 +713,8 @@ void Grille::casePrecedente(int &x, int &y)
 
       fenetre.print(2 * (x), y, ' ', colCaseSelectionnee);
       fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
+            fenetre.BordureNumerotee(x, y);
+
       return;
 }
 
@@ -734,6 +731,8 @@ void Grille::moveRight(int &x, int &y)
                   fenetre.print(2 * i, y, ' ', colCaseSelectionnee);
                   fenetre.print(2 * i + 1, y, ' ', colCaseSelectionnee);
                   x = i;
+                        fenetre.BordureNumerotee(x, y);
+
                   return;
             }
       }
@@ -752,6 +751,8 @@ void Grille::moveLeft(int &x, int &y)
                   fenetre.print(2 * (i), y, ' ', colCaseSelectionnee);
                   fenetre.print(2 * i + 1, y, ' ', colCaseSelectionnee);
                   x = i;
+                        fenetre.BordureNumerotee(x, y);
+
                   return;
             }
       }
@@ -770,6 +771,8 @@ void Grille::moveUp(int &x, int &y)
                   fenetre.print(2 * (x), i, ' ', colCaseSelectionnee);
                   fenetre.print(2 * x + 1, i, ' ', colCaseSelectionnee);
                   y = i;
+                        fenetre.BordureNumerotee(x, y);
+
                   return;
             }
       }
@@ -788,6 +791,8 @@ void Grille::moveDown(int &x, int &y)
                   fenetre.print(2 * (x), i, ' ', colCaseSelectionnee);
                   fenetre.print(2 * x + 1, i, ' ', colCaseSelectionnee);
                   y = i;
+                        fenetre.BordureNumerotee(x, y);
+
                   return;
             }
       }
@@ -799,6 +804,8 @@ void Grille::findMilieu(int &x, int &y)
       {
             x = dernierePositionGagnante[0];
             y = dernierePositionGagnante[1];
+                  fenetre.BordureNumerotee(x, y);
+
             return;
       }
 
@@ -817,6 +824,8 @@ void Grille::findMilieu(int &x, int &y)
                         {
                               x = i;
                               y = j;
+                                    fenetre.BordureNumerotee(x, y);
+
                               return;
                         }
                   }
@@ -862,7 +871,7 @@ void Grille::initCouleurs()
                   colNavires = convertColor(ligne);
                   break;
             case 16:
-                  fenetre.setCouleurBordure(convertColor(ligne));
+                  // fenetre.setCouleurBordure(convertColor(ligne));
                   bordure = convertColor(ligne);
                   break;
             case 17:
@@ -1304,11 +1313,11 @@ void Grille::setCiblageValide(bool c)
 {
       if (c)
       {
-            fenetre.setCarBordure('-');
+            // fenetre.setCarBordure('-');
       }
       else
       {
-            fenetre.setCarBordure(carBordureGrille);
+            // fenetre.setCarBordure(carBordureGrille);
       }
 }
 

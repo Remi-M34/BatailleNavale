@@ -15,18 +15,19 @@ using namespace std;
 #define HF getDimFlotte('h')
 
 Jeu::Jeu(int nbjoueurs, int humains, int diff, int v, string n[]) : nbjoueurs(nbjoueurs),
-                                                        humains(humains),
-                                                        info(20, 18, getScoreStartX(nbjoueurs), -(H + HF) / 1.9),
-                                                        plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
-                                                        aide(7, 2 * W + 4, getScoreStartX(nbjoueurs) + 22, getAideStartY(nbjoueurs)),
-                                                        difficulte(diff),
-                                                        vitesse(v)
+                                                                    humains(humains),
+                                                                    info(22, 22, getScoreStartX(nbjoueurs) - 2, -(H + HF) / 1.9),
+                                                                    plateau(getBordureHeight(nbjoueurs), getBordureWidth(nbjoueurs), getScoreStartX(nbjoueurs) - 4, getBordureStartY(nbjoueurs)),
+                                                                    aide(7, 2 * W + 4, getScoreStartX(nbjoueurs) + 22, getAideStartY(nbjoueurs)),
+                                                                    difficulte(diff),
+                                                                    vitesse(v)
 
 {
-    // plateau.setCouleurBordure(BCYAN);
-    for (int i = 0 ; i < 6 ; i++)
-{    nom[i] = n[i];
 
+    // plateau.setCouleurBordure(BCYAN);
+    for (int i = 0; i < 6; i++)
+    {
+        nom[i] = n[i];
     }
     initCouleurs();
     srand((int)time(0));
@@ -73,7 +74,10 @@ void Jeu::initCouleurs()
             aide.setCarBordure(ligne[0]);
             break;
         case 24:
-            plateau.setBordureDroite();
+            if (ligne[0] == 'O' || ligne[0] == 'o')
+            {
+                plateau.setBordureDroite();
+            }
             break;
         case 25:
             if (ligne[0] == 'O' || ligne[0] == 'o')
@@ -90,10 +94,9 @@ void Jeu::initCouleurs()
 
 void Jeu::start()
 {
-
+    DecalerHistorique("Les joueurs peuvent \ndésormais placer leur navires sur leur territoire!", 0);
     placementDesNavires();
-    (*Joueur[0]).flotte.fenetre.setBordureDroite();
-    (*Joueur[0]).flotte.fenetre.setCarBordure(' ');
+
     info.setBordureDroite();
     // aide.setBordureDroite();
     aide.setCouleurBordure(BGREEN);
@@ -113,6 +116,7 @@ void Jeu::start()
     aide.print(aide.getWindowWidth() - 2, 4, "z");
     aide.print(1, 5, "Tir aléatoire");
     aide.print(aide.getWindowWidth() - 2, 5, "a");
+    DecalerHistorique("Le jeu commence !", 0);
 
     (*Joueur[joueur]).setJoue(true);
     usleep(155555);
@@ -128,6 +132,7 @@ void Jeu::start()
         switch (attaque())
         {
         case 1:
+            InfoJeu(joueur, cibleSelectionnee, 1);
             payback[cibleSelectionnee] = joueur;
             (*Joueur[joueur]).Score.navireTouche();
             classementUp();
@@ -136,6 +141,8 @@ void Jeu::start()
             continue;
 
         case 2:
+            InfoJeu(joueur, cibleSelectionnee, 2);
+
             (payback[cibleSelectionnee]) = joueur;
             (*Joueur[joueur]).Score.navireTouche();
             classementUp();
@@ -162,22 +169,61 @@ void Jeu::start()
             break;
         }
     }
+}
 
-    // HFile (k < H * W)
-    // {
-    //     int d = joueur2.destinationMissile();
-    //     if (d == 1)
-    //     {
-    //         info.print(2, 1, "Touché!");
-    //         info.print(2, 3, "joueur 1 rejoue");
-    //     }
-    //     else if (d == 2)
-    //     {
-    //         info.print(2, 1, "Coulé ");
-    //         info.print(2, 3, "joueur 1 rejoue");
-    //     }
-    //     k++;
-    // }
+void Jeu::DecalerHistorique(string nouvelleinfo, int sc)
+{
+
+    for (int i = 5; i > 0; i--)
+    {
+        historique[i] = historique[i - 1];
+        separateur[i] = separateur[i - 1];
+    }
+    historique[0] = nouvelleinfo;
+
+    switch (sc)
+    {
+    case 0:
+        separateur[0] = YBLACK;
+        break;
+    case 1:
+        separateur[0] = BLUEBLACK;
+        break;
+
+    case 2:
+        separateur[0] = MBLACK;
+        break;
+    }
+
+    werase(info.win);
+    info.print(0, 3 + nbjoueurs, "                    ", WBLACK);
+    int ligne = 0;
+
+    info.print(6, 2 + nbjoueurs, "HISTORIQUE", GBLACK);
+    for (int i = 0; i < 6; i++)
+    {
+        info.print(0, ligne + 4 + nbjoueurs, historique[i], separateur[i]);
+        ligne += historique[i].length() / 22 + 2;
+        // info.print(0,ligne-1,"                    ",separateur[i]);
+    }
+}
+
+void Jeu::InfoJeu(unsigned int attaquant, unsigned int cible, int sc)
+{
+    string nouvelleinfo;
+
+    switch (sc)
+    {
+    case 2:
+        nouvelleinfo = nom[attaquant] + " vient de couler un navire de " + nom[cible];
+        break;
+    case 1:
+        nouvelleinfo = nom[attaquant] + " a touché " + nom[cible];
+
+        break;
+    }
+
+    DecalerHistorique(nouvelleinfo, sc);
 }
 
 void Jeu::initDim(int nbjoueurs)
@@ -203,6 +249,9 @@ void Jeu::initDim(int nbjoueurs)
     case 2:
     {
         Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 - (H + HF) / 2, 0 - 2 - sxf - 2 * WF, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA());
+        // plateau.print(sx+25+W/2,syf,nom[0].c_str());
+          (*Joueur[0]).fenetre.printborder(0,0,nom[0]);
+
         Joueur[1] = new Grille(0 + 2 + sx, 0 - (H + HF) / 2, 0 + 2 + sxf, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA());
         break;
     }
@@ -383,7 +432,7 @@ void Jeu::selectionCibleAleatoire()
 
     do
     {
-    test("rand...");
+        test("rand...");
 
         switch (difficulte)
         {
@@ -666,11 +715,11 @@ int getScoreStartX(int nbjoueurs)
 
     if (nbjoueurs < 5)
     {
-        return (-2 * max(W, WF) - 26 + max(0, WF - W));
+        return (-2 * max(W, WF) - 26 + max(0, WF - W) - 1);
     }
     else
     {
-        return (-2 * max(W, WF) - 38 + max(0, WF - W));
+        return (-2 * max(W, WF) - 38 + max(0, WF - W) - 1);
     }
 }
 
@@ -753,33 +802,29 @@ void checkSpeed(int ch, Window &aide, int &vitesse)
 
 void Jeu::refreshScores()
 {
-    cout << nom[0] << endl;
-    cout << nom[0] << endl;
-    cout << nom[0] << endl;
-    cout << nom[0] << endl;
 
+    info.print(8, 0, "SCORES", YBLACK);
     for (int i = 0; i < nbjoueurs; i++)
     {
-        string t = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore());
-        switch (t.length())
+        string sc = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore());
+        switch (sc.length())
         {
-            case 4:
-            t.insert(1," ");
+        case 4:
+            sc.insert(1, " ");
             break;
-                        case 5:
-            t.insert(2," ");
+        case 5:
+            sc.insert(2, " ");
             break;
-                        case 6:
-            t.insert(3," ");
+        case 6:
+            sc.insert(3, " ");
             break;
         }
 
         string str = nom[i];
-        string str2 = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore()/1000)+" "+myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore()%1000);
-                info.print(0, 15 + i, "                    ");
-        info.print(0, 15 + i, nom[joueurEnPosition[i]]);
-        info.print(18-t.length(), 15 + i, t);
-        cout <<i << endl;
+        string str2 = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore() / 1000) + " " + myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore() % 1000);
+        info.print(0, 1 + i, "                    ");
+        info.print(0, 1 + i, nom[joueurEnPosition[i]]);
+        info.print(info.getLargeur() - sc.length(), 1 + i, sc);
         // info.print(1,13+i,myitoa(i));
     }
 }
@@ -787,54 +832,48 @@ void Jeu::refreshScores()
 void Jeu::classementDown()
 {
 
-        if (positionDuJoueur[joueur] < nbjoueurs-1 && (*Joueur[joueur]).getScore() < (*Joueur[joueurEnPosition[positionDuJoueur[joueur] + 1 ]]).getScore())
-        {
-                        int pos = joueurEnPosition[positionDuJoueur[joueur] + 1];
+    if (positionDuJoueur[joueur] < nbjoueurs - 1 && (*Joueur[joueur]).getScore() < (*Joueur[joueurEnPosition[positionDuJoueur[joueur] + 1]]).getScore())
+    {
+        int pos = joueurEnPosition[positionDuJoueur[joueur] + 1];
 
-            swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] + 1 ]);
+        swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] + 1]);
 
-            swap(positionDuJoueur[joueur],positionDuJoueur[pos]);
+        swap(positionDuJoueur[joueur], positionDuJoueur[pos]);
 
-            // positionDuJoueur[joueur]++;
-            // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
-            test("\nLe joueur ");
-            test(myitoa(joueur));
-                        test("\n devient  ");
-            test(myitoa(positionDuJoueur[joueur]));
-            test("      et le joueur ");
-            test(myitoa(joueurEnPosition[positionDuJoueur[joueur]]));
-            test(" devient ");
-            test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
-            classementDown();
-
-        }
-
-    
+        // positionDuJoueur[joueur]++;
+        // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
+        test("\nLe joueur ");
+        test(myitoa(joueur));
+        test("\n devient  ");
+        test(myitoa(positionDuJoueur[joueur]));
+        test("      et le joueur ");
+        test(myitoa(joueurEnPosition[positionDuJoueur[joueur]]));
+        test(" devient ");
+        test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
+        classementDown();
+    }
 }
-
 
 void Jeu::classementUp()
 {
 
-        if (positionDuJoueur[joueur] > 0 && (*Joueur[joueur]).getScore() > (*Joueur[joueurEnPosition[positionDuJoueur[joueur] - 1 ]]).getScore())
-        {
-            int pos = joueurEnPosition[positionDuJoueur[joueur] - 1];
-            swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] - 1 ]);
+    if (positionDuJoueur[joueur] > 0 && (*Joueur[joueur]).getScore() > (*Joueur[joueurEnPosition[positionDuJoueur[joueur] - 1]]).getScore())
+    {
+        int pos = joueurEnPosition[positionDuJoueur[joueur] - 1];
+        swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] - 1]);
 
-            swap(positionDuJoueur[joueur],positionDuJoueur[pos]);
+        swap(positionDuJoueur[joueur], positionDuJoueur[pos]);
 
-            // positionDuJoueur[joueur]++;
-            // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
-            test("\nLe joueur ");
-            test(myitoa(joueur));
-                        test("\n devient  ");
-            test(myitoa(positionDuJoueur[joueur]));
-            test("      et le joueur ");
-            test(myitoa(joueurEnPosition[positionDuJoueur[joueur]]));
-            test(" devient ");
-            test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
-            classementUp();
-
-        }
-
+        // positionDuJoueur[joueur]++;
+        // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
+        test("\nLe joueur ");
+        test(myitoa(joueur));
+        test("\n devient  ");
+        test(myitoa(positionDuJoueur[joueur]));
+        test("      et le joueur ");
+        test(myitoa(joueurEnPosition[positionDuJoueur[joueur]]));
+        test(" devient ");
+        test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
+        classementUp();
+    }
 }

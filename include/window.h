@@ -21,7 +21,14 @@ enum Color {
   BYELLOW, // couleur fond = jaune,   couleur texte = noir
   BGREEN,  // couleur fond = vert,    couleur texte = noir 
   BMAGENTA,// couleur fond = magenta, couleur texte = noir
-  BRED    // couleur fond = rouge,   couleur texte = noir
+  BRED,    // couleur fond = rouge,   couleur texte = noir
+  CBLACK,
+  BLUEBLACK,
+  YBLACK,
+  GBLACK,
+  MBLACK,
+  RBLACK,
+  WHITEBLACK
 };
 
 
@@ -38,6 +45,7 @@ class Window {
   Color colorwin, colorframe;
   char bord;
   void update() const;
+  bool estGrille = true;
 
  public:
 
@@ -46,7 +54,7 @@ class Window {
 
   // constructeur d'un fenetre de hauteur=h, largeur=w dont le coin superieur gauche
   // a pour coordonnée (x,y), le caractère c est utilisé pour définir la bordure
-  Window(int h,int w, int x, int y, char c='+');
+  Window(int h,int w, int x, int y, char c=' ', bool estgrille=true);
 
   ~Window();
 
@@ -57,6 +65,9 @@ class Window {
   void print(int x, int y, char s, Color c) const;
   void print(int x, int y, std::string s) const;
   void print(int x, int y, char s) const; 
+  void printborderch(int x, int y, char s);
+  void printborder(int x, int y, std::string s);
+  void BordureNumerotee(int x, int y);
 
   
   // accesseurs

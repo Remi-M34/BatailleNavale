@@ -18,6 +18,7 @@ public:
   void placementDesNavires();
 
   void initCouleurs();
+  void InfoJeu(unsigned int attaquant, unsigned int cible, int sc);
   // Initialise toutes les grilles dont les positions dépendent du nombre de joueurs (afin de toujours centrer le jeu)
   void initDim(int j);
   bool estIA();
@@ -41,11 +42,13 @@ public:
   void refreshScores();
   void classementDown();
   void classementUp();
+  void DecalerHistorique(std::string nouvelleinfo,int sc);
 
 private:
   Window info;
   Window aide;
   Window plateau;
+
 std::string nom[6];
 
   int humains;
@@ -64,6 +67,9 @@ std::string nom[6];
   int joueurEnPosition[6];
   
   int const difficulte;
+      std::string historique[6];
+  Color separateur[5] = {WBLACK};
+
   Grille *Joueur[];
 
 
@@ -79,7 +85,6 @@ std::string nom[6];
 
 
 
-
   // Options du thème
   Color colScore;
   Color colAide;
@@ -87,6 +92,7 @@ std::string nom[6];
   Color colBordurePlateau;
 
   int sx, sy, sxf, syf;
+
 };
 
 int getScoreStartX(int t);

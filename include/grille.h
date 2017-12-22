@@ -23,11 +23,10 @@ class Grille
 public:
   Window fenetre;
   Flotte flotte;
-    Scores Score;
+  Scores Score;
 
 
   //Constructeur :
-  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide);
   Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA);
 
   //Destructeur

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
+Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy,false)
 {
     couleursNavires();
     initDim();
