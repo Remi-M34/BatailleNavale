@@ -43,7 +43,8 @@ public:
   void classementDown();
   void classementUp();
   void DecalerHistorique(std::string nouvelleinfo,int sc);
-
+  std::string getPos(int i);
+  void setupaide();
 private:
   Window info;
   Window aide;
@@ -56,7 +57,7 @@ std::string nom[6];
 
   int vitesse = 3;
   int joueur = 0;
-  
+  unsigned int JoueursRestants;
   int cible;
   int cibleSelectionnee = 0;
   // Gère les affinités, utilisé par l'IA.
@@ -65,7 +66,8 @@ std::string nom[6];
   int estVulnerable[6];
     int positionDuJoueur[6];
   int joueurEnPosition[6];
-  
+    int nbhisto = 0;
+  int tour = 0;
   int const difficulte;
       std::string historique[6];
   Color separateur[5] = {WBLACK};

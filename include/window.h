@@ -28,7 +28,8 @@ enum Color {
   GBLACK,
   MBLACK,
   RBLACK,
-  WHITEBLACK
+  WHITEBLACK,
+  RBLUE
 };
 
 
@@ -45,7 +46,7 @@ class Window {
   Color colorwin, colorframe;
   char bord;
   void update() const;
-  bool estGrille = true;
+  bool estGrille = false;
 
  public:
 
@@ -54,7 +55,7 @@ class Window {
 
   // constructeur d'un fenetre de hauteur=h, largeur=w dont le coin superieur gauche
   // a pour coordonnée (x,y), le caractère c est utilisé pour définir la bordure
-  Window(int h,int w, int x, int y, char c=' ', bool estgrille=true);
+  Window(int h,int w, int x, int y, char c=' ', bool estgrille=false);
 
   ~Window();
 

@@ -27,7 +27,7 @@ public:
 
 
   //Constructeur :
-  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA);
+  Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA, std::string nom);
 
   //Destructeur
   ~Grille();
@@ -125,6 +125,9 @@ public:
   bool toucheBord(int x, int d);
 
   int getScore();
+  int* getDernierePositionGagnante();
+  int* getDernierTir();
+  bool estMort();
 
 private:
 // L'etat de chaque case.
@@ -141,6 +144,8 @@ private:
   bool joue = false;
   // Permet d'afficher la nouvelle vitesse dans la fenêtre appropriée.
   Window *aide;
+  std::string nom;
+  unsigned int naviresRestants = 5;
 
 
   // Position du navire sur la grille. [n][0] = x, [n][1] = y; afin de changer l'état
@@ -153,6 +158,7 @@ private:
 
   // Un joueur ayant tiré sur un navire ne sera pas renvoyé au milieu de la grille si la valeur != -1.
   int dernierePositionGagnante[2] = {-1};
+  int dernierTir[2] = {-1};
 
   // +1 pour chaque case dont dispose le navire. -1 à chaque missile tiré sur ce navire. A 0, le navire est coulé.
   // Est initialisé lors de la création de la grille

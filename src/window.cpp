@@ -33,6 +33,7 @@ void init_colors(void)
   init_pair(MBLACK, COLOR_MAGENTA, COLOR_BLACK);
   init_pair(RBLACK, COLOR_RED, COLOR_BLACK);
   init_pair(WHITEBLACK, COLOR_WHITE, COLOR_BLACK);
+  init_pair(RBLUE, COLOR_RED, COLOR_BLUE);
 }
 
 void startProgramX()
@@ -64,7 +65,7 @@ void Window::update() const
 }
 
 Window::Window(int h, int w, int x, int y, char c, bool estgrille)
-    : height(h), width(w), startx(x + COLS / 2), starty(y + LINES / 2), bord(c), estGrille(estgrille)
+    : height(h), width(w), startx(x + COLS / 2), starty(y + LINES / 2), bord(c)
 {
   colorwin = WBLACK;
   colorframe = WBLACK;
@@ -94,6 +95,7 @@ Window::~Window()
 
 void Window::print(int x, int y, std::string s, Color c) const
 {
+  
   wattron(win, COLOR_PAIR(c));
   mvwprintw(win, y, x, s.c_str());
   wattroff(win, COLOR_PAIR(c));
@@ -129,16 +131,24 @@ void Window::printborder(int x, int y, string s)
 
 void Window::BordureNumerotee(int x, int y)
 {
+  wattron(frame, A_DIM);
+  wattron(frame, A_INVIS);
+
   const char *Alphabet = "0ABCDEFGHIJKLMNOPQRST";
   for (int i = 1; i <= W; i++)
   {
     if (x == i - 1)
     {
-      wattron(frame, COLOR_PAIR(BCYAN));
-      mvwaddch(frame, 0, 2 * i - 1, ' ');
+      // wattron(frame,A_DIM);
+
+      wattron(frame, A_UNDERLINE);
+
+      wattron(frame, COLOR_PAIR(WRED));
+      mvwaddch(frame, 0, 2 * i - 1, ACS_BULLET);
       mvwaddch(frame, 0, 2 * i, Alphabet[i]);
-      mvwaddch(frame, 0, 2 * i + 1, ' ');
+      mvwaddch(frame, 0, 2 * i + 1, ACS_BULLET);
       wattron(frame, COLOR_PAIR(colorframe));
+      wattroff(frame, A_UNDERLINE);
     }
     else
 
@@ -151,8 +161,11 @@ void Window::BordureNumerotee(int x, int y)
   {
     if (i - 1 == y)
     {
-      wattron(frame, COLOR_PAIR(BCYAN));
+      wattron(frame, A_UNDERLINE);
+
+      wattron(frame, COLOR_PAIR(WRED));
       printborder(0, i, myitoa((i > 9 ? (i == 10 || i == 20 ? i / 10 : i % 10) : i)));
+      wattroff(frame, A_UNDERLINE);
 
       wattron(frame, COLOR_PAIR(colorframe));
     }
@@ -193,7 +206,7 @@ void Window::setCouleurBordure(Color c)
 
 void Window::setBordureDroite()
 {
-  wborder(frame, '|', '|', '_', '_', ' ', ' ', '|', '|');
+  wborder(frame, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
   colorwin = GBLACK;
   wbkgd(frame, COLOR_PAIR(colorwin));
   wattron(win, COLOR_PAIR(colorwin));
@@ -227,6 +240,7 @@ int Window::getWindowWidth()
 void Window::clear() const
 {
   werase(win);
+  werase(frame);
   update();
 }
 
