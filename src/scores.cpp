@@ -5,38 +5,60 @@
 
 using namespace std;
 
-
 Scores::Scores(int difficulte) : difficulte(difficulte)
-{}
+{
+}
 
-Scores::~Scores(){}
+Scores::~Scores() {}
 
 int Scores::getScore()
 {
-    double s = ((double)missilesGagnants/missilesTires)*(12500)/((double)tailleFlotte/(height*width));
-    // cout << s << endl;
-    if (missilesTires == 0)
-    {
-        return 0;
-    }
-    else return ceil(s);
+  double s = ((double)missilesGagnants / missilesTires) * (12500) / ((double)tailleFlotte / (height * width));
+  // cout << s << endl;
+  if (missilesTires == 0)
+  {
+    return 0;
+  }
+  else
+    return ceil(s);
 }
 
+void Scores::missileEnvoye()
+{
+  missilesTires++;
+}
 
+void Scores::navireTouche()
+{
+  missilesTires++;
+  missilesGagnants++;
+}
 
-  void Scores::missileEnvoye()
-  {
-    missilesTires++;
-  }
+void Scores::augmenterTailleFlotte()
+{
+  tailleFlotte++;
+}
 
+int Scores::getMissilesTires()
+{
 
-  void Scores::navireTouche()
-  {
-    missilesTires++;
-    missilesGagnants++;
-  }
+  return missilesTires;
+}
+int Scores::getMissilesGagnants()
+{
 
-  void Scores::augmenterTailleFlotte()
-  {
-      tailleFlotte++;
-  }
+  return missilesGagnants;
+}
+
+int Scores::getTailleFlotte()
+{
+
+  return tailleFlotte;
+}
+
+void Scores::ChargerDonnees(int MissilesTires, int MissilesGagnants, int tailleFlotte)
+{
+  this->missilesTires = MissilesTires;
+  this->missilesGagnants = MissilesGagnants;
+  this->tailleFlotte = tailleFlotte;
+}

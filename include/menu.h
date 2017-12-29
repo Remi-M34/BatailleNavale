@@ -17,9 +17,11 @@ class Menu
     void themes();
     void optionsJeu();
     void selectJoueurs(Window plateau);
-
+  void topscores(Window& top);
+void refreshMenu();
     void aideMenu();
     void preset(int s);
+    void chargement();
     // Vérifie si la taille de l'écran est assez grande pour lancer le jeu.
     void checkTailleEcran();
     // Active et place le curseur à la position séléctionnée de la fenêtre. Renvoie un string.
@@ -28,6 +30,8 @@ class Menu
     ~Menu();
 
   private:
+    Window plateau;
+
     std::string nom[6];
 
     int nbjoueurs = 0;
@@ -41,6 +45,7 @@ class Menu
     Color colSelectionnee;
     Color colNonSelectionnee;
     Color colBordureMenu;
+    Color colBordureFlotte;
     bool bordureMenuDroite = false;
     char carBordureMenu = ' ';
 

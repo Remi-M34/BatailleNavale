@@ -128,7 +128,13 @@ public:
   int* getDernierePositionGagnante();
   int* getDernierTir();
   bool estMort();
-
+  void croixmort();
+  void SauvegarderGrille(std::fstream& save);
+  int getNaviresRestants();
+  void getCasesRestantes(std::fstream& save);
+  void getPosNavires(std::fstream& save);
+  int getNbPivotements(int n);
+  void ChargementDonnees(int** Case, int** Case2,int* casesRestantes, int** posNavires, int naviresRestants, int* NbPivotements, int MissilesTires, int MissilesGagnants, int tailleFlotte);
 private:
 // L'etat de chaque case.
   etat **Case;
@@ -137,7 +143,7 @@ private:
   bool IA = false;
   // La liste des navires, ou plutôt des tableaux dans lesquels ils se trouvent.
   int ***navire = listedesnavires();
-  // La vitesse du jeu (IA) entre 0 et 9. Est passé en référence depuis la classe Jeu.
+  // La vitesse du jeu (IA) entre 0 et 9. Est passée en référence depuis la classe Jeu.
   // Ainsi, une vitesse changée sur une grille le sera sur toutes les autres.
   int &vitesse;
   int const difficulte;
@@ -163,6 +169,7 @@ private:
   // +1 pour chaque case dont dispose le navire. -1 à chaque missile tiré sur ce navire. A 0, le navire est coulé.
   // Est initialisé lors de la création de la grille
   int caseRestantes[5] = {0};
+  int NombrePivotements[5] = {0};
 
   // Selon les options du thème
   Color colTouche;

@@ -12,10 +12,15 @@
 #include <unistd.h>
 #include <cassert>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define H getHeightGrille()
+#define W getWidthGrille()
 
 using namespace std;
 
-Menu::Menu()
+Menu::Menu() : plateau(33, 100, -50, -16, carBordureMenu, false)
 {
   initCouleurs();
 }
@@ -33,6 +38,9 @@ void Menu::initCouleurs()
 
     switch (lignes)
     {
+    case 9:
+      colBordureFlotte = convertColor(ligne);
+      break;
     case 42:
       colSelectionnee = convertColor(ligne);
       break;
@@ -71,30 +79,37 @@ void Menu::mainMenu(int d)
 
   // startProgramX();
 
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  Window apropos(2, 40, 50 - 40 / 2 + -50, 25 + -16, ' ',false);
+  Window apropos(3, 40, 50 - 40 / 2 + -50, 27 + -16, ' ', false);
   apropos.setCouleurBordure(WBLACK);
 
-  Color col[5] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
+  Color col[7] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
 
   refresh();
   getch();
 
   int c;
-  string choix[5] = {"Commencer une partie", "Options", "Aide", "Version du jeu", "A Propos"};
+  string choix[7] = {"Commencer une partie", "Continuer...", "Top Scores", "Options", "Aide", "Version du jeu", "A Propos"};
   int selection = 0;
-
+  Window top(16, 25, -48, -3);
   Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, d);
   while ((c = getch()))
   {
+    if (selection < 5)
+    {
+      apropos.clearall();
+    }
+    if (selection != 2)
+    {
+      top.clearall();
+    }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 7; i++)
     {
       plateau.print(50 - choix[i].length() / 2, 12 + 2 * i, choix[i], col[i]);
     }
@@ -113,7 +128,7 @@ void Menu::mainMenu(int d)
       break;
 
     case KEY_DOWN:
-      if (selection != 4)
+      if (selection != 6)
       {
         swap(col[selection], col[selection + 1]);
         plateau.print(50 - choix[selection].length() / 2 - 2, 12 + 2 * selection, ' ', WBLACK);
@@ -128,35 +143,46 @@ void Menu::mainMenu(int d)
         checkTailleEcran();
         selectJoueurs(plateau);
         optionsJeu();
-        // if (nbjoueurs >= 2)
 
-        // erase();
         Jeu Jeu(nbjoueurs, nbjoueurshumain, difficulte, vitesse, nom);
-        Jeu.start();
-        return;
+        Jeu.Phase1();
+        return mainMenu(1);
       }
       else if (selection == 1)
       {
-        options();
-        mainMenu(1);
-        return;
-        // version.print(2, 2, "aaaaaaaaaaaaaaa", WGREEN);
-        // refresh();
+        
+        chargement();
+        return mainMenu(1);
       }
       else if (selection == 2)
       {
-        aideMenu();
+        topscores(top);
+        // refreshMenu();
       }
       else if (selection == 3)
       {
-        apropos.clear();
-        apropos.print(0, 1, version());
-        apropos.setBordureDroite();
+        plateau.clear();
+        options();
+        refreshMenu();
+        flotte.fenetre.setCouleurBordure(colBordureFlotte);
+        flotte.refreshPort(0);
+        // mainMenu(1);
+        // return;
       }
       else if (selection == 4)
       {
+        aideMenu();
+      }
+      else if (selection == 5)
+      {
         apropos.clear();
-        apropos.print(0, 1, aPropos());
+        apropos.print(17, 1, version());
+        apropos.setBordureDroite();
+      }
+      else if (selection == 6)
+      {
+        apropos.clear();
+        apropos.print(0, 0, aPropos());
         apropos.setBordureDroite();
       }
       else
@@ -172,6 +198,15 @@ void Menu::mainMenu(int d)
   erase();
 
   stopProgramX();
+}
+
+void Menu::refreshMenu()
+{
+
+  plateau.clear();
+  plateau.update();
+  // flotte.refreshPort(0);
+  // flotte.fenetre.setCouleurBordure(colBordureFlotte);
 }
 
 void Menu::selectJoueurs(Window plateau)
@@ -227,7 +262,6 @@ void Menu::options()
   // stopProgramX();
   // startProgramX();
 
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -282,34 +316,42 @@ void Menu::options()
       }
 
       break;
-    
+
     case '\n':
       if (selection == 0)
       {
         menuNavire();
+        refreshMenu();
         options();
         return;
       }
       else if (selection == 1)
       {
+        plateau.clear();
+        refreshMenu();
         changerDim();
-
-        options();
-        return;
-        // version.print(2, 2, "aaaaaaaaaaaaaaa", WGREEN);
-        // refresh();
+        refreshMenu();
+        flotte.fenetre.setCouleurBordure(colBordureFlotte);
+        flotte.refreshPort(0);
       }
       else if (selection == 2)
       {
+        refreshMenu();
+
         themes();
-        options();
-        return;
+        refreshMenu();
+
+        flotte.fenetre.setCouleurBordure(colBordureFlotte);
+        flotte.refreshPort(0);
       }
       else if (selection == 3)
       {
+        refreshMenu();
+
         preset(1);
-        options();
-        return;
+        refreshMenu();
+
+        return mainMenu(0);
       }
       else if (selection == 4)
       {
@@ -329,7 +371,7 @@ void Menu::options()
 void Menu::aideMenu()
 {
   int ch;
-  Window aidef(19, 85, 7 + -50, 12 + -16,false);
+  Window aidef(19, 85, 7 + -50, 12 + -16, false);
   aidef.setBordureDroite();
   aidef.setCouleurFenetre(WBLACK);
   aidef.print(39, 0, "Règles :", BBLUE);
@@ -347,19 +389,18 @@ void Menu::changerDim()
   int ch;
   int n = 0;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
 
-  Window dim(3, 18, 41 + -50, 13 + -16, ' ',false);
+  Window dim(3, 18, 41 + -50, 13 + -16, ' ', false);
   dim.setCouleurBordure(BGREEN);
   dim.setCouleurFenetre(WBLACK);
   Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
 
-  Window aide(8, 30, 2 + -50, 11 + -16,false);
+  Window aide(8, 30, 2 + -50, 11 + -16, false);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
@@ -558,13 +599,15 @@ void Menu::menuNavire()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
+  plateau.clear();
+  refreshMenu();
+
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
     plateau.setBordureDroite();
   }
-  Window aide(12, 30, 2 + -50, 11 + -16,false);
+  Window aide(12, 30, 2 + -50, 11 + -16, false);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
@@ -647,7 +690,6 @@ void Menu::themes()
   int c;
   int n = 0;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -731,7 +773,6 @@ void Menu::preset(int s)
 
   int c;
 
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
@@ -740,13 +781,13 @@ void Menu::preset(int s)
 
   plateau.print(47, 22, "Valider", colSelectionnee);
 
-  Window aide(5, 24, -50 + 50 - 12, -16 + 25,false);
+  Window aide(5, 24, -50 + 50 - 12, -16 + 25, false);
   aide.setBordureDroite();
   aide.print(1, 1, "<-, ->       Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE         Valider", WBLACK);
   aide.print(1, 4, "q                 Menu", WBLACK);
 
-  Window info(6, 30, -50 + 50 - 15, -16 + 3,false);
+  Window info(6, 30, -50 + 50 - 15, -16 + 3, false);
   info.setBordureDroite();
 
   int selection = s;
@@ -795,7 +836,7 @@ void Menu::checkTailleEcran()
 {
   if (COLS < 5 * getWidthGrille() || LINES < 2.5 * getHeightGrille())
   {
-    Window erreur(5, 100, -50, -16, '+',false);
+    Window erreur(5, 100, -50, -16, '+', false);
     erreur.print(0, 0, erreurTailleFenetre2());
     cin.ignore(1);
     assert(COLS > 5 * getWidthGrille() && LINES > 2.5 * getHeightGrille());
@@ -804,58 +845,64 @@ void Menu::checkTailleEcran()
 
 void Menu::optionsJeu()
 {
-  for (int i = 0 ; i < 6 ; i ++)
-  {
-    nom[i] = "Bot "+myitoa(i);
-  }
-  
+  // for (int i = 0 ; i < 6 ; i ++)
+  // {
+  //   nom[i] = "Bot "+myitoa(i);
+  // }
 
   int c;
   nbjoueurshumain = 0;
-  Window plateau(33, 100, -50, -16, carBordureMenu,false);
-  plateau.setCouleurBordure(colBordureMenu);
+  Window plateau2(33, 100, -50, -16, carBordureMenu, false);
+  plateau2.setCouleurBordure(colBordureMenu);
   if (bordureMenuDroite)
   {
-    plateau.setBordureDroite();
+    plateau2.setBordureDroite();
   }
-  Window aide(6, 40, -50 + 30, 26 + -16, ' ',false);
+
+  Window aide(6, 40, -50 + 30, 26 + -16, ' ', false);
   aide.setBordureDroite();
 
-  Color col[10] = {
-      colNonSelectionnee,
-      colNonSelectionnee,
-      colSelectionnee,
-      colNonSelectionnee,
-      colNonSelectionnee,
-      colNonSelectionnee,
-      colNonSelectionnee,
-      colNonSelectionnee,
-      colNonSelectionnee,
-      colNonSelectionnee,
-  };
+  Color col[11];
+  for (int i = 0; i < 11; i++)
+  {
+    col[i] = colNonSelectionnee;
+  }
+  col[2] = colSelectionnee;
 
-  string choix[10] = {"Vitesse IA: x", "Difficulté: ", "Humains", "Ajouter un joueur", "Ajouter un joueur humain",
+  string choix[11] = {"Vitesse IA: x", "Difficulté: ", "Humains", "Ajouter un joueur", "Ajouter un joueur humain",
                       "Ajouter un joueur humain", "Ajouter un joueur humain",
-                      "Ajouter un joueur humain", "Ajouter un joueur humain", "Jouer"};
+                      "Ajouter un joueur humain", "Ajouter un joueur humain", "Jouer", "Retour"};
   string difficulte[3] = {"Facile", "Normal", "Difficile"};
   int selection = 2;
 
   Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
   aideOptionsJeu(aide, selection);
 
-  while ((c = getch()) != 'q')
+  for (int i = 0; i < nbjoueurs; i++)
+  {
+    plateau2.print(9, 14 + 2 * i, "     ");
+
+    if (i < nbjoueurs - nbjoueurshumain)
+    {
+      string str = "Bot " + myitoa(i + 1);
+      plateau2.print(9, 14 + 2 * i, str);
+    }
+  }
+
+  while ((c = getch()))
   {
 
-    plateau.print(70, 12, choix[0] + myitoa(vitesse), col[0]);
-    plateau.print(41, 12, choix[1] + difficulte[this->difficulte - 1], col[1]);
-    plateau.print(23, 12, choix[2] + " (" + myitoa(nbjoueurshumain) + ")", col[2]);
-    plateau.print(9, 12, "IA (" + myitoa(nbjoueurs - nbjoueurshumain) + ")", colNonSelectionnee);
-    plateau.print(48, 24, choix[9], col[9]);
+    plateau2.print(70, 12, choix[0] + myitoa(vitesse), col[0]);
+    plateau2.print(41, 12, choix[1] + difficulte[this->difficulte - 1], col[1]);
+    plateau2.print(23, 12, choix[2] + " (" + myitoa(nbjoueurshumain) + ")", col[2]);
+    plateau2.print(9, 12, "IA (" + myitoa(nbjoueurs - nbjoueurshumain) + ")", BBLUE);
+    plateau2.print(48, 24, choix[9], col[9]);
+    plateau2.print(9, 24, choix[10], col[10]);
 
     for (int i = 3; i < nbjoueurshumain + 4 && i < nbjoueurs + 3; i++)
     {
 
-      plateau.print(23, 14 + 2 * (i - 3), choix[i], col[i]);
+      plateau2.print(23, 14 + 2 * (i - 3), choix[i], col[i]);
     }
     switch (c)
     {
@@ -899,8 +946,11 @@ void Menu::optionsJeu()
     case KEY_RIGHT:
       if (selection > 0 && selection < 3)
       {
-        swap(col[selection], col[selection - 1]);
-        selection--;
+        swap(col[selection], col[selection--]);
+      }
+      else if (selection == 10)
+      {
+        swap(col[selection], col[selection--]);
       }
       aideOptionsJeu(aide, selection);
 
@@ -909,18 +959,27 @@ void Menu::optionsJeu()
     case KEY_LEFT:
       if (selection < 2 && selection >= 0)
       {
-        swap(col[selection], col[selection + 1]);
-        selection++;
+        swap(col[selection], col[selection++]);
+      }
+      else if (selection == 9)
+      {
+        swap(col[selection], col[selection++]);
       }
       aideOptionsJeu(aide, selection);
 
       break;
+    case 'q':
+    {
+      return mainMenu(0);
+    }
     case '\n':
       switch (selection)
       {
-      case 0:
-
+      case 10:
+        return mainMenu(0);
         break;
+      case 2:
+        return optionsJeu();
       case 1:
         if (this->difficulte < 3)
         {
@@ -930,21 +989,31 @@ void Menu::optionsJeu()
         {
           this->difficulte = 1;
         }
-        plateau.print(41, 12, "                      ", WBLACK);
+        plateau2.print(41, 12, "                      ", WBLACK);
 
         break;
       case 9:
-
+      {
+        int k = 1;
+        for (int i = nbjoueurshumain; i < 6; i++)
+        {
+          nom[i] = "Bot " + myitoa(k);
+          k++;
+        }
         return;
-
+      }
       case 3 ... 8:
       {
         if (selection == 3 + nbjoueurshumain && nbjoueurshumain < nbjoueurs)
         {
           nbjoueurshumain = min(6, nbjoueurshumain + 1);
         }
-        choix[selection] = saisie(23, 14 + 2 * (selection - 3), 25, plateau);
-        nom[selection-3] = choix[selection];
+        choix[selection] = saisie(23, 14 + 2 * (selection - 3), 25, plateau2);
+        nom[selection - 3] = choix[selection];
+        plateau2.print(9, 14 + 2 * (nbjoueurs - nbjoueurshumain), "     ");
+
+        aide.setBordureDroite();
+        aideOptionsJeu(aide, selection);
         continue;
       }
       break;
@@ -994,6 +1063,7 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
 
   curs_set(0);
   noecho();
+  plateau.print(x, y, "                     ", WBLACK);
 
   return chaine;
 }
@@ -1015,8 +1085,10 @@ void aideOptionsJeu(Window &aide, int s)
 
     break;
   case 2:
-    aide.print(1, 0, "Liste des joueurs humain.\n\n Laissez vide pour une partie entre joueurs virtuels.");
+    aide.print(1, 0, "Liste des joueurs humain.\n\n Laissez vide pour une partie entre joueurs virtuels.\n Réinitialiser");
+    aide.print(33, 4, "Entrée");
 
+    break;
   case 3 ... 8:
     aide.print(1, 0, "Appuyez sur entrer pour ajouter un\n joueur humain ou modifier son nom.");
     aide.print(1, 4, "Ajouter / Modifier");
@@ -1025,5 +1097,268 @@ void aideOptionsJeu(Window &aide, int s)
   case 9:
     aide.print(1, 0, "Jouer avec la configuration actuelle");
     break;
+  case 10:
+    aide.print(1, 0, "Retour au menu");
+    break;
   }
+}
+
+void Menu::topscores(Window& top)
+{
+  top.setBordureDroite();
+  wattron(top.win, A_UNDERLINE);
+  top.print(8, 0, "TOP SCORES", BLUEBLACK);
+  wattroff(top.win, A_UNDERLINE);
+
+  // top.print(10, 14, "Retour", colSelectionnee);
+
+  int k;
+  int i = 3;
+  string ligne;
+
+  ifstream file("topscores", ios::in);
+
+  while (getline(file, ligne) && i < 13)
+  {
+    top.print(1, i, ligne, BLUEBLACK);
+    getline(file, ligne);
+    int sc = atoi(ligne.c_str());
+    string strsc = myitoa(sc / 1000) + " " + (sc % 1000 < 100 && sc % 1000 > 0 ? "0" : "") + myitoa(sc % 1000) + (sc % 1000 == 0 ? "00" : "");
+
+    top.print(24 - strsc.length(), i, strsc, GBLACK);
+
+    i++;
+    usleep(160000);
+  }
+  file.close();
+
+  // while ((k = getch()) != '\n')
+  // {
+  // }
+}
+
+void Menu::chargement()
+{
+
+  int height = H;
+  int width = W;
+
+  ifstream save("save/sauvegarde", ios::in);
+  string ligne;
+  getline(save, ligne);
+  int humains = ligne[0]-'0';
+  int nbjoueurs = ligne[2]-'0';
+  int joueurs = ligne[4]-'0';
+  int JoueursRestants = ligne[6]-'0';
+  int cible = ligne[8]-'0';
+  int cibleSelectionnee = ligne[10]-'0';
+  int nbhisto = ligne[12]-'0';
+  int difficulte = ligne[14]-'0';
+  getline(save, ligne);
+  int tour = atoi(ligne.c_str());
+
+  int*** EtatCases = new int**[nbjoueurs];
+  int*** Case2 = new int**[nbjoueurs];
+
+  for (int i = 0 ; i < nbjoueurs ; i++)
+  {
+    EtatCases[i] = new int*[W];
+    Case2[i] = new int*[W];
+    for (int x = 0 ; x < W ; x++)
+    {
+      EtatCases[i][x] = new int[H];
+      Case2[i][x] = new int[H];
+    }
+  }
+
+
+
+  
+  string nom[6];
+  int missilesTires[6];
+  int missilesGagnants[6];
+
+  int payback[6];
+    getline(save, ligne);
+
+  for (int i = 0; i < 6; i++)
+  {
+    payback[i] = ligne[i]-'0';
+  }
+  getline(save, ligne);
+
+  int estVulnerable[6];
+  for (int i = 0; i < 6; i++)
+  {
+    estVulnerable[i] = ligne[i]-'0';
+  }
+  getline(save, ligne);
+
+  int positionDuJoueur[6];
+  for (int i = 0; i < 6; i++)
+  {
+    positionDuJoueur[i] = ligne[i]-'0';
+  }
+  getline(save, ligne);
+
+  int joueurEnPosition[6];
+  for (int i = 0; i < 6; i++)
+  {
+    joueurEnPosition[i] = ligne[i]-'0';
+  }
+  getline(save, ligne);
+
+  int *naviresRestants=new int[nbjoueurs];
+  int k = 0;
+
+  for (int i = 0; i <  nbjoueurs; i ++)
+  {
+    naviresRestants[i] = ligne[k]-'0';
+    k+=2;
+  }
+  getline(save, ligne);
+  k=0;
+
+  int** casesRestantes = new int*[nbjoueurs];
+  string tmp;
+
+  // Cases restantes de chacun des navires
+  for (int i = 0; i < nbjoueurs; i++)
+  {
+    casesRestantes[i] = new int[5];
+    for (int j = 0; j < 5; j++)
+    {
+      while (ligne[k] != ':')
+      {
+        tmp += ligne[k];
+        k++;
+      }
+      casesRestantes[i][j] = atoi(tmp.c_str());
+      k++;
+      tmp.clear();
+    }
+    k = 0;
+    getline(save, ligne);
+  }
+
+  int ***posNavires =new int**[nbjoueurs];
+
+  // Position des navires
+  for (int i = 0; i < nbjoueurs; i++)
+  {
+    k=0;
+    posNavires[i] = new int*[5];
+    for (int j = 0; j < 5; j++)
+    {
+      posNavires[i][j] = new int[2];
+      for (int p = 0; p < 2; p++)
+      {
+        while (ligne[k] != ':')
+        {
+          tmp += ligne[k];
+          k++;
+        }
+        posNavires[i][j][p] = atoi(tmp.c_str());
+        k++;
+        tmp.clear();
+      }
+      k++;
+    }
+
+    getline(save, ligne);
+  }
+
+
+  int** NbPivotements = new int*[nbjoueurs];
+
+  for (int i = 0 ; i < nbjoueurs ; i++)
+  {
+    k = 0;
+    NbPivotements[i] = new int[5];
+    for (int n = 0 ; n < 5 ; n++)
+    {
+      NbPivotements[i][n] = ligne[k]-'0';
+            k +=2;
+    }
+        getline(save, ligne);
+
+  }
+
+
+
+k=0;
+
+  for (int i = 0; i < nbjoueurs; i++)
+  {
+    nom[i] += ligne;
+    getline(save, ligne);
+  }
+
+  string historique[6];
+
+  for (int i = 0; i < nbhisto; i++)
+  {
+    getline(save, ligne);
+
+    while (ligne[1] != ':')
+    {
+      historique[i] += ligne;
+      getline(save, ligne);
+    }
+  }
+
+  getline(save, ligne);
+
+  getline(save, ligne);
+
+  int tailleFlotte = atoi(ligne.c_str());
+
+  getline(save, ligne);
+
+  for (int i = 0; i < nbjoueurs; i++)
+  {
+    getline(save, ligne);
+    missilesTires[i] = atoi(ligne.c_str());
+    getline(save, ligne);
+    missilesGagnants[i] = atoi(ligne.c_str());
+  }
+
+
+  for (int n = 0; n < nbjoueurs; n++)
+  {
+      getline(save, ligne);
+
+    k = 0;
+    for (int y = 0; y < H; y++)
+    {
+      getline(save, ligne);
+      k = 0;
+      for (int x = 0; x < W; x++)
+      {
+        EtatCases[n][x][y] = ligne[k]-'0';
+        k += 2;
+      }
+    }
+    k = 0;
+    getline(save, ligne);
+
+    for (int y = 0; y < H; y++)
+    {
+      getline(save, ligne);
+      k = 0;
+      for (int x = 0; x < W; x++)
+      {
+        Case2[n][x][y] = ligne[k]-'0';
+        k += 2;
+      }
+    }
+  }
+
+  save.close();
+
+  clear();
+
+  Jeu Jeu(nbjoueurs, humains, 2, 6, nom);
+  Jeu.chargementparametres(tour,nbhisto,payback, estVulnerable, positionDuJoueur, joueurEnPosition, historique,EtatCases,Case2,casesRestantes,posNavires,naviresRestants,NbPivotements, missilesTires,missilesGagnants,tailleFlotte);
+  Jeu.Phase2();
 }

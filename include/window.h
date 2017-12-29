@@ -45,7 +45,6 @@ class Window {
   int height,width,startx,starty;
   Color colorwin, colorframe;
   char bord;
-  void update() const;
   bool estGrille = false;
 
  public:
@@ -58,6 +57,7 @@ class Window {
   Window(int h,int w, int x, int y, char c=' ', bool estgrille=false);
 
   ~Window();
+  void update() const;
 
   // fonction permettant d'afficher une variable s de type (string ou char)
   // à la position (x,y) dans la fenetre.
@@ -87,6 +87,7 @@ class Window {
 
 
   void clear() const; // enleve tout le contenu de la fenêtre
+  void clearall() const; // enleve tout le contenu de la fenêtre + frame
   WINDOW* getWin();
 };
 

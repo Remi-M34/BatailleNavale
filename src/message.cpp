@@ -25,14 +25,14 @@ string aide()
 
 string aPropos()
 {
-    string message = "Rémi M - Guillaume K - Rémi L";
+    string message = "Rémi Mattei\t|  Guillaume Kostrzewski\nRémi Lagardère |  Mohamed Bouchengour";
 
     return message;
 }
 
 string version()
 {
-    string message = "v. 0.55";
+    string message = "v. 1.12";
 
     return message;
 }

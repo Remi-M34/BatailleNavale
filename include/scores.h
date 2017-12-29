@@ -18,6 +18,12 @@ public:
   void navireTouche();
   void augmenterTailleFlotte();
 
+  int getMissilesTires();
+  int getMissilesGagnants();
+  int getTailleFlotte();
+
+  void ChargerDonnees(int MissilesTires, int MissilesGagnants, int tailleFlotte);
+
 private:
 
 int missilesTires = 0;

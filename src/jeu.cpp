@@ -37,6 +37,96 @@ Jeu::Jeu(int nbjoueurs, int humains, int diff, int v, string n[]) : nbjoueurs(nb
     this->humains = humains;
 }
 
+Jeu::Jeu(int n) : info(22, 22, getScoreStartX(2) - 2, -(H + HF) / 1.9), plateau(getBordureHeight(2), getBordureWidth(2), getScoreStartX(2) - 4, getBordureStartY(2)), aide(7, 2 * W + 4, getScoreStartX(2) + 22, getAideStartY(2)), difficulte(2)
+{
+    srand((int)time(0));
+
+    nbjoueurs = 2;
+    humains = (2);
+    vitesse = (6);
+    JoueursRestants = (2);
+
+    initCouleurs();
+    curs_set(0);
+
+    initDim(2);
+}
+
+void Jeu::CreationLog()
+{
+    //Creer un fichier "fichier.log" et écrit la configuration de la parie
+    //Si un fichier "fichier.log" existe déja, il écrase celui-ci puis écrit la configuration de la parie
+    std::ofstream file("fichier.log");
+    file << "Début d'une nouvelle partie à: " << nbjoueurs << " joueurs\n";
+    file << "La taille de la grille de jeu est de: " << W << "x" << H << "\n";
+    file << "Difficulté: " << (difficulte == 1 ? "Facile" : (difficulte == 2 ? "Normal" : "Difficile")) << "\n";
+    file << "Participants:\n";
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        file << "\t" << nom[i] << "\n";
+    }
+    file << " \n";
+}
+
+void Jeu::Log_AjouterAction(int sc)
+{
+    //Permet d'ajouter les actions tour par tour
+    std::ofstream file("fichier.log", std::ios_base::app);
+    file << "Tour " << tour << "\n";
+    file << nom[joueur] << " cible la flotte de " << nom[cibleSelectionnee] << "\n";
+    file << "\tun missile est tiré sur la case " << getPos(cibleSelectionnee) << "\n";
+    switch (sc)
+    {
+    case 1:
+
+        file << "\tle missile a touché la cible !\n";
+        break;
+    case 2:
+        file << "\tle missile a coulé un navire de la cible !\n";
+        break;
+    case 3:
+        file << "\tle missile a coulé un navire de la cible !\n";
+        file << nom[cibleSelectionnee] << " repose en paix...\n";
+        break;
+    case 0:
+
+        file << "\tle missile est tombé à l'eau...\n";
+        break;
+    }
+    file << "\tle score de " << nom[joueur] << " est de " << myitoa(Joueur[joueur]->Score.getScore() / 1000);
+
+    if (Joueur[joueur]->Score.getScore() > 999)
+    {
+        file << " " << (Joueur[joueur]->Score.getScore() % 1000 < 100 && Joueur[joueur]->Score.getScore() % 1000 > 0 ? "0" : "") << Joueur[joueur]->Score.getScore() % 1000 << ((*Joueur[joueur]).Score.getScore() % 1000 == 0 ? "00" : "");
+    }
+
+    file << " Points" << endl
+         << endl
+         << endl;
+}
+
+void Jeu::chargementparametres(int tour, int nbhisto, int payback[6], int estVulnerable[6], int positionDuJoueur[6], int joueurEnPosition[6], string historique[6], int ***Case, int ***Case2, int **casesRestantes, int ***posNavires,int* naviresRestants, int** NbPivotements, int *MissilesTires, int *MissilesGagnants, int tailleFlotte)
+{
+    this->nbhisto = nbhisto;
+    this->tour = tour;
+    for (int i = 0; i < 6; i++)
+    {
+        this->payback[i] = payback[i];
+        this->estVulnerable[i] = estVulnerable[i];
+        this->positionDuJoueur[i] = positionDuJoueur[i];
+        this->joueurEnPosition[i] = joueurEnPosition[i];
+        this->historique[i] = historique[i];
+
+        if (i < nbjoueurs)
+        {
+            Joueur[i]->ChargementDonnees(Case[i], Case2[i], casesRestantes[i], posNavires[i], naviresRestants[i], NbPivotements[i],MissilesTires[i], MissilesGagnants[i], tailleFlotte);
+        }
+    }
+
+    setupaide();
+    DecalerHistorique(" Partie chargée!", 0);
+}
+
 Jeu::~Jeu() {}
 
 void Jeu::initCouleurs()
@@ -124,44 +214,44 @@ void Jeu::setupaide()
         aide.print(1, 5, "Tir aléatoire", CBLACK);
         aide.print(aide.getWindowWidth() - 2, 5, "a");
     }
-    DecalerHistorique(" Le jeu commence !", 0);
 }
 
-void Jeu::start()
+void Jeu::Phase2()
 {
 
-    DecalerHistorique(" Les joueurs peuvent \ndésormais placer leur navires sur leur territoire!", 0);
-    placementDesNavires();
     setupaide();
+    refreshScores();
 
     (*Joueur[joueur]).setJoue(true);
     usleep(150000);
 
     selectionCible(joueur);
-    // cibleSelectionnee = joueur;
     int ch;
+
     while (JoueursRestants > 1)
     {
         tour++;
-        refreshScores();
         // checkSpeed(ch,aide,vitesse);
 
         switch (attaque())
         {
         case 1:
-            InfoJeu(joueur, cibleSelectionnee, 1);
+
             payback[cibleSelectionnee] = joueur;
             (*Joueur[joueur]).Score.navireTouche();
+            InfoJeu(joueur, cibleSelectionnee, 1);
+            Log_AjouterAction(1);
             classementUp();
 
             estVulnerable[cibleSelectionnee] = 1;
             continue;
 
         case 2:
-            InfoJeu(joueur, cibleSelectionnee, 2);
 
             (payback[cibleSelectionnee]) = joueur;
             (*Joueur[joueur]).Score.navireTouche();
+            InfoJeu(joueur, cibleSelectionnee, 2);
+            Log_AjouterAction(2);
             classementUp();
             if ((*Joueur[cibleSelectionnee]).findFocus() == -1)
             {
@@ -169,17 +259,29 @@ void Jeu::start()
             }
             continue;
         case 3:
-            InfoJeu(joueur, cibleSelectionnee, 3);
             JoueursRestants--;
-            (*Joueur[joueur]).Score.navireTouche();
+
+            Joueur[joueur]->Score.navireTouche();
+            Log_AjouterAction(3);
+
             classementUp();
-selectionCible(joueur);
-break;
+            InfoJeu(joueur, cibleSelectionnee, 3);
+            classementUp();
+            Joueur[cibleSelectionnee]->croixmort();
+            if (JoueursRestants > 1)
+            {
+                selectionCible(cibleSelectionnee);
+            }
+            continue;
+
         case 0:
             (payback[cibleSelectionnee]) = joueur;
+
             (*Joueur[joueur]).Score.missileEnvoye();
-            classementDown();
+            Log_AjouterAction(0);
+
             joueurSuivant();
+            classementDown();
             usleep(max((9 - vitesse) * 27000, 0));
             selectionCible(joueur);
 
@@ -187,17 +289,27 @@ break;
         case -1:
             (*Joueur[cibleSelectionnee]).setCiblageValide(false);
             tour--;
-            selectionCible(joueur);
-
+            if (JoueursRestants > 2)
+            {
+                selectionCible(joueur);
+            }
             break;
         }
     }
 
-    while(1)
-    {
+    ValiderScore();
 
-    }
-    
+    plateau.clearall();
+}
+
+void Jeu::Phase1()
+{
+    CreationLog();
+    DecalerHistorique(" Les joueurs peuvent \ndésormais placer leur navires sur leur territoire!", 0);
+    placementDesNavires();
+    DecalerHistorique(" Le jeu commence !", 0);
+
+    Phase2();
 }
 
 void Jeu::DecalerHistorique(string nouvelleinfo, int sc)
@@ -234,6 +346,9 @@ void Jeu::DecalerHistorique(string nouvelleinfo, int sc)
     case 2:
         separateur[0] = MBLACK;
         break;
+    case 3:
+        separateur[0] = RBLACK;
+        break;
     }
 
     werase(info.win);
@@ -262,16 +377,26 @@ void Jeu::InfoJeu(unsigned int attaquant, unsigned int cible, int sc)
 
     switch (sc)
     {
+    case 3:
+        nouvelleinfo = " " + nom[attaquant] + " a tué " + nom[cible] + " !";
+        break;
     case 2:
         nouvelleinfo = " " + nom[attaquant] + " vient de couler un navire de " + nom[cible];
         break;
     case 1:
         nouvelleinfo = " " + nom[attaquant] + " a touché " + nom[cible] + " en " + getPos(cible);
-
         break;
     }
-
     DecalerHistorique(nouvelleinfo, sc);
+
+    if (JoueursRestants == 1)
+    {
+        string sco = myitoa(Joueur[attaquant]->Score.getScore() / 1000) + " " + (Joueur[attaquant]->Score.getScore() % 1000 < 100 && Joueur[attaquant]->Score.getScore() % 1000 > 0 ? "0" : "") + myitoa(Joueur[attaquant]->Score.getScore() % 1000) + ((*Joueur[attaquant]).Score.getScore() % 1000 == 0 ? "00" : "");
+
+        nouvelleinfo = nom[attaquant] + " est déclaré vainqueur avec " + sco + " points !";
+
+        DecalerHistorique(nouvelleinfo, sc);
+    }
 }
 
 string Jeu::getPos(int i)
@@ -303,42 +428,42 @@ void Jeu::initDim(int nbjoueurs)
     {
     case 2:
     {
-        Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 - (H + HF) / 2, 0 - 2 - sxf - 2 * WF, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA(),nom[0]);
+        Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 - (H + HF) / 2, 0 - 2 - sxf - 2 * WF, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA(), nom[0]);
         // plateau.print(sx+25+W/2,syf,nom[0].c_str());
         (*Joueur[0]).fenetre.printborder(0, 0, nom[0]);
 
-        Joueur[1] = new Grille(0 + 2 + sx, 0 - (H + HF) / 2, 0 + 2 + sxf, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA(),nom[1]);
+        Joueur[1] = new Grille(0 + 2 + sx, 0 - (H + HF) / 2, 0 + 2 + sxf, 4 + H + 0 - (H + HF) / 2, vitesse, difficulte, aide, estIA(), nom[1]);
         break;
     }
     case 3 ... 4:
     {
-        Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 + 1, 0 - 2 - sxf - 2 * WF, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(),nom[0]);
-        Joueur[1] = new Grille(0 + 2 + sx, 0 + 1, 0 + 2 + sxf, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(),nom[1]);
+        Joueur[0] = new Grille(0 - 2 - sx - 2 * W, 0 + 1, 0 - 2 - sxf - 2 * WF, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(), nom[0]);
+        Joueur[1] = new Grille(0 + 2 + sx, 0 + 1, 0 + 2 + sxf, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(), nom[1]);
 
         switch (nbjoueurs)
         {
         case 3:
-            Joueur[2] = new Grille(0 - 2 - sx - 2 * W, 0 - H - 2, 0 - 2 - sxf - 2 * WF, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(),nom[2]);
+            Joueur[2] = new Grille(0 - 2 - sx - 2 * W, 0 - H - 2, 0 - 2 - sxf - 2 * WF, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(), nom[2]);
             break;
         case 4:
-            Joueur[2] = new Grille(0 - 2 - sx - 2 * W, 0 - H - 2, 0 - 2 - sxf - 2 * WF, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(),nom[2]);
-            Joueur[3] = new Grille(0 + 2 + sx, 0 - H - 2, 0 + 2 + sxf, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(),nom[3]);
+            Joueur[2] = new Grille(0 - 2 - sx - 2 * W, 0 - H - 2, 0 - 2 - sxf - 2 * WF, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(), nom[2]);
+            Joueur[3] = new Grille(0 + 2 + sx, 0 - H - 2, 0 + 2 + sxf, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(), nom[3]);
             break;
         }
         break;
     }
     case 5 ... 6:
     {
-        Joueur[0] = new Grille(0 - 2 - sx - 2 * W - 12, 0 + 1, 0 - 2 - sxf - 2 * WF - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(),nom[0]);
-        Joueur[1] = new Grille(0 + 2 + sx - 12, 0 + 1, 0 + 2 + sxf - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(),nom[1]);
-        Joueur[2] = new Grille(0 + 6 + sx + 2 * max(W, WF) - 12, 0 + 1, 0 + 6 + sxf + 2 * max(W, WF) - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(),nom[2]);
+        Joueur[0] = new Grille(0 - 2 - sx - 2 * W - 12, 0 + 1, 0 - 2 - sxf - 2 * WF - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(), nom[0]);
+        Joueur[1] = new Grille(0 + 2 + sx - 12, 0 + 1, 0 + 2 + sxf - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(), nom[1]);
+        Joueur[2] = new Grille(0 + 6 + sx + 2 * max(W, WF) - 12, 0 + 1, 0 + 6 + sxf + 2 * max(W, WF) - 12, 4 + H + 0 + 1, vitesse, difficulte, aide, estIA(), nom[2]);
 
-        Joueur[3] = new Grille(0 - 2 - sx - 2 * W - 12, 0 - H - 2, 0 - 2 - sxf - 2 * WF - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(),nom[3]);
-        Joueur[4] = new Grille(0 + 2 + sx - 12, 0 - H - 2, 0 + 2 + sxf - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(),nom[4]);
+        Joueur[3] = new Grille(0 - 2 - sx - 2 * W - 12, 0 - H - 2, 0 - 2 - sxf - 2 * WF - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(), nom[3]);
+        Joueur[4] = new Grille(0 + 2 + sx - 12, 0 - H - 2, 0 + 2 + sxf - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(), nom[4]);
 
         if (nbjoueurs == 6)
         {
-            Joueur[5] = new Grille(0 + 6 + sx + 2 * max(W, WF) - 12, 0 - H - 2, 0 + 6 + sxf + 2 * max(W, WF) - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(),nom[5]);
+            Joueur[5] = new Grille(0 + 6 + sx + 2 * max(W, WF) - 12, 0 - H - 2, 0 + 6 + sxf + 2 * max(W, WF) - 12, 0 - 6 - H - HF, vitesse, difficulte, aide, estIA(), nom[5]);
         }
         break;
     }
@@ -380,18 +505,12 @@ bool Jeu::estIA()
 void Jeu::selectionCible(int j)
 {
 
-    if (nbjoueurs == 2)
+    if (JoueursRestants == 2)
     {
-        switch (joueur)
+        do
         {
-        case 0:
             selectRight();
-            break;
-        case 1:
-            selectLeft();
-            break;
-        }
-
+        } while (cibleSelectionnee == joueur);
         (*Joueur[cibleSelectionnee]).setCiblageValide(true);
         return;
     }
@@ -452,11 +571,53 @@ void Jeu::selectionCible(int j)
             }
             break;
         }
+        case '1':
+            if (!Joueur[0]->estMort() && joueur != 0)
+            {
+                SelectionKeypad(0);
+                return;
+            }
+            break;
+        case '2':
+            if (!Joueur[1]->estMort() && joueur != 1)
+            {
+                SelectionKeypad(1);
+                return;
+            }
+            break;
+        case '3':
+            if (nbjoueurs > 2 && !Joueur[2]->estMort() && joueur != 2)
+            {
+                SelectionKeypad(2);
+                return;
+            }
+            break;
+        case '4':
+            if (nbjoueurs > 3 && !Joueur[3]->estMort() && joueur != 3)
+            {
+                SelectionKeypad(3);
+                return;
+            }
+            break;
+        case '5':
+            if (nbjoueurs > 4 && !Joueur[4]->estMort() && joueur != 4)
+            {
+                SelectionKeypad(4);
+                return;
+            }
+            break;
+        case '6':
+            if (nbjoueurs > 5 && !Joueur[5]->estMort() && joueur != 5)
+            {
+                SelectionKeypad(5);
+                return;
+            }
+            break;
         case 'a':
         {
             selectionCibleAleatoire();
-                            (*Joueur[cibleSelectionnee]).setCiblageValide(true);
-                return;
+            (*Joueur[cibleSelectionnee]).setCiblageValide(true);
+            return;
             break;
         }
         case '+':
@@ -468,15 +629,18 @@ void Jeu::selectionCible(int j)
             aide.print(aide.getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
 
             break;
+        case 's':
+            sauvegarde();
+            break;
         case '\n':
-            if (joueur != cibleSelectionnee)
+            if (joueur != cibleSelectionnee && !Joueur[cibleSelectionnee]->estMort())
             {
                 (*Joueur[cibleSelectionnee]).setCiblageValide(true);
                 return;
             }
             else
             {
-                (*Joueur[joueur]).mauvaiseSelection();
+                (*Joueur[cibleSelectionnee]).mauvaiseSelection();
             }
 
             break;
@@ -484,22 +648,47 @@ void Jeu::selectionCible(int j)
     }
 }
 
-int Jeu::joueurVulnerable()
+void Jeu::SelectionKeypad(int j)
+{
+    if (nbjoueurs > j && !Joueur[j]->estMort() && j != joueur)
+    {
+        (*Joueur[cibleSelectionnee]).setCiblageValide(false);
+        (*Joueur[cibleSelectionnee]).setEstCible(false);
+
+        cibleSelectionnee = j;
+        (*Joueur[cibleSelectionnee]).setEstCible(true);
+
+        Joueur[cibleSelectionnee]->setCiblageValide(true);
+    }
+}
+
+void Jeu::joueurVulnerable()
 {
     int k = 0;
-    int vul[nbjoueurs] = {-1};
+    int vul[JoueursRestants] = {-1};
+    // srand((int)time(0));
+
     for (int i = 0; i < nbjoueurs; i++)
     {
-        if ((estVulnerable[i] == 1) && joueur != i)
+        test("\n Rech joueur vul");
+        if (!(Joueur[i]->estMort()) && (estVulnerable[i] == 1) && joueur != i)
         {
             vul[k] = i;
             k++;
         }
     }
     if (k == 0)
-        return rand() % nbjoueurs;
+    {
+        cibleAleatoire();
+        return;
+    }
 
-    return vul[rand() % k];
+    cible = vul[(rand() % k)];
+    test(myitoa(cible));
+    test(myitoa(k));
+    test(myitoa(vul[k]));
+
+    return;
 }
 
 void Jeu::cibleAleatoire()
@@ -522,27 +711,39 @@ void Jeu::selectionCibleAleatoire()
         {
         case 3:
 
-            cible = joueurVulnerable();
+            joueurVulnerable();
             break;
         case 2:
             if ((rand() % 2) == 0)
             {
-                cible = joueurVulnerable();
+                joueurVulnerable();
             }
             else
             {
-                cible = payback[joueur];
+                if (!Joueur[payback[joueur]]->estMort())
+                {
+                    cible = payback[joueur];
+                }
+                else
+                    cibleAleatoire();
             }
             break;
         case 1:
             switch (int k = (rand() % 3))
             {
             case 0:
-                cible = joueurVulnerable();
+                joueurVulnerable();
                 break;
             case 1:
-                cible = payback[joueur];
-                break;
+            {
+                if (!Joueur[payback[joueur]]->estMort())
+                {
+                    cible = payback[joueur];
+                }
+                else
+                    cibleAleatoire();
+            }
+            break;
             case 2:
                 cibleAleatoire();
                 break;
@@ -575,19 +776,32 @@ void Jeu::deplacementIA()
         case 0 ... 2:
             if (cibleSelectionnee > cible)
             {
+                test("left");
+
                 selectLeft();
             }
             else
             {
+                test("right");
+
                 selectRight();
             }
             break;
         case 3 ... 5:
         {
             if (nbjoueurs > 4)
+
+            {
+                test("up");
+
                 selectUp();
+            }
             else
+            {
+                test("right");
+
                 selectRight();
+            }
         }
         break;
         }
@@ -597,15 +811,20 @@ void Jeu::deplacementIA()
         switch (cible)
         {
         case 0 ... 2:
+            test("down");
+
             selectDown();
             break;
         case 3 ... 5:
             if (cibleSelectionnee > cible)
             {
+                test("left");
                 selectLeft();
             }
             else
             {
+                test("right");
+
                 selectRight();
             }
             break;
@@ -630,24 +849,32 @@ void Jeu::selectUp()
         switch (cibleSelectionnee)
         {
         case 0:
-            (*Joueur[cibleSelectionnee]).setEstCible(false);
-            (*Joueur[3]).setEstCible(true);
-            cibleSelectionnee = 3;
-            return;
+            if (!Joueur[3]->estMort())
+            {
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[3]).setEstCible(true);
+                cibleSelectionnee = 3;
+                return;
+            }
+            else
+            {
+                return selectLeft();
+            }
         case 1:
-            if (nbjoueurs > 4)
+            if (nbjoueurs > 4 && !Joueur[4]->estMort())
             {
                 (*Joueur[cibleSelectionnee]).setEstCible(false);
                 (*Joueur[4]).setEstCible(true);
                 cibleSelectionnee = 4;
+                return;
             }
             else
             {
-                selectLeft();
+                return selectLeft();
             }
             return;
         case 2:
-            if (nbjoueurs == 6)
+            if (nbjoueurs == 6 && !Joueur[5]->estMort())
             {
                 (*Joueur[cibleSelectionnee]).setEstCible(false);
                 (*Joueur[5]).setEstCible(true);
@@ -655,7 +882,7 @@ void Jeu::selectUp()
             }
             else
             {
-                selectLeft();
+                return selectRight();
             }
             return;
         }
@@ -665,23 +892,34 @@ void Jeu::selectUp()
         switch (cibleSelectionnee)
         {
         case 0:
-            (*Joueur[cibleSelectionnee]).setEstCible(false);
-            (*Joueur[2]).setEstCible(true);
-            cibleSelectionnee = 2;
-            return;
+            if (nbjoueurs > 2 && !Joueur[2]->estMort())
+            {
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[2]).setEstCible(true);
+                cibleSelectionnee = 2;
+                return;
+            }
+            else
+            {
+                return selectRight();
+            }
         case 1:
-            if (nbjoueurs == 4)
+            if (nbjoueurs == 4 && !Joueur[3]->estMort())
             {
                 (*Joueur[cibleSelectionnee]).setEstCible(false);
                 (*Joueur[3]).setEstCible(true);
                 cibleSelectionnee = 3;
+            }
+            else
+            {
+                return selectRight();
             }
             return;
         }
     }
     else
     {
-        selectLeft();
+        // selectLeft();
     }
 }
 
@@ -692,24 +930,41 @@ void Jeu::selectDown()
         switch (cibleSelectionnee)
         {
         case 3:
-            (*Joueur[cibleSelectionnee]).setEstCible(false);
-            (*Joueur[0]).setEstCible(true);
-            cibleSelectionnee = 0;
+        {
+            if (!Joueur[0]->estMort())
+            {
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[0]).setEstCible(true);
+                cibleSelectionnee = 0;
+            }
+            else
+            {
+                return selectLeft();
+            }
             break;
+        }
         case 4:
-            if (nbjoueurs > 4)
+            if (nbjoueurs > 4 && !Joueur[1]->estMort())
             {
                 (*Joueur[cibleSelectionnee]).setEstCible(false);
                 (*Joueur[1]).setEstCible(true);
                 cibleSelectionnee = 1;
             }
+            else
+            {
+                return selectRight();
+            }
             break;
         case 5:
-            if (nbjoueurs == 6)
+            if (nbjoueurs == 6 && !Joueur[2]->estMort())
             {
                 (*Joueur[cibleSelectionnee]).setEstCible(false);
                 (*Joueur[2]).setEstCible(true);
                 cibleSelectionnee = 2;
+            }
+            else
+            {
+                return selectRight();
             }
             break;
         }
@@ -719,15 +974,30 @@ void Jeu::selectDown()
         switch (cibleSelectionnee)
         {
         case 3:
-            (*Joueur[cibleSelectionnee]).setEstCible(false);
-            (*Joueur[1]).setEstCible(true);
-            cibleSelectionnee = 1;
+            if (!Joueur[1]->estMort())
+            {
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[1]).setEstCible(true);
+                cibleSelectionnee = 1;
+            }
+            else
+            {
+                return selectRight();
+            }
             break;
         case 2:
         {
-            (*Joueur[cibleSelectionnee]).setEstCible(false);
-            (*Joueur[0]).setEstCible(true);
-            cibleSelectionnee = 0;
+            if (!Joueur[0]->estMort())
+
+            {
+                (*Joueur[cibleSelectionnee]).setEstCible(false);
+                (*Joueur[0]).setEstCible(true);
+                cibleSelectionnee = 0;
+            }
+            else
+            {
+                return selectLeft();
+            }
         }
         break;
         }
@@ -736,78 +1006,74 @@ void Jeu::selectDown()
 
 void Jeu::selectRight()
 {
-        (*Joueur[cibleSelectionnee]).setEstCible(false);
-bool trouve = false;
-while (!trouve)
-{
-    if (cibleSelectionnee < nbjoueurs -1)
+    (*Joueur[cibleSelectionnee]).setEstCible(false);
+    bool trouve = false;
+    while (!trouve)
     {
-        cibleSelectionnee++;
-    }
-    else
-    {
-        for (int i = 0 ; i < nbjoueurs ; i++)
+        if (cibleSelectionnee < nbjoueurs - 1)
         {
-            if (!(Joueur[i]->estMort()))
+            cibleSelectionnee++;
+        }
+        else
+        {
+            for (int i = 0; i < nbjoueurs; i++)
             {
-                trouve = true;
-                cibleSelectionnee = i;
-                break;
+                if (!(Joueur[i]->estMort()))
+                {
+                    trouve = true;
+                    cibleSelectionnee = i;
+                    break;
+                }
             }
         }
+        if (!(Joueur[cibleSelectionnee]->estMort()))
+        {
+            trouve = true;
+        }
     }
-    if (!(Joueur[cibleSelectionnee]->estMort()))
-    {
-        trouve = true;
-    }
-}
 
-
-        (*Joueur[cibleSelectionnee]).setEstCible(true);
-    
+    (*Joueur[cibleSelectionnee]).setEstCible(true);
 }
 
 void Jeu::selectLeft()
 {
-{
+    {
         (*Joueur[cibleSelectionnee]).setEstCible(false);
-bool trouve = false;
-while (!trouve)
-{
-    if (cibleSelectionnee > 0)
-    {
-        cibleSelectionnee--;
-    }
-    else
-    {
-        for (int i = nbjoueurs-1 ; i >= 0 ; i--)
+        bool trouve = false;
+        while (!trouve)
         {
-            if (!(Joueur[i]->estMort()))
+            if (cibleSelectionnee > 0)
+            {
+                cibleSelectionnee--;
+            }
+            else
+            {
+                for (int i = nbjoueurs - 1; i >= 0; i--)
+                {
+                    if (!(Joueur[i]->estMort()))
+                    {
+                        trouve = true;
+                        cibleSelectionnee = i;
+                        break;
+                    }
+                }
+            }
+            if (!(Joueur[cibleSelectionnee]->estMort()))
             {
                 trouve = true;
-                cibleSelectionnee = i;
-                break;
             }
         }
-    }
-    if (!(Joueur[cibleSelectionnee]->estMort()))
-    {
-        trouve = true;
-    }
-}
-
 
         (*Joueur[cibleSelectionnee]).setEstCible(true);
-    
-}
+    }
 }
 
 void Jeu::placementDesNavires()
 {
     for (int i = 0; i < nbjoueurs; i++)
     {
-        info.print(1, 0, 'Joueur ');
-        info.print(8, 0, to_string(i));
+        string str = nom[i] + " place ses\n navires...";
+        info.print(0, 0, str);
         Joueur[i]->selectionNavire();
     }
 
@@ -823,27 +1089,31 @@ void Jeu::joueurSuivant()
 
     (*Joueur[joueur]).setJoue(false);
 
-bool trouve = false;
-for (int i = joueur+1 ; i < nbjoueurs  && !trouve; i++)
-{
-    if (!(*Joueur[joueur]).estMort())
+    bool trouve = false;
+    while (!trouve)
     {
-        trouve = true;
-        joueur = i;
+        if (joueur < nbjoueurs - 1)
+        {
+            joueur++;
+        }
+        else
+        {
+            for (int i = 0; i < nbjoueurs; i++)
+            {
+                if (!(Joueur[i]->estMort()))
+                {
+                    trouve = true;
+                    joueur = i;
+                    break;
+                }
+            }
+        }
+        if (!(Joueur[joueur]->estMort()))
+        {
+            trouve = true;
+        }
     }
-}
-if (!trouve)
-{
-    for (int i = 0 ; i < nbjoueurs && !trouve; i++ )
-    {
-    if (!(*Joueur[joueur]).estMort())
-    {
-        trouve = true;
-        joueur = i;
-    }
-    }
-}
-    
+
     (*Joueur[joueur]).setJoue(true);
     cibleSelectionnee = joueur;
     usleep(min((9 - vitesse) * 20000, 0));
@@ -986,10 +1256,21 @@ void Jeu::refreshScores()
         }
 
         string str = nom[i];
-        string str2 = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore() / 1000) + " " + myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore() % 1000);
+        Color col = BLUEBLACK;
+        string str2 = myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore() / 1000) + " " + ((*Joueur[joueurEnPosition[i]]).Score.getScore() % 1000 < 100 && (*Joueur[joueurEnPosition[i]]).Score.getScore() % 1000 > 0 ? "0" : "") + myitoa((*Joueur[joueurEnPosition[i]]).Score.getScore() % 1000) + (Joueur[joueurEnPosition[i]]->Score.getScore() % 1000 == 0 ? "00" : "");
         info.print(0, i, "                    ");
-        info.print(0, i, nom[joueurEnPosition[i]]);
+        if (Joueur[joueurEnPosition[i]]->estMort())
+        {
+            col = RBLACK;
+        }
+        else if (i == positionDuJoueur[joueur])
+        {
+            col = GBLACK;
+        }
+        info.print(0, i, nom[joueurEnPosition[i]], col);
         info.print(info.getLargeur() - sc.length(), i, sc);
+        col = WBLACK;
+
         // info.print(1,13+i,myitoa(i));
     }
 }
@@ -1021,6 +1302,8 @@ void Jeu::classementDown()
         cout << "test" << endl;
         classementDown();
     }
+
+    refreshScores();
 }
 
 void Jeu::classementUp()
@@ -1044,5 +1327,178 @@ void Jeu::classementUp()
         test(" devient ");
         test(myitoa(positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]));
         classementUp();
+    }
+
+    refreshScores();
+}
+
+void Jeu::ValiderScore()
+{
+    Window endgame(14, 60, -35, -6);
+    endgame.setCouleurBordure(BRED);
+    endgame.setBordureDroite();
+    endgame.print(1, 1, historique[0], BLUEBLACK);
+    endgame.print(1, 4, "Votre pseudo a peut être été ajouté aux Top Scores...\n Vérifiez depuis le menu!");
+    endgame.print(1, 8, "Appuyez sur Entrée pour revenir au menu.");
+    endgame.print(27, 12, "Retour", WMAGENTA);
+
+    fstream top("topscores", ios::in | ios::out);
+
+    string ligne;
+    int pos = 0;
+
+    int count = 0;
+    int k;
+
+    while (getline(top, ligne))
+    {
+        if (count % 2 == 1)
+        {
+            k = atoi(ligne.c_str());
+            if (k < Joueur[joueur]->Score.getScore())
+            {
+                break;
+            }
+            else
+            {
+                pos++;
+            }
+        }
+        count++;
+    }
+
+    top.clear();
+    top.seekg(0, ios::beg);
+
+    fstream toptmp("topscores2", ios::in | ios::out | ios::trunc);
+
+    while (pos > 0)
+    {
+        getline(top, ligne);
+        toptmp << ligne << "\n";
+        getline(top, ligne);
+        toptmp << ligne << "\n";
+        pos--;
+    }
+
+    toptmp << nom[joueur] << "\n"
+           << Joueur[joueur]->Score.getScore() << "\n";
+
+    while (getline(top, ligne))
+    {
+        toptmp << ligne << "\n";
+    }
+    rename("topscores2", "topscores");
+
+    top.close();
+    toptmp.close();
+
+    int car;
+    while ((car = getch()) != '\n')
+    {
+    }
+}
+
+void Jeu::sauvegarde()
+{
+    string ligne;
+
+    fstream configcopy("config/config_save.txt", ios::in | ios::out | ios::trunc);
+    ifstream config("config/config.txt", ios::in);
+
+    while ((getline(config, ligne)))
+    {
+        configcopy << ligne << endl;
+    }
+
+    fstream save("save/sauvegarde", ios::in | ios::out | ios::trunc);
+    save << humains << ':'
+         << nbjoueurs << ':'
+         << joueur << ':'
+         << JoueursRestants << ':'
+         << cible << ':'
+         << cibleSelectionnee << ':'
+         << min(nbhisto, 6) << ':'
+         << difficulte << endl
+         << tour << endl;
+    for (int i = 0; i < 6; i++)
+    {
+        save << payback[i];
+    }
+    save << endl;
+    for (int i = 0; i < 6; i++)
+    {
+        save << estVulnerable[i];
+    }
+    save << endl;
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        save << positionDuJoueur[i];
+    }
+    save << endl;
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        save << joueurEnPosition[i];
+    }
+    save << endl;
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        save << Joueur[i]->getNaviresRestants() << ':';
+    }
+    save << endl;
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        Joueur[i]->getCasesRestantes(save);
+        save << endl;
+    }
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        Joueur[i]->getPosNavires(save);
+        save << endl;
+    }
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        for (int n = 0; n < 5; n++)
+        {
+            save << Joueur[i]->getNbPivotements(n) << ':';        
+            }
+        save << endl;
+
+    }
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        save << nom[i] << endl;
+    }
+    for (int i = 0; i < min(nbhisto, 6); i++)
+    {
+        save << endl
+             << historique[i];
+        if (i != min(nbhisto, 6))
+            save << endl
+                 << "::";
+    }
+
+    save << endl
+         << "SCORES" << endl;
+
+    save << myitoa(Joueur[0]->Score.getTailleFlotte()) << endl
+         << endl;
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        save << Joueur[i]->Score.getMissilesTires() << endl
+             << Joueur[i]->Score.getMissilesGagnants() << endl;
+    }
+
+    save << "GRILLES" << endl;
+
+    for (int i = 0; i < nbjoueurs; i++)
+    {
+        Joueur[i]->SauvegarderGrille(save);
+        save << endl;
     }
 }

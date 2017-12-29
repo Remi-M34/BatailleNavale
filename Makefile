@@ -7,6 +7,5 @@ prog: obj/window.o obj/test-piece.o obj/grille.o obj/flotte.o obj/config.o obj/m
 
 
 obj/%.o: src/%.cpp
-	g++ -c $^ -o $@ -lncurses -W -Wall -ansi -pedantic
-
+	g++ -c $^ -o $@ -lncurses -W -Wall -ansi -pedantic -g
 

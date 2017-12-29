@@ -207,7 +207,7 @@ void Window::setCouleurBordure(Color c)
 void Window::setBordureDroite()
 {
   wborder(frame, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-  colorwin = GBLACK;
+  colorwin = CBLACK;
   wbkgd(frame, COLOR_PAIR(colorwin));
   wattron(win, COLOR_PAIR(colorwin));
   // BordureNumerotee();
@@ -240,6 +240,12 @@ int Window::getWindowWidth()
 void Window::clear() const
 {
   werase(win);
+  // werase(frame);
+  update();
+}
+
+void Window::clearall() const
+{
   werase(frame);
   update();
 }

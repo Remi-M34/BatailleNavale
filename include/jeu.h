@@ -9,11 +9,12 @@ class Jeu
 
 public:
   Jeu(int nbjoueurs, int humains, int difficulte, int v, std::string n[]);
+  Jeu(int n);
 
   //destructeur
   ~Jeu();
   // Démarre le jeu
-  void start();
+  void Phase1();
   // Phase où chacun des joueurs placent leur navires.
   void placementDesNavires();
 
@@ -36,15 +37,22 @@ public:
   void navires();
   // Renvoie un joueur "vulnérable" cad ayant au moins un navire touché (mais non coulé).
   // Est plus ou moins pris en compte par l'IA selon le mode de difficulté choisie
-  int joueurVulnerable();
+  void joueurVulnerable();
   // Renvoie aléatoirement un joueur qui sera la cible du joueur en train de jouer (sauf lui-même)
   void cibleAleatoire();
   void refreshScores();
   void classementDown();
   void classementUp();
+  void SelectionKeypad(int j);
   void DecalerHistorique(std::string nouvelleinfo,int sc);
   std::string getPos(int i);
   void setupaide();
+  void ValiderScore();
+  void sauvegarde();
+void chargementparametres(int tour, int nbhisto, int payback[6], int estVulnerable[6], int positionDuJoueur[6], int joueurEnPosition[6], std::string historique[6], int*** Case, int*** Case2,int** casesRestantes, int***posNavires,int* naviresRestants, int** NbPivotements, int* missilesTires, int* missilesGagnants, int tailleFlotte);
+void Log_AjouterAction(int sc);
+void CreationLog();
+void Phase2();
 private:
   Window info;
   Window aide;
@@ -69,7 +77,7 @@ std::string nom[6];
     int nbhisto = 0;
   int tour = 0;
   int const difficulte;
-      std::string historique[6];
+  std::string historique[6];
   Color separateur[5] = {WBLACK};
 
   Grille *Joueur[];

@@ -341,3 +341,9 @@ void Flotte::couleursNavires()
 
     couleurs.close();
 }
+
+
+  void Flotte::chargerDim(int** dim)
+{
+    dimNavire = dim;
+}

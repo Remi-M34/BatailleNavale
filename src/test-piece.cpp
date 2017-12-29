@@ -1,6 +1,10 @@
 #include "../include/window.h"
 #include "../include/config.h"
 #include "../include/menu.h"
+#include "../include/message.h"
+
+#include <iostream>
+
 using namespace std;
 void options();
 
@@ -30,24 +34,50 @@ void myprogram()
   }
 }
 
-int main()
+void ParametreLancement(char *argv)
 {
-  startProgramX();
-  if (COLS < 140 || LINES < 40)
+  string par = argv;
+  if (par == "version")
   {
-    erreurEcran(140,40);
+    cout << version() << endl;
   }
+  else if (par == "auteurs")
+  {
+    cout << aPropos() << endl;
+    ;
+  }
+  else if (par == "aide")
+  {
+    cout << aide() << endl;
+    ;
+  }
+  else
+  {
+    cout << "Commande inconnue.\nParamètres possibles : aide version auteurs" << endl;
+  }
+}
 
+int main(int argc, char *argv[])
+{
 
+  if (argc > 1)
+  {
+    ParametreLancement(argv[1]);
+  }
+  else
+  {
+    startProgramX();
+    if (COLS < 140 || LINES < 40)
+    {
+      erreurEcran(140, 40);
+    }
+    Menu menu;
 
-
-  Menu menu;
-
-  menu.mainMenu(1);
+    menu.mainMenu(1);
+  }
 
   // myprogram();
   // stopProgramX();
 
   return 0;
 }
-

@@ -68,7 +68,7 @@ public:
   void swapDimensionsNavire(int n);
 
   void couleursNavires();
-
+  void chargerDim(int** dim);
 
 private:
   bool estauport[5] = {1, 1, 1, 1, 1};
