@@ -21,8 +21,8 @@ BGREEN		Couleur de la bordure de la fenêtre d'aide
 +			Caractère de la bordure du plateau
  			Caractère de la bordure de la fenêtre score
  			Caractère de la bordure de la fenêtre d'aide
-OUI			Bordure du plateau droite (si oui, ignore la couleur et le caractère)
-OUI			Bordure de la fenêtre score droite (si oui, ignore la couleur et le caractère)
+OUI			Bordure du plateau fine (si oui, ignore la couleur et le caractère)
+OUI			Bordure de la fenêtre score fine (si oui, ignore la couleur et le caractère)
 1			Temps entre chaque envoi de missile de l'IA (en millisecondes) (désormais réglable pendant le jeu)
 190			Délai après la pose de chacun des navires de l'IA (en millisecondes)
 Normal		Difficulté (précision de l'IA et pertinence des cibles choisies) (désormais réglable pendant le jeu)
@@ -41,8 +41,8 @@ WBLACK		Case vide
 
 BWHITE		Couleur du menu (sélectionné)
 BYELLOW		Couleur du menu
-OUI			Bordure du menu droite
-WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est droite)
+OUI			Bordure du menu fine
+WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est fine)
  			Caractère de la bordure du menu (espace par défaut)
 
 

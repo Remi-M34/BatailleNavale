@@ -211,6 +211,11 @@ int Flotte::getDernierNavire()
 
 int Flotte::getRandomNavire()
 {
+    for (int i = 0 ; i < 5 ; i++)
+    {
+        s[i] = ' ';
+    }
+    refreshPort(0);
     if (portVide())
     {
         return -1;

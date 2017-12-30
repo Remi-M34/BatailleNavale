@@ -640,7 +640,16 @@ int Grille::destinationMissile()
             case 'h':
                   // aideJeu();
                   break;
-
+            case 's':
+                  refreshGrille(x, y, x + 1, y + 1);
+                  return -2;
+                  break;
+            case 'm':
+                  return -3;
+                  break;
+            case 'n':
+                  return -4;
+                  break;
             case '\n':
                   dernierTir[0] = x;
                   dernierTir[1] = y;
@@ -683,11 +692,6 @@ int Grille::destinationMissile()
                               return 1;
                         }
                   }
-                  break;
-
-            case 'n':
-                  // Flotte fl(15, 15, 0);
-                  // wclear(fl.fenetre.getWin());
                   break;
             }
       }
@@ -1123,12 +1127,8 @@ int Grille::destinationMissileAleatoire()
 
 void Grille::zoneFocus(int &x, int &y)
 {
-      test("zoneFocus");
-
       if (aDesVoisins(x, y))
       {
-            test("\ndebute la recherche de case pour une zone focus");
-
             int k = 50;
             while (!caseNonDecouverte(x, y))
             {
@@ -1744,8 +1744,8 @@ void Grille::ChargementDonnees(int **Case, int **Case2, int *casesRestantes, int
             for (int i = 0; i < NbP[n]; i++)
             {
 
-                  pivoteDroite(n,a,b);
-                              }
+                  pivoteDroite(n, a, b);
+            }
       }
 
       for (int x = 0; x < W; x++)

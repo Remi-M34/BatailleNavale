@@ -105,7 +105,7 @@ void Jeu::Log_AjouterAction(int sc)
          << endl;
 }
 
-void Jeu::chargementparametres(int tour, int nbhisto, int payback[6], int estVulnerable[6], int positionDuJoueur[6], int joueurEnPosition[6], string historique[6], int ***Case, int ***Case2, int **casesRestantes, int ***posNavires,int* naviresRestants, int** NbPivotements, int *MissilesTires, int *MissilesGagnants, int tailleFlotte)
+void Jeu::chargementparametres(int tour, int nbhisto, int payback[6], int estVulnerable[6], int positionDuJoueur[6], int joueurEnPosition[6], string historique[6], int ***Case, int ***Case2, int **casesRestantes, int ***posNavires, int *naviresRestants, int **NbPivotements, int *MissilesTires, int *MissilesGagnants, int tailleFlotte)
 {
     this->nbhisto = nbhisto;
     this->tour = tour;
@@ -119,7 +119,7 @@ void Jeu::chargementparametres(int tour, int nbhisto, int payback[6], int estVul
 
         if (i < nbjoueurs)
         {
-            Joueur[i]->ChargementDonnees(Case[i], Case2[i], casesRestantes[i], posNavires[i], naviresRestants[i], NbPivotements[i],MissilesTires[i], MissilesGagnants[i], tailleFlotte);
+            Joueur[i]->ChargementDonnees(Case[i], Case2[i], casesRestantes[i], posNavires[i], naviresRestants[i], NbPivotements[i], MissilesTires[i], MissilesGagnants[i], tailleFlotte);
         }
     }
 
@@ -167,13 +167,13 @@ void Jeu::initCouleurs()
         case 24:
             if (ligne[0] == 'O' || ligne[0] == 'o')
             {
-                plateau.setBordureDroite();
+                plateau.setBordureFine();
             }
             break;
         case 25:
             if (ligne[0] == 'O' || ligne[0] == 'o')
             {
-                info.setBordureDroite();
+                info.setBordureFine();
             }
             break;
         }
@@ -189,7 +189,7 @@ void Jeu::setupaide()
 
     // aide.setCouleurBordure(BGREEN);
     // aide.setCarBordure(' ');
-    aide.setBordureDroite();
+    aide.setBordureFine();
 
     aide.print(1, 0, "Vitesse ( +, - )", CBLACK);
     aide.print(aide.getWindowWidth() - 2, 0, myitoa(vitesse), CBLACK);
@@ -200,21 +200,81 @@ void Jeu::setupaide()
     }
     else
     {
-        aide.print(1, 1, "Selection", CBLACK);
-        aide.print(aide.getWindowWidth() - 6, 1, "<-,->");
+        aide.print(1, 1, "Revoir navires", CBLACK);
+        aide.print(aide.getWindowWidth() - 2, 1, "n");
 
         aide.print(1, 2, "Annuler cible", CBLACK);
         aide.print(aide.getWindowWidth() - 2, 2, "c");
 
-        aide.print(1, 3, "Case suivante", CBLACK);
-        aide.print(aide.getWindowWidth() - 2, 3, "e");
+        aide.print(1, 3, "Case préc/suivante", CBLACK);
+        aide.print(aide.getWindowWidth() - 4, 3, "z/e");
 
-        aide.print(1, 4, "Case précédente", CBLACK);
-        aide.print(aide.getWindowWidth() - 2, 4, "z");
-        aide.print(1, 5, "Tir aléatoire", CBLACK);
-        aide.print(aide.getWindowWidth() - 2, 5, "a");
+        aide.print(1, 4, "Tir aléatoire", CBLACK);
+        aide.print(aide.getWindowWidth() - 2, 4, "a");
+        aide.print(1, 5, "Sauvegarder", CBLACK);
+        aide.print(aide.getWindowWidth() - 2, 5, "s");
+        aide.print(1, 6, "Menu", CBLACK);
+        aide.print(aide.getWindowWidth() - 2, 6, "m");
     }
 }
+
+
+void Jeu::RetourMenu()
+{
+    stop = true;
+    Window warning(6, 30, -18, -2);
+    warning.setCouleurBordure(BRED);
+    warning.setBordureFine();
+    warning.print(1, 1, "Sauvegarder la partie ?", BLUEBLACK);
+    int ch;
+    Color col[2] = {WBLUE, BBLUE};
+    while (ch = getch())
+    {
+        warning.print(7, 4, "Oui", col[0]);
+        warning.print(20, 4, "Non", col[1]);
+        switch (ch)
+        {
+        case KEY_RIGHT:
+            swap(col[0], col[1]);
+            break;
+        case KEY_LEFT:
+            swap(col[0], col[1]);
+            break;
+        case '\n':
+            if (col[0] == WBLUE)
+            {
+                sauvegarde();
+                usleep(1500000);
+            }
+            return;
+        }
+    }
+}
+
+void Jeu::Phase1()
+{
+    CreationLog();
+    DecalerHistorique("Commandes:\n\nSélection     Entrée\nValider       Entrée\nPivoter D     Espace\nPivoter G          w\nAnnuler navire     b\nAléatoire          a", 0);
+    DecalerHistorique("Les joueurs peuvent placer leur navires sur leur territoire!", 0);
+    placementDesNavires();
+    historique[1].clear();
+    nbhisto--;
+    DecalerHistorique("Tirage au sort pour\ndésigner le premier\njoueur...", 1);
+    usleep(1500000);
+    joueur = rand() % nbjoueurs;
+    string str = nom[joueur] + " commence!";
+    DecalerHistorique(str, 1);
+
+    Phase2();
+}
+
+
+
+
+
+
+
+
 
 void Jeu::Phase2()
 {
@@ -226,9 +286,7 @@ void Jeu::Phase2()
     usleep(150000);
 
     selectionCible(joueur);
-    int ch;
-
-    while (JoueursRestants > 1)
+    while (JoueursRestants > 1 && !stop)
     {
         tour++;
         // checkSpeed(ch,aide,vitesse);
@@ -294,40 +352,53 @@ void Jeu::Phase2()
                 selectionCible(joueur);
             }
             break;
+
+        case -2:
+            sauvegarde();
+            (*Joueur[cibleSelectionnee]).setCiblageValide(false);
+            tour--;
+            if (JoueursRestants > 2)
+            {
+                selectionCible(joueur);
+            }
+            break;
+        case -3:
+            RetourMenu();
+            stop = true;
+            break;
+            case -4:
+            navires();
+            break;
         }
+    
     }
 
-    ValiderScore();
-
+    if (JoueursRestants == 1)
+    {
+        ValiderScore();
+    }
     plateau.clearall();
+    erase();
 }
 
-void Jeu::Phase1()
-{
-    CreationLog();
-    DecalerHistorique(" Les joueurs peuvent \ndésormais placer leur navires sur leur territoire!", 0);
-    placementDesNavires();
-    DecalerHistorique(" Le jeu commence !", 0);
 
-    Phase2();
-}
+
+
+
+
+
+
+
+
 
 void Jeu::DecalerHistorique(string nouvelleinfo, int sc)
 {
-    info.setBordureDroite();
-    // if (nouvelleinfo[66/3] == ' ')
-    // {
-    //     nouvelleinfo.erase(nouvelleinfo.begin()+22);
-    // }
+    info.setBordureFine();
 
     for (int i = 5; i > 0; i--)
     {
         historique[i] = historique[i - 1];
         separateur[i] = separateur[i - 1];
-        if (nouvelleinfo.length() > (6 - i) * (22) && nouvelleinfo[(6 - i) * (22)] == ' ')
-        {
-            nouvelleinfo.erase(nouvelleinfo.begin() + 110 / i);
-        }
     }
     historique[0] = nouvelleinfo;
 
@@ -367,7 +438,6 @@ void Jeu::DecalerHistorique(string nouvelleinfo, int sc)
         mvwaddch(info.frame, ligne + 4 + nbjoueurs, 0, ACS_BULLET);
         info.print(0, ligne + 3 + nbjoueurs, historique[i], separateur[i]);
         ligne += historique[i].length() / 22 + 2;
-        // info.print(0,ligne-1,"                    ",separateur[i]);
     }
 }
 
@@ -408,9 +478,6 @@ string Jeu::getPos(int i)
 
 void Jeu::initDim(int nbjoueurs)
 {
-
-    // int 0 = COLS / 2;
-    // int 0 = LINES / 2;
 
     int sx, sxf;
     if (W < WF)
@@ -469,21 +536,12 @@ void Jeu::initDim(int nbjoueurs)
     }
     }
 
-    // *payback = new int[nbjoueurs];
-    // *estVulnerable = new bool[nbjoueurs];
-
-    // srand((int)time(0));
-    // payback = new int[nbjoueurs];
-    // estVulnerable = new int[nbjoueurs];
-
     for (int i = 0; i < nbjoueurs; i++)
     {
         payback[i] = rand() % nbjoueurs;
         estVulnerable[i] = 0;
         positionDuJoueur[i] = i;
         joueurEnPosition[i] = i;
-
-        // estVulnerable[i] = 0;
     }
 }
 
@@ -528,19 +586,6 @@ void Jeu::selectionCible(int j)
         {
         case 'n':
             navires();
-            for (int i = 0; i < nbjoueurs; i++)
-            {
-                (*Joueur[i]).fenetre.setCouleurBordure(BCYAN);
-
-                if (i == cibleSelectionnee)
-                {
-                    (*Joueur[cibleSelectionnee]).setEstCible(true);
-                }
-            }
-            for (int i = 0; i < nbjoueurs; i++)
-            {
-                (*Joueur[i]).refreshGrille(0, 0, W, H);
-            }
 
             break;
         case KEY_RIGHT:
@@ -631,6 +676,10 @@ void Jeu::selectionCible(int j)
             break;
         case 's':
             sauvegarde();
+            break;
+        case 'm':
+            RetourMenu();
+            return;
             break;
         case '\n':
             if (joueur != cibleSelectionnee && !Joueur[cibleSelectionnee]->estMort())
@@ -752,14 +801,12 @@ void Jeu::selectionCibleAleatoire()
             break;
         }
 
-        // cible = rand() % nbjoueurs;
     } while (cible == joueur);
     test("\n");
 
     test(myitoa(cible));
     test("est la cible. Depuis le joueur ");
     test(myitoa(joueur));
-    // (*Joueur[cibleSelectionnee]).setEstCible();
     {
         deplacementIA();
     }
@@ -1072,7 +1119,7 @@ void Jeu::placementDesNavires()
 {
     for (int i = 0; i < nbjoueurs; i++)
     {
-        string str = nom[i] + " place ses\n navires...";
+        string str = nom[i] + "\nplace ses navires...";
         info.print(0, 0, str);
         Joueur[i]->selectionNavire();
     }
@@ -1080,7 +1127,7 @@ void Jeu::placementDesNavires()
     wattron(aide.win, A_BOLD);
     (*Joueur[0]).flotte.fenetre.setCarBordure(' ');
     (*Joueur[0]).flotte.fenetre.setCouleurBordure(GBLACK);
-    info.setBordureDroite();
+    info.setBordureFine();
 }
 
 void Jeu::joueurSuivant()
@@ -1197,12 +1244,31 @@ void Jeu::navires()
     for (int i = 0; i < nbjoueurs; i++)
     {
 
-        (*Joueur[i]).cacherCases();
+        Joueur[i]->fenetre.clear();
     }
-    Flotte nav(COLS / 2, LINES / 2, 0);
-    cin.ignore(1);
-    nav.fenetre.setBordureDroite();
-    nav.fenetre.setCarBordure(' ');
+    Flotte nav(Joueur[1]->flotte.fenetre.getX()-COLS/2,Joueur[1]->flotte.fenetre.getY()-LINES/2, 0);
+    getchar();
+    // nav.fenetre.setBordureFine();
+    // nav.fenetre.setCarBordure(' ');
+                            Joueur[1]->flotte.fenetre.setCouleurBordure(Joueur[1]->flotte.fenetre.getCouleurBordure());
+
+            for (int i = 0; i < nbjoueurs; i++)
+            {
+                // (*Joueur[i]).fenetre.setCouleurBordure(colBordureGrilles);
+
+                if (i == cibleSelectionnee)
+                {
+                    (*Joueur[i]).setEstCible(true);
+                }
+                else
+                                    (*Joueur[i]).setEstCible(false);
+
+            }
+            for (int i = 0; i < nbjoueurs; i++)
+            {
+                (*Joueur[i]).refreshGrille(0, 0, W, H);
+            }
+
 }
 
 void checkSpeed(int ch, Window &aide, int &vitesse)
@@ -1270,8 +1336,6 @@ void Jeu::refreshScores()
         info.print(0, i, nom[joueurEnPosition[i]], col);
         info.print(info.getLargeur() - sc.length(), i, sc);
         col = WBLACK;
-
-        // info.print(1,13+i,myitoa(i));
     }
 }
 
@@ -1285,8 +1349,6 @@ void Jeu::classementDown()
         swap(joueurEnPosition[positionDuJoueur[joueur]], joueurEnPosition[positionDuJoueur[joueur] + 1]);
         swap(positionDuJoueur[joueur], positionDuJoueur[pos]);
 
-        // positionDuJoueur[joueur]++;
-        // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
         test("\nLe joueur ");
         test(myitoa(joueur));
         test("\n devient  ");
@@ -1316,8 +1378,6 @@ void Jeu::classementUp()
 
         swap(positionDuJoueur[joueur], positionDuJoueur[pos]);
 
-        // positionDuJoueur[joueur]++;
-        // positionDuJoueur[joueurEnPosition[positionDuJoueur[joueur]]]--;
         test("\nLe joueur ");
         test(myitoa(joueur));
         test("\n devient  ");
@@ -1336,7 +1396,7 @@ void Jeu::ValiderScore()
 {
     Window endgame(14, 60, -35, -6);
     endgame.setCouleurBordure(BRED);
-    endgame.setBordureDroite();
+    endgame.setBordureFine();
     endgame.print(1, 1, historique[0], BLUEBLACK);
     endgame.print(1, 4, "Votre pseudo a peut être été ajouté aux Top Scores...\n Vérifiez depuis le menu!");
     endgame.print(1, 8, "Appuyez sur Entrée pour revenir au menu.");
@@ -1403,13 +1463,19 @@ void Jeu::sauvegarde()
 {
     string ligne;
 
-    fstream configcopy("config/config_save.txt", ios::in | ios::out | ios::trunc);
-    ifstream config("config/config.txt", ios::in);
+    // fstream configcopy("save/config.txt", ios::in | ios::out | ios::trunc);
+    // ifstream config("config/config.txt", ios::in);
+    ifstream src("config/config.txt", ios::binary);
+    ofstream dest("save/config.txt", ios::binary);
+    dest << src.rdbuf();
+    src.close();
+    dest.close();
 
-    while ((getline(config, ligne)))
-    {
-        configcopy << ligne << endl;
-    }
+    ifstream srclog("fichier.log", ios::binary);
+    ofstream destlog("save/fichier.log", ios::binary);
+    destlog << srclog.rdbuf();
+    srclog.close();
+    destlog.close();
 
     fstream save("save/sauvegarde", ios::in | ios::out | ios::trunc);
     save << humains << ':'
@@ -1463,10 +1529,9 @@ void Jeu::sauvegarde()
     {
         for (int n = 0; n < 5; n++)
         {
-            save << Joueur[i]->getNbPivotements(n) << ':';        
-            }
+            save << Joueur[i]->getNbPivotements(n) << ':';
+        }
         save << endl;
-
     }
 
     for (int i = 0; i < nbjoueurs; i++)
@@ -1501,4 +1566,8 @@ void Jeu::sauvegarde()
         Joueur[i]->SauvegarderGrille(save);
         save << endl;
     }
+
+    DecalerHistorique(" Partie sauvegardée avec succès !", 0);
+    refreshScores();
+    save.close();
 }

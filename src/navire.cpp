@@ -130,7 +130,7 @@ void nouveauNavire(int n)
 {
   Window creation(5, 10, 0, 0,' ',false);
   creation.setCouleurBordure(BCYAN);
-  creation.setBordureDroite();
+  creation.setBordureFine();
   int c;
   int k = 0;
   int **Case = new int *[5];

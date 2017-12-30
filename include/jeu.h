@@ -53,6 +53,7 @@ void chargementparametres(int tour, int nbhisto, int payback[6], int estVulnerab
 void Log_AjouterAction(int sc);
 void CreationLog();
 void Phase2();
+void RetourMenu();
 private:
   Window info;
   Window aide;
@@ -62,6 +63,7 @@ std::string nom[6];
 
   int humains;
   int nbjoueurs;
+  bool stop = false;
 
   int vitesse = 3;
   int joueur = 0;

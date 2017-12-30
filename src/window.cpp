@@ -204,7 +204,7 @@ void Window::setCouleurBordure(Color c)
     update();
 }
 
-void Window::setBordureDroite()
+void Window::setBordureFine()
 {
   wborder(frame, ACS_VLINE, ACS_VLINE, ACS_HLINE, ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
   colorwin = CBLACK;

@@ -46,7 +46,7 @@ void refreshMenu();
     Color colNonSelectionnee;
     Color colBordureMenu;
     Color colBordureFlotte;
-    bool bordureMenuDroite = false;
+    bool bordureMenuFine = false;
     char carBordureMenu = ' ';
 
 

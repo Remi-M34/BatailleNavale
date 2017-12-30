@@ -3,13 +3,11 @@
 #include "../include/config.h"
 #include "../include/message.h"
 
-
 #include <fstream>
 #include <unistd.h>
 #include <cmath>
 #include <cassert>
 #include <stdlib.h>
-
 
 using namespace std;
 
@@ -109,7 +107,7 @@ void editWidthGrille(int w)
 
 void editHeightGrille(int h)
 {
-        if (h > 20)
+    if (h > 20)
     {
         h = 20;
     }
@@ -598,7 +596,6 @@ void changePreset(int n)
 }
 
 // Convertie un string en int (cppreference)
-
 std::string to_string(int x)
 {
     int length = snprintf(NULL, 0, "%d", x);
@@ -610,37 +607,20 @@ std::string to_string(int x)
     return str;
 }
 
-
-
-
 void erreurEcran(int w, int h)
 {
-  halfdelay(1);
-    
-  Window erreur(LINES, COLS, 0-COLS/2, 0-LINES/2, ' ',false);
-  while (COLS < w || LINES < h)
-  {
-    erreur.print(0, 1, erreurTailleFenetre());
-    usleep(3000000);
+    halfdelay(1);
 
+    Window erreur(LINES, COLS, 0 - COLS / 2, 0 - LINES / 2, ' ', false);
 
-      }
+        erreur.print(0, 1, erreurTailleFenetre());
 
-  Window m(LINES, COLS, 0-25, 0, ' ',false);
+    getchar();
 
-  erase();
-  int ch;
-  while ((ch = getch()) != '\n')
-  {
-
-    // cin.ignore(99999,'\n');
-    m.print(1, 1, "Taille OK! Appuyez sur ENTREE pour démarrer le jeu.");
-    // usleep(50000);
-  }
-  erase();
+    erase();
 
     stopProgramX();
+    exit(1);
 
-  startProgramX();
+    startProgramX();
 }
-

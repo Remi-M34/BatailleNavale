@@ -140,7 +140,7 @@ string erreurTailleFenetre()
     largeur = myitoa(COLS);
     hauteur = myitoa(LINES);
     string message = "Votre fenêtre est trop petite : " + largeur + " x " + hauteur 
-    + "\nLe jeu nécessite une fenêtre de taille supérieur à 150 x 40"
+    + "\nLe jeu nécessite une fenêtre de taille supérieur à 150 x 40 pour l'affichage du menu."
     + "\n\nNous recommendons d'utiliser le mode plein écran."
     + "\n\nAppuyez sur une touche pour quitter...";
 
