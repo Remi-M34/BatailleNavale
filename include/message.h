@@ -3,8 +3,6 @@
 
 #include <string>
 
-
-
 std::string insPlacement();
 std::string aide();
 std::string aPropos();
@@ -17,7 +15,6 @@ std::string mauvaiseTaille2();
 std::string dimGrille();
 std::string erreurTailleFenetre();
 std::string erreurTailleFenetre2();
-
 
 
 

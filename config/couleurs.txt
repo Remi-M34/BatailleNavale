@@ -47,7 +47,7 @@ WCYAN		Couleur de la bordure du menu (pas prise en compte si la bordure est fine
 
 
 
-Defaut
+Defaut (recommandé)
 			
 			
 Couleurs :

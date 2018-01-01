@@ -14,14 +14,20 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iomanip>
+#include <ctime>
 
 #define H getHeightGrille()
 #define W getWidthGrille()
 
 using namespace std;
 
-Menu::Menu() : plateau(33, 100, -50, -16, carBordureMenu, false)
+Menu::Menu() : plateau(33, 100, -50, -16, carBordureMenu)
 {
+  nbjoueurs = 0;
+  nbjoueurshumain = 0;
+  difficulte = 2;
+  vitesse = 6;
   initCouleurs();
 }
 
@@ -61,10 +67,7 @@ void Menu::initCouleurs()
       break;
     case 50:
       theme.clear();
-      for (int i = 0; isalnum(ligne[i]); i++)
-      {
-        theme += ligne[i];
-      }
+      theme = ligne;
       couleurs.close();
       return;
     }
@@ -82,13 +85,12 @@ void Menu::mainMenu(int d)
     plateau.setBordureFine();
   }
 
-  Window apropos(3, 40, 50 - 40 / 2 + -50, 29 + -16, ' ', false);
+  Window apropos(3, 40, 50 - 40 / 2 + -50, 29 + -16, ' ');
   apropos.setCouleurBordure(WBLACK);
 
-
   Color col[8];
-col[0] = colSelectionnee;
-  for (int i = 1 ; i < 8 ; i++)
+  col[0] = colSelectionnee;
+  for (int i = 1; i < 8; i++)
   {
     col[i] = colNonSelectionnee;
   }
@@ -100,8 +102,7 @@ col[0] = colSelectionnee;
   string choix[8] = {"Commencer une partie", "Continuer...", "Top Scores", "Options", "Aide", "Version du jeu", "A Propos", "Quitter"};
   int selection = 0;
   Window top(16, 25, -48, -3);
-  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, d);
-  bool stop = false;
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, d, false);
   while ((c = getch()))
   {
     if (selection < 5)
@@ -145,20 +146,24 @@ col[0] = colSelectionnee;
       if (selection == 0)
       {
         checkTailleEcran();
+        // refreshMenu();
+        flotte.fenetre.update();
+        // flotte.refreshPort(0);
         selectJoueurs(plateau);
         if (nbjoueurs > 0)
         {
           optionsJeu();
-          Jeu Jeu(nbjoueurs, nbjoueurshumain, difficulte, vitesse, nom);
+          Jeu Jeu(nbjoueurs, nbjoueurshumain, difficulte, vitesse, nom, log, false);
           Jeu.Phase1();
         }
         return mainMenu(0);
       }
       else if (selection == 1)
       {
-
         chargement();
-        return mainMenu(1);
+        refreshMenu();
+        flotte.refreshPort(0);
+        flotte.fenetre.setCouleurBordure(colBordureFlotte);
       }
       else if (selection == 2)
       {
@@ -171,8 +176,6 @@ col[0] = colSelectionnee;
         refreshMenu();
         flotte.fenetre.setCouleurBordure(colBordureFlotte);
         flotte.refreshPort(0);
-        // mainMenu(1);
-        // return;
       }
       else if (selection == 4)
       {
@@ -195,12 +198,6 @@ col[0] = colSelectionnee;
         stopProgramX();
         exit(1);
       }
-      // else
-      // {
-      //   changerDim();
-      //   mainMenu(1);
-      //   return;
-      // }
       break;
     }
   }
@@ -208,7 +205,6 @@ col[0] = colSelectionnee;
 
 void Menu::refreshMenu()
 {
-
   plateau.clear();
   plateau.update();
   if (bordureMenuFine)
@@ -219,6 +215,7 @@ void Menu::refreshMenu()
   {
     plateau.setCouleurBordure(colBordureMenu);
   }
+
 }
 
 void Menu::selectJoueurs(Window plateau)
@@ -257,7 +254,7 @@ void Menu::selectJoueurs(Window plateau)
       }
       break;
     case KEY_LEFT:
-    plateau.clear();
+      plateau.clear();
       mainMenu(0);
       return;
     case '\n':
@@ -287,7 +284,7 @@ void Menu::options()
   string choix[5] = {"Editeur de navires", "Modifier la taille de la grille", "Thèmes", "Charger flotte", "Retour"};
   int selection = 0;
 
-  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0, false);
 
   for (int i = 0; i < 5; i++)
   {
@@ -346,10 +343,11 @@ void Menu::options()
       else if (selection == 2)
       {
         refreshMenu();
-
         themes();
+        initCouleurs();
         refreshMenu();
 
+        return mainMenu(0);
         flotte.fenetre.setCouleurBordure(colBordureFlotte);
         flotte.refreshPort(0);
       }
@@ -365,20 +363,18 @@ void Menu::options()
       else if (selection == 4)
       {
         return;
-
       }
       break;
     }
   }
 
   erase();
-
 }
 
 void Menu::aideMenu()
 {
   int ch;
-  Window aidef(19, 85, 7 + -50, 12 + -16, false);
+  Window aidef(19, 85, 7 + -50, 12 + -16);
   aidef.setBordureFine();
   aidef.setCouleurFenetre(WBLACK);
   aidef.print(39, 0, "Règles :", BBLUE);
@@ -402,20 +398,19 @@ void Menu::changerDim()
     plateau.setBordureFine();
   }
 
-  Window dim(3, 18, 41 + -50, 13 + -16, ' ', false);
+  Window dim(3, 18, 41 + -50, 13 + -16, ' ');
   dim.setCouleurBordure(BGREEN);
   dim.setCouleurFenetre(WBLACK);
-  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0, false);
 
-  Window aide(8, 30, 2 + -50, 11 + -16, false);
+  Window aide(8, 30, 2 + -50, 11 + -16);
   aide.setBordureFine();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
-
   aide.print(1, 7, "q          Menu", WBLACK);
 
-  int h = getHeightGrille();
-  int w = getWidthGrille();
+  const int h = getHeightGrille();
+  const int w = getWidthGrille();
   string height;
   string width;
   ostringstream convert;
@@ -425,7 +420,6 @@ void Menu::changerDim()
   convert2 << w;
   width = convert2.str();
 
-  int x = 0;
   int num = 0;
   Color col[3] = {colSelectionnee, colNonSelectionnee, colNonSelectionnee};
   dim.print(5 + width.length() + 2, 1, "x", WBLACK);
@@ -480,7 +474,7 @@ void Menu::changerDim()
       if (n == 0)
       {
         echo();
-        for (int i = 0; i < width.length(); i++)
+        for (unsigned int i = 0; i < width.length(); i++)
         {
           dim.print(5 + i, 1, ' ', WBLACK);
         }
@@ -537,7 +531,7 @@ void Menu::changerDim()
       {
 
         echo();
-        for (int i = 0; i < height.length(); i++)
+        for (unsigned int i = 0; i < height.length(); i++)
         {
           dim.print(10 + i + width.length(), 1, ' ', WBLACK);
         }
@@ -600,9 +594,6 @@ void Menu::changerDim()
 
 void Menu::menuNavire()
 {
-  // stopProgramX();
-  // startProgramX();
-
   int c;
   int n = 0;
 
@@ -614,14 +605,14 @@ void Menu::menuNavire()
   {
     plateau.setBordureFine();
   }
-  Window aide(12, 30, 2 + -50, 11 + -16, false);
+  Window aide(12, 30, 2 + -50, 11 + -16);
   aide.setBordureFine();
   aide.print(1, 1, "<-, ->     Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE     Sélectionner", WBLACK);
   aide.print(1, 11, "q          Menu", WBLACK);
 
   Color col = colNonSelectionnee;
-  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0, false);
 
   flotte.initSelection();
 
@@ -646,7 +637,6 @@ void Menu::menuNavire()
         flotte.echangeSelection(n, n - 1);
         flotte.refreshPort(0);
       }
-
       break;
 
     case KEY_LEFT:
@@ -663,9 +653,7 @@ void Menu::menuNavire()
         flotte.selectionne(0, false);
         flotte.refreshPort(0);
       }
-
       break;
-
     case '\n':
       if (n == -1)
       {
@@ -695,7 +683,6 @@ void Menu::themes()
 {
 
   int c;
-  int n = 0;
 
   plateau.setCouleurBordure(colBordureMenu);
   if (bordureMenuFine)
@@ -703,21 +690,19 @@ void Menu::themes()
     plateau.setBordureFine();
   }
 
-
-
   Color col[6] = {plateau.getCouleurFenetre(), colSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee, colNonSelectionnee};
 
-  string th = "[ Thème actuel: " + theme + " ]";
-  string choix[6] = {th, "Defaut", "Theme2", "Theme3", "Theme4", "Retour"};
+  string th = "Thème actuel: " + theme;
+  string choix[6] = {th, "Defaut (recommandé)", "Theme2", "Retour"};
 
   int selection = 1;
 
-  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0, false);
 
   while ((c = getch()) != 'q')
   {
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 4; i++)
     {
       plateau.print(50 - choix[i].length() / 2, 12 + 2 * i, choix[i], col[i]);
     }
@@ -732,7 +717,7 @@ void Menu::themes()
       break;
 
     case KEY_DOWN:
-      if (selection != 5)
+      if (selection != 3)
       {
         swap(col[selection], col[selection + 1]);
         selection++;
@@ -757,11 +742,7 @@ void Menu::themes()
         flotte.refreshPort(0);
         return;
       case 3:
-        theme = "Theme3";
-        break;
-      case 4:
-        theme = "Theme4";
-        break;
+        return;
       }
       if (selection != 5)
       {
@@ -787,19 +768,19 @@ void Menu::preset(int s)
 
   plateau.print(47, 22, "Valider", colSelectionnee);
 
-  Window aide(5, 24, -50 + 50 - 12, -16 + 25, false);
+  Window aide(5, 24, -50 + 50 - 12, -16 + 25);
   aide.setBordureFine();
   aide.print(1, 1, "<-, ->       Parcourir", WBLACK);
   aide.print(1, 2, "ENTREE         Valider", WBLACK);
   aide.print(1, 4, "q                 Menu", WBLACK);
 
-  Window info(6, 30, -50 + 50 - 15, -16 + 3, false);
+  Window info(6, 30, -50 + 50 - 15, -16 + 3);
   info.setBordureFine();
 
   int selection = s;
 
   changePreset(selection);
-  Flotte flotte(50 - getDimFlotte('w') + -50, 14 + -16, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 14 + -16, 0, false);
 
   info.print(15 - (infoFlotte(s).length()) / 2, 1, infoFlotte(s));
   info.print(15 - (infoFlotteD(s).length()) / 2, 2, infoFlotteD(s));
@@ -835,6 +816,7 @@ void Menu::preset(int s)
       return;
     }
   }
+  
   return;
 }
 
@@ -842,43 +824,45 @@ void Menu::checkTailleEcran()
 {
   if (COLS < 5 * getWidthGrille() || LINES < 2.5 * getHeightGrille())
   {
-    Window erreur(5, 100, -50, -16, '+', false);
+    Window erreur(2, 90, -45, 14, '+');
     erreur.print(0, 0, erreurTailleFenetre2());
-    cin.ignore(1);
-    assert(COLS > 5 * getWidthGrille() && LINES > 2.5 * getHeightGrille());
+    getchar();
+    // assert(COLS > 5 * getWidthGrille() && LINES > 2.5 * getHeightGrille());
   }
 }
+
 
 void Menu::optionsJeu()
 {
 
 
+  this->log = __DATE__;
   int c;
   nbjoueurshumain = 0;
-  Window plateau2(33, 100, -50, -16, carBordureMenu, false);
+  Window plateau2(33, 100, -50, -16, carBordureMenu);
   plateau2.setCouleurBordure(colBordureMenu);
   if (bordureMenuFine)
   {
     plateau2.setBordureFine();
   }
 
-  Window aide(6, 40, -50 + 30, 26 + -16, ' ', false);
+  Window aide(6, 40, -50 + 30, 26 + -16, ' ');
   aide.setBordureFine();
 
-  Color col[11];
-  for (int i = 0; i < 11; i++)
+  Color col[12];
+  for (int i = 0; i < 12; i++)
   {
     col[i] = colNonSelectionnee;
   }
-  col[2] = colSelectionnee;
+  col[1] = colSelectionnee;
 
-  string choix[11] = {"Vitesse IA: x", "Difficulté: ", "Humains", "Ajouter un joueur", "Ajouter un joueur humain",
+  string choix[12] = {"Vitesse IA: x", "Difficulté: ", "Nom du fichier log: ", "Humains", "Ajouter un joueur", "Ajouter un joueur humain",
                       "Ajouter un joueur humain", "Ajouter un joueur humain",
                       "Ajouter un joueur humain", "Ajouter un joueur humain", "Jouer", "Retour"};
   string difficulte[3] = {"Facile", "Normal", "Difficile"};
-  int selection = 2;
+  int selection = 1;
 
-  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0);
+  Flotte flotte(50 - getDimFlotte('w') + -50, 4 + -16, 0, false);
   aideOptionsJeu(aide, selection);
 
   for (int i = 0; i < nbjoueurs; i++)
@@ -897,20 +881,21 @@ void Menu::optionsJeu()
 
     plateau2.print(70, 12, choix[0] + myitoa(vitesse), col[0]);
     plateau2.print(41, 12, choix[1] + difficulte[this->difficulte - 1], col[1]);
-    plateau2.print(23, 12, choix[2] + " (" + myitoa(nbjoueurshumain) + ")", col[2]);
+    plateau2.print(41, 14, choix[2] + log, col[2]);
+    plateau2.print(23, 12, choix[3] + " (" + myitoa(nbjoueurshumain) + ")", col[3]);
     plateau2.print(9, 12, "IA (" + myitoa(nbjoueurs - nbjoueurshumain) + ")", BBLUE);
-    plateau2.print(48, 24, choix[9], col[9]);
-    plateau2.print(9, 24, choix[10], col[10]);
+    plateau2.print(48, 24, choix[10], col[10]);
+    plateau2.print(1, 24, choix[11], col[11]);
 
-    for (int i = 3; i < nbjoueurshumain + 4 && i < nbjoueurs + 3; i++)
+    for (int i = 4; i < nbjoueurshumain + 5 && i < nbjoueurs + 4; i++)
     {
 
-      plateau2.print(23, 14 + 2 * (i - 3), choix[i], col[i]);
+      plateau2.print(23, 14 + 2 * (i - 4), choix[i], col[i]);
     }
     switch (c)
     {
     case KEY_UP:
-      if (selection > 2 && selection < 9)
+      if ((selection > 3 && selection < 9) || selection == 2)
       {
         swap(col[selection], col[selection - 1]);
         selection--;
@@ -919,17 +904,17 @@ void Menu::optionsJeu()
       {
         vitesse = min(9, vitesse + 1);
       }
-      else if (selection == 9)
+      else if (selection == 10)
       {
-        swap(col[selection], col[1]);
-        selection = 1;
+        swap(col[selection], col[2]);
+        selection = 2;
       }
       aideOptionsJeu(aide, selection);
 
       break;
 
     case KEY_DOWN:
-      if (selection < nbjoueurshumain + 3 && selection > 1 && selection < 2 + nbjoueurs)
+      if (selection < nbjoueurshumain + 4 && selection > 0 && selection < 3 + nbjoueurs && selection != 2)
       {
         swap(col[selection], col[selection + 1]);
         selection++;
@@ -938,35 +923,58 @@ void Menu::optionsJeu()
       {
         vitesse = max(0, vitesse - 1);
       }
-      else if (selection == 1 || selection == min(nbjoueurs, nbjoueurshumain) + 3 || selection == 2 + nbjoueurs)
+      else if (selection == 2 || selection == min(nbjoueurs, nbjoueurshumain) + 4 || selection == 3 + nbjoueurs)
       {
-        swap(col[selection], col[9]);
-        selection = 9;
+        swap(col[selection], col[10]);
+        selection = 10;
       }
       aideOptionsJeu(aide, selection);
 
       break;
     case KEY_RIGHT:
-      if (selection > 0 && selection < 3)
+      if (selection > 0 && selection < 4 && selection != 2)
       {
-        swap(col[selection], col[selection--]);
+        swap(col[selection], col[selection-1]);
+        selection--;
       }
-      else if (selection == 10)
+      else if (selection == 4)
       {
-        swap(col[selection], col[selection--]);
+        swap(col[selection], col[2]);
+        selection = 2;
+      }
+      else if (selection == 11)
+      {
+        swap(col[selection], col[selection-1]);
+                selection--;
+
       }
       aideOptionsJeu(aide, selection);
 
       break;
 
     case KEY_LEFT:
-      if (selection < 2 && selection >= 0)
+      if (selection < 3)
       {
-        swap(col[selection], col[selection++]);
+        if (selection == 0)
+        {
+          swap(col[selection], col[selection+1]);
+                  selection++;
+        }
+        else if (selection == 1)
+        {
+          swap(col[selection], col[3]);
+          selection = 3;
+        }
+        else if (selection == 2)
+        {
+          swap(col[selection], col[4]);
+          selection = 4;
+        }
       }
-      else if (selection == 9)
+      else if (selection == 10)
       {
-        swap(col[selection], col[selection++]);
+        swap(col[selection], col[selection+1]);
+                selection++;
       }
       aideOptionsJeu(aide, selection);
 
@@ -978,10 +986,10 @@ void Menu::optionsJeu()
     case '\n':
       switch (selection)
       {
-      case 10:
+      case 11:
         return mainMenu(0);
         break;
-      case 2:
+      case 3:
         return optionsJeu();
       case 1:
         if (this->difficulte < 3)
@@ -995,7 +1003,7 @@ void Menu::optionsJeu()
         plateau2.print(41, 12, "                      ", WBLACK);
 
         break;
-      case 9:
+      case 10:
       {
         int k = 1;
         for (int i = nbjoueurshumain; i < 6; i++)
@@ -1005,21 +1013,23 @@ void Menu::optionsJeu()
         }
         return;
       }
-      case 3 ... 8:
+      case 4 ... 9:
       {
-        if (selection == 3 + nbjoueurshumain && nbjoueurshumain < nbjoueurs)
+        if (selection == 4 + nbjoueurshumain && nbjoueurshumain < nbjoueurs)
         {
           nbjoueurshumain = min(6, nbjoueurshumain + 1);
         }
-        choix[selection] = saisie(23, 14 + 2 * (selection - 3), 25, plateau2);
-        nom[selection - 3] = choix[selection];
+        choix[selection] = saisie(23, 14 + 2 * (selection - 4), (selection > 4 ? 25 : 18), plateau2);
+        nom[selection - 4] = choix[selection];
         plateau2.print(9, 14 + 2 * (nbjoueurs - nbjoueurshumain), "     ");
 
         aide.setBordureFine();
         aideOptionsJeu(aide, selection);
         continue;
       }
-      break;
+      case 2:
+        log = saisie(61, 14, 25, plateau2);
+        break;
       }
     }
   }
@@ -1042,7 +1052,7 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
   do
   {
     ch = getch();
-    if (isalnum(ch))
+    if (isalnum(ch) || ch == '.')
     {
       chaine += ch;
     }
@@ -1062,7 +1072,7 @@ string Menu::saisie(int x, int y, int longueur, Window &plateau)
       plateau.print(x, y + 2, "                     ", WBLACK);
       break;
     }
-  } while (chaine.length() < 10);
+  } while (chaine.length() < 13);
 
   curs_set(0);
   noecho();
@@ -1085,22 +1095,26 @@ void aideOptionsJeu(Window &aide, int s)
     aide.print(1, 0, "Détermine la vitesse à laquelle l'IA  joue. \n Peut être modifié pendant le jeu.");
     aide.print(1, 4, "Augmenter / Diminuer");
     aide.print(32, 4, "Flèches");
-
     break;
   case 2:
+    aide.print(1, 0, "Le nom du fichier qui enregistrera toutes les action du jeu.");
+    aide.print(1, 4, "Modifier");
+    aide.print(32, 4, "Entrée");
+    break;
+  case 3:
     aide.print(1, 0, "Liste des joueurs humain.\n\n Laissez vide pour une partie entre joueurs virtuels.\n Réinitialiser");
     aide.print(33, 4, "Entrée");
 
     break;
-  case 3 ... 8:
+  case 4 ... 9:
     aide.print(1, 0, "Appuyez sur entrer pour ajouter un\n joueur humain ou modifier son nom.");
     aide.print(1, 4, "Ajouter / Modifier");
     aide.print(33, 4, "Entrée");
     break;
-  case 9:
+  case 10:
     aide.print(1, 0, "Jouer avec la configuration actuelle");
     break;
-  case 10:
+  case 11:
     aide.print(1, 0, "Retour au menu");
     break;
   }
@@ -1115,7 +1129,6 @@ void Menu::topscores(Window &top)
 
   // top.print(10, 14, "Retour", colSelectionnee);
 
-  int k;
   int i = 3;
   string ligne;
 
@@ -1131,35 +1144,46 @@ void Menu::topscores(Window &top)
     top.print(24 - strsc.length(), i, strsc, GBLACK);
 
     i++;
-    usleep(160000);
+    usleep(100000);
   }
   file.close();
+}
 
+void Menu::PasDeSauvegarde()
+{
+  Window warning(6, 30, -15, -3);
+  warning.setCouleurBordure(BRED);
+  warning.setBordureFine();
+  warning.print(0, 2, "Aucune sauvegarde disponible!", BLUEBLACK);
+  usleep(1750000);
+  refreshMenu();
 }
 
 void Menu::chargement()
 {
 
   ifstream srcconfig("save/config.txt", ios::binary);
+  if (!srcconfig)
+  {
+    PasDeSauvegarde();
+
+    return;
+  }
   ofstream destconfig("config/config.txt", ios::binary);
   destconfig << srcconfig.rdbuf();
   srcconfig.close();
   destconfig.close();
 
-  ifstream src("save/fichier.log", ios::binary);
-  ofstream dest("fichier.log", ios::binary);
-  dest << src.rdbuf();
-  src.close();
-  dest.close();
   string ligne;
   ifstream save("save/sauvegarde", ios::in);
+  getline(save, this->log);
   getline(save, ligne);
   int humains = ligne[0] - '0';
   int nbjoueurs = ligne[2] - '0';
-  int joueurs = ligne[4] - '0';
+  int joueur = ligne[4] - '0';
   int JoueursRestants = ligne[6] - '0';
-  int cible = ligne[8] - '0';
-  int cibleSelectionnee = ligne[10] - '0';
+  // int cible = ligne[8] - '0';
+  // int cibleSelectionnee = ligne[10] - '0';
   int nbhisto = ligne[12] - '0';
   int difficulte = ligne[14] - '0';
   getline(save, ligne);
@@ -1356,16 +1380,82 @@ void Menu::chargement()
 
   save.close();
 
+  string cheminlog = "save/" + this->log;
+  ifstream src(cheminlog.c_str(), ios::binary);
+  string logdest = "logs/" + this->log;
+  ofstream dest(logdest.c_str(), ios::binary);
+  dest << src.rdbuf();
+  src.close();
+  dest.close();
+
+  bool stop = false;
+  Window warning(6, 30, -15, -3);
+  warning.setCouleurBordure(BRED);
+  warning.setBordureFine();
+  warning.print(0, 0, "Partie chargée.\nSouhaitez-vous supprimer\nles fichiers de sauvegarde?", BLUEBLACK);
+  int ch;
+  Color col[2] = {WBLUE, BBLUE};
+  while (!stop)
+  {
+    ch = getch();
+    warning.print(7, 4, "Oui", col[0]);
+    warning.print(20, 4, "Non", col[1]);
+    switch (ch)
+    {
+    case KEY_RIGHT:
+      swap(col[0], col[1]);
+      break;
+    case KEY_LEFT:
+      swap(col[0], col[1]);
+      break;
+    case '\n':
+      stop = true;
+      if (col[0] == WBLUE)
+      {
+
+        remove(cheminlog.c_str());
+        remove("save/config.txt");
+        remove("save/sauvegarde");
+        warning.clear();
+        warning.print(0, 2, "Suppression effectuée.");
+        usleep(1500000);
+      }
+      break;
+    }
+  }
+
   clear();
 
-  Jeu Jeu(nbjoueurs, humains, 2, 6, nom);
-  Jeu.chargementparametres(tour, nbhisto, payback, estVulnerable, positionDuJoueur, joueurEnPosition, historique, EtatCases, Case2, casesRestantes, posNavires, naviresRestants, NbPivotements, missilesTires, missilesGagnants, tailleFlotte);
+  Jeu Jeu(nbjoueurs, humains, difficulte, 6, nom, log, true);
+  Jeu.chargementparametres(joueur,JoueursRestants, tour, nbhisto, payback, estVulnerable, positionDuJoueur, joueurEnPosition, historique, EtatCases, Case2, casesRestantes, posNavires, naviresRestants, NbPivotements, missilesTires, missilesGagnants, tailleFlotte);
   Jeu.Phase2();
+
+  for (int i = 0; i < nbjoueurs; i++)
+  {
+    for (int j = 0; j < W; j++)
+    {
+      delete[] EtatCases[i][j];
+      delete[] Case2[i][j];
+    }
+    for (int j = 0; j < 5; j++)
+    {
+      delete[] posNavires[i][j];
+    }
+  
+    delete[] NbPivotements[i];
+    delete[] posNavires[i];
+    delete[] EtatCases[i];
+    delete[] Case2[i];
+    delete[] casesRestantes[i];
+  }
+
+delete[] NbPivotements;
+delete[] posNavires;
+delete[] EtatCases;
+delete[] Case2;
+delete[] naviresRestants;
+delete[] casesRestantes;
 }
-
-
-
-
 
 void ParametreLancement(char *argv)
 {
@@ -1382,7 +1472,6 @@ void ParametreLancement(char *argv)
   else if (par == "aide")
   {
     cout << aide() << endl;
-    ;
   }
   else
   {
@@ -1402,13 +1491,12 @@ int main(int argc, char *argv[])
     startProgramX();
     if (COLS < 140 || LINES < 40)
     {
-      erreurEcran(140, 40);
+      erreurEcran();
     }
     Menu menu;
 
     menu.mainMenu(1);
   }
-
 
   return 0;
 }

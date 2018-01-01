@@ -1,11 +1,15 @@
 
-all: prog
+all: BatailleNavale
 
-prog: obj/window.o obj/test-piece.o obj/grille.o obj/flotte.o obj/config.o obj/message.o obj/navire.o obj/menu.o obj/jeu.o obj/scores.o
-	g++ -g $^ -o $@ -lncurses -W -Wall -ansi -pedantic -g
+BatailleNavale: obj/window.o obj/grille.o obj/flotte.o obj/config.o obj/message.o obj/navire.o obj/menu.o obj/jeu.o obj/scores.o
+	g++ -g $^ -o $@ -lncurses -W -ansi -g
 
+obj/%.o: src/%.cpp include/%.h
+	g++ -c $< -o $@ -lncurses -W -ansi -g
 
+clean:
+	rm -rf obj/*.o
 
-obj/%.o: src/%.cpp
-	g++ -c $^ -o $@ -lncurses -W -Wall -ansi -pedantic -g
-
+mrproper: clean
+	rm -rf BatailleNavale
+			

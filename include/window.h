@@ -45,7 +45,7 @@ class Window {
   int height,width,startx,starty;
   Color colorwin, colorframe;
   char bord;
-  bool estGrille = false;
+  bool estGrille;
 
  public:
 
@@ -54,7 +54,7 @@ class Window {
 
   // constructeur d'un fenetre de hauteur=h, largeur=w dont le coin superieur gauche
   // a pour coordonnée (x,y), le caractère c est utilisé pour définir la bordure
-  Window(int h,int w, int x, int y, char c=' ', bool estgrille=false);
+  Window(int h,int w, int x, int y, char c=' ');
 
   ~Window();
   void update() const;
@@ -76,6 +76,7 @@ class Window {
   int getY() const;        // récupère l'ordonnée du coin supérieur gauche de la fenêtre 
   int getHauteur() const ; // récupère la hauteur de la fenêtre
   int getLargeur() const ; // récupère la largeur de la fenêtre
+  WINDOW* getWin();
 
   Color getCouleurBordure() const; // récupère la couleur de la bordure
   Color getCouleurFenetre() const; // récupère la couleur de la fenêtre
@@ -88,17 +89,7 @@ class Window {
 
   void clear() const; // enleve tout le contenu de la fenêtre
   void clearall() const; // enleve tout le contenu de la fenêtre + frame
-  WINDOW* getWin();
 };
-
-
-
-
-
-
-
-
-
 
 
 #endif

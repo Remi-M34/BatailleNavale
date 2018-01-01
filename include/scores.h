@@ -12,10 +12,12 @@ public:
   Scores(int difficulte);
   ~Scores();
 
-
+  // Renvoie le score arrondi
   int getScore();
   void missileEnvoye();
   void navireTouche();
+
+  // La taille de la flotte correspond au nombre total de cases que possèdent chaque navire (entre 5 et 125)
   void augmenterTailleFlotte();
 
   int getMissilesTires();
@@ -26,13 +28,13 @@ public:
 
 private:
 
-int missilesTires = 0;
-int missilesGagnants = 0;
-int tailleFlotte = 0;
+int missilesTires;
+int missilesGagnants;
+int tailleFlotte;
 
 int nbjoueurs;
-int height = getHeightGrille();
-int width = getWidthGrille();
+int height;
+int width;
 
 int difficulte;
 

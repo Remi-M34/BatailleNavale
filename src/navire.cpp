@@ -1,134 +1,108 @@
 #include "../include/navire.h"
 #include "../include/window.h"
 
-
 #include <cmath>
 
 using namespace std;
 
-// #define xm (COLS-100)/2
-// #define ym (LINES-33)/2
-
-
-
-
-
-
-int getDim(int** navire, int c)
+int getDim(int **navire, int c)
 {
   navire = checkRepositionnement(navire);
-  int x,y;
+  int x, y;
   int w = 0;
   int h = 0;
-  for ( x = 0 ; x <5 ; x++)
+  for (x = 0; x < 5; x++)
   {
-    for ( y = 0 ; y < 5 ; y++)
+    for (y = 0; y < 5; y++)
     {
-
       if (navire[x][y] == 1)
       {
-        h = fmax(y+1,h);
+        h = fmax(y + 1, h);
       }
 
       if (navire[y][x] == 1)
       {
-        w = fmax(y+1,w);
+        w = fmax(y + 1, w);
       }
     }
-
   }
-
 
   if (c == 0)
   {
-
     return w;
   }
   else
   {
     return h;
   }
-
 }
 
-
-
-
-int** checkRepositionnement(int** navire)
+int **checkRepositionnement(int **navire)
 {
 
-
-            int k = 0;
-            for (int x = 0; x < 5; x++)
-            {
-                  k += navire[x][0];
-            }
-            if (k == 0)
-            {
-                  navire = repositionnementVertical(navire);
-                  navire = checkRepositionnement(navire);
-            }
-            k = 0;
-            for (int y = 0; y < 5; y++)
-            {
-                  k += navire[0][y];
-            }
-            if (k == 0)
-            {
-                  navire = repositionnementHorizontal(navire);
-                  navire = checkRepositionnement(navire);
-            }
-      
-
-      return navire;
+  int k = 0;
+  for (int x = 0; x < 5; x++)
+  {
+    k += navire[x][0];
+  }
+  if (k == 0)
+  {
+    navire = repositionnementVertical(navire);
+    navire = checkRepositionnement(navire);
+  }
+  k = 0;
+  for (int y = 0; y < 5; y++)
+  {
+    k += navire[0][y];
+  }
+  if (k == 0)
+  {
+    navire = repositionnementHorizontal(navire);
+    navire = checkRepositionnement(navire);
+  }
+  return navire;
 }
 
-int** repositionnementHorizontal(int** navire)
+int **repositionnementHorizontal(int **navire)
 {
-      int x = 0;
-      for (x = 0; x < 4; x++)
-      {
-            for (int y = 0; y < 5; y++)
-            {
-                  navire[x][y] = navire[x + 1][y];
-            }
-      }
-      x = 4;
-      for (int y = 0; y < 5; y++)
-      {
-            navire[x][y] = 0;
-      }
+  int x = 0;
+  for (x = 0; x < 4; x++)
+  {
+    for (int y = 0; y < 5; y++)
+    {
+      navire[x][y] = navire[x + 1][y];
+    }
+  }
+  x = 4;
+  for (int y = 0; y < 5; y++)
+  {
+    navire[x][y] = 0;
+  }
 
-      return navire;
+  return navire;
 }
 
-int** repositionnementVertical(int** navire)
+int **repositionnementVertical(int **navire)
 {
-      int y = 0;
-      for (int x = 0; x < 5; x++)
-      {
-            for (y = 0; y < 4; y++)
-            {
-                  navire[x][y] = navire[x][y + 1];
-            }
-      }
-      y = 4;
-      for (int x = 0; x < 5 ; x++)
-      {
-            navire[x][y] = 0;
-      }
-
-      return navire;
+  int y = 0;
+  for (int x = 0; x < 5; x++)
+  {
+    for (y = 0; y < 4; y++)
+    {
+      navire[x][y] = navire[x][y + 1];
+    }
+  }
+  y = 4;
+  for (int x = 0; x < 5; x++)
+  {
+    navire[x][y] = 0;
+  }
+  return navire;
 }
-
-
-
-
-
 
 void nouveauNavire(int n)
 {
-  Window creation(5, 10, 0, 0,' ',false);
+  Window creation(5, 10, 0, 0, ' ');
   creation.setCouleurBordure(BCYAN);
   creation.setBordureFine();
   int c;
@@ -146,6 +120,7 @@ void nouveauNavire(int n)
     }
   }
 
+  bool done = false;
 refresh:
 
   for (int i = 0; i < 5; i++)
@@ -169,7 +144,7 @@ refresh:
   creation.print(2 * x, y, ' ', WGREEN);
   creation.print(2 * x + 1, y, ' ', WGREEN);
 
-  while ((c = getch()) != 'q')
+  while ((c = getch()) && !done)
   {
     switch (c)
     {
@@ -218,35 +193,35 @@ refresh:
       }
       break;
 
-
     case 'r':
-      return;
+      done = true;
+      break;
     case '\n':
       if (k > 0)
       {
-
+        done = true;
         Case = checkRepositionnement(Case);
-        modifierNavires(n, getDim(Case,0), getDim(Case,1), Case);
-
-
-        return;
+        modifierNavires(n, getDim(Case, 0), getDim(Case, 1), Case);
       }
       break;
-
     case 'q':
-      return;
+      done = true;
       break;
 
     case 'd':
-    if (k > 0)
-    {
-              Case = checkRepositionnement(Case);
-              goto refresh;
-
-    }
-
+      if (k > 0)
+      {
+        Case = checkRepositionnement(Case);
+        goto refresh;
+      }
       break;
-
     }
   }
+
+
+  for (int i = 0; i < 5; i++)
+  {
+    delete[] Case[i];
+  }
+  delete[] Case;
 }

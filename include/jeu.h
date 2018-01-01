@@ -8,23 +8,24 @@ class Jeu
 {
 
 public:
-  Jeu(int nbjoueurs, int humains, int difficulte, int v, std::string n[]);
-  Jeu(int n);
+  Jeu(int nbjoueurs, int humains, int difficulte, int v, std::string n[], std::string log, bool partiechargee);
 
   //destructeur
   ~Jeu();
-  // Démarre le jeu
+  void initCouleurs();
+
+  // Démarre le jeu - placement des navires, creation du log etc...
   void Phase1();
+  void Phase2();
   // Phase où chacun des joueurs placent leur navires.
   void placementDesNavires();
 
-  void initCouleurs();
   void InfoJeu(unsigned int attaquant, unsigned int cible, int sc);
   // Initialise toutes les grilles dont les positions dépendent du nombre de joueurs (afin de toujours centrer le jeu)
   void initDim(int j);
   bool estIA();
   // Fonctions permettant la sélection de cible
-  void selectionCible(int c);
+  void selectionCible();
   void selectUp();
   void selectDown();
   void selectRight();
@@ -44,58 +45,54 @@ public:
   void classementDown();
   void classementUp();
   void SelectionKeypad(int j);
-  void DecalerHistorique(std::string nouvelleinfo,int sc);
+  void DecalerHistorique(std::string nouvelleinfo, int sc);
   std::string getPos(int i);
   void setupaide();
   void ValiderScore();
+  void chargementparametres(int j, int jrestants, int tour, int nbhisto, int payback[6], int estVulnerable[6], int positionDuJoueur[6], int joueurEnPosition[6], std::string historique[6], int ***Case, int ***Case2, int **casesRestantes, int ***posNavires, int *naviresRestants, int **NbPivotements, int *missilesTires, int *missilesGagnants, int tailleFlotte);
+  void CreationLog();
+  void Log_AjouterAction(int sc);
+  void RetourMenu();
   void sauvegarde();
-void chargementparametres(int tour, int nbhisto, int payback[6], int estVulnerable[6], int positionDuJoueur[6], int joueurEnPosition[6], std::string historique[6], int*** Case, int*** Case2,int** casesRestantes, int***posNavires,int* naviresRestants, int** NbPivotements, int* missilesTires, int* missilesGagnants, int tailleFlotte);
-void Log_AjouterAction(int sc);
-void CreationLog();
-void Phase2();
-void RetourMenu();
+
 private:
-  Window info;
-  Window aide;
-  Window plateau;
-
-std::string nom[6];
-
-  int humains;
   int nbjoueurs;
-  bool stop = false;
+  int humains;
+  Window info;
+  Window plateau;
+  Window aide;
+  int const difficulte;
 
-  int vitesse = 3;
-  int joueur = 0;
+  int vitesse;
   unsigned int JoueursRestants;
+  const std::string fichierlog;
+
+  bool partiechargee;
+
+  std::string nom[6];
+
+  bool stop;
+
+  int joueur;
   int cible;
-  int cibleSelectionnee = 0;
+  int cibleSelectionnee;
   // Gère les affinités, utilisé par l'IA.
   // Selon le mode de difficulté, renvoie et cible le dernier joueur ayant attaqué avec succès le joueur en train de jouer.
   int payback[6];
   int estVulnerable[6];
-    int positionDuJoueur[6];
+  int positionDuJoueur[6];
   int joueurEnPosition[6];
-    int nbhisto = 0;
-  int tour = 0;
-  int const difficulte;
+  int nbhisto;
+  int tour;
   std::string historique[6];
-  Color separateur[5] = {WBLACK};
+  Color separateur[5];
 
   Grille *Joueur[];
-
-
 
   int scoreWidth;
   int syf2;
   int sxf2;
   int sy2, sx2;
-
-
-
-
-
-
 
   // Options du thème
   Color colScore;
@@ -104,7 +101,6 @@ std::string nom[6];
   Color colBordurePlateau;
 
   int sx, sy, sxf, syf;
-
 };
 
 int getScoreStartX(int t);

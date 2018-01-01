@@ -7,6 +7,11 @@ using namespace std;
 
 Scores::Scores(int difficulte) : difficulte(difficulte)
 {
+  missilesTires = 0;
+  missilesGagnants = 0;
+  tailleFlotte = 0;
+  height = getHeightGrille();
+  width = getWidthGrille();
 }
 
 Scores::~Scores() {}
@@ -14,7 +19,6 @@ Scores::~Scores() {}
 int Scores::getScore()
 {
   double s = ((double)missilesGagnants / missilesTires) * (12500) / ((double)tailleFlotte / (height * width));
-  // cout << s << endl;
   if (missilesTires == 0)
   {
     return 0;

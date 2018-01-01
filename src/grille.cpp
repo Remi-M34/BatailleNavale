@@ -13,22 +13,48 @@ using namespace std;
 #define H getHeightGrille()
 #define W getWidthGrille()
 
-Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA, string nom) : fenetre(H, W * 2, sx, sy, ' ', true), flotte(sxf, syf, 1), IA(estIA),
+Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int const difficulte, Window &aide, bool estIA, string nom, bool partiechargee) : fenetre(H, W * 2, sx, sy, ' '), flotte(sxf, syf, 1, partiechargee), IA(estIA),
 
-                                                                                                                                         vitesse(vitesse), aide(&aide), difficulte(difficulte), Score(difficulte), nom(nom)
+                                                                                                                                                             vitesse(vitesse), aide(&aide), difficulte(difficulte), Score(difficulte), nom(nom)
 
 {
 
+
+      
+      navire = listedesnavires();
+      joue = false;
+      naviresRestants = 5;
+      focusnavire = -1;
+      focusx = -1;
+      focusy = -1;
+      retourmenu = false;
+      retoursauvegarde = false;
+      carGrilleMauvaiseSelection = '!';
+      for (int i = 0; i < 5; i++)
+      {
+            caseRestantes[i] = 0;
+            NombrePivotements[i] = 0;
+            if (i < 2)
+            {
+                  dernierePositionGagnante[i] = -1;
+                  dernierTir[i] = -1;
+            }
+      }
       //Initialise la grille et rend toutes les cases de la grille VIDE
       initCouleurs();
       init();
 }
 
-Grille::~Grille() {}
+Grille::~Grille()
+{
+
+      // delete[] Case;
+      // delete[] Case2;
+}
 
 void Grille::selectionNavire()
 {
-      // Ré-initialisation des couleurs car bug sinon...
+      // Ré-initialisation des couleurs...
       initCouleurs();
       mvwprintw(fenetre.frame, H + 1, W - nom.length() / 2, nom.c_str());
       wrefresh(fenetre.frame);
@@ -98,10 +124,7 @@ void Grille::selectionNavire()
                         refreshGrille(0, 0, W, H);
                         return;
                   }
-                  // flotte.echangeSelection(n, flotte.getPremierNavire());
                   flotte.refreshPort(0);
-                  // refreshGrille(0, 0, 0, 0);
-
                   break;
             }
       }
@@ -125,10 +148,8 @@ void Grille::init()
                   Case2[i][j] = 9;
                   fenetre.print(2 * i, j, ' ');
                   fenetre.print(2 * i + 1, j, ' ');
-                  usleep(3);
             }
       }
-
       mvwprintw(fenetre.frame, H + 1, W - nom.length() / 2, nom.c_str());
       wrefresh(fenetre.frame);
 }
@@ -184,11 +205,6 @@ void Grille::refreshGrille(int fx, int fy, int maxX, int maxY)
 void Grille::refreshNavireGrille(int n, int fx, int fy)
 {
 
-      // if (maxX == 0 && maxY == 0)
-      // {
-      //       maxX = min(W, fx + 7);
-      //       maxY = min(H, fy + 7);
-      // }
       if (fx < 0)
       {
             fx = 0;
@@ -293,7 +309,6 @@ void Grille::placementNavire(int n)
                         y--;
                         moveNavire(n, x, y);
                   }
-
                   break;
             case KEY_DOWN:
 
@@ -302,7 +317,6 @@ void Grille::placementNavire(int n)
                         y++;
                         moveNavire(n, x, y);
                   }
-
                   break;
 
             case ' ':
@@ -320,7 +334,6 @@ void Grille::placementNavire(int n)
                   moveNavire(n, x, y);
                   break;
             }
-
             case '\n':
 
                   if (checkPlacement(n, x, y))
@@ -338,13 +351,10 @@ void Grille::placementNavire(int n)
                   }
 
                   break;
-
             case 'b':
                   flotte.estAuPort(n, true);
                   refreshGrille(x, y, 0, 0);
-
                   return;
-
                   break;
             }
       }
@@ -366,8 +376,6 @@ void Grille::moveNavire(int n, int sx, int sy)
       {
             c = '#';
       }
-
-      // refreshGrille(sx - 1, sy - 1, 0, 0);
       refreshNavireGrille(n, sx - 1, sy - 1);
 
       for (x = 0; x < fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n)); x++)
@@ -383,20 +391,8 @@ void Grille::moveNavire(int n, int sx, int sy)
       }
 }
 
-bool Grille::check(int n, int sx, int sy)
-{
-      int x = 0;
-      int y = 0;
 
-      for (x = 0; x < flotte.getWidthnavire(n); x++)
-      {
-            for (y = 0; x < flotte.getHeightnavire(n); y++)
-            {
-            }
-      }
-}
-
-void Grille::pivoteDroite(int n, int &x, int &y)
+void Grille::pivoteDroite(int n, int &xx, int &y)
 {
       int taille = fmax(flotte.getHeightnavire(n), flotte.getWidthnavire(n));
 
@@ -418,20 +414,15 @@ void Grille::pivoteDroite(int n, int &x, int &y)
       }
 
       checkRepositionnement(n);
-
-      // refreshGrille();
-
       flotte.swapDimensionsNavire(n);
-
-      if (x + flotte.getWidthnavire(n) > W)
+      if (xx + flotte.getWidthnavire(n) > W)
       {
-            x -= abs(flotte.getHeightnavire(n) - flotte.getWidthnavire(n));
+            xx -= abs(flotte.getHeightnavire(n) - flotte.getWidthnavire(n));
       }
       if (y + flotte.getHeightnavire(n) > H)
       {
             y -= abs(flotte.getHeightnavire(n) - flotte.getWidthnavire(n));
       }
-
       if (NombrePivotements[n] == 3)
       {
             NombrePivotements[n] = 0;
@@ -480,7 +471,6 @@ void Grille::repositionnementHorizontal(int n)
                   navire[n][x][y] = navire[n][x + 1][y];
             }
       }
-
       for (int y = 0; navire[n][0][y] != -1; y++)
       {
             navire[n][x][y] = 0;
@@ -497,7 +487,6 @@ void Grille::repositionnementVertical(int n)
                   navire[n][x][y] = navire[n][x][y + 1];
             }
       }
-
       for (int x = 0; navire[n][x][0] != -1; x++)
       {
             navire[n][x][y] = 0;
@@ -517,7 +506,6 @@ bool Grille::checkPlacement(int n, int sx, int sy)
                   }
             }
       }
-
       return true;
 }
 
@@ -542,7 +530,6 @@ void Grille::validerNavire(int n, int sx, int sy)
 
       if (!estIA())
       {
-            // refreshNavireGrille(n, sx, sy);
             usleep(200000);
       }
 }
@@ -570,11 +557,6 @@ void Grille::coulerNavire(int n)
 int Grille::destinationMissile()
 {
 
-      // if (!IA)
-      // {
-      //       return destinationMissileAleatoire();
-      // }
-
       int ch;
       int x = W / 2;
       int y = H / 2;
@@ -599,10 +581,6 @@ int Grille::destinationMissile()
             switch (ch)
             {
 
-            case 'a':
-                  refreshGrille(x, y, x + 1, y + 1);
-                  return destinationMissileAleatoire();
-
             case KEY_RIGHT:
                   moveRight(x, y);
                   break;
@@ -617,7 +595,9 @@ int Grille::destinationMissile()
             case KEY_UP:
                   moveUp(x, y);
                   break;
-
+            case 'a':
+                  refreshGrille(x, y, x + 1, y + 1);
+                  return destinationMissileAleatoire();
             case 'e':
                   caseSuivante(x, y);
                   break;
@@ -635,10 +615,6 @@ int Grille::destinationMissile()
             case '-':
                   vitesse = max(vitesse - 1, 0);
                   (*aide).print((*aide).getWindowWidth() - 2, 0, myitoa(vitesse), BCYAN);
-
-                  break;
-            case 'h':
-                  // aideJeu();
                   break;
             case 's':
                   refreshGrille(x, y, x + 1, y + 1);
@@ -695,6 +671,8 @@ int Grille::destinationMissile()
                   break;
             }
       }
+
+      return 0;
 }
 
 void Grille::caseSuivante(int &x, int &y)
@@ -759,7 +737,6 @@ void Grille::casePrecedente(int &x, int &y)
       fenetre.print(2 * (x), y, ' ', colCaseSelectionnee);
       fenetre.print(2 * x + 1, y, ' ', colCaseSelectionnee);
       fenetre.BordureNumerotee(x, y);
-
       return;
 }
 
@@ -850,7 +827,6 @@ void Grille::findMilieu(int &x, int &y)
             x = dernierePositionGagnante[0];
             y = dernierePositionGagnante[1];
             fenetre.BordureNumerotee(x, y);
-
             return;
       }
 
@@ -892,14 +868,6 @@ bool Grille::estCoule(int n)
       }
 }
 
-void test(string s)
-{
-      fstream test("test.txt", ios::in | ios::out | ios::app);
-
-      test << s;
-
-      test.close();
-}
 
 void Grille::initCouleurs()
 {
@@ -909,7 +877,6 @@ void Grille::initCouleurs()
 
       while (getline(couleurs, ligne))
       {
-
             switch (lignes)
             {
             case 8:
@@ -945,19 +912,6 @@ void Grille::initCouleurs()
                   delaiPoseIA *= 1000;
                   break;
             case 28:
-                  // if (ligne[0] == '1')
-                  // {
-                  //       difficulte = 1;
-                  // }
-                  // else if (ligne[0] == '2')
-                  // {
-                  //       difficulte = 2;
-                  // }
-                  // else
-                  // {
-                  //       difficulte = 3;
-                  // }
-                  // break;
             case 33:
                   colCaseSelectionnee = convertColor(ligne);
                   break;
@@ -973,7 +927,6 @@ void Grille::initCouleurs()
             case 37:
                   colVide = convertColor(ligne);
                   couleurs.close();
-
                   return;
             }
 
@@ -1024,13 +977,11 @@ void Grille::placementAleatoire()
 
 int Grille::destinationMissileAleatoire()
 {
-
-      // srand((int)time(0));
       int x = focusx;
       int y = focusy;
       if (focusnavire == -1)
       {
-            findFocus();
+            focusnavire = findFocus();
       }
       if (focusnavire == -1)
       {
@@ -1043,6 +994,17 @@ int Grille::destinationMissileAleatoire()
             {
                   return destinationMissileAleatoire();
             }
+      }
+
+      if (retourmenu)
+      {
+            return -3;
+      }
+      else if (retoursauvegarde)
+      {
+            retoursauvegarde = false;
+            refreshGrille(0, 0, W, 3);
+            return -2;
       }
 
       if (1)
@@ -1085,7 +1047,6 @@ int Grille::destinationMissileAleatoire()
       {
             Case[x][y] = TOUCHE;
             caseRestantes[Case2[x][y]]--;
-            cout << caseRestantes[Case2[x][y]] << endl;
             if (estCoule(Case2[x][y]) == true)
             {
                   refreshGrille(posNavire[Case2[x][y]][0], posNavire[Case2[x][y]][1], W, H);
@@ -1110,7 +1071,6 @@ int Grille::destinationMissileAleatoire()
             else
             {
                   refreshGrille(x, y, x + 1, y + 1);
-                  // if (!IA)
                   {
                         focusnavire = Case2[x][y];
                         focusx = x;
@@ -1123,25 +1083,16 @@ int Grille::destinationMissileAleatoire()
                   return 1;
             }
       }
+
+      return 0;
 }
 
 void Grille::zoneFocus(int &x, int &y)
 {
       if (aDesVoisins(x, y))
       {
-            int k = 50;
             while (!caseNonDecouverte(x, y))
             {
-                  test("\ncontinue la recherche avec mauvais x:");
-                  test(myitoa(x));
-                  test(" et mauvais y: ");
-                  test(myitoa(y));
-                  test("    diff:");
-
-                  test(myitoa(difficulte));
-
-                  // srand((int)time(0) + k);
-
                   switch (difficulte)
                   {
                   case 2 ... 3:
@@ -1153,13 +1104,7 @@ void Grille::zoneFocus(int &x, int &y)
                         y = rand() % (toucheBord(focusy, H) ? 3 : toucheBord(focusy + 1, H) ? 4 : 5) + (max(focusy - 2, 0));
                         break;
                   }
-
-                  k += 50;
             }
-            test("\fin de la recherche avec focusx:");
-            test(myitoa(focusx));
-            test(" et focusy: ");
-            test(myitoa(focusy));
       }
       else
       {
@@ -1179,10 +1124,6 @@ void Grille::zoneFocus(int &x, int &y)
 
 bool Grille::aDesVoisins(int x, int y)
 {
-      test("\fdebut recherche voisin avec x:");
-      test(myitoa(x));
-      test(" et y: ");
-      test(myitoa(y));
 
       int debutX = max(0, x - 1);
       int debutY = max(0, y - 1);
@@ -1198,44 +1139,23 @@ bool Grille::aDesVoisins(int x, int y)
             {
                   if (caseNonDecouverte(debutX, debutY))
                   {
-                        test("\na renvoye un voisin : x:");
-
-                        test(myitoa(debutX));
-                        test(" et y:");
-                        test(myitoa(debutY));
-                        test("\n tandis que focusx: ");
-                        test(myitoa(focusx));
-                        test(" et focusy: ");
-                        test(myitoa(focusy));
-
                         return true;
                   }
                   debutY++;
             }
             debutX++;
       }
-      test("\nn'a pas renvoye de voisin");
-
       return false;
 }
 
 bool Grille::caseNonDecouverte(int x, int y)
 {
-      test("\n casenon decouverte? avec x=");
-      test(myitoa(x));
-      test(" et y=");
-      test(myitoa(y));
-      test("\n tandis que focusx=");
-      test(myitoa(focusx));
-      test(" et focusy=");
-      test(myitoa(focusy));
+
       return (Case[x][y] == VIDE || Case[x][y] == NAVIRE);
 }
 
 int Grille::findFocus()
 {
-      test("findFocus");
-
       for (int x = 0; x < W; x++)
       {
             for (int y = 0; y < H; y++)
@@ -1255,9 +1175,6 @@ int Grille::findFocus()
 
 void Grille::caseAleatoire(int &x, int &y)
 {
-      test("caseAleatoire");
-
-      // srand((int)time(0));
 
       x = rand() % W;
       y = rand() % H;
@@ -1281,11 +1198,6 @@ string myitoa(int i)
       return i_as_string;
 }
 
-// void Grille::affichagenom()
-// {
-
-// }
-
 void Grille::setEstCible(bool c)
 {
 
@@ -1293,16 +1205,12 @@ void Grille::setEstCible(bool c)
       if (c && !joue)
       {
             fenetre.setCouleurBordure(BRED);
-            // wattron(fenetre.frame,A_BOLD);
-            // wattron(fenetre.frame,COLOR_PAIR(BRED));
+
             mvwprintw(fenetre.frame, H + 1, 1 + W - nom.length() / 2, nom.c_str());
             string str = "(" + myitoa(naviresRestants) + "N)";
             mvwprintw(fenetre.frame, H + 1, 2 * W - 2, str.c_str());
-            //  wattroff(fenetre.frame,A_BOLD);
-            // wattron(fenetre.frame,COLOR_PAIR(BRED));
 
             wrefresh(fenetre.frame);
-            // setCiblageValide(true);
       }
       else if (c && joue)
       // Si le joueur se cible lui-même
@@ -1313,8 +1221,6 @@ void Grille::setEstCible(bool c)
             string str = "(" + myitoa(naviresRestants) + "N)";
             mvwprintw(fenetre.frame, H + 1, 2 * W - 2, str.c_str());
             wrefresh(fenetre.frame);
-
-            setCiblageValide(false);
       }
       else if (!c && joue)
       // Si le joueur n'est plus ciblé mais est toujours joueur
@@ -1327,7 +1233,6 @@ void Grille::setEstCible(bool c)
             string str = "(" + myitoa(naviresRestants) + "N)";
             mvwprintw(fenetre.frame, H + 1, 2 * W - 2, str.c_str());
             wrefresh(fenetre.frame);
-            setCiblageValide(false);
       }
       else if (!c)
       // Si le joueur n'est plus ciblé
@@ -1338,32 +1243,8 @@ void Grille::setEstCible(bool c)
             string str = "(" + myitoa(naviresRestants) + "N)";
             mvwprintw(fenetre.frame, H + 1, 2 * W - 2, str.c_str());
             wrefresh(fenetre.frame);
-            setCiblageValide(false);
       }
-
-      // if (estDejaCible() && !joue)
-      // {
-      //       fenetre.setCouleurBordure(bordure);
-      // }
-      // else if (joue)
-      // {
-      //       return;
-      // }
-      // else
-      // {
-      //       fenetre.setCouleurBordure(BRED);
-      // }
 }
-
-// void Grille::nonCible()
-// {
-//       fenetre.setCouleurBordure(bordure);
-// }
-
-// bool Grille::estDejaCible()
-// {
-//       return ((fenetre.getCouleurBordure() == BRED));
-// }
 
 bool Grille::estIA()
 {
@@ -1372,7 +1253,6 @@ bool Grille::estIA()
 
 void Grille::setJoue(bool c)
 {
-      // wattron(fenetre.frame,COLOR_PAIR(BBLUE));
 
       if (c)
       {
@@ -1402,24 +1282,6 @@ bool Grille::getJoue()
       return joue;
 }
 
-// void Grille::joue()
-// {
-//       fenetre.setCouleurBordure(BWHITE);
-//       estEnTrainDeJouer = true;
-// }
-
-void Grille::setCiblageValide(bool c)
-{
-      if (c)
-      {
-            // fenetre.setCarBordure('-');
-      }
-      else
-      {
-            // fenetre.setCarBordure(carBordureGrille);
-      }
-}
-
 void Grille::checkSpeedG()
 {
       int ch = getch();
@@ -1432,26 +1294,25 @@ void Grille::checkSpeedG()
       case '-':
             vitesse = max(vitesse - 1, 0);
             break;
+      case 'm':
+            retourmenu = true;
+            fenetre.print(0, 0, "Veuillez patientez...", RBLACK);
+            break;
+      case 's':
+            retoursauvegarde = true;
+            fenetre.print(0, 0, "Veuillez patientez...", RBLACK);
+            break;
       }
-
       (*aide).print((*aide).getWindowWidth() - 2, 0, myitoa(vitesse), CBLACK);
 }
 
 void Grille::deplacementIA(int dx, int dy, int x, int y)
 {
-      test(myitoa(x));
-      test(",");
-      test(myitoa(y));
-      test(" sont x et y. dx et dy sont : ");
-      test(myitoa(dx));
-      test(",");
-      test(myitoa(dy));
-      test("\n");
+
       double distance;
       double distance2;
       while ((distance = (double)sqrt(pow(x - dx, 2)) + pow(y - dy, 2)) > 0)
       {
-
             if (checkCheminHorizontal(dx, dy, x))
             {
                   do
@@ -1493,54 +1354,22 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
             {
                   caseSuivante(dx, dy);
                   wait();
-                  test(myitoa(dx));
-                  test(",");
-                  test(myitoa(dy));
-                  test(" est la position actuelle. Bouge à droite pour arriver en ");
-                  test(myitoa(x));
-                  test(",");
-                  test(myitoa(y));
-                  test("\n");
             }
             else if (dx > x)
             {
                   casePrecedente(dx, dy);
                   wait();
-                  test(myitoa(dx));
-                  test(",");
-                  test(myitoa(dy));
-                  test(" est la position actuelle. Bouge à gauche pour arriver en ");
-                  test(myitoa(x));
-                  test(",");
-                  test(myitoa(y));
-                  test("\n");
             }
 
             if (dy < y)
             {
                   moveDown(dx, dy);
                   wait();
-                  test(myitoa(dx));
-                  test(",");
-                  test(myitoa(dy));
-                  test(" est la position actuelle. Bouge en bas pour arriver en ");
-                  test(myitoa(x));
-                  test(",");
-                  test(myitoa(y));
-                  test("\n");
             }
             else if (dy > y)
             {
                   moveUp(dx, dy);
                   wait();
-                  test(myitoa(dx));
-                  test(",");
-                  test(myitoa(dy));
-                  test(" est la position actuelle. Bouge en haut pour arriver en ");
-                  test(myitoa(x));
-                  test(",");
-                  test(myitoa(y));
-                  test("\n");
             }
             if (distance2 >= distance)
             {
@@ -1560,33 +1389,14 @@ void Grille::deplacementIA(int dx, int dy, int x, int y)
                               wait();
                         }
                   }
-
-                  test(myitoa(dx));
-                  test(",");
-                  test(myitoa(dy));
-                  test(" est la position actuelle. a fait case suiv car bloqué. doit arriver en : ");
-                  test(myitoa(x));
-                  test(",");
-                  test(myitoa(y));
-                  test("\n");
             }
             distance2 = distance;
       }
-      test(myitoa(dx));
-      test(",");
-      test(myitoa(dy));
-      test(" est la position actuelle. a terminé ses mouvements. doit etre en : ");
-      test(myitoa(x));
-      test(",");
-      test(myitoa(y));
-      test("\n");
 }
 
 bool Grille::checkCheminVertical(int dx, int dy, int y)
 {
       return (caseNonDecouverte(dx, y) && dy != y);
-      {
-      }
 }
 
 bool Grille::checkCheminHorizontal(int dx, int dy, int x)
@@ -1596,25 +1406,11 @@ bool Grille::checkCheminHorizontal(int dx, int dy, int x)
 
 void Grille::wait()
 {
-
       for (int i = 1; i <= 5; i++)
       {
             checkSpeedG();
             usleep((9 - vitesse) * (9 - vitesse) * 2000);
       }
-}
-
-void Grille::cacherCases()
-{
-      fenetre.clear();
-      // for (int x = 0; x < W; x++)
-      // {
-      //       for (int y = 0; y < H; y++)
-      //       {
-      //             fenetre.print(2 * x, y, ' ', WBLACK);
-      //             fenetre.print(2 * x + 1, y, ' ', WBLACK);
-      //       }
-      // }
 }
 
 void Grille::mauvaiseSelection()
@@ -1747,32 +1543,40 @@ void Grille::ChargementDonnees(int **Case, int **Case2, int *casesRestantes, int
                   pivoteDroite(n, a, b);
             }
       }
-
-      for (int x = 0; x < W; x++)
-      {
-            for (int y = 0; y < H; y++)
+      if (!estMort())
+            for (int x = 0; x < W; x++)
             {
-                  switch (Case[x][y])
                   {
-                  case VIDE:
-                        fenetre.print(2 * x, y, ' ', colVide);
-                        fenetre.print(2 * x + 1, y, ' ', colVide);
-                        break;
-                  case TOMBEALEAU:
-                        fenetre.print(2 * x, y, ' ', colManque);
-                        fenetre.print(2 * x + 1, y, ' ', colManque);
-                        break;
-                  case TOUCHE:
-                        fenetre.print(2 * x, y, '#', colTouche);
-                        fenetre.print(2 * x + 1, y, '#', colTouche);
-                        break;
-                  case COULE:
-                        fenetre.print(2 * x, y, '#', colCoule);
-                        fenetre.print(2 * x + 1, y, '#', colCoule);
-                        break;
+                        for (int y = 0; y < H; y++)
+                        {
+                              switch (Case[x][y])
+                              {
+                              case VIDE:
+                                    fenetre.print(2 * x, y, ' ', colVide);
+                                    fenetre.print(2 * x + 1, y, ' ', colVide);
+                                    break;
+                              case TOMBEALEAU:
+                                    fenetre.print(2 * x, y, ' ', colManque);
+                                    fenetre.print(2 * x + 1, y, ' ', colManque);
+                                    break;
+                              case TOUCHE:
+                                    fenetre.print(2 * x, y, '#', colTouche);
+                                    fenetre.print(2 * x + 1, y, '#', colTouche);
+                                    break;
+                              case COULE:
+                                    fenetre.print(2 * x, y, '#', colCoule);
+                                    fenetre.print(2 * x + 1, y, '#', colCoule);
+                                    break;
+                              }
+                        }
                   }
             }
+      else
+      {
+            croixmort();
       }
+
+      focusnavire = findFocus();
 }
 
 int Grille::getNbPivotements(int n)

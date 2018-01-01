@@ -1,25 +1,41 @@
 #include "../include/flotte.h"
 #include "../include/window.h"
 
-
-
 #include <iostream>
 #include <cmath>
 #include <unistd.h>
 #include <fstream>
 #include <stdlib.h>
 
-
 using namespace std;
 
-Flotte::Flotte(int sx, int sy, int d) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy,false)
+Flotte::Flotte(int sx, int sy, int d, bool partiechargee) : fenetre(getDimFlotte('h'), 2 * (getDimFlotte('w')), sx, sy)
 {
-    couleursNavires();
+    navire = listedesnavires();
     initDim();
-    refreshPort(d);
+    for (int i = 0; i < 5; i++)
+    {
+        color[i] = WBLACK;
+        estauport[i] = true;
+        s[i] = ' ';
+    }
+    if (!partiechargee)
+    {
+        couleursNavires();
+        refreshPort(d);
+    }
 }
 
-Flotte::~Flotte() {}
+Flotte::~Flotte()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        delete[] dimNavire[i];
+        delete[] dimNavireOriginales[i];
+    }
+    delete[] dimNavire;
+    delete[] dimNavireOriginales;
+}
 
 void Flotte::estAuPort(int n, bool b)
 {
@@ -74,6 +90,7 @@ int Flotte::getNavireSuivant(int n)
             return i;
         }
     }
+    return -1;
 }
 
 Color Flotte::getColor(int n)
@@ -90,13 +107,13 @@ int Flotte::getNavirePrecedent(int n)
             return i;
         }
     }
+    return -1;
 }
 
 bool Flotte::getEstAuPort(int n)
 {
     return estauport[n];
 }
-
 
 void Flotte::selectionne(int n, bool x)
 {
@@ -184,7 +201,7 @@ bool Flotte::portVide()
         }
     }
     return true;
-    }
+}
 
 int Flotte::getPremierNavire()
 {
@@ -207,11 +224,12 @@ int Flotte::getDernierNavire()
             return n;
         }
     }
+    return -1;
 }
 
 int Flotte::getRandomNavire()
 {
-    for (int i = 0 ; i < 5 ; i++)
+    for (int i = 0; i < 5; i++)
     {
         s[i] = ' ';
     }
@@ -220,16 +238,15 @@ int Flotte::getRandomNavire()
     {
         return -1;
     }
-    srand((int)time(0));
     int n = rand() % 5;
 
     while (!getEstAuPort(n))
-{        
-     n = rand() % 5;
-}
-s[n] = '#';
-refreshPort(0);
-return n;
+    {
+        n = rand() % 5;
+    }
+    s[n] = '#';
+    refreshPort(0);
+    return n;
 }
 
 void Flotte::initSelection()
@@ -267,8 +284,7 @@ void Flotte::swapDimensionsNavire(int n)
 
 void Flotte::initDim()
 {
-    int kx = 0;
-    int ky = 0;
+
     int maxX = 0;
     int maxY = 0;
 
@@ -312,7 +328,6 @@ void Flotte::couleursNavires()
 
     while (getline(couleurs, ligne))
     {
-
         switch (lignes)
         {
         case 3:
@@ -330,7 +345,6 @@ void Flotte::couleursNavires()
         case 7:
             color[lignes - 3] = convertColor(ligne);
             break;
-
         case 9:
             fenetre.setCouleurBordure(convertColor(ligne));
             break;
@@ -343,12 +357,10 @@ void Flotte::couleursNavires()
 
         lignes++;
     }
-
     couleurs.close();
 }
 
-
-  void Flotte::chargerDim(int** dim)
+void Flotte::chargerDim(int **dim)
 {
     dimNavire = dim;
 }

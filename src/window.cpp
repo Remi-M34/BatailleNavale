@@ -25,7 +25,7 @@ void init_colors(void)
   init_pair(BGREEN, COLOR_BLACK, COLOR_GREEN);
   init_pair(BMAGENTA, COLOR_BLACK, COLOR_MAGENTA);
   init_pair(BRED, COLOR_BLACK, COLOR_RED);
-
+  
   init_pair(CBLACK, COLOR_CYAN, COLOR_BLACK);
   init_pair(BLUEBLACK, COLOR_BLUE, COLOR_BLACK);
   init_pair(YBLACK, COLOR_YELLOW, COLOR_BLACK);
@@ -64,7 +64,7 @@ void Window::update() const
   refresh();
 }
 
-Window::Window(int h, int w, int x, int y, char c, bool estgrille)
+Window::Window(int h, int w, int x, int y, char c)
     : height(h), width(w), startx(x + COLS / 2), starty(y + LINES / 2), bord(c)
 {
   colorwin = WBLACK;
@@ -81,6 +81,10 @@ Window::Window(int h, int w, int x, int y, char c, bool estgrille)
   {
     estGrille = true;
   }
+  else
+  {
+    estGrille = false;
+  }
 }
 
 Window::~Window()
@@ -95,7 +99,7 @@ Window::~Window()
 
 void Window::print(int x, int y, std::string s, Color c) const
 {
-  
+
   wattron(win, COLOR_PAIR(c));
   mvwprintw(win, y, x, s.c_str());
   wattroff(win, COLOR_PAIR(c));
@@ -116,8 +120,6 @@ void Window::print(int x, int y, std::string s) const
 
 void Window::printborderch(int x, int y, char s)
 {
-  // const char * c = s.c_str();
-  // mvwprintw(frame,y,x,s);
 
   mvwaddch(frame, y, x, s);
   mvwaddch(frame, y, x + 1, ' ');
@@ -125,7 +127,6 @@ void Window::printborderch(int x, int y, char s)
 
 void Window::printborder(int x, int y, string s)
 {
-  // const char * c = s.c_str();
   mvwprintw(frame, y, x, s.c_str());
 }
 
@@ -139,8 +140,6 @@ void Window::BordureNumerotee(int x, int y)
   {
     if (x == i - 1)
     {
-      // wattron(frame,A_DIM);
-
       wattron(frame, A_UNDERLINE);
 
       wattron(frame, COLOR_PAIR(WRED));
@@ -172,9 +171,6 @@ void Window::BordureNumerotee(int x, int y)
     else
       printborder(0, i, myitoa((i > 9 ? (i == 10 || i == 20 ? i / 10 : i % 10) : i)));
   }
-
-  // wrefresh(frame);
-  // refresh();
   update();
 }
 
@@ -240,7 +236,6 @@ int Window::getWindowWidth()
 void Window::clear() const
 {
   werase(win);
-  // werase(frame);
   update();
 }
 

@@ -18,7 +18,7 @@ string aide()
 {
 
     string message =
-        "Le but du jeu est d'être le premier joueur à avoir situé tous les navires ennemis sur le terrain maritime de l'adversaire.\n\nIl se déroule en 2 phases :\nLe joueur commence par sélectionner un de ses navires pour ensuite le placer où il le veut sur son terrain.\nSélection et validation du navire avec ENTREE, rotation avec ESPACE\nLe jeu débute quand les deux joueurs ont placé tous leur navires.\n\nUn premier joueur (désigné aléatoirement) peut envoyer un missile sur une des cases du plateau ennemi :\n- Une partie d'un navire est touchée, le joueur peut rejouer et gagne x points (x si le navire est coulé)\n- Le missile tombe à l'eau : c'est au tour de l'adversaire de jouer\nLe jeu se termine quand un joueur a coulé tous les navires ennemis.";
+        "Le but du jeu est de localiser et détruire les 5 navires de chaque adversaire.\n\nLes joueurs commencent par placer chacun de leur navires sur leur territoire.\nLe jeu débute quand tous les participants ont placé tous leur navires.\n\nUn tirage au sort est effectué pour désigner qui jouera en premier. Après ça, les joueurs peuvent, chacun leur tour, choisir une cible et une case à attaquer.\n\nLe nombre de navires restants de chaque joueur est affiché sur la bordure de leur grille, à droite de leur pseudo.\n\nLe gagnant est le dernier survivant. Son score est alors enregistré et figure peut-être dans le top 10.\nScores :\n((missilesGagnants / missilesTires) * (12500)) / (tailleFlotte / (hauteurGrille * largeurGrille))";
 
     return message;
 }
@@ -42,26 +42,26 @@ string infoFlotte(int s)
     switch (s)
     {
     case 1:
-        return "--- Thème 1 ---";
+        return "--- Flotte 1 ---";
 
     case 2:
-        return "--- Thème 2 ---";
+        return "--- Flotte 2 ---";
     case 3:
-        return "--- Thème 3 ---";
+        return "--- Flotte 3 ---";
     case 4:
-        return "--- Thème 4 ---";
+        return "--- Flotte 4 ---";
     case 5:
-        return "--- Thème 5 ---";
+        return "--- Flotte 5 ---";
     case 6:
-        return "--- Thème 6 ---";
+        return "--- Flotte 6 ---";
     case 7:
-        return "--- Thème 7 ---";
+        return "--- Flotte 7 ---";
     case 8:
-        return "--- Thème 8 ---";
+        return "--- Flotte 8 ---";
     case 9:
-        return "--- Thème 9 ---";
+        return "--- Flotte 9 ---";
     case 10:
-        return "--- Thème 10 ---";
+        return "--- Flotte 10 ---";
     }
 }
 
@@ -74,21 +74,21 @@ string infoFlotteD(int s)
     case 2:
         return "Facile";
     case 3:
-        return "Facile";
+        return "Moyen";
     case 4:
-        return "Facile";
+        return "Moyen";
     case 5:
-        return "Facile";
+        return "Moyen";
     case 6:
-        return "Facile";
+        return "Moyen";
     case 7:
-        return "Facile";
+        return "Difficile";
     case 8:
-        return "Facile";
+        return "Difficile";
     case 9:
-        return "Facile";
+        return "Difficile";
     case 10:
-        return "Facile";
+        return "Difficile";
     }
 }
 
@@ -140,7 +140,7 @@ string erreurTailleFenetre()
     largeur = myitoa(COLS);
     hauteur = myitoa(LINES);
     string message = "Votre fenêtre est trop petite : " + largeur + " x " + hauteur 
-    + "\nLe jeu nécessite une fenêtre de taille supérieur à 150 x 40 pour l'affichage du menu."
+    + "\nLe jeu nécessite une fenêtre de taille supérieure à 150 x 40 pour l'affichage du menu."
     + "\n\nNous recommendons d'utiliser le mode plein écran."
     + "\n\nAppuyez sur une touche pour quitter...";
 
@@ -151,7 +151,7 @@ string erreurTailleFenetre()
 
 string erreurTailleFenetre2()
 {
-    string message = "Erreur!\nVeuillez agrandir la taille de votre terminal et relancer le jeu.\n\nAppuyez sur une touche pour quitter...";
+    string message = "Votre fenêtre semble être trop petite pour la configuration choisie.\nAppuyez sur une touche pour continuer malgré tout...";
 
 
     return message;

@@ -14,7 +14,7 @@ using namespace std;
 #define xm (COLS - 100) / 2
 #define ym (LINES - 33) / 2
 
-int const getDimFlotte(char c)
+int getDimFlotte(char c)
 {
     ifstream config("config/config.txt", ios::in);
     string ligne;
@@ -63,12 +63,13 @@ int const getDimFlotte(char c)
     {
         longueur += width[n];
     }
-
+     int const longueurfinale = longueur;
+     int const maxheightfinale = maxheight;
     if (c == 'w')
-        return longueur;
+        return longueurfinale;
     else
     {
-        return maxheight;
+        return maxheightfinale;
     }
 }
 
@@ -138,7 +139,7 @@ void editHeightGrille(int h)
     config.close();
 }
 
-int const getWidthGrille()
+int getWidthGrille()
 {
 
     ifstream config("config/config.txt", ios::in);
@@ -156,7 +157,7 @@ int const getWidthGrille()
     return n;
 }
 
-int const getHeightGrille()
+int getHeightGrille()
 {
     ifstream config("config/config.txt", ios::in);
     string ligne;
@@ -180,56 +181,6 @@ int const getHeightGrille()
     config.close();
 
     return n;
-}
-
-int **dimN()
-{
-    ifstream config("config/config.txt", ios::in);
-    string ligne;
-    int n = 0;
-    int lignes = 0;
-    // Dim [n][i] où n est le numero du navire est i est la longueur si 0, hauteur si 1
-    int **dim;
-    dim = new int *[5];
-    for (int i = 0; i < 5; i++)
-    {
-        dim[i] = new int[2];
-    }
-
-    // Obtention des dimensions de chaque navire
-    while (getline(config, ligne))
-    {
-
-        if (ligne[1] == '\0' && ligne[0] != ' ' && ligne[0] != 'x')
-        {
-            n++;
-            lignes++;
-
-            continue;
-        }
-        if (lignes > 0)
-        {
-            for (int i = 0; ligne[i] != '\0'; i++)
-            {
-
-                if (i > dim[n][0])
-                {
-                    dim[n][0]++;
-                }
-            }
-
-            dim[n][1]++;
-        }
-        lignes++;
-        if (config.eof() && dim[4][1] == 1)
-        {
-            dim[4][0]++;
-        }
-    }
-
-    config.close();
-
-    return dim;
 }
 
 int ***listedesnavires()
@@ -341,32 +292,12 @@ int ***listedesnavires()
     }
 
     config.close();
-
-    // for (n = 0; n < 5; n++)
-    // {
-    //     for (y = 0; y < height[n] + 1; y++)
-    //     {
-    //         for (x = 0; x < width[n] + 1; x++)
-    //         {
-    //             cout << navire[n][x][y];
-    //         }
-    //         cout << endl;
-    //     }
-    // }
-    // cout << width[4] << endl;
-    //Affichage de toutes les cases des navires
-
     return navire;
 }
 
 void modifierNavires(int n, int width, int height, int **nouveaunavire)
 {
-
-    int lignes = -1;
     string ligne;
-    int navire = 1;
-    bool trouve = false;
-    bool saut = false;
 
     fstream tmp0("config/tmp.txt", ios::in | ios::out | ios::trunc);
     tmp0 << getWidthGrille() << "x" << getHeightGrille() << '\n';
@@ -423,10 +354,6 @@ void ecrireNavire(int n)
         lignes++;
         if (lignes == 1)
         {
-            // if (n == 0)
-            // {
-            //     continue;
-            // }
             continue;
         }
 
@@ -495,6 +422,20 @@ Color convertColor(string ligne)
         return BMAGENTA;
     else if (!ligne.find("BRED"))
         return BRED;
+    else if (!ligne.find("CBLACK"))
+        return CBLACK;
+    else if (!ligne.find("BLUEBLACK"))
+        return BLUEBLACK;
+    else if (!ligne.find("YBLACK"))
+        return YBLACK;
+    else if (!ligne.find("GBLACK"))
+        return GBLACK;
+    else if (!ligne.find("MBLACK"))
+        return MBLACK;
+    else if (!ligne.find("RBLACK"))
+        return RBLACK;
+    else if (!ligne.find("RBLUE"))
+        return RBLUE;
 
     return WBLACK;
 }
@@ -516,19 +457,13 @@ void changeTheme(string th)
         stream2 << stream1.rdbuf();
         stream1.close();
     }
-    else if (th == "Theme3")
-    {
-        ifstream stream1("config/themes/theme3");
-        stream2 << stream1.rdbuf();
-        stream1.close();
-    }
+    // else if (th == "Theme3")
+    // {
+    //     ifstream stream1("config/themes/theme3");
+    //     stream2 << stream1.rdbuf();
+    //     stream1.close();
+    // }
 
-    else if (th == "Theme4")
-    {
-        ifstream stream1("config/themes/theme4");
-        stream2 << stream1.rdbuf();
-        stream1.close();
-    }
     stream2.close();
 }
 
@@ -595,6 +530,7 @@ void changePreset(int n)
     stream2.close();
 }
 
+
 // Convertie un string en int (cppreference)
 std::string to_string(int x)
 {
@@ -607,20 +543,16 @@ std::string to_string(int x)
     return str;
 }
 
-void erreurEcran(int w, int h)
+void erreurEcran()
 {
     halfdelay(1);
 
-    Window erreur(LINES, COLS, 0 - COLS / 2, 0 - LINES / 2, ' ', false);
+    Window erreur(LINES, COLS, 0 - COLS / 2, 0 - LINES / 2, ' ');
 
-        erreur.print(0, 1, erreurTailleFenetre());
+    erreur.print(0, 1, erreurTailleFenetre());
 
     getchar();
-
     erase();
-
     stopProgramX();
     exit(1);
-
-    startProgramX();
 }
