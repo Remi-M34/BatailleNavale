@@ -19,8 +19,6 @@ Grille::Grille(int const sx, int const sy, int sxf, int syf, int &vitesse, int c
 
 {
 
-
-      
       navire = listedesnavires();
       joue = false;
       naviresRestants = 5;
@@ -115,7 +113,6 @@ void Grille::selectionNavire()
                         break;
                   }
 
-                  flotte.initSelection();
                   n = flotte.getPremierNavire();
 
                   if (n == -1)
@@ -124,7 +121,11 @@ void Grille::selectionNavire()
                         refreshGrille(0, 0, W, H);
                         return;
                   }
-                  flotte.refreshPort(0);
+                  else
+                  {
+                        flotte.initSelection();
+                        flotte.refreshPort(0);
+                  }
                   break;
             }
       }
@@ -390,7 +391,6 @@ void Grille::moveNavire(int n, int sx, int sy)
             }
       }
 }
-
 
 void Grille::pivoteDroite(int n, int &xx, int &y)
 {
@@ -867,7 +867,6 @@ bool Grille::estCoule(int n)
             return false;
       }
 }
-
 
 void Grille::initCouleurs()
 {
