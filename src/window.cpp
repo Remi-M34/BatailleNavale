@@ -133,7 +133,6 @@ void Window::printborder(int x, int y, string s)
 void Window::BordureNumerotee(int x, int y)
 {
   wattron(frame, A_DIM);
-  wattron(frame, A_INVIS);
 
   const char *Alphabet = "0ABCDEFGHIJKLMNOPQRST";
   for (int i = 1; i <= W; i++)

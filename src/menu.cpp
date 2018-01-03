@@ -836,7 +836,7 @@ void Menu::optionsJeu()
 {
 
 
-  this->log = __DATE__;
+  this->log = "fichier.log";
   int c;
   nbjoueurshumain = 0;
   Window plateau2(33, 100, -50, -16, carBordureMenu);
