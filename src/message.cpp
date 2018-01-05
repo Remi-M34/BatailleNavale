@@ -18,7 +18,7 @@ string aide()
 {
 
     string message =
-        "Le but du jeu est de localiser et détruire les 5 navires de chaque adversaire.\n\nLes joueurs commencent par placer chacun de leur navires sur leur territoire.\nLe jeu débute quand tous les participants ont placé tous leur navires.\n\nUn tirage au sort est effectué pour désigner qui jouera en premier. Après ça, les joueurs peuvent, chacun leur tour, choisir une cible et une case à attaquer.\n\nLe nombre de navires restants de chaque joueur est affiché sur la bordure de leur grille, à droite de leur pseudo.\n\nLe gagnant est le dernier survivant. Son score est alors enregistré et figure peut-être dans le top 10.\nScores :\n((missilesGagnants / missilesTires) * (12500)) / (tailleFlotte / (hauteurGrille * largeurGrille))";
+        "Le but du jeu est de localiser et détruire les 5 navires de chaque adversaire.\n\nLes joueurs commencent par placer chacun de leurs navires sur leurs territoire.\nLe jeu débute quand tous les participants ont placé tous leurs navires.\n\nUn tirage au sort est effectué pour désigner qui jouera en premier. Après ça, les joueurs peuvent, chacun leurs tours, choisir une cible et une case à attaquer.\n\nLe nombre de navires restants de chaque joueur est affiché sur la bordure de leurs grilles, à droite de leurs pseudos.\n\nLe gagnant est le dernier survivant. Son score est alors enregistré et figure peut-être dans le top 10.\nScores :\n((missilesGagnants / missilesTires) * (12500)) / (tailleFlotte / (hauteurGrille * largeurGrille))";
 
     return message;
 }

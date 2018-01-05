@@ -70,7 +70,7 @@ void Jeu::Phase1()
 {
     CreationLog();
     DecalerHistorique("Commandes:\n\nSélection     Entrée\nValider       Entrée\nPivoter D     Espace\nPivoter G          w\nAnnuler navire     b\nAléatoire          a", 0);
-    DecalerHistorique("Les joueurs peuvent placer leur navires sur leur territoire!", 0);
+    DecalerHistorique("Les joueurs peuvent placer leurs navires sur leurs territoires!", 0);
     placementDesNavires();
     historique[1].clear();
     nbhisto--;

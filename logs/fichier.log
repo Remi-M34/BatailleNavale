@@ -2,6 +2,132 @@ Début d'une nouvelle partie à: 2 joueurs
 La taille de la grille de jeu est de: 12x12
 Difficulté: Normal
 Participants:
+	Moi
 	Bot 1
-	Bot 2
  
+Tour 0
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case A5
+	le missile a touché la cible !
+	le score de Bot 1 est de 105 883 Points
+
+
+Tour 0
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case B6
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 52 942 Points
+
+
+Tour 1
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case B5
+	le missile est tombé à l'eau...
+	le score de Moi est de 0 Points
+
+
+Tour 2
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case A4
+	le missile a coulé un navire de la cible !
+	le score de Bot 1 est de 70 589 Points
+
+
+Tour 2
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case K1
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 52 942 Points
+
+
+Tour 3
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case C3
+	le missile a touché la cible !
+	le score de Moi est de 52 942 Points
+
+
+Tour 3
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case D3
+	le missile a touché la cible !
+	le score de Moi est de 70 589 Points
+
+
+Tour 3
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case E3
+	le missile a touché la cible !
+	le score de Moi est de 79 412 Points
+
+
+Tour 3
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case F3
+	le missile est tombé à l'eau...
+	le score de Moi est de 63 530 Points
+
+
+Tour 4
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case K9
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 42 353 Points
+
+
+Tour 5
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case B3
+	le missile est tombé à l'eau...
+	le score de Moi est de 52 942 Points
+
+
+Tour 6
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case B12
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 35 295 Points
+
+
+Tour 7
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case E4
+	le missile est tombé à l'eau...
+	le score de Moi est de 45 379 Points
+
+
+Tour 8
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case I12
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 30 253 Points
+
+
+Tour 9
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case C2
+	le missile a coulé un navire de la cible !
+	le score de Moi est de 52 942 Points
+
+
+Tour 9
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case F7
+	le missile a touché la cible !
+	le score de Moi est de 58 824 Points
+
+
+Tour 9
+Moi cible la flotte de Bot 1
+	un missile est tiré sur la case G7
+	le missile est tombé à l'eau...
+	le score de Moi est de 52 942 Points
+
+
+Tour 10
+Bot 1 cible la flotte de Moi
+	un missile est tiré sur la case I10
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 26 471 Points
+
+

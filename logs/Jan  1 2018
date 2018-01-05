@@ -226,7 +226,7 @@ Bot 4 cible la flotte de Bot 1
 
 Tour 23
 Bot 1 cible la flotte de Bot 2
-	un missile est tiré sur la case C8
+	un missile est tiré sur la case A6
 	le missile est tombé à l'eau...
 	le score de Bot 1 est de 0 Points
 
@@ -234,6 +234,62 @@ Bot 1 cible la flotte de Bot 2
 Tour 24
 Bot 2 cible la flotte de Bot 1
 	un missile est tiré sur la case A5
+	le missile est tombé à l'eau...
+	le score de Bot 2 est de 0 Points
+
+
+Tour 25
+Bot 3 cible la flotte de Bot 1
+	un missile est tiré sur la case A6
+	le missile est tombé à l'eau...
+	le score de Bot 3 est de 48 869 Points
+
+
+Tour 26
+Bot 4 cible la flotte de Bot 1
+	un missile est tiré sur la case B4
+	le missile est tombé à l'eau...
+	le score de Bot 4 est de 23 530 Points
+
+
+Tour 27
+Bot 1 cible la flotte de Bot 4
+	un missile est tiré sur la case G3
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 0 Points
+
+
+Tour 28
+Bot 2 cible la flotte de Bot 1
+	un missile est tiré sur la case C4
+	le missile est tombé à l'eau...
+	le score de Bot 2 est de 0 Points
+
+
+Tour 29
+Bot 3 cible la flotte de Bot 2
+	un missile est tiré sur la case C8
+	le missile est tombé à l'eau...
+	le score de Bot 3 est de 45 379 Points
+
+
+Tour 30
+Bot 4 cible la flotte de Bot 1
+	un missile est tiré sur la case A4
+	le missile est tombé à l'eau...
+	le score de Bot 4 est de 21 177 Points
+
+
+Tour 31
+Bot 1 cible la flotte de Bot 4
+	un missile est tiré sur la case L8
+	le missile est tombé à l'eau...
+	le score de Bot 1 est de 0 Points
+
+
+Tour 32
+Bot 2 cible la flotte de Bot 3
+	un missile est tiré sur la case K11
 	le missile est tombé à l'eau...
 	le score de Bot 2 est de 0 Points
 
